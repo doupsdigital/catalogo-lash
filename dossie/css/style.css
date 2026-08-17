@@ -1,0 +1,531 @@
+/* ---------- Reset / base ---------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #100f0d;
+}
+body { -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+::selection { background: #e3dccc; }
+::-webkit-scrollbar { width: 0; height: 0; }
+
+.etiqueta-mono {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #6d675b;
+}
+
+/* ---------- Shell ---------- */
+.dossie {
+  max-width: 430px;
+  margin: 0 auto;
+  background: #f3efe6;
+  color: #1a1815;
+  font-family: 'Archivo', system-ui, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ---------- Barra de capítulo ---------- */
+.barra-capitulo {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(243, 239, 230, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #d8d1c1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #6d675b;
+}
+
+/* ---------- Capa ---------- */
+.hero {
+  padding: 34px 20px 108px;
+  border-bottom: 1px solid #1a1815;
+}
+.hero__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #6d675b;
+  padding-bottom: 26px;
+}
+.hero__titulo {
+  margin: 0;
+  font-family: 'Bodoni Moda', serif;
+  font-weight: 400;
+  font-size: 66px;
+  line-height: .86;
+  letter-spacing: -.02em;
+  opacity: 0;
+}
+.hero__titulo em { font-style: italic; }
+.hero__assinatura {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  padding-top: 26px;
+}
+.hero__foto {
+  width: 132px;
+  height: 168px;
+  object-fit: cover;
+  background: #e3dccc;
+  filter: grayscale(.25) contrast(1.05);
+  border: 1px solid #1a1815;
+  flex: none;
+}
+.hero__texto { flex: 1; padding-bottom: 4px; }
+.hero__nome {
+  margin: 0 0 10px;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 19px;
+  line-height: 1.25;
+}
+.hero__cargo {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #6d675b;
+  line-height: 1.7;
+}
+
+/* ---------- Índice ---------- */
+.indice {
+  padding: 26px 20px 30px;
+  border-bottom: 1px solid #1a1815;
+}
+.indice > .etiqueta-mono { margin-bottom: 16px; }
+.indice__lista { display: flex; flex-direction: column; }
+.indice__lista a {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 0;
+  border-top: 1px solid #d8d1c1;
+}
+.indice__lista a.indice__ultimo { border-bottom: 1px solid #d8d1c1; }
+.indice__num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #7a2b23;
+  width: 22px;
+}
+.indice__nome {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 22px;
+  color: #1a1815;
+}
+
+/* ---------- Capítulos (base) ---------- */
+.capitulo {
+  padding: 40px 20px 44px;
+  border-bottom: 1px solid #1a1815;
+}
+.sobre { min-height: 78vh; }
+.capitulo__cabecalho {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 18px;
+}
+.capitulo__num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: #7a2b23;
+}
+.capitulo__filete { flex: 1; height: 1px; background: #1a1815; }
+.capitulo__titulo {
+  margin: 0 0 22px;
+  font-family: 'Bodoni Moda', serif;
+  font-weight: 400;
+  font-size: 52px;
+  line-height: .9;
+  letter-spacing: -.02em;
+}
+.capitulo__titulo em { font-style: italic; }
+.capitulo__titulo--curto { margin-bottom: 8px; }
+
+/* ---------- 01 Sobre ---------- */
+.sobre__linha {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding-bottom: 18px;
+}
+.sobre__foto {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #e3dccc;
+  filter: grayscale(.2);
+  border: 1px solid #1a1815;
+  flex: none;
+}
+.sobre__lead {
+  margin: 0;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 17px;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.sobre__corpo {
+  margin: 0;
+  font-family: 'Archivo', sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #3c382f;
+  text-wrap: pretty;
+}
+.sobre__nota {
+  margin: 20px 0 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #6d675b;
+}
+
+/* ---------- 02 Mapping ---------- */
+.item-mapping {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-top: 1px solid #d8d1c1;
+}
+.item-mapping__foto {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #e3dccc;
+  filter: grayscale(.2);
+  border: 1px solid #1a1815;
+  flex: none;
+}
+.item-mapping__texto { flex: 1; }
+.item-mapping__cabecalho { display: flex; align-items: baseline; gap: 8px; }
+.item-mapping__numeral {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: #7a2b23;
+}
+.item-mapping__texto h3 {
+  margin: 0;
+  font-family: 'Bodoni Moda', serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1;
+}
+.item-mapping__texto p {
+  margin: 7px 0 0;
+  font-family: 'Archivo', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #3c382f;
+  text-wrap: pretty;
+}
+
+/* ---------- 03 Procedimentos ---------- */
+.procedimentos__intro {
+  margin: 0 0 22px;
+  font-family: 'Archivo', sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #6d675b;
+}
+.linha-procedimento { padding: 14px 0; border-top: 1px solid #d8d1c1; }
+.linha-procedimento__topo { display: flex; align-items: baseline; gap: 8px; }
+.linha-procedimento__topo h3 {
+  margin: 0;
+  font-family: 'Bodoni Moda', serif;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 1.1;
+}
+.linha-procedimento__pontilhado {
+  flex: 1;
+  border-bottom: 1px dotted #b3aa96;
+  transform: translateY(-4px);
+}
+.linha-procedimento__preco {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  letter-spacing: -.01em;
+}
+.linha-procedimento__base {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding-top: 5px;
+}
+.linha-procedimento__base p {
+  margin: 0;
+  flex: 1;
+  font-family: 'Archivo', sans-serif;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #6d675b;
+  text-wrap: pretty;
+}
+.linha-procedimento__base span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #7a2b23;
+  white-space: nowrap;
+}
+
+.nota-duracao {
+  margin-top: 22px;
+  padding: 16px 18px;
+  border: 1px solid #1a1815;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.nota-duracao__foto {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #e3dccc;
+  filter: grayscale(.25);
+  flex: none;
+}
+.nota-duracao p {
+  margin: 0;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+
+/* ---------- 04 Manutenção ---------- */
+.grade-manutencao {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #d8d1c1;
+  border: 1px solid #d8d1c1;
+}
+.grade-manutencao__item { background: #f3efe6; padding: 16px 14px; }
+.grade-manutencao__label {
+  margin: 0 0 6px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #6d675b;
+}
+.grade-manutencao__valor {
+  margin: 0;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 30px;
+  line-height: 1;
+}
+.grade-manutencao__valor span { font-size: 14px; }
+.manutencao__corpo {
+  margin: 18px 0 0;
+  font-family: 'Archivo', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #3c382f;
+  text-wrap: pretty;
+}
+
+/* ---------- 05 Agendamento ---------- */
+.passo-agendamento {
+  display: flex;
+  gap: 12px;
+  padding: 13px 0;
+  border-top: 1px solid #d8d1c1;
+}
+.passo-agendamento span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: #7a2b23;
+  padding-top: 3px;
+}
+.passo-agendamento p {
+  margin: 0;
+  flex: 1;
+  font-family: 'Archivo', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #3c382f;
+  text-wrap: pretty;
+}
+
+.pagamento-endereco {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #1a1815;
+  display: flex;
+  gap: 22px;
+}
+.pagamento-endereco > div { flex: 1; }
+.pagamento-endereco .etiqueta-mono { margin-bottom: 8px; }
+.pagamento-endereco__valor {
+  margin: 0;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ---------- 06 Cuidados ---------- */
+.cuidados__intro {
+  margin: 0 0 22px;
+  font-family: 'Archivo', sans-serif;
+  font-size: 12px;
+  color: #6d675b;
+  letter-spacing: .02em;
+}
+.item-cuidado {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-top: 1px solid #d8d1c1;
+}
+.item-cuidado span {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 34px;
+  line-height: .8;
+  color: #7a2b23;
+  width: 34px;
+  flex: none;
+}
+.item-cuidado p {
+  margin: 0;
+  flex: 1;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 16px;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+/* ---------- Colofão / Contato ---------- */
+.contato {
+  padding: 44px 20px 132px;
+  background: #1a1815;
+  color: #f3efe6;
+}
+.contato__cabecalho {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding-bottom: 26px;
+}
+.contato__foto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #3c382f;
+  filter: grayscale(.35);
+  border: 1px solid #6d675b;
+  flex: none;
+}
+.contato__cabecalho h2 {
+  margin: 0;
+  font-family: 'Bodoni Moda', serif;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: .92;
+}
+.contato__cabecalho h2 em { font-style: italic; }
+.contato__acoes { display: flex; flex-direction: column; gap: 10px; }
+.btn-whatsapp,
+.btn-instagram {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  min-height: 52px;
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+}
+.btn-whatsapp { border: 1px solid #f3efe6; }
+.btn-whatsapp:hover { background: #f3efe6; color: #1a1815; }
+.btn-instagram { border: 1px solid #6d675b; }
+.btn-instagram:hover { border-color: #f3efe6; }
+.btn-whatsapp > span:first-child,
+.btn-instagram > span:first-child {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 19px;
+}
+.btn__meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+}
+.contato__rodape {
+  margin: 30px 0 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #8f887a;
+  line-height: 1.9;
+}
+
+/* ---------- Barra de agendamento fixa ---------- */
+.barra-agendamento {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.barra-agendamento__inner {
+  width: 100%;
+  max-width: 430px;
+  padding: 12px 20px 16px;
+  background: linear-gradient(to top, rgba(243, 239, 230, .98), rgba(243, 239, 230, .86));
+  pointer-events: auto;
+  border-top: 1px solid #d8d1c1;
+}
+.barra-agendamento__inner a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  background: #1a1815;
+  color: #f3efe6;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  transition: background-color .25s ease;
+}
+.barra-agendamento__inner a:hover { background: #7a2b23; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__titulo { opacity: 1; }
+}
