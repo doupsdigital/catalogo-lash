@@ -1,82 +1,55 @@
-gsap.registerPlugin(ScrollTrigger);
-
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* Entrada do título do Hero — animação de carregamento, não ligada ao scroll. */
-const heroTitulo = document.querySelector('.hero__titulo');
-if (heroTitulo) {
-  if (reduceMotion) {
-    gsap.set(heroTitulo, { opacity: 1, y: 0 });
-  } else {
-    gsap.fromTo(
-      heroTitulo,
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, duration: 1.1, delay: 0.15, ease: 'power2.out' },
-    );
-  }
-}
-
-if (!reduceMotion) {
-  /* Revela textos/cards ao entrar na viewport, escrubado pela posição do scroll. */
-  document.querySelectorAll('.reveal').forEach((el) => {
-    gsap.fromTo(
-      el,
-      { opacity: 0, y: 24 },
-      {
-        opacity: 1,
-        y: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 92%',
-          end: 'top 58%',
-          scrub: 1,
-        },
-      },
-    );
-  });
-
-  /* Parallax vertical das fotos full-bleed, escrubado pela posição do scroll. */
+document.addEventListener('DOMContentLoaded', () => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sections = document.querySelectorAll('.vitrine > section');
   const fotoWraps = document.querySelectorAll(
-    '.hero__foto-wrap, .sobre__foto-wrap, .manutencao__foto-wrap, .cuidados__foto-wrap, .contato__foto-wrap',
+    '.hero__foto-wrap, .sobre__foto-wrap, .manutencao__foto-wrap, .cuidados__foto-wrap, .contato__foto-wrap'
   );
-  fotoWraps.forEach((wrap) => {
-    const section = wrap.closest('section');
-    gsap.fromTo(
-      wrap,
-      { yPercent: -6 },
-      {
-        yPercent: 6,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      },
-    );
-  });
 
-  /* Ken Burns: zoom leve e contínuo enquanto a seção está em tela — não
-     escrubado pelo scroll, dispara ao entrar/sair via IntersectionObserver
-     (mesmo padrão do ProcessSection/PinnedPortfolio nos outros projetos). */
-  gsap.set(fotoWraps, { scale: 1 });
-  fotoWraps.forEach((wrap) => {
-    const section = wrap.closest('section');
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        gsap.to(wrap, {
-          scale: entry.isIntersecting ? 1.08 : 1,
-          duration: entry.isIntersecting ? 8 : 0.6,
-          ease: entry.isIntersecting ? 'sine.out' : 'power2.out',
-          overwrite: 'auto',
-        });
-      },
-      { threshold: 0.3 },
-    );
-    observer.observe(section);
-  });
-} else {
-  gsap.set('.reveal', { opacity: 1, y: 0 });
-}
+  // Set initial scales for photo wraps
+  if (fotoWraps.length > 0 && typeof gsap !== 'undefined') {
+    gsap.set(fotoWraps, { scale: 1 });
+  }
+
+  // IntersectionObserver to handle active section snap detection & animations (1 scroll = 1 section snap model)
+  const observerOptions = {
+    root: document.querySelector('.vitrine'),
+    threshold: 0.5,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const section = entry.target;
+      const wrap = section.querySelector(
+        '.hero__foto-wrap, .sobre__foto-wrap, .manutencao__foto-wrap, .cuidados__foto-wrap, .contato__foto-wrap'
+      );
+
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        section.classList.add('is-active');
+
+        // Ken Burns zoom effect on background photo when section becomes active
+        if (wrap && !reduceMotion && typeof gsap !== 'undefined') {
+          gsap.to(wrap, {
+            scale: 1.08,
+            duration: 7,
+            ease: 'sine.out',
+            overwrite: 'auto',
+          });
+        }
+      } else {
+        section.classList.remove('is-active');
+
+        // Reset photo scale smoothly when section is left
+        if (wrap && !reduceMotion && typeof gsap !== 'undefined') {
+          gsap.to(wrap, {
+            scale: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+            overwrite: 'auto',
+          });
+        }
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach((section) => observer.observe(section));
+});
