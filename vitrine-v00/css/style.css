@@ -335,29 +335,31 @@ img { display: block; max-width: 100%; }
   object-position: 50% 42%;
   filter: saturate(.45) brightness(.88);
 }
-.card-procedimento__cabecalho {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-}
-.card-procedimento__cabecalho h3 {
-  margin: 0;
+.card-procedimento__nome {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
   font-family: 'Cormorant Garamond', serif;
-  font-weight: 400;
-  font-size: 25px;
-  line-height: 1.1;
+  font-size: 28px;
+  font-style: italic;
+  line-height: 1.08;
+  text-shadow: 0 2px 20px rgba(0,0,0,.85);
+}
+.card-procedimento__info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 .card-procedimento__preco {
-  font-size: 11px;
-  letter-spacing: .14em;
-  opacity: .75;
-  white-space: nowrap;
-  color: #c9a389;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  color: #e3c39f;
 }
 .card-procedimento__meta {
   margin: 0;
-  font-size: 11px;
+  font-size: 12.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   opacity: .5;
@@ -708,6 +710,139 @@ img { display: block; max-width: 100%; }
 .is-active .card-cuidado:nth-child(4) { transition-delay: 0.55s; }
 .is-active .card-cuidado:nth-child(5) { transition-delay: 0.65s; }
 .is-active .contato__conteudo { transition-delay: 0.2s; }
+
+/* ---------- Detalhe do procedimento (modal) ---------- */
+.card-procedimento { cursor: pointer; }
+
+.vitrine.modal-aberto { overflow: hidden; }
+
+.detalhe-procedimento {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(13, 11, 10, .78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.detalhe-procedimento[hidden] { display: none; }
+.detalhe-procedimento__sheet {
+  width: 100%;
+  max-width: 430px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #171311;
+  border-radius: 14px 14px 0 0;
+  -webkit-overflow-scrolling: touch;
+}
+.detalhe-procedimento__foto-wrap { position: relative; }
+.detalhe-procedimento__foto {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  filter: saturate(.75) brightness(.85);
+}
+.detalhe-procedimento__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(23,19,17,0) 45%, rgba(23,19,17,.92) 100%);
+}
+.detalhe-procedimento__fechar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(13,11,10,.55);
+  backdrop-filter: blur(6px);
+  color: #f3efe9;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+.detalhe-procedimento__corpo {
+  padding: 4px 24px 30px;
+  margin-top: -40px;
+  position: relative;
+}
+.detalhe-procedimento__cat {
+  font-size: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: #c9a389;
+}
+.detalhe-procedimento__titulo {
+  margin: 10px 0 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 38px;
+  line-height: 1.02;
+  color: #f3efe9;
+}
+.detalhe-procedimento__desc {
+  margin: 0 0 22px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(243,239,233,.72);
+}
+.detalhe-procedimento__specs { display: flex; flex-direction: column; }
+.detalhe-procedimento__spec {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-top: 1px solid rgba(243,239,233,.1);
+}
+.detalhe-procedimento__spec-k {
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(243,239,233,.45);
+}
+.detalhe-procedimento__spec-v {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  color: #f3efe9;
+  text-align: right;
+}
+.detalhe-procedimento__acoes {
+  display: flex;
+  gap: 8px;
+  margin-top: 28px;
+}
+.detalhe-procedimento__cta {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  background: #f3efe9;
+  color: #12100e;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  transition: background-color .25s ease;
+}
+.detalhe-procedimento__cta:hover { background: #c9a389; }
+.detalhe-procedimento__proximo {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(243,239,233,.3);
+  background: transparent;
+  color: #f3efe9;
+  font-size: 16px;
+  cursor: pointer;
+  transition: border-color .25s ease;
+}
+.detalhe-procedimento__proximo:hover { border-color: #c9a389; }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
