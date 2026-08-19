@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <title>LashMenu — Catálogo Digital para Lash Designers</title>
+  <meta name="description"
+    content="Tenha o seu próprio LashMenu: um catálogo digital profissional, personalizado com o seu nome, serviços e valores — pronto para compartilhar em um único link.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- TOP ANNOUNCEMENT BAR (PROVA SOCIAL NA BARRA ROSA) -->
+  <div class="top-announcement-bar">
+    <div class="container">
+      <div class="announcement-content">
+        <div class="topbar-avatars">
+          <img src="../../vitrine-v01/assets/img/hero.jpg" alt="Lash Designer" class="topbar-avatar">
+          <img src="../../vitrine-v01/assets/img/sobre.jpg" alt="Lash Designer" class="topbar-avatar">
+          <img src="../../vitrine-v01/assets/img/contato.jpg" alt="Lash Designer" class="topbar-avatar">
+        </div>
+        <div class="topbar-stars">★★★★★</div>
+        <span class="announcement-text"><strong>4.9/5</strong> · Mais de <strong>350+ Lash Designers</strong> já usam</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative Blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob--top-right"></div>
+    <div class="blob blob--bottom-left"></div>
+  </div>
+
+  <main>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+
+          <!-- Left — Content -->
+          <div class="hero-content">
+            <div class="hero-brand-block hero-animate-1">
+              <h1 class="hero-brand-h1">Lash<em>Menu</em></h1>
+              <p class="hero-brand-tagline">Catálogo digital para Lash Designers</p>
+            </div>
+
+            <h2 class="hero-title hero-animate-2">
+              Destaque seu estúdio da concorrência com uma vitrine digital <span class="text-gradient">impecável.</span>
+            </h2>
+
+            <p class="hero-subtitle hero-animate-3">
+              Um catálogo digital profissional, elegante e personalizado com seu nome, fotos e valores. Chega de mandar mensagens soltas de preços no WhatsApp.
+            </p>
+
+            <div class="hero-actions hero-animate-4">
+              <a href="#pacotes" class="btn btn--primary btn--pulsing">
+                Garantir meu LashMenu
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14m-7-7 7 7-7 7"/>
+                </svg>
+              </a>
+              <a href="#demo" class="btn btn--outline">
+                Ver modelos
+              </a>
+            </div>
+
+            <div class="trust-badges hero-animate-5">
+              <span class="trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                Entrega rápida
+              </span>
+              <span class="trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+                100% Personalizado
+              </span>
+              <span class="trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>
+                </svg>
+                Pagamento único
+              </span>
+            </div>
+          </div>
+
+          <!-- Right — Phone Mockup (Produto Real Vitrine-v01 com Vídeo e Telas Oficiais) -->
+          <div class="hero-mockup-wrapper hero-animate-mockup">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+
+              <div class="phone-screen">
+                <div class="phone-screen-scaler">
+                  <iframe
+                    id="vitrine-preview-frame"
+                    src="../../vitrine-v01/index.html?preview=1&v=2026"
+                    title="Prévia oficial do produto LashMenu"
+                    loading="eager"
+                    allow="autoplay"></iframe>
+                </div>
+
+                <!-- Overlay Pill -->
+                <div class="phone-overlay-badge">
+                  <span class="dot-pulse"></span>
+                  <span id="preview-screen-name">Catálogo ao vivo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. FAIXA DINÂMICA DE CARDS DE VALOR (MARQUEE INFINITO NO FUNDO ROSA ESCURO) -->
+    <section class="marquee-ribbon-section">
+      <div class="marquee-ribbon-wrap">
+        <div class="marquee-ribbon-track">
+          
+          <!-- Card 1: Economia de Tempo -->
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Praticidade</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Economia de Tempo</h3>
+            <p class="mpc-desc">Pare de digitar textos longos e explicar os mesmos valores todos os dias no WhatsApp.</p>
+          </div>
+
+          <!-- Card 2: Valor Percebido Alto -->
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Autoridade</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Valor Percebido Alto</h3>
+            <p class="mpc-desc">Apresentação impecável que faz seu trabalho parecer mais caro e evita pedidos de desconto.</p>
+          </div>
+
+          <!-- Card 3: Agendamento Rápido -->
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Conversão</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Agendamento Rápido</h3>
+            <p class="mpc-desc">A cliente vê as fotos reais, entende os procedimentos e clica direto para agendar no WhatsApp.</p>
+          </div>
+
+          <!-- Card 4: 100% Personalizado -->
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Exclusivo</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">100% Personalizado</h3>
+            <p class="mpc-desc">Com seu nome, fotos reais dos seus procedimentos e a sua tabela de valores oficial.</p>
+          </div>
+
+          <!-- DUPLICADOS PARA LOOP INFINITO PERFEITAMENTE SUAVE -->
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Praticidade</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Economia de Tempo</h3>
+            <p class="mpc-desc">Pare de digitar textos longos e explicar os mesmos valores todos os dias no WhatsApp.</p>
+          </div>
+
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Autoridade</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Valor Percebido Alto</h3>
+            <p class="mpc-desc">Apresentação impecável que faz seu trabalho parecer mais caro e evita pedidos de desconto.</p>
+          </div>
+
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Conversão</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Agendamento Rápido</h3>
+            <p class="mpc-desc">A cliente vê as fotos reais, entende os procedimentos e clica direto para agendar no WhatsApp.</p>
+          </div>
+
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Exclusivo</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">100% Personalizado</h3>
+            <p class="mpc-desc">Com seu nome, fotos reais dos seus procedimentos e a sua tabela de valores oficial.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. COMPARATIVO "VS" -->
+    <section class="vs-section" id="comparativo">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker reveal">A diferença na prática</p>
+          <h2 class="section-title reveal">Quando uma cliente pede seus&nbsp;valores,<br>o que você envia?</h2>
+          <p class="section-subtitle reveal">A primeira impressão define se a cliente vai valorizar seu trabalho ou pedir desconto.</p>
+        </div>
+
+        <div class="vs-container reveal">
+          <!-- VS Badge Desktop -->
+          <div class="vs-badge">VS</div>
+
+          <!-- Sem LashMenu -->
+          <div class="vs-card vs-card--bad">
+            <div class="vs-card-header">
+              <div class="vs-icon-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+                </svg>
+              </div>
+              <h3 class="vs-card-title">Como a maioria faz hoje</h3>
+            </div>
+            <ul class="vs-list">
+              <li class="vs-item">
+                <span class="vs-item-icon">✕</span>
+                Mensagens de texto soltas e confusas no WhatsApp
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✕</span>
+                PDF pesado de 4 páginas que quase ninguém abre
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✕</span>
+                Artes feitas às pressas no Canva entre um atendimento e outro
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✕</span>
+                A cliente não entende os estilos e sempre pergunta o mesmo
+              </li>
+            </ul>
+          </div>
+
+          <!-- Com LashMenu -->
+          <div class="vs-card vs-card--good">
+            <div class="vs-card-header">
+              <div class="vs-icon-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+              </div>
+              <h3 class="vs-card-title">Com o seu LashMenu</h3>
+            </div>
+            <ul class="vs-list">
+              <li class="vs-item">
+                <span class="vs-item-icon">✓</span>
+                <div class="vs-item-text">
+                  Um link elegante e exclusivo:
+                  <div class="vs-link-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                    <span>seunome.lashmenu.com</span>
+                  </div>
+                </div>
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✓</span>
+                Fotos em alta qualidade com explicações e tempos de procedimento
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✓</span>
+                Você não precisa criar nada — entregamos 100% pronto
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✓</span>
+                Transmite autoridade imediata e valoriza seus procedimentos
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PILARES / BENEFÍCIOS -->
+    <section class="features-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title reveal" style="color: #ffffff;">
+            Tudo o que seu estúdio precisa.<br>
+            <span style="color: rgba(255,255,255,0.75);">Em uma experiência impecável.</span>
+          </h2>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <div class="feature-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Um Link na Bio e WhatsApp</h3>
+            <p class="feature-desc">Envie para suas clientes ou coloque no Instagram. Elas abrem em qualquer celular com carregamento instantâneo.</p>
+          </div>
+
+          <div class="feature-card reveal">
+            <div class="feature-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Procedimentos & Valores Claros</h3>
+            <p class="feature-desc">Volume Brasileiro, Fox Eyes, Lash Lifting, remoção e manutenção com valores e durações bem explicados.</p>
+          </div>
+
+          <div class="feature-card reveal">
+            <div class="feature-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Você Não Cria Nada</h3>
+            <p class="feature-desc">Não perca horas no Canva. Você apenas envia seus dados e nós configuramos tudo com perfeição.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ESTILOS DISPONÍVEIS -->
+    <section class="styles-section" id="demo">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker reveal">Estilos Exclusivos</p>
+          <h2 class="section-title reveal">Escolha o estilo do seu LashMenu</h2>
+          <p class="section-subtitle reveal">Modelos com design refinado, pensados para destacar a estética do seu trabalho.</p>
+        </div>
+
+        <div class="demo-showcase">
+          <!-- Card 1: Elegance -->
+          <div class="style-card reveal">
+            <img src="../../vitrine-v01/assets/img/Hero.png" alt="Modelo Elegance" class="style-card-img">
+            <div class="style-card-body">
+              <span class="style-card-tag">Modelo 01</span>
+              <h3 class="style-card-title">Elegance</h3>
+              <p class="style-card-desc">Preto profundo, champagne e tipografia serifada de alto luxo.</p>
+              <a href="../../vitrine-v01/index.html" target="_blank" class="style-card-link">
+                Ver catálogo ao vivo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: Dourado Realeza -->
+          <div class="style-card reveal">
+            <img src="../../vitrine-v03/assets/img/Hero.png" alt="Modelo Dourado Realeza" class="style-card-img">
+            <div class="style-card-body">
+              <span class="style-card-tag">Modelo 02</span>
+              <h3 class="style-card-title">Dourado Realeza</h3>
+              <p class="style-card-desc">Marrom profundo e dourado acetinado para presença e autoridade.</p>
+              <a href="../../vitrine-v03/index.html" target="_blank" class="style-card-link">
+                Ver catálogo ao vivo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3: Clean -->
+          <div class="style-card reveal">
+            <img src="../../vitrine-v05/assets/img/Hero.png" alt="Modelo Clean" class="style-card-img">
+            <div class="style-card-body">
+              <span class="style-card-tag">Modelo 03</span>
+              <h3 class="style-card-title">Clean & Minimal</h3>
+              <p class="style-card-desc">Off-white e terracota suave — leve, moderno e acolhedor.</p>
+              <a href="../../vitrine-v05/index.html" target="_blank" class="style-card-link">
+                Ver catálogo ao vivo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. COMO FUNCIONA (3 PASSOS) -->
+    <section class="steps-section" id="como-funciona">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker reveal">Simples e Rápido</p>
+          <h2 class="section-title reveal">Como ter o seu em 3 passos</h2>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card reveal">
+            <div class="step-bg-number">01</div>
+            <div class="step-number">01</div>
+            <h3 class="step-title">Escolha seu pacote</h3>
+            <p class="step-desc">Selecione o plano ideal e garanta sua vaga. O processo de compra é 100% seguro.</p>
+          </div>
+
+          <div class="step-card reveal">
+            <div class="step-bg-number">02</div>
+            <div class="step-number">02</div>
+            <h3 class="step-title">Envie suas informações</h3>
+            <p class="step-desc">Preencha um formulário rápido com seu nome, serviços, valores, chave Pix e suas fotos.</p>
+          </div>
+
+          <div class="step-card reveal">
+            <div class="step-bg-number">03</div>
+            <div class="step-number">03</div>
+            <h3 class="step-title">Receba pronto para usar</h3>
+            <p class="step-desc">Entregamos seu link exclusivo pronto para você colocar na bio do Instagram e mandar no WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. PACOTES / PRICING -->
+    <section class="pricing-section" id="pacotes">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker reveal">Investimento Único</p>
+          <h2 class="section-title reveal">Escolha o seu LashMenu</h2>
+          <p class="section-subtitle reveal">Sem mensalidades. Você paga uma única vez e o catálogo é seu.</p>
+        </div>
+
+        <div class="pricing-grid">
+
+          <!-- Essencial -->
+          <div class="pricing-card pricing-card--regular reveal">
+            <span class="pricing-tag">Plano Essencial</span>
+            <h3 class="pricing-title">LashMenu Essencial</h3>
+            <div class="pricing-price-wrap">
+              <div class="pricing-installment">3x de R$ 69,90</div>
+              <div class="pricing-cash">ou R$ 197 à vista</div>
+            </div>
+            <ul class="pricing-features">
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Escolha do modelo visual
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Seu nome e foto na capa
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Seus serviços, descrições e valores
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Link exclusivo <strong>seunome.lashmenu.com</strong>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Personalização completa feita por nós
+              </li>
+            </ul>
+            <a href="https://pay.hotmart.com" target="_blank" class="btn btn--outline pricing-cta">
+              Quero o Essencial
+            </a>
+          </div>
+
+          <!-- Custom (Destaque) -->
+          <div class="pricing-card pricing-card--featured reveal">
+            <div class="pricing-card-badge">Mais Recomendado</div>
+            <span class="pricing-tag">Plano Custom</span>
+            <h3 class="pricing-title">LashMenu Custom</h3>
+            <div class="pricing-price-wrap">
+              <div class="pricing-installment">3x de R$ 99,90</div>
+              <div class="pricing-cash">ou R$ 297 à vista</div>
+            </div>
+            <ul class="pricing-features">
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                <strong>Tudo do LashMenu Essencial</strong>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                <strong>Suas próprias fotos dos procedimentos</strong>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Personalização visual sob medida
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Ajustes e revisões inclusas
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Suporte prioritário na entrega
+              </li>
+            </ul>
+            <a href="https://pay.hotmart.com" target="_blank" class="btn btn--primary pricing-cta">
+              Quero o LashMenu Custom
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14m-7-7 7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. GARANTIA -->
+    <section class="guarantee-section">
+      <div class="container container--xs">
+        <div class="guarantee-icon reveal">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <h3 class="guarantee-title reveal">Garantia de Satisfação</h3>
+        <p class="guarantee-desc reveal">
+          Personalizamos tudo com o máximo de carinho e atenção aos detalhes. Caso queira algum ajuste nas informações após a entrega, fazemos para deixar o seu catálogo 100% perfeito.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker reveal" style="color: rgba(255,255,255,0.85);">Tire suas dúvidas</p>
+          <h2 class="section-title reveal" style="color: #ffffff;">Perguntas Frequentes</h2>
+        </div>
+
+        <div class="faq-list">
+
+          <div class="faq-item reveal">
+            <button class="faq-question-btn" type="button">
+              <span>Eu preciso entender de design ou saber editar?</span>
+              <span class="faq-chevron">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Não! Essa é a principal vantagem do LashMenu. Você apenas nos envia suas informações e nós configuramos tudo pronto para você.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question-btn" type="button">
+              <span>Posso usar fotos dos meus próprios atendimentos?</span>
+              <span class="faq-chevron">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Sim! No pacote <strong>LashMenu Custom</strong> você pode nos enviar fotos reais dos seus procedimentos e nós aplicamos em cada serviço.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question-btn" type="button">
+              <span>Tem alguma mensalidade ou taxa extra?</span>
+              <span class="faq-chevron">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Não há mensalidades para o catálogo. O pagamento do pacote escolhido é único e seu link fica disponível para suas clientes.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question-btn" type="button">
+              <span>Como envio meus preços e dados após a compra?</span>
+              <span class="faq-chevron">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Assim que sua compra for confirmada, você receberá o link de um formulário simples e prático para preencher com seus dados e enviar fotos.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-mobile-cta">
+    <a href="#pacotes" class="btn btn--primary">
+      Garantir meu LashMenu
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>

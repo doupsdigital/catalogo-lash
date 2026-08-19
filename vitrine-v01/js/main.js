@@ -209,3 +209,47 @@ document.addEventListener('DOMContentLoaded', () => {
   modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) close(); });
 });
+
+/* ---------- Modo Preview / Auto-Tour no Mockup ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const isPreview = window.location.search.includes('preview') || window.self !== window.top;
+  if (!isPreview) return;
+
+  const vitrine = document.querySelector('.vitrine');
+  const sections = Array.from(document.querySelectorAll('.vitrine > section'));
+  if (!vitrine || sections.length === 0) return;
+
+  let currentIdx = 0;
+
+  // Auto-scroll loop exclusivo do container interno da vitrine
+  function nextStep() {
+    const currentSection = sections[currentIdx];
+    const isHero = currentSection && currentSection.classList.contains('hero');
+    const delay = isHero ? 6000 : 4500; // 6 segundos na capa hero (vídeo), 4.5s nas outras
+
+    setTimeout(() => {
+      currentIdx = (currentIdx + 1) % sections.length;
+      const targetSection = sections[currentIdx];
+
+      if (targetSection) {
+        // Rola SOMENTE o container interno da vitrine, sem disparar scrollIntoView na página pai
+        vitrine.scrollTo({
+          top: targetSection.offsetTop,
+          behavior: 'smooth'
+        });
+
+        // Envia mensagem para o iframe pai para atualizar o label do badge
+        try {
+          const label = targetSection.getAttribute('data-screen-label') || 'Vitrine';
+          window.parent.postMessage({ type: 'VITRINE_SCREEN_CHANGE', label: label, index: currentIdx }, '*');
+        } catch (e) {}
+      }
+      nextStep();
+    }, delay);
+  }
+
+  // Inicia tour isolado
+  nextStep();
+});
+
+
