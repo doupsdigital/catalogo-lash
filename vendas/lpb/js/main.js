@@ -95,11 +95,13 @@ function initCounters() {
   counters.forEach((el) => observer.observe(el));
 }
 
-/* ── 4. Mockup Live Preview Listener ────────────────────────────────────── */
+/* ── 4. Mockup Live Preview & Visibility Controller ────────────────────── */
 function initMockupSlider() {
   const nameLabel = document.getElementById('preview-screen-name');
-  if (!nameLabel) return;
+  const iframe = document.getElementById('vitrine-preview-frame');
+  const mockupWrapper = document.querySelector('.hero-mockup-wrapper');
 
+  // Atualiza label do badge superior da tela
   window.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'VITRINE_SCREEN_CHANGE') {
       const labelMap = {
@@ -109,9 +111,42 @@ function initMockupSlider() {
         'Agendamento': 'Orientações & Agendamento',
         'Contato': 'Contato & WhatsApp'
       };
-      nameLabel.textContent = labelMap[event.data.label] || event.data.label || 'Catálogo ao vivo';
+      if (nameLabel) {
+        nameLabel.textContent = labelMap[event.data.label] || event.data.label || 'Catálogo ao vivo';
+      }
     }
   });
+
+  if (!iframe || !mockupWrapper) return;
+
+  // Dispara o tour apenas quando o celular estiver no campo de visão e reseta ao sair
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      try {
+        if (entry.isIntersecting) {
+          iframe.contentWindow?.postMessage({ type: 'START_TOUR' }, '*');
+        } else {
+          iframe.contentWindow?.postMessage({ type: 'RESET_TOUR' }, '*');
+          if (nameLabel) {
+            nameLabel.textContent = 'Capa Oficial';
+          }
+        }
+      } catch (e) {}
+    });
+  }, {
+    threshold: 0.25
+  });
+
+  // Trata carregamento do iframe
+  iframe.addEventListener('load', () => {
+    const rect = mockupWrapper.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    if (isVisible) {
+      iframe.contentWindow?.postMessage({ type: 'START_TOUR' }, '*');
+    }
+  });
+
+  observer.observe(mockupWrapper);
 }
 
 /* ── 5. FAQ Accordion ────────────────────────────────────────────────────── */

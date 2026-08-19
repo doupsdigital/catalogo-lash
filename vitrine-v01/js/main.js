@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) close(); });
 });
 
-/* ---------- Modo Preview / Auto-Tour no Mockup ---------- */
+/* ---------- Modo Preview / Auto-Tour no Mockup Controlado por Visibilidade ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   const isPreview = window.location.search.includes('preview') || window.self !== window.top;
   if (!isPreview) return;
@@ -220,36 +220,67 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!vitrine || sections.length === 0) return;
 
   let currentIdx = 0;
+  let timerId = null;
+  let isRunning = false;
 
-  // Auto-scroll loop exclusivo do container interno da vitrine
-  function nextStep() {
+  function stopTourAndReset() {
+    isRunning = false;
+    if (timerId) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+    currentIdx = 0;
+    vitrine.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    try {
+      const label = sections[0]?.getAttribute('data-screen-label') || 'Hero';
+      window.parent.postMessage({ type: 'VITRINE_SCREEN_CHANGE', label: label, index: 0 }, '*');
+    } catch (e) {}
+  }
+
+  function scheduleNext() {
+    if (!isRunning) return;
     const currentSection = sections[currentIdx];
     const isHero = currentSection && currentSection.classList.contains('hero');
     const delay = isHero ? 6000 : 4500; // 6 segundos na capa hero (vídeo), 4.5s nas outras
 
-    setTimeout(() => {
+    timerId = setTimeout(() => {
+      if (!isRunning) return;
       currentIdx = (currentIdx + 1) % sections.length;
       const targetSection = sections[currentIdx];
 
       if (targetSection) {
-        // Rola SOMENTE o container interno da vitrine, sem disparar scrollIntoView na página pai
         vitrine.scrollTo({
           top: targetSection.offsetTop,
           behavior: 'smooth'
         });
 
-        // Envia mensagem para o iframe pai para atualizar o label do badge
         try {
           const label = targetSection.getAttribute('data-screen-label') || 'Vitrine';
           window.parent.postMessage({ type: 'VITRINE_SCREEN_CHANGE', label: label, index: currentIdx }, '*');
         } catch (e) {}
       }
-      nextStep();
+      scheduleNext();
     }, delay);
   }
 
-  // Inicia tour isolado
-  nextStep();
+  function startTour() {
+    if (isRunning) return;
+    isRunning = true;
+    scheduleNext();
+  }
+
+  // Escuta comandos de visibilidade da página pai
+  window.addEventListener('message', (event) => {
+    if (!event.data) return;
+    if (event.data.type === 'START_TOUR') {
+      startTour();
+    } else if (event.data.type === 'RESET_TOUR') {
+      stopTourAndReset();
+    }
+  });
 });
 
 
