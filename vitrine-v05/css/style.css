@@ -1,5 +1,5 @@
 /* ==========================================================================
-   VITRINE V05 — CLEAN LATTE & WARM SAND (COM FOTOS RESTAURADAS E PROFUNDIDADE)
+   VITRINE V05 — CLEAN ESSENTIAL (PALETA LIGHT REFINADA, CONTRASTADA E EQUILIBRADA)
    ========================================================================== */
 
 /* ---------- Reset / Base ---------- */
@@ -9,7 +9,7 @@ html, body {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background: #14100d;
+  background: #0d0b0a;
   -webkit-font-smoothing: antialiased;
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
@@ -27,7 +27,7 @@ a {
 }
 
 a:hover {
-  color: #dfa87a;
+  color: #a05e32;
 }
 
 img, video {
@@ -52,8 +52,8 @@ img, video {
   max-width: 430px;
   height: 100dvh;
   margin: 0 auto;
-  background: #181310;
-  color: #f7f1e6; /* Marfim suave e luminoso, sem cansar a visão */
+  background: #f6f1eb; /* Nude / Creme acetinado suave (Clean) */
+  color: #221a16;     /* Café escuro e nítido para contraste impecável */
   font-family: 'Jost', system-ui, -apple-system, sans-serif;
   overflow-y: auto;
   overflow-x: hidden;
@@ -70,7 +70,7 @@ img, video {
   font-weight: 600;
   letter-spacing: .38em;
   text-transform: uppercase;
-  color: #dfa87a;
+  color: #a05e32;
 }
 
 /* ---------- Snap Sections (General Rules) ---------- */
@@ -89,7 +89,7 @@ img, video {
 }
 
 /* ==========================================================================
-   FOTOS DE FUNDO (RESTAURADAS EM TODAS AS TELAS COM NITIDEZ E CORES VIVAS)
+   FOTOS DE FUNDO (NITIDEZ REALÇADA PARA NÃO DESBOTAR SOB O EFEITO CLEAN)
    ========================================================================== */
 .hero__foto-wrap,
 .procedimentos__foto-wrap,
@@ -111,7 +111,7 @@ img, video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.92) contrast(1.06) brightness(0.82);
+  filter: saturate(1.08) contrast(1.08) brightness(0.96);
 }
 
 .hero__foto {
@@ -123,21 +123,23 @@ img, video {
 }
 
 /* ==========================================================================
-   1. HERO
+   1. HERO (CAMADA CLEAN CALIBRADA — NÍTIDA E SEM ESTOURO)
    ========================================================================== */
 .hero {
-  background: #181310;
+  background: #f6f1eb;
 }
 
 .hero__scrim {
   position: absolute;
   inset: 0;
+  /* Camada clean com transição suave para não ofuscar */
   background: linear-gradient(
     180deg,
-    rgba(18, 13, 10, 0.45) 0%,
-    rgba(18, 13, 10, 0.15) 28%,
-    rgba(18, 13, 10, 0.65) 62%,
-    rgba(18, 13, 10, 0.94) 100%
+    rgba(246, 241, 235, 0.40) 0%,
+    rgba(246, 241, 235, 0.12) 28%,
+    rgba(246, 241, 235, 0.65) 58%,
+    rgba(246, 241, 235, 0.94) 84%,
+    #f6f1eb 100%
   );
 }
 
@@ -161,14 +163,14 @@ img, video {
   font-weight: 600;
   letter-spacing: .38em;
   text-transform: uppercase;
-  color: #f7f1e6;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
-  background: rgba(30, 22, 18, 0.45);
+  color: #a05e32;
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 4px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(223, 168, 122, 0.35);
+  border: 1px solid rgba(160, 94, 50, 0.25);
+  box-shadow: 0 2px 8px rgba(34, 26, 22, 0.05);
 }
 
 .hero__titulo {
@@ -185,26 +187,26 @@ img, video {
   font-size: 46px;
   line-height: 1.06;
   letter-spacing: -.02em;
-  color: #f7f1e6;
+  color: #221a16;
 }
 
 .hero__titulo h1 em {
   font-weight: 500;
   font-style: italic;
-  color: #dfa87a;
+  color: #a05e32;
 }
 
 .hero__filete {
   width: 38px;
   height: 1.5px;
-  background: #dfa87a;
+  background: #a05e32;
 }
 
 .hero__frase {
   margin: 0;
   font-size: 14.5px;
   line-height: 1.55;
-  color: rgba(247, 241, 230, 0.85);
+  color: #4b4038;
   max-width: 320px;
 }
 
@@ -218,14 +220,14 @@ img, video {
   font-size: 32px;
   line-height: 1.16;
   font-weight: 400;
-  color: #f7f1e6;
+  color: #221a16;
   text-wrap: pretty;
 }
 
 .hero__frase-cilios em {
   font-weight: 500;
   font-style: italic;
-  color: #dfa87a;
+  color: #a05e32;
 }
 
 .hero .hero__scroll-cue {
@@ -243,21 +245,21 @@ img, video {
   font-size: 9.5px;
   letter-spacing: .34em;
   text-transform: uppercase;
-  color: rgba(247, 241, 230, 0.6);
+  color: #685e58;
 }
 
 .hero__scroll-linha {
   width: 1px;
   height: 32px;
-  background: linear-gradient(180deg, #dfa87a, transparent);
+  background: linear-gradient(180deg, #a05e32, transparent);
   animation: cue 2.6s ease-in-out infinite;
 }
 
 /* ==========================================================================
-   2. PROCEDIMENTOS
+   2. PROCEDIMENTOS (FUNDO CLEAN COM FOTO SUAVE E CARDS EM ALTO CONTRASTE)
    ========================================================================== */
 .procedimentos {
-  background: #181310;
+  background: #f6f1eb;
 }
 
 .procedimentos__scrim {
@@ -265,9 +267,9 @@ img, video {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(18, 13, 10, 0.86) 0%,
-    rgba(18, 13, 10, 0.60) 40%,
-    rgba(18, 13, 10, 0.94) 100%
+    rgba(246, 241, 235, 0.92) 0%,
+    rgba(246, 241, 235, 0.70) 38%,
+    rgba(246, 241, 235, 0.95) 100%
   );
 }
 
@@ -294,12 +296,12 @@ img, video {
   font-size: 34px;
   line-height: 1.15;
   font-weight: 400;
-  color: #f7f1e6;
+  color: #221a16;
 }
 
 .procedimentos__frase em {
   font-style: italic;
-  color: #dfa87a;
+  color: #a05e32;
 }
 
 .procedimentos__dica {
@@ -307,7 +309,7 @@ img, video {
   padding: 0 26px;
   font-size: 12px;
   font-style: italic;
-  color: rgba(247, 241, 230, 0.6);
+  color: #685e58;
 }
 
 .procedimentos__lista {
@@ -341,17 +343,17 @@ img, video {
   aspect-ratio: 3 / 5.0;
   max-height: 560px;
   overflow: hidden;
-  background: #241b16;
+  background: #eae2d6;
   border-radius: 14px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(223, 168, 122, 0.28);
+  box-shadow: 0 14px 32px rgba(34, 26, 22, 0.12), 0 2px 6px rgba(34, 26, 22, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .card-procedimento__foto {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(1.02) contrast(1.04);
+  filter: saturate(1.05) contrast(1.04);
   transition: transform 0.4s ease;
 }
 
@@ -367,7 +369,7 @@ img, video {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 48%, rgba(12, 9, 7, 0.85) 100%);
+  background: linear-gradient(180deg, transparent 48%, rgba(20, 15, 12, 0.78) 100%);
   pointer-events: none;
 }
 
@@ -382,7 +384,7 @@ img, video {
   font-size: 27px;
   font-style: italic;
   line-height: 1.1;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
   margin: 0;
 }
 
@@ -397,7 +399,7 @@ img, video {
   font-size: 22px;
   font-weight: 600;
   letter-spacing: -.01em;
-  color: #dfa87a;
+  color: #a05e32;
 }
 
 .card-procedimento__meta {
@@ -405,15 +407,15 @@ img, video {
   font-size: 12px;
   letter-spacing: .10em;
   text-transform: uppercase;
-  color: rgba(247, 241, 230, 0.55);
+  color: #685e58;
   font-weight: 500;
 }
 
 /* ==========================================================================
-   3. AGENDAMENTO
+   3. AGENDAMENTO (CARDS EM VIDRO TRANSLÚCIDO CLEAN)
    ========================================================================== */
 .agendamento {
-  background: #181310;
+  background: #f6f1eb;
 }
 
 .agendamento__scrim {
@@ -421,10 +423,10 @@ img, video {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(18, 13, 10, 0.82) 0%,
-    rgba(18, 13, 10, 0.45) 35%,
-    rgba(18, 13, 10, 0.94) 80%,
-    #181310 100%
+    rgba(246, 241, 235, 0.88) 0%,
+    rgba(246, 241, 235, 0.40) 35%,
+    rgba(246, 241, 235, 0.94) 75%,
+    #f6f1eb 100%
   );
 }
 
@@ -450,25 +452,25 @@ img, video {
   font-size: 32px;
   line-height: 1.15;
   font-weight: 400;
-  color: #f7f1e6;
+  color: #221a16;
   text-wrap: pretty;
 }
 
 .agendamento__frase em {
   font-style: italic;
-  color: #dfa87a;
+  color: #a05e32;
 }
 
 .agendamento__lista {
   display: flex;
   flex-direction: column;
-  background: rgba(30, 23, 18, 0.82);
-  border: 1px solid rgba(223, 168, 122, 0.22);
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid rgba(160, 94, 50, 0.18);
   border-radius: 14px;
   padding: 8px 18px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(34, 26, 22, 0.06);
 }
 
 .agendamento__item {
@@ -477,7 +479,7 @@ img, video {
   gap: 14px;
   align-items: center;
   padding: 12px 0;
-  border-bottom: 1px solid rgba(223, 168, 122, 0.12);
+  border-bottom: 1px solid rgba(34, 26, 22, 0.07);
 }
 
 .agendamento__item--ultimo {
@@ -488,7 +490,7 @@ img, video {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 19px;
   font-style: italic;
-  color: #dfa87a;
+  color: #a05e32;
   font-weight: 600;
 }
 
@@ -501,21 +503,21 @@ img, video {
 .agendamento__texto strong {
   font-size: 13.5px;
   font-weight: 600;
-  color: #f7f1e6;
+  color: #221a16;
 }
 
 .agendamento__texto p {
   margin: 0;
   font-size: 12px;
   line-height: 1.45;
-  color: rgba(247, 241, 230, 0.72);
+  color: #55483e;
 }
 
 /* ==========================================================================
    4. CUIDADOS & MANUTENÇÃO
    ========================================================================== */
 .cuidados {
-  background: #181310;
+  background: #f6f1eb;
 }
 
 .cuidados__scrim {
@@ -523,9 +525,9 @@ img, video {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(18, 13, 10, 0.84) 0%,
-    rgba(18, 13, 10, 0.48) 35%,
-    rgba(18, 13, 10, 0.94) 100%
+    rgba(246, 241, 235, 0.90) 0%,
+    rgba(246, 241, 235, 0.42) 35%,
+    rgba(246, 241, 235, 0.95) 100%
   );
 }
 
@@ -552,12 +554,12 @@ img, video {
   font-size: 34px;
   line-height: 1.15;
   font-weight: 400;
-  color: #f7f1e6;
+  color: #221a16;
 }
 
 .cuidados__frase em {
   font-style: italic;
-  color: #dfa87a;
+  color: #a05e32;
 }
 
 .cuidados__carrossel {
@@ -579,12 +581,12 @@ img, video {
   scroll-snap-align: center;
   scroll-snap-stop: always;
   padding: 22px 24px;
-  background: rgba(30, 23, 18, 0.84);
+  background: rgba(255, 255, 255, 0.90);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(223, 168, 122, 0.22);
+  border: 1px solid rgba(160, 94, 50, 0.18);
   border-radius: 14px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 28px rgba(34, 26, 22, 0.06);
   min-height: 170px;
   display: flex;
   flex-direction: column;
@@ -596,7 +598,7 @@ img, video {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 26px;
   font-style: italic;
-  color: #dfa87a;
+  color: #a05e32;
   font-weight: 600;
 }
 
@@ -604,15 +606,15 @@ img, video {
   margin: 0;
   font-size: 16px;
   line-height: 1.45;
-  color: #f7f1e6;
-  font-weight: 400;
+  color: #221a16;
+  font-weight: 500;
 }
 
 /* ==========================================================================
    5. CONTATO
    ========================================================================== */
 .contato {
-  background: #181310;
+  background: #f6f1eb;
 }
 
 .contato__scrim {
@@ -620,10 +622,10 @@ img, video {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(18, 13, 10, 0.40) 0%,
-    rgba(18, 13, 10, 0.20) 25%,
-    rgba(18, 13, 10, 0.82) 58%,
-    #181310 92%
+    rgba(246, 241, 235, 0.35) 0%,
+    rgba(246, 241, 235, 0.10) 25%,
+    rgba(246, 241, 235, 0.88) 58%,
+    #f6f1eb 92%
   );
 }
 
@@ -644,12 +646,12 @@ img, video {
   font-size: 42px;
   line-height: 1.08;
   font-weight: 400;
-  color: #f7f1e6;
+  color: #221a16;
 }
 
 .contato__titulo em {
   font-style: italic;
-  color: #dfa87a;
+  color: #a05e32;
 }
 
 .contato__acoes {
@@ -674,27 +676,26 @@ img, video {
 }
 
 .btn-whatsapp {
-  background: #dfa87a;
-  color: #181310;
-  font-weight: 800;
-  box-shadow: 0 6px 20px rgba(223, 168, 122, 0.35);
+  background: #221a16;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(34, 26, 22, 0.20);
 }
 
 .btn-whatsapp:hover {
-  background: #ecc099;
+  background: #a05e32;
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
 .btn-instagram {
-  background: rgba(30, 23, 18, 0.75);
-  border: 1.5px solid rgba(223, 168, 122, 0.35);
-  color: #f7f1e6;
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.90);
+  border: 1.5px solid rgba(34, 26, 22, 0.22);
+  color: #221a16;
 }
 
 .btn-instagram:hover {
-  border-color: #dfa87a;
-  color: #dfa87a;
+  border-color: #a05e32;
+  color: #a05e32;
   transform: translateY(-2px);
 }
 
@@ -710,7 +711,7 @@ img, video {
   font-size: 10.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: rgba(247, 241, 230, 0.55);
+  color: #685e58;
   padding-top: 4px;
 }
 
@@ -780,9 +781,9 @@ img, video {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background: rgba(10, 7, 5, 0.70);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(20, 15, 12, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .detalhe-procedimento[hidden] {
@@ -794,12 +795,10 @@ img, video {
   max-width: 430px;
   max-height: 88vh;
   overflow-y: auto;
-  background: #181310;
+  background: #f6f1eb;
   border-radius: 16px 16px 0 0;
   -webkit-overflow-scrolling: touch;
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(223, 168, 122, 0.25);
-  border-bottom: none;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.25);
 }
 
 .detalhe-procedimento__foto-wrap {
@@ -811,13 +810,13 @@ img, video {
   height: 290px;
   object-fit: cover;
   display: block;
-  filter: saturate(1.02) contrast(1.04);
+  filter: saturate(1.05) contrast(1.04);
 }
 
 .detalhe-procedimento__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 30%, #181310 96%);
+  background: linear-gradient(180deg, transparent 30%, #f6f1eb 96%);
 }
 
 .detalhe-procedimento__fechar {
@@ -827,27 +826,28 @@ img, video {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 1px solid rgba(223, 168, 122, 0.3);
-  background: rgba(24, 19, 16, 0.85);
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(6px);
-  color: #f7f1e6;
+  color: #221a16;
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .detalhe-procedimento__corpo {
   padding: 4px 24px 30px;
   margin-top: -30px;
   position: relative;
-  background: #181310;
+  background: #f6f1eb;
 }
 
 .detalhe-procedimento__cat {
   font-size: 10px;
   letter-spacing: .3em;
   text-transform: uppercase;
-  color: #dfa87a;
+  color: #a05e32;
   font-weight: 600;
 }
 
@@ -858,14 +858,14 @@ img, video {
   font-style: italic;
   font-size: 36px;
   line-height: 1.05;
-  color: #f7f1e6;
+  color: #221a16;
 }
 
 .detalhe-procedimento__desc {
   margin: 0 0 20px;
   font-size: 14px;
   line-height: 1.6;
-  color: rgba(247, 241, 230, 0.82);
+  color: #4b4038;
 }
 
 .detalhe-procedimento__specs {
@@ -879,20 +879,20 @@ img, video {
   justify-content: space-between;
   gap: 16px;
   padding: 12px 0;
-  border-top: 1px solid rgba(223, 168, 122, 0.15);
+  border-top: 1px solid rgba(34, 26, 22, 0.10);
 }
 
 .detalhe-procedimento__spec-k {
   font-size: 10px;
   letter-spacing: .20em;
   text-transform: uppercase;
-  color: rgba(247, 241, 230, 0.55);
+  color: #685e58;
 }
 
 .detalhe-procedimento__spec-v {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 18px;
-  color: #f7f1e6;
+  color: #221a16;
   text-align: right;
 }
 
@@ -908,10 +908,10 @@ img, video {
   align-items: center;
   justify-content: center;
   height: 50px;
-  background: #dfa87a;
-  color: #181310;
+  background: #221a16;
+  color: #ffffff;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
   border-radius: 10px;
@@ -919,16 +919,16 @@ img, video {
 }
 
 .detalhe-procedimento__cta:hover {
-  background: #ecc099;
+  background: #a05e32;
 }
 
 .detalhe-procedimento__proximo {
   flex: none;
   width: 50px;
   height: 50px;
-  border: 1.5px solid rgba(223, 168, 122, 0.35);
+  border: 1.5px solid rgba(34, 26, 22, 0.25);
   background: transparent;
-  color: #f7f1e6;
+  color: #221a16;
   font-size: 16px;
   border-radius: 10px;
   cursor: pointer;
@@ -936,8 +936,8 @@ img, video {
 }
 
 .detalhe-procedimento__proximo:hover {
-  border-color: #dfa87a;
-  color: #dfa87a;
+  border-color: #a05e32;
+  color: #a05e32;
 }
 
 /* ---------- Reduced Motion ---------- */
