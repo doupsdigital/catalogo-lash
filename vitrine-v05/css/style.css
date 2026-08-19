@@ -1,17 +1,45 @@
-/* ---------- Reset / base ---------- */
+/* ==========================================================================
+   VITRINE V05 — CLEAN & REFINED (ESTÉTICA MINIMALISTA & EDITORIAL)
+   ========================================================================== */
+
+/* ---------- Reset / Base ---------- */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
   overflow: hidden;
-  background: #faf6f1;
+  background: #0d0b0a;
   -webkit-font-smoothing: antialiased;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }
-* { box-sizing: border-box; }
-a { color: inherit; text-decoration: none; }
-a:hover { color: #b4703f; }
-img { display: block; max-width: 100%; }
-::-webkit-scrollbar { width: 0; height: 0; }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #9c5d32;
+}
+
+img, video {
+  display: block;
+  max-width: 100%;
+}
+
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
 
 @keyframes cue {
   0%, 100% { transform: translateY(0); opacity: .55; }
@@ -24,9 +52,9 @@ img { display: block; max-width: 100%; }
   max-width: 430px;
   height: 100dvh;
   margin: 0 auto;
-  background: #faf6f1;
-  color: #2a2320;
-  font-family: 'Jost', system-ui, sans-serif;
+  background: #faf7f2;
+  color: #1e1916;
+  font-family: 'Jost', system-ui, -apple-system, sans-serif;
   overflow-y: auto;
   overflow-x: hidden;
   scroll-snap-type: y mandatory;
@@ -38,10 +66,11 @@ img { display: block; max-width: 100%; }
   display: block;
   width: 100%;
   text-align: center;
-  font-size: 10px;
-  letter-spacing: .42em;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .38em;
   text-transform: uppercase;
-  color: #b4703f;
+  color: #9c5d32;
 }
 
 /* ---------- Snap Sections (General Rules) ---------- */
@@ -59,28 +88,42 @@ img { display: block; max-width: 100%; }
   box-sizing: border-box;
 }
 
-/* ---------- Hero ---------- */
+/* ==========================================================================
+   1. HERO (CAPA LIMPA COM NITIDEZ E DEGRADÊ QUENTE NO RODAPÉ)
+   ========================================================================== */
 .hero {
-  background: #faf6f1;
+  background: #faf7f2;
 }
+
 .hero__foto-wrap {
   position: absolute;
   inset: -10%;
   overflow: hidden;
   will-change: transform;
 }
+
 .hero__foto {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% 28%;
-  filter: saturate(.9) brightness(1.12) contrast(.96);
+  filter: saturate(1.02) contrast(1.02) brightness(0.98);
 }
+
 .hero__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(250,246,241,.55) 0%, rgba(250,246,241,.35) 30%, rgba(250,246,241,.82) 62%, rgba(250,246,241,.96) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(20, 15, 12, 0.40) 0%,
+    rgba(250, 247, 242, 0) 24%,
+    rgba(250, 247, 242, 0) 48%,
+    rgba(250, 247, 242, 0.85) 68%,
+    rgba(250, 247, 242, 0.98) 88%,
+    #faf7f2 100%
+  );
 }
+
 .hero__conteudo {
   position: relative;
   z-index: 3;
@@ -88,85 +131,143 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 44px 26px 44px;
+  padding: 44px 26px 36px;
 }
-.hero__selo { display: flex; justify-content: center; }
+
+.hero__selo {
+  display: flex;
+  justify-content: center;
+}
+
 .hero__selo span {
   font-size: 10px;
-  letter-spacing: .42em;
+  font-weight: 600;
+  letter-spacing: .38em;
   text-transform: uppercase;
-  opacity: .85;
+  color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+  background: rgba(30, 25, 22, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 4px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
+
 .hero__titulo {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   margin-top: auto;
 }
+
 .hero__titulo h1 {
   margin: 0;
   font-family: 'Fraunces', Georgia, serif;
   font-weight: 400;
-  font-size: 48px;
-  line-height: 1.08;
+  font-size: 46px;
+  line-height: 1.06;
   letter-spacing: -.02em;
+  color: #1e1916;
 }
-.hero__titulo h1 em { font-weight: 500; font-style: italic; color: #b4703f; }
-.hero__filete { width: 38px; height: 1px; background: #b4703f; }
+
+.hero__titulo h1 em {
+  font-weight: 500;
+  font-style: italic;
+  color: #9c5d32;
+}
+
+.hero__filete {
+  width: 38px;
+  height: 1.5px;
+  background: #9c5d32;
+}
+
 .hero__frase {
   margin: 0;
-  font-size: 15px;
+  font-size: 14.5px;
   line-height: 1.55;
-  opacity: .88;
-  max-width: 300px;
+  color: #4a413a;
+  max-width: 320px;
 }
-.hero__frase em { font-style: italic; }
+
+.hero__frase em {
+  font-style: italic;
+}
+
 .hero__frase-cilios {
   margin: 0;
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 34px;
-  line-height: 1.18;
+  font-size: 32px;
+  line-height: 1.16;
   font-weight: 400;
+  color: #1e1916;
   text-wrap: pretty;
 }
-.hero__frase-cilios em { font-weight: 500; font-style: italic; color: #b4703f; }
-.hero .hero__scroll-cue { margin-top: 32px; }
+
+.hero__frase-cilios em {
+  font-weight: 500;
+  font-style: italic;
+  color: #9c5d32;
+}
+
+.hero .hero__scroll-cue {
+  margin-top: 24px;
+}
+
 .hero__scroll-cue {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
 }
+
 .hero__scroll-cue span {
   font-size: 9.5px;
   letter-spacing: .34em;
   text-transform: uppercase;
-  opacity: .6;
+  color: #685e58;
 }
+
 .hero__scroll-linha {
   width: 1px;
-  height: 34px;
-  background: linear-gradient(180deg, #2a2320, transparent);
+  height: 32px;
+  background: linear-gradient(180deg, #9c5d32, transparent);
   animation: cue 2.6s ease-in-out infinite;
 }
 
-
-/* ---------- Procedimentos (Balanced Portrait Carousel) ---------- */
+/* ==========================================================================
+   2. PROCEDIMENTOS (CARROSSEL COM FOTOS NÍTIDAS E CARDS ACETINADOS)
+   ========================================================================== */
 .procedimentos {
-  background: radial-gradient(circle at 50% 30%, #f6f0e6 0%, #faf6f1 100%);
+  background: #faf7f2;
 }
-.procedimentos__foto-wrap { position: absolute; inset: -10%; overflow: hidden; will-change: transform; }
+
+.procedimentos__foto-wrap {
+  position: absolute;
+  inset: -10%;
+  overflow: hidden;
+  will-change: transform;
+}
+
 .procedimentos__foto {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(.9) brightness(1.12) contrast(.96);
+  filter: saturate(1.02) contrast(1.02);
 }
+
 .procedimentos__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(246,240,232,.9) 0%, rgba(246,240,232,.68) 40%, rgba(246,240,232,.95) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(250, 247, 242, 0.94) 0%,
+    rgba(250, 247, 242, 0.72) 35%,
+    rgba(250, 247, 242, 0.96) 100%
+  );
 }
+
 .procedimentos__conteudo {
   position: relative;
   z-index: 3;
@@ -174,13 +275,15 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 44px 0 44px;
+  padding: 40px 0 36px;
 }
+
 .procedimentos__corpo {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
+
 .procedimentos__frase {
   margin: 0;
   padding: 0 26px;
@@ -188,25 +291,36 @@ img { display: block; max-width: 100%; }
   font-size: 34px;
   line-height: 1.15;
   font-weight: 400;
+  color: #1e1916;
 }
-.procedimentos__frase em { font-style: italic; }
+
+.procedimentos__frase em {
+  font-style: italic;
+  color: #9c5d32;
+}
+
 .procedimentos__dica {
   margin: -4px 0 0;
   padding: 0 26px;
   font-size: 12px;
   font-style: italic;
-  opacity: .55;
+  color: #685e58;
 }
+
 .procedimentos__lista {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 0 9% 8px;
+  padding: 0 9% 10px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
-.procedimentos__lista::-webkit-scrollbar { display: none; }
+
+.procedimentos__lista::-webkit-scrollbar {
+  display: none;
+}
+
 .card-procedimento {
   margin: 0;
   flex: 0 0 82%;
@@ -215,105 +329,115 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   gap: 12px;
+  cursor: pointer;
 }
+
 .card-procedimento__foto-box {
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 5.0;
-  max-height: 600px;
+  max-height: 560px;
   overflow: hidden;
-  background: #efe6d8;
-  border-radius: 4px;
+  background: #efe9df;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(30, 25, 22, 0.10), 0 2px 6px rgba(30, 25, 22, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
+
 .card-procedimento__foto {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(.9) brightness(1.12) contrast(.96);
+  filter: saturate(1.03) contrast(1.02);
+  transition: transform 0.4s ease;
 }
+
+.card-procedimento:hover .card-procedimento__foto {
+  transform: scale(1.03);
+}
+
 .card-procedimento__foto--hibrido {
   object-position: 50% 42%;
-  filter: saturate(.9) brightness(1.12) contrast(.96);
 }
+
+.card-procedimento__foto-box::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 48%, rgba(20, 15, 12, 0.76) 100%);
+  pointer-events: none;
+}
+
 .card-procedimento__nome {
   position: absolute;
   left: 18px;
   right: 18px;
   bottom: 16px;
+  z-index: 2;
   color: #ffffff;
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 28px;
+  font-size: 27px;
   font-style: italic;
-  line-height: 1.08;
-  text-shadow: 0 2px 20px rgba(0,0,0,.85);
+  line-height: 1.1;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+  margin: 0;
 }
+
 .card-procedimento__info {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
+  padding: 0 4px;
 }
+
 .card-procedimento__preco {
   font-size: 22px;
-  font-weight: 500;
-  letter-spacing: .01em;
-  color: #b4703f;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: #9c5d32;
 }
+
 .card-procedimento__meta {
   margin: 0;
-  font-size: 12.5px;
-  letter-spacing: .12em;
+  font-size: 12px;
+  letter-spacing: .10em;
   text-transform: uppercase;
-  opacity: .5;
+  color: #685e58;
 }
 
-/* ---------- Manutenção (sub-bloco dentro de Cuidados) ---------- */
-.cuidados__manutencao {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: 0 26px;
-  margin-bottom: 24px;
-}
-.manutencao__frase {
-  margin: 0;
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 30px;
-  line-height: 1.2;
-  font-weight: 400;
-  text-wrap: pretty;
-}
-.manutencao__frase em { font-style: italic; color: #b4703f; }
-.manutencao__regras {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 11px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  opacity: .68;
-}
-
-/* ---------- Agendamento ---------- */
+/* ==========================================================================
+   3. AGENDAMENTO (CARD DE VIDRO TRANSLÚCIDO EM ALTO CONTRASTE)
+   ========================================================================== */
 .agendamento {
-  background: radial-gradient(circle at 50% 25%, #f6f0e6 0%, #faf6f1 100%);
+  background: #faf7f2;
 }
+
 .agendamento__foto-wrap {
   position: absolute;
   inset: -10%;
   overflow: hidden;
   will-change: transform;
 }
+
 .agendamento__foto {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(.9) brightness(1.12) contrast(.96);
+  filter: saturate(1.02) contrast(1.02);
 }
+
 .agendamento__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(250,246,241,.82) 0%, rgba(250,246,241,.38) 38%, rgba(250,246,241,.96) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(250, 247, 242, 0.88) 0%,
+    rgba(250, 247, 242, 0.35) 32%,
+    rgba(250, 247, 242, 0.94) 75%,
+    #faf7f2 100%
+  );
 }
+
 .agendamento__conteudo {
   position: relative;
   z-index: 3;
@@ -321,89 +445,114 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 44px 26px 44px;
+  padding: 40px 24px 36px;
 }
+
 .agendamento__corpo {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
+
 .agendamento__frase {
   margin: 0;
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 34px;
+  font-size: 32px;
   line-height: 1.15;
   font-weight: 400;
+  color: #1e1916;
   text-wrap: pretty;
 }
-.agendamento__frase em { font-style: italic; color: #b4703f; }
+
+.agendamento__frase em {
+  font-style: italic;
+  color: #9c5d32;
+}
+
 .agendamento__lista {
   display: flex;
   flex-direction: column;
-  background: rgba(255,255,255,.68);
-  border: 1px solid rgba(42,35,32,.12);
-  border-radius: 4px;
-  padding: 6px 18px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(156, 93, 50, 0.16);
+  border-radius: 12px;
+  padding: 8px 18px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(30, 25, 22, 0.06);
 }
+
 .agendamento__item {
   display: grid;
   grid-template-columns: 28px 1fr;
   gap: 14px;
   align-items: center;
   padding: 12px 0;
-  border-bottom: 1px solid rgba(42,35,32,.12);
+  border-bottom: 1px solid rgba(30, 25, 22, 0.08);
 }
+
 .agendamento__item--ultimo {
   border-bottom: none;
 }
+
 .agendamento__numeral {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 19px;
   font-style: italic;
-  color: #b4703f;
-  font-weight: 500;
-  opacity: .95;
+  color: #9c5d32;
+  font-weight: 600;
 }
+
 .agendamento__texto {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
+
 .agendamento__texto strong {
   font-size: 13.5px;
-  font-weight: 500;
-  letter-spacing: .02em;
-  color: #2a2320;
+  font-weight: 600;
+  color: #1e1916;
 }
+
 .agendamento__texto p {
   margin: 0;
   font-size: 12px;
   line-height: 1.45;
-  opacity: .75;
-  color: #6b6058;
+  color: #554c46;
 }
 
-/* ---------- Manutenção & Cuidados ---------- */
+/* ==========================================================================
+   4. CUIDADOS & MANUTENÇÃO
+   ========================================================================== */
 .cuidados {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #f6f0e6;
+  background: #faf7f2;
 }
-.cuidados__foto-wrap { position: absolute; inset: -10%; overflow: hidden; will-change: transform; }
+
+.cuidados__foto-wrap {
+  position: absolute;
+  inset: -10%;
+  overflow: hidden;
+  will-change: transform;
+}
+
 .cuidados__foto {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(.9) brightness(1.12) contrast(.96);
+  filter: saturate(1.02) contrast(1.02);
 }
+
 .cuidados__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(250,246,241,.8) 0%, rgba(250,246,241,.42) 35%, rgba(250,246,241,.95) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(250, 247, 242, 0.90) 0%,
+    rgba(250, 247, 242, 0.40) 35%,
+    rgba(250, 247, 242, 0.95) 100%
+  );
 }
+
 .cuidados__conteudo {
   position: relative;
   z-index: 3;
@@ -411,128 +560,202 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 44px 0 44px;
+  padding: 40px 0 36px;
 }
+
 .cuidados__corpo {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
+
 .cuidados__frase {
   margin: 0;
-  padding: 0 26px;
+  padding: 0 24px;
   font-family: 'Fraunces', Georgia, serif;
   font-size: 34px;
   line-height: 1.15;
   font-weight: 400;
+  color: #1e1916;
 }
-.cuidados__frase em { font-style: italic; }
+
+.cuidados__frase em {
+  font-style: italic;
+  color: #9c5d32;
+}
+
 .cuidados__carrossel {
   display: flex;
   gap: 14px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 0 10% 8px;
+  padding: 0 9% 10px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
-.cuidados__carrossel::-webkit-scrollbar { display: none; }
+
+.cuidados__carrossel::-webkit-scrollbar {
+  display: none;
+}
+
 .card-cuidado {
-  flex: 0 0 80%;
+  flex: 0 0 82%;
   scroll-snap-align: center;
   scroll-snap-stop: always;
   padding: 22px 24px;
-  background: rgba(255,255,255,.68);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(42,35,32,.12);
-  min-height: 175px;
+  border: 1px solid rgba(156, 93, 50, 0.16);
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(30, 25, 22, 0.06);
+  min-height: 170px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 20px;
-  border-radius: 4px;
+  gap: 16px;
 }
+
 .card-cuidado span {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 26px;
   font-style: italic;
-  color: #b4703f;
-  font-weight: 500;
-}
-.card-cuidado p {
-  margin: 0;
-  font-size: 17.5px;
-  line-height: 1.5;
-  color: #2a2320;
-  opacity: .95;
+  color: #9c5d32;
+  font-weight: 600;
 }
 
-/* ---------- Contato ---------- */
-.contato {
-  background: #f6f0e6;
+.card-cuidado p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+  color: #1e1916;
+  font-weight: 500;
 }
-.contato__foto-wrap { position: absolute; inset: -10%; overflow: hidden; will-change: transform; }
+
+/* ==========================================================================
+   5. CONTATO (FINAL LUXUOSO COM BOTÕES EM ALTO CONTRASTE)
+   ========================================================================== */
+.contato {
+  background: #faf7f2;
+}
+
+.contato__foto-wrap {
+  position: absolute;
+  inset: -10%;
+  overflow: hidden;
+  will-change: transform;
+}
+
 .contato__foto {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 20%;
-  filter: saturate(.9) brightness(1.12) contrast(.96);
+  filter: saturate(1.02) contrast(1.02) brightness(0.98);
 }
+
 .contato__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(250,246,241,.1) 0%, rgba(250,246,241,.2) 35%, rgba(250,246,241,.92) 65%, #faf6f1 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(20, 15, 12, 0.35) 0%,
+    rgba(250, 247, 242, 0) 25%,
+    rgba(250, 247, 242, 0.88) 58%,
+    #faf7f2 92%
+  );
 }
+
 .contato__conteudo {
   position: relative;
   z-index: 3;
   height: 100%;
-  padding: 0 26px 44px;
+  padding: 0 24px 40px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 26px;
+  gap: 22px;
 }
+
 .contato__titulo {
   margin: 0;
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 44px;
+  font-size: 42px;
   line-height: 1.08;
   font-weight: 400;
+  color: #1e1916;
 }
-.contato__titulo em { font-style: italic; }
-.contato__acoes { display: flex; flex-direction: column; gap: 11px; }
+
+.contato__titulo em {
+  font-style: italic;
+  color: #9c5d32;
+}
+
+.contato__acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .btn-whatsapp,
 .btn-instagram {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 54px;
+  min-height: 52px;
   padding: 0 22px;
   font-size: 11.5px;
-  letter-spacing: .22em;
+  font-weight: 700;
+  letter-spacing: .20em;
   text-transform: uppercase;
-  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+  border-radius: 10px;
+  transition: all 0.25s ease;
 }
-.btn-whatsapp { background: #2a2320; color: #ffffff; }
-.btn-whatsapp:hover { background: #b4703f; color: #ffffff; }
-.btn-instagram { border: 1px solid rgba(42,35,32,.3); }
-.btn-instagram:hover { border-color: #b4703f; color: #b4703f; }
-.btn-whatsapp span, .btn-instagram span { font-size: 15px; }
+
+.btn-whatsapp {
+  background: #1e1916;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(30, 25, 22, 0.18);
+}
+
+.btn-whatsapp:hover {
+  background: #9c5d32;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-instagram {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid rgba(30, 25, 22, 0.18);
+  color: #1e1916;
+  backdrop-filter: blur(8px);
+}
+
+.btn-instagram:hover {
+  border-color: #9c5d32;
+  color: #9c5d32;
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp span,
+.btn-instagram span {
+  font-size: 15px;
+}
+
 .contato__info {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
   font-size: 10.5px;
-  letter-spacing: .14em;
+  letter-spacing: .12em;
   text-transform: uppercase;
-  opacity: .5;
-  padding-top: 8px;
+  color: #685e58;
+  padding-top: 4px;
 }
 
-/* ---------- Active Section Animations (Intersection Observer Triggered) ---------- */
+/* ==========================================================================
+   6. ANIMAÇÕES DE ENTRADA POR SEÇÃO
+   ========================================================================== */
 .hero__selo,
 .hero__titulo,
 .hero__scroll-cue,
@@ -544,8 +767,8 @@ img { display: block; max-width: 100%; }
 .card-cuidado,
 .contato__conteudo {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(28px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -563,40 +786,31 @@ img { display: block; max-width: 100%; }
   transform: translateY(0);
 }
 
-/* Stagger Delays */
 .is-active .hero__selo,
 .is-active .etiqueta { transition-delay: 0.1s; }
-
 .is-active .hero__titulo,
 .is-active .procedimentos__corpo,
 .is-active .agendamento__corpo,
 .is-active .cuidados__corpo { transition-delay: 0.22s; }
-
 .is-active .hero__scroll-cue { transition-delay: 0.4s; }
 
-.is-active .card-procedimento:nth-child(1) { transition-delay: 0.22s; }
-.is-active .card-procedimento:nth-child(2) { transition-delay: 0.3s; }
-.is-active .card-procedimento:nth-child(3) { transition-delay: 0.38s; }
-.is-active .card-procedimento:nth-child(4) { transition-delay: 0.46s; }
-.is-active .card-procedimento:nth-child(5) { transition-delay: 0.54s; }
-.is-active .card-procedimento:nth-child(6) { transition-delay: 0.62s; }
-.is-active .card-procedimento:nth-child(7) { transition-delay: 0.7s; }
-.is-active .card-procedimento:nth-child(8) { transition-delay: 0.78s; }
-.is-active .card-procedimento:nth-child(9) { transition-delay: 0.86s; }
+.is-active .card-procedimento:nth-child(1) { transition-delay: 0.20s; }
+.is-active .card-procedimento:nth-child(2) { transition-delay: 0.28s; }
+.is-active .card-procedimento:nth-child(3) { transition-delay: 0.36s; }
+.is-active .card-procedimento:nth-child(4) { transition-delay: 0.44s; }
+.is-active .card-procedimento:nth-child(5) { transition-delay: 0.52s; }
 
-.is-active .agendamento__guia { transition-delay: 0.15s; }
-.is-active .cuidados__legenda { transition-delay: 0.15s; }
-.is-active .card-cuidado:nth-child(1) { transition-delay: 0.25s; }
-.is-active .card-cuidado:nth-child(2) { transition-delay: 0.35s; }
-.is-active .card-cuidado:nth-child(3) { transition-delay: 0.45s; }
-.is-active .card-cuidado:nth-child(4) { transition-delay: 0.55s; }
-.is-active .card-cuidado:nth-child(5) { transition-delay: 0.65s; }
+.is-active .card-cuidado:nth-child(1) { transition-delay: 0.22s; }
+.is-active .card-cuidado:nth-child(2) { transition-delay: 0.32s; }
+.is-active .card-cuidado:nth-child(3) { transition-delay: 0.42s; }
 .is-active .contato__conteudo { transition-delay: 0.2s; }
 
-/* ---------- Detalhe do procedimento (modal) ---------- */
-.card-procedimento { cursor: pointer; }
-
-.vitrine.modal-aberto { overflow: hidden; }
+/* ==========================================================================
+   7. MODAL DE DETALHES DO PROCEDIMENTO
+   ========================================================================== */
+.vitrine.modal-aberto {
+  overflow: hidden;
+}
 
 .detalhe-procedimento {
   position: fixed;
@@ -605,33 +819,44 @@ img { display: block; max-width: 100%; }
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background: rgba(250,246,241,.78);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(20, 15, 12, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
-.detalhe-procedimento[hidden] { display: none; }
+
+.detalhe-procedimento[hidden] {
+  display: none;
+}
+
 .detalhe-procedimento__sheet {
   width: 100%;
   max-width: 430px;
   max-height: 88vh;
   overflow-y: auto;
-  background: #efe6d8;
-  border-radius: 14px 14px 0 0;
+  background: #faf7f2;
+  border-radius: 16px 16px 0 0;
   -webkit-overflow-scrolling: touch;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.25);
 }
-.detalhe-procedimento__foto-wrap { position: relative; }
+
+.detalhe-procedimento__foto-wrap {
+  position: relative;
+}
+
 .detalhe-procedimento__foto {
   width: 100%;
-  height: 300px;
+  height: 290px;
   object-fit: cover;
   display: block;
-  filter: saturate(.9) brightness(1.12) contrast(.96);
+  filter: saturate(1.03) contrast(1.02);
 }
+
 .detalhe-procedimento__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(239,230,216,0) 15%, #efe6d8 92%);
+  background: linear-gradient(180deg, transparent 30%, #faf7f2 96%);
 }
+
 .detalhe-procedimento__fechar {
   position: absolute;
   top: 14px;
@@ -640,94 +865,120 @@ img { display: block; max-width: 100%; }
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: rgba(250,246,241,.55);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(6px);
-  color: #2a2320;
+  color: #1e1916;
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
 .detalhe-procedimento__corpo {
   padding: 4px 24px 30px;
-  margin-top: -40px;
+  margin-top: -30px;
   position: relative;
-  background: #efe6d8;
+  background: #faf7f2;
 }
+
 .detalhe-procedimento__cat {
   font-size: 10px;
   letter-spacing: .3em;
   text-transform: uppercase;
-  color: #b4703f;
+  color: #9c5d32;
+  font-weight: 600;
 }
+
 .detalhe-procedimento__titulo {
-  margin: 10px 0 12px;
+  margin: 8px 0 10px;
   font-family: 'Fraunces', Georgia, serif;
   font-weight: 500;
   font-style: italic;
-  font-size: 38px;
-  line-height: 1.02;
-  color: #2a2320;
+  font-size: 36px;
+  line-height: 1.05;
+  color: #1e1916;
 }
+
 .detalhe-procedimento__desc {
-  margin: 0 0 22px;
+  margin: 0 0 20px;
   font-size: 14px;
-  line-height: 1.65;
-  color: rgba(42,35,32,.72);
+  line-height: 1.6;
+  color: #4a413a;
 }
-.detalhe-procedimento__specs { display: flex; flex-direction: column; }
+
+.detalhe-procedimento__specs {
+  display: flex;
+  flex-direction: column;
+}
+
 .detalhe-procedimento__spec {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 16px;
-  padding: 13px 0;
-  border-top: 1px solid rgba(42,35,32,.1);
+  padding: 12px 0;
+  border-top: 1px solid rgba(30, 25, 22, 0.1);
 }
+
 .detalhe-procedimento__spec-k {
   font-size: 10px;
-  letter-spacing: .22em;
+  letter-spacing: .20em;
   text-transform: uppercase;
-  color: rgba(42,35,32,.45);
+  color: #685e58;
 }
+
 .detalhe-procedimento__spec-v {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 19px;
-  color: #2a2320;
+  font-size: 18px;
+  color: #1e1916;
   text-align: right;
 }
+
 .detalhe-procedimento__acoes {
   display: flex;
   gap: 8px;
-  margin-top: 28px;
+  margin-top: 24px;
 }
+
 .detalhe-procedimento__cta {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 52px;
-  background: #2a2320;
+  height: 50px;
+  background: #1e1916;
   color: #ffffff;
   font-size: 12px;
+  font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
+  border-radius: 10px;
   transition: background-color .25s ease;
 }
-.detalhe-procedimento__cta:hover { background: #b4703f; }
+
+.detalhe-procedimento__cta:hover {
+  background: #9c5d32;
+}
+
 .detalhe-procedimento__proximo {
   flex: none;
-  width: 52px;
-  height: 52px;
-  border: 1px solid rgba(42,35,32,.3);
+  width: 50px;
+  height: 50px;
+  border: 1.5px solid rgba(30, 25, 22, 0.2);
   background: transparent;
-  color: #2a2320;
+  color: #1e1916;
   font-size: 16px;
+  border-radius: 10px;
   cursor: pointer;
   transition: border-color .25s ease;
 }
-.detalhe-procedimento__proximo:hover { border-color: #b4703f; }
 
-/* ---------- Reduced motion ---------- */
+.detalhe-procedimento__proximo:hover {
+  border-color: #9c5d32;
+  color: #9c5d32;
+}
+
+/* ---------- Reduced Motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   .hero__scroll-linha { animation: none; }
   .hero__selo, .hero__titulo, .hero__scroll-cue,
