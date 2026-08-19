@@ -1,5 +1,5 @@
 /* ==========================================================================
-   VITRINE V05 — CLEAN ESSENTIAL (PALETA LIGHT REFINADA, CONTRASTADA E EQUILIBRADA)
+   VITRINE V05 — BLUSH ROSÉ CLEAN (CAMADA ESFUMAÇADA EM ROSA CLARO SUAVE)
    ========================================================================== */
 
 /* ---------- Reset / Base ---------- */
@@ -27,7 +27,7 @@ a {
 }
 
 a:hover {
-  color: #a05e32;
+  color: #c04b6b;
 }
 
 img, video {
@@ -52,8 +52,8 @@ img, video {
   max-width: 430px;
   height: 100dvh;
   margin: 0 auto;
-  background: #f6f1eb; /* Nude / Creme acetinado suave (Clean) */
-  color: #221a16;     /* Café escuro e nítido para contraste impecável */
+  background: #fbf2f4; /* Rosa claro blush acetinado e suave */
+  color: #26161c;     /* Ameixa / Café escuro de alto contraste */
   font-family: 'Jost', system-ui, -apple-system, sans-serif;
   overflow-y: auto;
   overflow-x: hidden;
@@ -70,7 +70,7 @@ img, video {
   font-weight: 600;
   letter-spacing: .38em;
   text-transform: uppercase;
-  color: #a05e32;
+  color: #c04b6b;
 }
 
 /* ---------- Snap Sections (General Rules) ---------- */
@@ -89,7 +89,7 @@ img, video {
 }
 
 /* ==========================================================================
-   FOTOS DE FUNDO (NITIDEZ REALÇADA PARA NÃO DESBOTAR SOB O EFEITO CLEAN)
+   FOTOS DE FUNDO
    ========================================================================== */
 .hero__foto-wrap,
 .procedimentos__foto-wrap,
@@ -111,7 +111,7 @@ img, video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(1.08) contrast(1.08) brightness(0.96);
+  filter: saturate(1.06) contrast(1.05) brightness(0.97);
 }
 
 .hero__foto {
@@ -123,23 +123,22 @@ img, video {
 }
 
 /* ==========================================================================
-   1. HERO (CAMADA CLEAN CALIBRADA — NÍTIDA E SEM ESTOURO)
+   1. HERO (CAMADA ESFUMAÇADA EM ROSA CLARO)
    ========================================================================== */
 .hero {
-  background: #f6f1eb;
+  background: #fbf2f4;
 }
 
 .hero__scrim {
   position: absolute;
   inset: 0;
-  /* Camada clean com transição suave para não ofuscar */
   background: linear-gradient(
     180deg,
-    rgba(246, 241, 235, 0.40) 0%,
-    rgba(246, 241, 235, 0.12) 28%,
-    rgba(246, 241, 235, 0.65) 58%,
-    rgba(246, 241, 235, 0.94) 84%,
-    #f6f1eb 100%
+    rgba(251, 242, 244, 0.42) 0%,
+    rgba(251, 242, 244, 0.12) 28%,
+    rgba(251, 242, 244, 0.70) 58%,
+    rgba(251, 242, 244, 0.95) 84%,
+    #fbf2f4 100%
   );
 }
 
@@ -163,14 +162,14 @@ img, video {
   font-weight: 600;
   letter-spacing: .38em;
   text-transform: uppercase;
-  color: #a05e32;
-  background: rgba(255, 255, 255, 0.85);
+  color: #c04b6b;
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 4px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(160, 94, 50, 0.25);
-  box-shadow: 0 2px 8px rgba(34, 26, 22, 0.05);
+  border: 1px solid rgba(192, 75, 107, 0.25);
+  box-shadow: 0 2px 8px rgba(70, 25, 40, 0.05);
 }
 
 .hero__titulo {
@@ -187,26 +186,26 @@ img, video {
   font-size: 46px;
   line-height: 1.06;
   letter-spacing: -.02em;
-  color: #221a16;
+  color: #26161c;
 }
 
 .hero__titulo h1 em {
   font-weight: 500;
   font-style: italic;
-  color: #a05e32;
+  color: #c04b6b;
 }
 
 .hero__filete {
   width: 38px;
   height: 1.5px;
-  background: #a05e32;
+  background: #c04b6b;
 }
 
 .hero__frase {
   margin: 0;
   font-size: 14.5px;
   line-height: 1.55;
-  color: #4b4038;
+  color: #553d46;
   max-width: 320px;
 }
 
@@ -220,14 +219,14 @@ img, video {
   font-size: 32px;
   line-height: 1.16;
   font-weight: 400;
-  color: #221a16;
+  color: #26161c;
   text-wrap: pretty;
 }
 
 .hero__frase-cilios em {
   font-weight: 500;
   font-style: italic;
-  color: #a05e32;
+  color: #c04b6b;
 }
 
 .hero .hero__scroll-cue {
@@ -245,21 +244,21 @@ img, video {
   font-size: 9.5px;
   letter-spacing: .34em;
   text-transform: uppercase;
-  color: #685e58;
+  color: #7d656d;
 }
 
 .hero__scroll-linha {
   width: 1px;
   height: 32px;
-  background: linear-gradient(180deg, #a05e32, transparent);
+  background: linear-gradient(180deg, #c04b6b, transparent);
   animation: cue 2.6s ease-in-out infinite;
 }
 
 /* ==========================================================================
-   2. PROCEDIMENTOS (FUNDO CLEAN COM FOTO SUAVE E CARDS EM ALTO CONTRASTE)
+   2. PROCEDIMENTOS (CAMADA ESFUMAÇADA ROSA CLARO)
    ========================================================================== */
 .procedimentos {
-  background: #f6f1eb;
+  background: #fbf2f4;
 }
 
 .procedimentos__scrim {
@@ -267,9 +266,9 @@ img, video {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(246, 241, 235, 0.92) 0%,
-    rgba(246, 241, 235, 0.70) 38%,
-    rgba(246, 241, 235, 0.95) 100%
+    rgba(251, 242, 244, 0.94) 0%,
+    rgba(251, 242, 244, 0.72) 38%,
+    rgba(251, 242, 244, 0.96) 100%
   );
 }
 
@@ -296,12 +295,12 @@ img, video {
   font-size: 34px;
   line-height: 1.15;
   font-weight: 400;
-  color: #221a16;
+  color: #26161c;
 }
 
 .procedimentos__frase em {
   font-style: italic;
-  color: #a05e32;
+  color: #c04b6b;
 }
 
 .procedimentos__dica {
@@ -309,7 +308,7 @@ img, video {
   padding: 0 26px;
   font-size: 12px;
   font-style: italic;
-  color: #685e58;
+  color: #7d656d;
 }
 
 .procedimentos__lista {
@@ -343,10 +342,10 @@ img, video {
   aspect-ratio: 3 / 5.0;
   max-height: 560px;
   overflow: hidden;
-  background: #eae2d6;
+  background: #faebef;
   border-radius: 14px;
-  box-shadow: 0 14px 32px rgba(34, 26, 22, 0.12), 0 2px 6px rgba(34, 26, 22, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 14px 32px rgba(70, 25, 40, 0.12), 0 2px 6px rgba(70, 25, 40, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.65);
 }
 
 .card-procedimento__foto {
@@ -369,7 +368,7 @@ img, video {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 48%, rgba(20, 15, 12, 0.78) 100%);
+  background: linear-gradient(180deg, transparent 48%, rgba(38, 22, 28, 0.80) 100%);
   pointer-events: none;
 }
 
@@ -399,7 +398,7 @@ img, video {
   font-size: 22px;
   font-weight: 600;
   letter-spacing: -.01em;
-  color: #a05e32;
+  color: #c04b6b;
 }
 
 .card-procedimento__meta {
@@ -407,15 +406,15 @@ img, video {
   font-size: 12px;
   letter-spacing: .10em;
   text-transform: uppercase;
-  color: #685e58;
+  color: #7d656d;
   font-weight: 500;
 }
 
 /* ==========================================================================
-   3. AGENDAMENTO (CARDS EM VIDRO TRANSLÚCIDO CLEAN)
+   3. AGENDAMENTO (ESFUMAÇADO ROSA CLARO)
    ========================================================================== */
 .agendamento {
-  background: #f6f1eb;
+  background: #fbf2f4;
 }
 
 .agendamento__scrim {
@@ -423,10 +422,10 @@ img, video {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(246, 241, 235, 0.88) 0%,
-    rgba(246, 241, 235, 0.40) 35%,
-    rgba(246, 241, 235, 0.94) 75%,
-    #f6f1eb 100%
+    rgba(251, 242, 244, 0.90) 0%,
+    rgba(251, 242, 244, 0.42) 35%,
+    rgba(251, 242, 244, 0.95) 75%,
+    #fbf2f4 100%
   );
 }
 
@@ -452,25 +451,25 @@ img, video {
   font-size: 32px;
   line-height: 1.15;
   font-weight: 400;
-  color: #221a16;
+  color: #26161c;
   text-wrap: pretty;
 }
 
 .agendamento__frase em {
   font-style: italic;
-  color: #a05e32;
+  color: #c04b6b;
 }
 
 .agendamento__lista {
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.90);
-  border: 1px solid rgba(160, 94, 50, 0.18);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(192, 75, 107, 0.20);
   border-radius: 14px;
   padding: 8px 18px;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 10px 30px rgba(34, 26, 22, 0.06);
+  box-shadow: 0 10px 30px rgba(70, 25, 40, 0.06);
 }
 
 .agendamento__item {
@@ -479,7 +478,7 @@ img, video {
   gap: 14px;
   align-items: center;
   padding: 12px 0;
-  border-bottom: 1px solid rgba(34, 26, 22, 0.07);
+  border-bottom: 1px solid rgba(192, 75, 107, 0.10);
 }
 
 .agendamento__item--ultimo {
@@ -490,7 +489,7 @@ img, video {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 19px;
   font-style: italic;
-  color: #a05e32;
+  color: #c04b6b;
   font-weight: 600;
 }
 
@@ -503,21 +502,21 @@ img, video {
 .agendamento__texto strong {
   font-size: 13.5px;
   font-weight: 600;
-  color: #221a16;
+  color: #26161c;
 }
 
 .agendamento__texto p {
   margin: 0;
   font-size: 12px;
   line-height: 1.45;
-  color: #55483e;
+  color: #553d46;
 }
 
 /* ==========================================================================
-   4. CUIDADOS & MANUTENÇÃO
+   4. CUIDADOS & MANUTENÇÃO (ESFUMAÇADO ROSA CLARO)
    ========================================================================== */
 .cuidados {
-  background: #f6f1eb;
+  background: #fbf2f4;
 }
 
 .cuidados__scrim {
@@ -525,9 +524,9 @@ img, video {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(246, 241, 235, 0.90) 0%,
-    rgba(246, 241, 235, 0.42) 35%,
-    rgba(246, 241, 235, 0.95) 100%
+    rgba(251, 242, 244, 0.92) 0%,
+    rgba(251, 242, 244, 0.45) 35%,
+    rgba(251, 242, 244, 0.96) 100%
   );
 }
 
@@ -561,13 +560,13 @@ img, video {
   font-size: 30px;
   line-height: 1.2;
   font-weight: 400;
-  color: #221a16;
+  color: #26161c;
   text-wrap: pretty;
 }
 
 .manutencao__frase em {
   font-style: italic;
-  color: #a05e32;
+  color: #c04b6b;
 }
 
 .manutencao__regras {
@@ -577,8 +576,8 @@ img, video {
   font-size: 11px;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: #685e58;
-  opacity: .85;
+  color: #7d656d;
+  opacity: .9;
 }
 
 .cuidados__frase {
@@ -588,12 +587,12 @@ img, video {
   font-size: 34px;
   line-height: 1.15;
   font-weight: 400;
-  color: #221a16;
+  color: #26161c;
 }
 
 .cuidados__frase em {
   font-style: italic;
-  color: #a05e32;
+  color: #c04b6b;
 }
 
 .cuidados__carrossel {
@@ -615,12 +614,12 @@ img, video {
   scroll-snap-align: center;
   scroll-snap-stop: always;
   padding: 22px 24px;
-  background: rgba(255, 255, 255, 0.90);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(160, 94, 50, 0.18);
+  border: 1px solid rgba(192, 75, 107, 0.20);
   border-radius: 14px;
-  box-shadow: 0 10px 28px rgba(34, 26, 22, 0.06);
+  box-shadow: 0 10px 28px rgba(70, 25, 40, 0.06);
   min-height: 170px;
   display: flex;
   flex-direction: column;
@@ -632,7 +631,7 @@ img, video {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 26px;
   font-style: italic;
-  color: #a05e32;
+  color: #c04b6b;
   font-weight: 600;
 }
 
@@ -640,15 +639,15 @@ img, video {
   margin: 0;
   font-size: 16px;
   line-height: 1.45;
-  color: #221a16;
+  color: #26161c;
   font-weight: 500;
 }
 
 /* ==========================================================================
-   5. CONTATO
+   5. CONTATO (ESFUMAÇADO ROSA CLARO)
    ========================================================================== */
 .contato {
-  background: #f6f1eb;
+  background: #fbf2f4;
 }
 
 .contato__scrim {
@@ -656,10 +655,10 @@ img, video {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(246, 241, 235, 0.35) 0%,
-    rgba(246, 241, 235, 0.10) 25%,
-    rgba(246, 241, 235, 0.88) 58%,
-    #f6f1eb 92%
+    rgba(251, 242, 244, 0.35) 0%,
+    rgba(251, 242, 244, 0.10) 25%,
+    rgba(251, 242, 244, 0.88) 58%,
+    #fbf2f4 92%
   );
 }
 
@@ -680,12 +679,12 @@ img, video {
   font-size: 42px;
   line-height: 1.08;
   font-weight: 400;
-  color: #221a16;
+  color: #26161c;
 }
 
 .contato__titulo em {
   font-style: italic;
-  color: #a05e32;
+  color: #c04b6b;
 }
 
 .contato__acoes {
@@ -710,26 +709,26 @@ img, video {
 }
 
 .btn-whatsapp {
-  background: #221a16;
+  background: #26161c;
   color: #ffffff;
-  box-shadow: 0 6px 18px rgba(34, 26, 22, 0.20);
+  box-shadow: 0 6px 18px rgba(70, 25, 40, 0.25);
 }
 
 .btn-whatsapp:hover {
-  background: #a05e32;
+  background: #c04b6b;
   color: #ffffff;
   transform: translateY(-2px);
 }
 
 .btn-instagram {
-  background: rgba(255, 255, 255, 0.90);
-  border: 1.5px solid rgba(34, 26, 22, 0.22);
-  color: #221a16;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid rgba(192, 75, 107, 0.25);
+  color: #26161c;
 }
 
 .btn-instagram:hover {
-  border-color: #a05e32;
-  color: #a05e32;
+  border-color: #c04b6b;
+  color: #c04b6b;
   transform: translateY(-2px);
 }
 
@@ -745,7 +744,7 @@ img, video {
   font-size: 10.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: #685e58;
+  color: #7d656d;
   padding-top: 4px;
 }
 
@@ -815,7 +814,7 @@ img, video {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background: rgba(20, 15, 12, 0.45);
+  background: rgba(38, 22, 28, 0.50);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -829,7 +828,7 @@ img, video {
   max-width: 430px;
   max-height: 88vh;
   overflow-y: auto;
-  background: #f6f1eb;
+  background: #fbf2f4;
   border-radius: 16px 16px 0 0;
   -webkit-overflow-scrolling: touch;
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.25);
@@ -850,7 +849,7 @@ img, video {
 .detalhe-procedimento__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 30%, #f6f1eb 96%);
+  background: linear-gradient(180deg, transparent 30%, #fbf2f4 96%);
 }
 
 .detalhe-procedimento__fechar {
@@ -861,27 +860,27 @@ img, video {
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.90);
   backdrop-filter: blur(6px);
-  color: #221a16;
+  color: #26161c;
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .detalhe-procedimento__corpo {
   padding: 4px 24px 30px;
   margin-top: -30px;
   position: relative;
-  background: #f6f1eb;
+  background: #fbf2f4;
 }
 
 .detalhe-procedimento__cat {
   font-size: 10px;
   letter-spacing: .3em;
   text-transform: uppercase;
-  color: #a05e32;
+  color: #c04b6b;
   font-weight: 600;
 }
 
@@ -892,14 +891,14 @@ img, video {
   font-style: italic;
   font-size: 36px;
   line-height: 1.05;
-  color: #221a16;
+  color: #26161c;
 }
 
 .detalhe-procedimento__desc {
   margin: 0 0 20px;
   font-size: 14px;
   line-height: 1.6;
-  color: #4b4038;
+  color: #553d46;
 }
 
 .detalhe-procedimento__specs {
@@ -913,20 +912,20 @@ img, video {
   justify-content: space-between;
   gap: 16px;
   padding: 12px 0;
-  border-top: 1px solid rgba(34, 26, 22, 0.10);
+  border-top: 1px solid rgba(192, 75, 107, 0.15);
 }
 
 .detalhe-procedimento__spec-k {
   font-size: 10px;
   letter-spacing: .20em;
   text-transform: uppercase;
-  color: #685e58;
+  color: #7d656d;
 }
 
 .detalhe-procedimento__spec-v {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 18px;
-  color: #221a16;
+  color: #26161c;
   text-align: right;
 }
 
@@ -942,7 +941,7 @@ img, video {
   align-items: center;
   justify-content: center;
   height: 50px;
-  background: #221a16;
+  background: #26161c;
   color: #ffffff;
   font-size: 12px;
   font-weight: 700;
@@ -953,16 +952,16 @@ img, video {
 }
 
 .detalhe-procedimento__cta:hover {
-  background: #a05e32;
+  background: #c04b6b;
 }
 
 .detalhe-procedimento__proximo {
   flex: none;
   width: 50px;
   height: 50px;
-  border: 1.5px solid rgba(34, 26, 22, 0.25);
+  border: 1.5px solid rgba(192, 75, 107, 0.25);
   background: transparent;
-  color: #221a16;
+  color: #26161c;
   font-size: 16px;
   border-radius: 10px;
   cursor: pointer;
@@ -970,8 +969,8 @@ img, video {
 }
 
 .detalhe-procedimento__proximo:hover {
-  border-color: #a05e32;
-  color: #a05e32;
+  border-color: #c04b6b;
+  color: #c04b6b;
 }
 
 /* ---------- Reduced Motion ---------- */
