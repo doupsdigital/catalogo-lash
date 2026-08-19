@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <title>Mariana Alves — Lash Designer | Studio Dark</title>
+  <meta name="description"
+    content="Menu Editorial Dark de Mariana Alves — Extensão de cílios, mapping personalizado, valores e agendamento.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="studio-app">
+
+    <!-- 1. HERO SECTION (PADRÃO UNIFICADO) -->
+    <section class="hero" id="hero" data-screen-label="Capa">
+      <div class="hero__foto-wrap">
+        <img src="assets/img/Hero.png" alt="Mariana Alves Lash Designer" class="hero__foto">
+      </div>
+      <div class="hero__scrim"></div>
+      <div class="hero__conteudo">
+        <div class="hero__selo">
+          <span>Seja Bem Vinda</span>
+        </div>
+        <div class="hero__titulo">
+          <h1>Mariana Alves<br><em>Lash Designer</em></h1>
+          <div class="hero__filete"></div>
+          <p class="hero__frase">Especialista em extensão de cílios. Cada aplicação começa por ouvir você.</p>
+          <p class="hero__frase-cilios">Cílios pensados para o <em>seu olhar</em> — técnica segura, desenho
+            personalizado.</p>
+        </div>
+        <a href="#menu" class="hero__scroll-cue" aria-label="Deslize para ver o menu">
+          <span>Ver Menu de Serviços</span>
+          <div class="hero__scroll-linha"></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. SEÇÃO MENU / LISTA EDITORIAL (ESTÉTICA LPB — ROSA & CREME) -->
+    <section class="secao-menu" id="menu" data-screen-label="Serviços">
+      <div class="container">
+
+        <header class="secao-menu__header">
+          <span class="etiqueta">Menu de Serviços</span>
+          <h2 class="secao-menu__titulo">Procedimentos & <em>Valores</em></h2>
+          <p class="secao-menu__sub">Toque em qualquer serviço para abrir a descrição completa e fotos.</p>
+        </header>
+
+        <!-- FILTROS DE CATEGORIA (CHIPS) -->
+        <nav class="studio__filtros" aria-label="Filtrar serviços">
+          <button type="button" class="filtro-chip is-ativo" data-filter="todos">Todos (11)</button>
+          <button type="button" class="filtro-chip" data-filter="volumes">Extensões & Volumes</button>
+          <button type="button" class="filtro-chip" data-filter="mapping">Mappings de Olhar</button>
+          <button type="button" class="filtro-chip" data-filter="especiais">Especiais & Cuidados</button>
+        </nav>
+
+        <!-- LISTA EDITORIAL DE SERVIÇOS (RENDERIZADA VIA JS) -->
+        <div class="studio__lista" data-lista></div>
+
+      </div>
+    </section>
+
+    <!-- 3. AGENDAMENTO & ORIENTAÇÕES -->
+    <section class="secao-orientacoes" id="orientacoes" data-screen-label="Orientações">
+      <div class="container">
+        <span class="etiqueta">Antes do Atendimento</span>
+        <h2 class="secao-orientacoes__titulo">Orientações para o <em>seu dia</em></h2>
+
+        <div class="orientacoes__card">
+          <div class="orientacao__item">
+            <span class="orientacao__num">01</span>
+            <div class="orientacao__info">
+              <strong>Confirmação de Horário</strong>
+              <p>Confirmamos seu agendamento 1 dia antes via WhatsApp.</p>
+            </div>
+          </div>
+          <div class="orientacao__item">
+            <span class="orientacao__num">02</span>
+            <div class="orientacao__info">
+              <strong>Pontualidade</strong>
+              <p>Tolerância máxima de 15 minutos para preservar o tempo do seu design.</p>
+            </div>
+          </div>
+          <div class="orientacao__item orientacao__item--ultimo">
+            <span class="orientacao__num">03</span>
+            <div class="orientacao__info">
+              <strong>Sem Maquiagem nos Olhos</strong>
+              <p>Venha sem rímel, delineador ou cosméticos oleosos na região dos cílios.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CONTATO & LOCALIZAÇÃO -->
+    <section class="secao-contato" id="contato" data-screen-label="Contato">
+      <div class="secao-contato__foto-wrap">
+        <img src="assets/img/Footer.png" alt="Mariana Alves Lash Designer" class="secao-contato__foto">
+      </div>
+      <div class="secao-contato__scrim"></div>
+      <div class="container secao-contato__conteudo">
+        <span class="etiqueta">Atendimento Privativo</span>
+        <h2 class="secao-contato__titulo">Agende seu <em>momento</em></h2>
+        <p class="secao-contato__desc">Reserve seu horário exclusivo e viva uma experiência personalizada.</p>
+
+        <div class="secao-contato__acoes">
+          <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio%20de%20c%C3%ADlios"
+            target="_blank" rel="noopener" class="btn-whatsapp">
+            Agendar pelo WhatsApp <span>→</span>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="btn-instagram">
+            Acompanhar no Instagram <span>↗</span>
+          </a>
+        </div>
+
+        <div class="secao-contato__info">
+          <span>Mariana Alves · Lash Designer</span>
+          <span>São Paulo — Atendimento com hora marcada</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- BARRA FIXA FLUTUANTE INFERIOR -->
+  <div class="barra-fixa-agendar">
+    <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio%20de%20c%C3%ADlios"
+      target="_blank" rel="noopener" class="btn-barra-fixa">
+      <span>Agendar meu Horário</span>
+      <span class="btn-barra-fixa__icon">→</span>
+    </a>
+  </div>
+
+  <!-- MODAL DE DETALHES DO PROCEDIMENTO -->
+  <div class="modal-detalhe" data-modal hidden>
+    <div class="modal-detalhe__backdrop" data-modal-fechar></div>
+    <div class="modal-detalhe__sheet" data-modal-sheet>
+      <!-- Renderizado dinamicamente via JS -->
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>
