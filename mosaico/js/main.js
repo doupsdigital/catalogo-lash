@@ -1,256 +1,305 @@
-gsap.registerPlugin(ScrollTrigger);
+/* ==========================================================================
+   LASHMENU — MODELO MOSAICO (JS INTERATIVO COM FILTROS E MODAL)
+   ========================================================================== */
 
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-const DATA = [
-  { id: 'classico', cat: 'cilios', catLabel: 'Fio a fio', title: 'Clássico', meta: 'R$150 · 1h30',
-    img: 'assets/img/classico.jpg', alt: 'Extensão de cílios clássico fio a fio', ratio: '0.78',
-    desc: 'Um fio de extensão para cada fio natural. O resultado mais discreto da casa: parece cílio seu, só melhor.',
-    rows: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']] },
-  { id: 'brasileiro', cat: 'cilios', catLabel: 'Volume', title: 'Volume Brasileiro', meta: 'R$150 · 1h30',
-    img: 'assets/img/volume-brasileiro.jpg', alt: 'Volume brasileiro em cílios', ratio: '1.05',
-    desc: 'Fios em Y que preenchem as falhas e criam efeito de rímel leve, sem peso no olhar.',
-    rows: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']] },
-  { id: 'boneca', cat: 'mapping', catLabel: 'Mapping', title: 'Boneca', meta: 'Olhar aberto',
-    img: 'assets/img/mapping-boneca.jpg', alt: 'Mapping boneca desenhado no olho', ratio: '1.2',
-    desc: 'Fios mais longos no centro do olho. Abre o olhar e arredonda — ideal para quem quer um efeito doce e desperto.',
-    rows: [['Efeito', 'Olho arredondado'], ['Combina com', 'Clássico e Brasileiro']] },
-  { id: 'egipcio', cat: 'cilios', catLabel: 'Volume', title: 'Volume Egípcio', meta: 'R$150 · 1h30',
-    img: 'assets/img/volume-egipcio.jpg', alt: 'Aplicação de volume egípcio', ratio: '0.8',
-    desc: 'Desenho marcado com fios em leque e pontas definidas. Para quem quer presença sem perder a naturalidade.',
-    rows: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']] },
-  { id: 'gatinho', cat: 'mapping', catLabel: 'Mapping', title: 'Gatinho', meta: 'Olhar alongado',
-    img: 'assets/img/mapping-gatinho.jpg', alt: 'Mapping gatinho com efeito alongado', ratio: '0.95',
-    desc: 'Crescimento gradual até o canto externo. Alonga, puxa o olhar para cima e afina o formato do olho.',
-    rows: [['Efeito', 'Olho alongado'], ['Combina com', 'Egípcio e Fox Eyes']] },
-  { id: 'hibrido', cat: 'cilios', catLabel: 'Volume', title: 'Volume Híbrido', meta: 'R$150 · 1h30',
-    img: 'assets/img/volume-hibrido.jpg', alt: 'Volume híbrido de cílios', ratio: '1.15',
-    desc: 'Mistura de fio a fio e volume no mesmo desenho: textura de cílio real com a densidade do volume.',
-    rows: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']] },
-  { id: 'esquilo', cat: 'mapping', catLabel: 'Mapping', title: 'Esquilo', meta: 'Olhar levantado',
-    img: 'assets/img/mapping-esquilo.jpg', alt: 'Mapping esquilo em cílios', ratio: '0.82',
-    desc: 'Pico entre o centro e o canto externo. Levanta a pálpebra caída e dá um lifting visual imediato.',
-    rows: [['Efeito', 'Lifting do olhar'], ['Combina com', 'Híbrido e Lash Lifting']] },
-  { id: 'fox', cat: 'cilios', catLabel: 'Assinatura', title: 'Fox Eyes', meta: 'R$150 · 1h30',
-    img: 'assets/img/fox-eyes.jpg', alt: 'Efeito fox eyes em cílios', ratio: '1.0',
-    desc: 'O desenho mais pedido: canto externo esticado, olhar felino e simétrico. Exige mapping milimétrico.',
-    rows: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']] },
-  { id: 'lifting', cat: 'cilios', catLabel: 'Sem extensão', title: 'Lash Lifting', meta: 'R$150 · 1h',
-    img: 'assets/img/lash-lifting.jpg', alt: 'Procedimento de lash lifting', ratio: '0.85',
-    desc: 'Curvatura no seu próprio fio, com nutrição e tintura. Zero manutenção diária, efeito de 6 a 8 semanas.',
-    rows: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h']] },
-  { id: 'combo', cat: 'cuidados', catLabel: 'Combo', title: 'Cílios + Design', meta: '2h de sessão',
-    img: 'assets/img/combo.jpg', alt: 'Design de sobrancelha em cabine', ratio: '1.1',
-    desc: 'Extensão e design de sobrancelha na mesma visita. Reserve 2h — saia com o rosto inteiro alinhado.',
-    rows: [['Duração', '2h'], ['Investimento', 'A combinar']] },
-  { id: 'manutencao', cat: 'cuidados', catLabel: 'Regras', title: 'Manutenção', meta: '15 a 20 dias',
-    img: 'assets/img/manutencao.jpg', alt: 'Escovinha de cílios em detalhe', ratio: '0.9',
-    desc: 'A manutenção mantém o desenho e a saúde do fio natural. Feita entre 15 e 20 dias após a aplicação.',
-    rows: [['Manutenção', 'R$ 90'], ['Após 25 dias', 'Valor reajustado'], ['Remoção', 'R$ 100']],
-    bullets: ['Chegue sem maquiagem nos olhos.', 'Confirmo o horário 1 dia antes por WhatsApp.', 'Tolerância de 15 min de atraso.'] },
-  { id: 'cuidados', cat: 'cuidados', catLabel: 'Pós-procedimento', title: 'Cuidados', meta: '5 regras de ouro',
-    img: 'assets/img/cuidados.jpg', alt: 'Olho em detalhe após aplicação', ratio: '0.75',
-    desc: 'A durabilidade do seu cílio depende dos primeiros dias. Cinco hábitos simples que mudam tudo.',
-    rows: [['Primeiras 24h', 'Sem água nos olhos'], ['Rotina', 'Escovar 1x ao dia']],
-    bullets: ['Evite água, vapor e sauna nas primeiras 24 horas.', 'Escove os fios pela manhã com a escovinha seca.', 'Não use rímel nem demaquilante oleoso.', 'Durma de lado ou de costas, evitando pressionar os fios.', 'Nunca puxe ou corte os fios — remoção só em cabine.'] }
+const PROCEDIMENTOS = [
+  {
+    id: 'brasileiro',
+    cat: 'volumes',
+    catLabel: 'Extensão em Y',
+    title: 'Volume Brasileiro',
+    preco: 'R$ 150',
+    duracao: '1h30',
+    img: 'assets/img/volume-brasileiro.png',
+    destaque: true,
+    desc: 'Fios em formato Y tecnológicos que preenchem as falhas naturais, criando um efeito de rímel marcante, leve e com excelente retenção.',
+    specs: [
+      ['Investimento', 'R$ 150'],
+      ['Manutenção', 'R$ 90 (até 20 dias)'],
+      ['Duração', '1h30 em cabine'],
+      ['Efeito', 'Preenchimento & Leveza']
+    ]
+  },
+  {
+    id: 'hibrido',
+    cat: 'volumes',
+    catLabel: 'Volume & Fio a Fio',
+    title: 'Volume Híbrido',
+    preco: 'R$ 150',
+    duracao: '1h30',
+    img: 'assets/img/volume-hibrido.png',
+    tall: true,
+    desc: 'A fusão perfeita entre a delicadeza do clássico fio a fio e tufos de volume, proporcionando textura irregular e densidade sob medida.',
+    specs: [
+      ['Investimento', 'R$ 150'],
+      ['Manutenção', 'R$ 90 (até 20 dias)'],
+      ['Duração', '1h30 em cabine'],
+      ['Efeito', 'Textura & Densidade']
+    ]
+  },
+  {
+    id: 'gatinho',
+    cat: 'mapping',
+    catLabel: 'Mapping de Olhar',
+    title: 'Mapping Gatinho',
+    preco: 'Incluso',
+    duracao: 'Design',
+    img: 'assets/img/mapping-gatinho.png',
+    desc: 'Crescimento milimétrico dos fios em direção ao canto externo. Alonga o olhar, cria um efeito felino refinado e valoriza o formato dos olhos.',
+    specs: [
+      ['Estilo de Mapping', 'Alongado / Felino'],
+      ['Indicado para', 'Olhos amendoados e redondos'],
+      ['Combinação', 'Brasileiro, Híbrido e Fox']
+    ]
+  },
+  {
+    id: 'egipcio',
+    cat: 'volumes',
+    catLabel: 'Extensão em W',
+    title: 'Volume Egípcio',
+    preco: 'R$ 150',
+    duracao: '1h30',
+    img: 'assets/img/volume-egipcio.png',
+    desc: 'Fios em formato W que geram um efeito de volume denso, uniforme e aveludado sem sobrecarregar a raiz dos cílios naturais.',
+    specs: [
+      ['Investimento', 'R$ 150'],
+      ['Manutenção', 'R$ 90 (até 20 dias)'],
+      ['Duração', '1h30 em cabine'],
+      ['Efeito', 'Densidade & Volume']
+    ]
+  },
+  {
+    id: 'fox',
+    cat: 'volumes',
+    catLabel: 'Assinatura',
+    title: 'Fox Eyes',
+    preco: 'R$ 150',
+    duracao: '1h30',
+    img: 'assets/img/fox-eyes.png',
+    tall: true,
+    desc: 'O desenho de maior sucesso do estúdio: canto externo esticado e alinhado para um visual sensual, sofisticado e marcante.',
+    specs: [
+      ['Investimento', 'R$ 150'],
+      ['Manutenção', 'R$ 90 (até 20 dias)'],
+      ['Duração', '1h30 em cabine'],
+      ['Efeito', 'Lifting & Olhar Felino']
+    ]
+  },
+  {
+    id: 'classico',
+    cat: 'volumes',
+    catLabel: 'Fio a Fio Clássico',
+    title: 'Clássico Fio a Fio',
+    preco: 'R$ 150',
+    duracao: '1h30',
+    img: 'assets/img/classico-fio-a-fio.png',
+    desc: 'Um fio de extensão colado sobre cada fio natural saudável. O resultado mais elegante e discreto: parece o seu cílio natural com rímel perfeito.',
+    specs: [
+      ['Investimento', 'R$ 150'],
+      ['Manutenção', 'R$ 90 (até 20 dias)'],
+      ['Duração', '1h30 em cabine'],
+      ['Efeito', 'Natural & Discreto']
+    ]
+  },
+  {
+    id: 'boneca',
+    cat: 'mapping',
+    catLabel: 'Mapping de Olhar',
+    title: 'Mapping Boneca',
+    preco: 'Incluso',
+    duracao: 'Design',
+    img: 'assets/img/mapping-boneca.png',
+    desc: 'Fios com maior comprimento posicionados estrategicamente no centro da íris. Abre e ilumina o olhar, proporcionando aspecto doce e jovial.',
+    specs: [
+      ['Estilo de Mapping', 'Olhar Aberto / Centralizado'],
+      ['Indicado para', 'Olhos caídos ou fundos'],
+      ['Combinação', 'Clássico e Brasileiro']
+    ]
+  },
+  {
+    id: 'lifting',
+    cat: 'especiais',
+    catLabel: 'Cílios Naturais',
+    title: 'Lash Lifting & Tintura',
+    preco: 'R$ 150',
+    duracao: '1h',
+    img: 'assets/img/lash-lifting.png',
+    destaque: true,
+    desc: 'Tratamento de curvatura e nutrição intensa nos seus próprios cílios naturais com tintura preta. Zero manutenção e durabilidade de 6 a 8 semanas.',
+    specs: [
+      ['Investimento', 'R$ 150'],
+      ['Duração do procedimento', '1h em cabine'],
+      ['Durabilidade do efeito', '6 a 8 semanas'],
+      ['Manutenção diária', 'Zero manutenção']
+    ]
+  },
+  {
+    id: 'esquilo',
+    cat: 'mapping',
+    catLabel: 'Mapping de Olhar',
+    title: 'Mapping Esquilo',
+    preco: 'Incluso',
+    duracao: 'Design',
+    img: 'assets/img/mapping-esquilo.png',
+    desc: 'Pico de comprimento posicionado exatamente no arco da sobrancelha. Ideal para disfarçar pálpebra caída e criar um efeito de lifting imediato.',
+    specs: [
+      ['Estilo de Mapping', 'Lifting da Pálpebra'],
+      ['Indicado para', 'Pálpebras gordinhas ou caídas'],
+      ['Combinação', 'Híbrido e Egípcio']
+    ]
+  },
+  {
+    id: 'remocao',
+    cat: 'especiais',
+    catLabel: 'Segurança & Saúde',
+    title: 'Remoção Segura',
+    preco: 'R$ 50',
+    duracao: '30min',
+    img: 'assets/img/remocao.png',
+    desc: 'Remoção química indolor realizada com gel removedor específico que dissolve a cola sem arrancar ou danificar nenhum fio natural.',
+    specs: [
+      ['Investimento', 'R$ 50'],
+      ['Duração', '30 minutos'],
+      ['Segurança', 'Preserva os fios naturais 100%']
+    ]
+  },
+  {
+    id: 'cuidados',
+    cat: 'especiais',
+    catLabel: 'Guia de Durabilidade',
+    title: 'Cuidados Pós-Aplicação',
+    preco: 'Guia',
+    duracao: 'Diário',
+    img: 'assets/img/cuidados.jpg',
+    desc: 'Orientações práticas para prolongar a retenção dos seus cílios: evitar água nas primeiras 24h, higienizar com shampoo neutro e escovar diariamente.',
+    specs: [
+      ['Primeiras 24h', 'Sem água ou vapor direto'],
+      ['Higienização', 'Shampoo neutro para cílios'],
+      ['Rotina diária', 'Escovinha seca 1x ao dia']
+    ]
+  }
 ];
 
-const grid = document.querySelector('[data-grid]');
-const contador = document.querySelector('[data-contador]');
-const filtros = document.querySelectorAll('.filtro-chip');
-const detalhe = document.querySelector('[data-detalhe]');
-const detalheSheet = document.querySelector('[data-detalhe-sheet]');
+// Elementos DOM
+const gridEl = document.querySelector('[data-grid]');
+const contadorEl = document.querySelector('[data-contador]');
+const filtroBtns = document.querySelectorAll('.filtro-chip');
+const modalEl = document.querySelector('[data-modal]');
+const modalSheetEl = document.querySelector('[data-modal-sheet]');
+const modalFecharEl = document.querySelector('[data-modal-fechar]');
 
-let activeFilter = 'todos';
-let openId = null;
-let tileTriggers = [];
+let filtroAtivo = 'todos';
+let itemAbertoId = null;
 
-/* ---------- Grid ---------- */
-function visibleData() {
-  return activeFilter === 'todos' ? DATA : DATA.filter((d) => d.cat === activeFilter);
+// Filtragem
+function getItensVisiveis() {
+  if (filtroAtivo === 'todos') return PROCEDIMENTOS;
+  return PROCEDIMENTOS.filter(item => item.cat === filtroAtivo);
 }
 
+// Renderizar Grid Mosaico
 function renderGrid() {
-  const list = visibleData();
-  contador.textContent = `${list.length} trabalho${list.length === 1 ? '' : 's'} — toque para ver detalhes`;
+  const lista = getItensVisiveis();
+  contadorEl.textContent = `${lista.length} procedimento${lista.length === 1 ? '' : 's'} no mosaico`;
 
-  tileTriggers.forEach((t) => t.kill());
-  tileTriggers = [];
-  grid.innerHTML = '';
+  gridEl.innerHTML = '';
 
-  list.forEach((d) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'tile reveal';
-    btn.style.setProperty('--ratio', d.ratio);
-    btn.innerHTML = `
-      <img src="${d.img}" alt="${d.alt}" class="tile__foto">
-      <span class="tile__scrim"></span>
-      <span class="tile__conteudo">
-        <span class="tile__cat">${d.catLabel}</span>
-        <span class="tile__titulo">${d.title}</span>
-        <span class="tile__meta">${d.meta}</span>
-      </span>
+  lista.forEach(item => {
+    const tile = document.createElement('button');
+    tile.type = 'button';
+    tile.className = 'tile';
+    if (item.destaque) tile.classList.add('tile--destaque');
+    if (item.tall) tile.classList.add('tile--tall');
+
+    tile.innerHTML = `
+      <img src="${item.img}" alt="${item.title}" class="tile__foto" loading="lazy">
+      <div class="tile__scrim"></div>
+      <div class="tile__conteudo">
+        <span class="tile__cat">${item.catLabel}</span>
+        <h3 class="tile__titulo">${item.title}</h3>
+        <div class="tile__rodape-info">
+          <span class="tile__preco">${item.preco}</span>
+          <span class="tile__duracao">${item.duracao}</span>
+        </div>
+      </div>
     `;
-    btn.addEventListener('click', () => openDetalhe(d.id));
-    grid.appendChild(btn);
-  });
 
-  if (reduceMotion) {
-    gsap.set('.tile.reveal', { opacity: 1, y: 0 });
-  } else {
-    grid.querySelectorAll('.tile.reveal').forEach((tile) => {
-      const tween = gsap.fromTo(
-        tile,
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: tile,
-            start: 'top 92%',
-            end: 'top 58%',
-            scrub: 1,
-          },
-        },
-      );
-      tileTriggers.push(tween.scrollTrigger);
-    });
-  }
+    tile.addEventListener('click', () => abrirModal(item.id));
+    gridEl.appendChild(tile);
+  });
 }
 
-filtros.forEach((chip) => {
-  chip.addEventListener('click', () => {
-    activeFilter = chip.dataset.filter;
-    filtros.forEach((c) => c.classList.toggle('is-ativo', c === chip));
+// Filtros
+filtroBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filtroBtns.forEach(b => b.classList.remove('is-ativo'));
+    btn.classList.add('is-ativo');
+    filtroAtivo = btn.dataset.filter;
     renderGrid();
   });
 });
 
-/* ---------- Detalhe ---------- */
-function renderDetalhe(d) {
-  const rowsHtml = d.rows
-    .map(([k, v]) => `
-      <div class="detalhe__spec">
-        <span class="detalhe__spec-k">${k}</span>
-        <span class="detalhe__spec-v">${v}</span>
-      </div>
-    `)
-    .join('');
+// Modal de Detalhes
+function abrirModal(id) {
+  const item = PROCEDIMENTOS.find(p => p.id === id);
+  if (!item) return;
 
-  const bulletsHtml = d.bullets && d.bullets.length
-    ? `<div class="detalhe__bullets">${d.bullets.map((b) => `
-        <div class="detalhe__bullet"><span>${b}</span></div>
-      `).join('')}</div>`
-    : '';
+  itemAbertoId = id;
+  const lista = getItensVisiveis();
+  const idxAtual = lista.findIndex(p => p.id === id);
+  const proxItem = lista[(idxAtual + 1) % lista.length];
 
-  detalheSheet.innerHTML = `
-    <div class="detalhe__foto-wrap">
-      <img src="${d.img}" alt="${d.alt}" class="detalhe__foto">
-      <span class="detalhe__foto-scrim"></span>
-      <button type="button" class="detalhe__fechar" data-detalhe-fechar aria-label="Fechar">×</button>
+  const mensagemWa = encodeURIComponent(`Olá Mariana! Gostaria de agendar o procedimento de ${item.title}.`);
+
+  modalSheetEl.innerHTML = `
+    <div class="modal__foto-wrap">
+      <img src="${item.img}" alt="${item.title}" class="modal__foto">
+      <div class="modal__scrim"></div>
+      <button type="button" class="modal__fechar" aria-label="Fechar" onclick="fecharModal()">✕</button>
     </div>
-    <div class="detalhe__corpo">
-      <span class="detalhe__cat">${d.catLabel}</span>
-      <h2 class="detalhe__titulo">${d.title}</h2>
-      <p class="detalhe__desc">${d.desc}</p>
-      <div class="detalhe__specs">${rowsHtml}</div>
-      ${bulletsHtml}
-      <div class="detalhe__acoes">
-        <a href="https://wa.me/5511999999999" class="detalhe__cta" target="_blank" rel="noopener">Quero esse</a>
-        <button type="button" class="detalhe__proximo" data-detalhe-proximo>→</button>
+    <div class="modal__corpo">
+      <span class="modal__cat">${item.catLabel}</span>
+      <h3 class="modal__titulo">${item.title}</h3>
+      <p class="modal__desc">${item.desc}</p>
+      
+      <div class="modal__specs">
+        ${item.specs.map(([k, v]) => `
+          <div class="modal__spec">
+            <span class="modal__spec-k">${k}</span>
+            <span class="modal__spec-v">${v}</span>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="modal__acoes">
+        <a href="https://wa.me/5511999999999?text=${mensagemWa}" target="_blank" rel="noopener" class="modal__cta">
+          Agendar ${item.title} →
+        </a>
+        <button type="button" class="modal__proximo" title="Ver próximo procedimento" onclick="abrirModal('${proxItem.id}')">
+          →
+        </button>
       </div>
     </div>
   `;
 
-  detalheSheet.querySelector('[data-detalhe-fechar]').addEventListener('click', closeDetalhe);
-  detalheSheet.querySelector('[data-detalhe-proximo]').addEventListener('click', nextDetalhe);
+  modalEl.removeAttribute('hidden');
+  document.body.style.overflow = 'hidden';
 }
 
-function openDetalhe(id) {
-  openId = id;
-  renderDetalhe(DATA.find((d) => d.id === id));
-  detalhe.hidden = false;
-  document.body.classList.add('modal-aberto');
-
-  if (reduceMotion) {
-    gsap.set(detalhe, { opacity: 1 });
-    gsap.set(detalheSheet, { y: 0 });
-  } else {
-    gsap.fromTo(detalhe, { opacity: 0 }, { opacity: 1, duration: .18, ease: 'power1.out' });
-    gsap.fromTo(detalheSheet, { yPercent: 100 }, { yPercent: 0, duration: .4, ease: 'expo.out' });
-  }
+function fecharModal() {
+  modalEl.setAttribute('hidden', '');
+  document.body.style.overflow = '';
 }
 
-function closeDetalhe() {
-  const finish = () => {
-    detalhe.hidden = true;
-    document.body.classList.remove('modal-aberto');
-    openId = null;
-  };
-  if (reduceMotion) {
-    finish();
-  } else {
-    gsap.to(detalheSheet, { yPercent: 100, duration: .3, ease: 'power2.in' });
-    gsap.to(detalhe, { opacity: 0, duration: .3, ease: 'power1.in', onComplete: finish });
-  }
-}
+modalFecharEl.addEventListener('click', fecharModal);
 
-function nextDetalhe() {
-  const idx = DATA.findIndex((d) => d.id === openId);
-  const next = DATA[(idx + 1) % DATA.length];
-  openId = next.id;
-
-  if (reduceMotion) {
-    renderDetalhe(next);
-    return;
-  }
-  gsap.to(detalheSheet, {
-    opacity: 0, duration: .12, ease: 'power1.in',
-    onComplete: () => {
-      renderDetalhe(next);
-      gsap.fromTo(detalheSheet, { opacity: 0 }, { opacity: 1, duration: .18, ease: 'power1.out' });
-    },
-  });
-}
-
-detalhe.addEventListener('click', (e) => {
-  if (e.target === detalhe) closeDetalhe();
-});
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !detalhe.hidden) closeDetalhe();
+  if (e.key === 'Escape' && !modalEl.hasAttribute('hidden')) {
+    fecharModal();
+  }
 });
 
-/* ---------- Entrada / seções ---------- */
-if (!reduceMotion) {
-  document.querySelectorAll('.mosaico__intro .reveal').forEach((el, i) => {
-    gsap.fromTo(
-      el,
-      { opacity: 0, y: 18 },
-      { opacity: 1, y: 0, duration: .8, delay: .1 + i * .08, ease: 'power2.out' },
-    );
-  });
-
-  document.querySelectorAll('.mosaico__rodape .reveal').forEach((el) => {
-    gsap.fromTo(
-      el,
-      { opacity: 0, y: 24 },
-      {
-        opacity: 1,
-        y: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 92%',
-          end: 'top 58%',
-          scrub: 1,
-        },
-      },
-    );
-  });
-} else {
-  gsap.set('.mosaico__intro .reveal, .mosaico__rodape .reveal', { opacity: 1, y: 0 });
-}
-
-renderGrid();
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+  renderGrid();
+});
