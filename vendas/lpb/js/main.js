@@ -245,6 +245,7 @@ function initModelsShowroom() {
     });
 
     updateDots();
+    updateArrows();
   }
 
   function updateDots() {
@@ -252,6 +253,26 @@ function initModelsShowroom() {
       dot.classList.toggle('is-active', idx === activeIndex);
     });
   }
+
+  function updateArrows() {
+    if (prevBtn) {
+      if (activeIndex <= 0) {
+        prevBtn.classList.add('is-hidden');
+      } else {
+        prevBtn.classList.remove('is-hidden');
+      }
+    }
+    if (nextBtn) {
+      if (activeIndex >= slides.length - 1) {
+        nextBtn.classList.add('is-hidden');
+      } else {
+        nextBtn.classList.remove('is-hidden');
+      }
+    }
+  }
+
+  // Inicializa setas no estado inicial
+  updateArrows();
 
   if (prevBtn) {
     prevBtn.addEventListener('click', () => scrollToSlide(activeIndex - 1));
@@ -268,18 +289,21 @@ function initModelsShowroom() {
     });
   });
 
-  // Atualiza dot ativo no scroll touch / manual
+  // Atualiza dot ativo e setas no scroll touch / manual
   let scrollTimeout;
   track.addEventListener('scroll', () => {
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       const slideWidth = track.clientWidth || 1;
       const newIndex = Math.round(track.scrollLeft / slideWidth);
-      if (newIndex !== activeIndex && newIndex >= 0 && newIndex < slides.length) {
-        activeIndex = newIndex;
-        updateDots();
+      if (newIndex >= 0 && newIndex < slides.length) {
+        if (newIndex !== activeIndex) {
+          activeIndex = newIndex;
+          updateDots();
+        }
+        updateArrows();
       }
-    }, 50);
+    }, 40);
   }, { passive: true });
 
   // Seletor Global de Paleta (Troca todos os modelos simultaneamente)
