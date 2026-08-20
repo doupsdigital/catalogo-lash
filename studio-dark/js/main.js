@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LASHMENU — MODELO STUDIO (JS INTERATIVO LISTA EDITORIAL)
+   LASHMENU — MODELO STUDIO DARK (JS COM FILTROS, ANIMAÇÕES E MODAL)
    ========================================================================== */
 
 const PROCEDIMENTOS = [
@@ -8,10 +8,10 @@ const PROCEDIMENTOS = [
     cat: 'volumes',
     catLabel: 'Extensão em Y',
     title: 'Volume Brasileiro',
-    sub: 'Fios em Y · Efeito rímel leve e marcante',
     preco: 'R$ 150',
     duracao: '1h30',
     img: 'assets/img/volume-brasileiro.png',
+    destaque: true,
     desc: 'Fios em formato Y tecnológicos que preenchem as falhas naturais, criando um efeito de rímel marcante, leve e com excelente retenção.',
     specs: [
       ['Investimento', 'R$ 150'],
@@ -25,7 +25,6 @@ const PROCEDIMENTOS = [
     cat: 'volumes',
     catLabel: 'Volume & Fio a Fio',
     title: 'Volume Híbrido',
-    sub: 'Clássico + Volume · Textura e densidade',
     preco: 'R$ 150',
     duracao: '1h30',
     img: 'assets/img/volume-hibrido.png',
@@ -42,7 +41,6 @@ const PROCEDIMENTOS = [
     cat: 'mapping',
     catLabel: 'Mapping de Olhar',
     title: 'Mapping Gatinho',
-    sub: 'Alongamento lateral · Efeito felino',
     preco: 'Incluso',
     duracao: 'Design',
     img: 'assets/img/mapping-gatinho.png',
@@ -58,7 +56,6 @@ const PROCEDIMENTOS = [
     cat: 'volumes',
     catLabel: 'Extensão em W',
     title: 'Volume Egípcio',
-    sub: 'Fios em W · Densidade máxima',
     preco: 'R$ 150',
     duracao: '1h30',
     img: 'assets/img/volume-egipcio.png',
@@ -75,7 +72,6 @@ const PROCEDIMENTOS = [
     cat: 'volumes',
     catLabel: 'Assinatura',
     title: 'Fox Eyes',
-    sub: 'Canto esticado · Olhar sensual',
     preco: 'R$ 150',
     duracao: '1h30',
     img: 'assets/img/fox-eyes.png',
@@ -92,7 +88,6 @@ const PROCEDIMENTOS = [
     cat: 'volumes',
     catLabel: 'Fio a Fio Clássico',
     title: 'Clássico Fio a Fio',
-    sub: '1 fio por fio · Discreto e natural',
     preco: 'R$ 150',
     duracao: '1h30',
     img: 'assets/img/classico-fio-a-fio.png',
@@ -109,7 +104,6 @@ const PROCEDIMENTOS = [
     cat: 'mapping',
     catLabel: 'Mapping de Olhar',
     title: 'Mapping Boneca',
-    sub: 'Centro elevado · Olhar aberto e doce',
     preco: 'Incluso',
     duracao: 'Design',
     img: 'assets/img/mapping-boneca.png',
@@ -125,7 +119,6 @@ const PROCEDIMENTOS = [
     cat: 'especiais',
     catLabel: 'Cílios Naturais',
     title: 'Lash Lifting & Tintura',
-    sub: 'Curvatura e cor nos próprios fios · 6-8 semanas',
     preco: 'R$ 150',
     duracao: '1h',
     img: 'assets/img/lash-lifting.png',
@@ -142,7 +135,6 @@ const PROCEDIMENTOS = [
     cat: 'mapping',
     catLabel: 'Mapping de Olhar',
     title: 'Mapping Esquilo',
-    sub: 'Pico no arco · Efeito lifting de pálpebra',
     preco: 'Incluso',
     duracao: 'Design',
     img: 'assets/img/mapping-esquilo.png',
@@ -158,7 +150,6 @@ const PROCEDIMENTOS = [
     cat: 'especiais',
     catLabel: 'Segurança & Saúde',
     title: 'Remoção Segura',
-    sub: 'Remoção química indolor · Preserva os fios',
     preco: 'R$ 50',
     duracao: '30min',
     img: 'assets/img/remocao.png',
@@ -174,7 +165,6 @@ const PROCEDIMENTOS = [
     cat: 'especiais',
     catLabel: 'Guia de Durabilidade',
     title: 'Cuidados Pós-Aplicação',
-    sub: 'Dicas e regras para retenção máxima',
     preco: 'Guia',
     duracao: 'Diário',
     img: 'assets/img/cuidados.jpg',
@@ -188,6 +178,8 @@ const PROCEDIMENTOS = [
 ];
 
 // Elementos DOM
+const studioApp = document.querySelector('.studio-app');
+const sections = document.querySelectorAll('.studio-app > section');
 const listaEl = document.querySelector('[data-lista]');
 const filtroBtns = document.querySelectorAll('.filtro-chip');
 const modalEl = document.querySelector('[data-modal]');
@@ -195,6 +187,70 @@ const modalSheetEl = document.querySelector('[data-modal-sheet]');
 const modalFecharEl = document.querySelector('[data-modal-fechar]');
 
 let filtroAtivo = 'todos';
+
+// IntersectionObserver para Disparar Animações por Seção
+function initSectionObserver() {
+  const observerOptions = {
+    root: studioApp,
+    threshold: 0.2
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      } else {
+        entry.target.classList.remove('is-visible');
+        if (entry.target.classList.contains('secao-menu')) {
+          document.querySelectorAll('.servico-card').forEach((card) => {
+            card.classList.remove('is-revealed');
+          });
+        }
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+// Observer Individual para os Cards da Lista (Re-anima suavemente sempre que entra no viewport)
+let cardObserver = null;
+
+function initCardObserver() {
+  if (cardObserver) {
+    cardObserver.disconnect();
+  }
+
+  const observerOptions = {
+    root: studioApp,
+    threshold: 0.08,
+    rootMargin: '20px 0px 10px 0px'
+  };
+
+  let batchCount = 0;
+  let batchTimer = null;
+
+  cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const card = entry.target;
+      if (entry.isIntersecting) {
+        const delay = (batchCount % 4) * 0.16;
+        card.style.animationDelay = `${delay}s`;
+        card.classList.add('is-revealed');
+
+        batchCount++;
+        clearTimeout(batchTimer);
+        batchTimer = setTimeout(() => { batchCount = 0; }, 250);
+      } else {
+        card.classList.remove('is-revealed');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.servico-card').forEach((card) => {
+    cardObserver.observe(card);
+  });
+}
 
 // Filtragem
 function getItensVisiveis() {
@@ -207,24 +263,27 @@ function renderLista() {
   const lista = getItensVisiveis();
   listaEl.innerHTML = '';
 
-  lista.forEach(item => {
+  lista.forEach((item, index) => {
     const card = document.createElement('article');
-    card.className = 'item-servico';
+    card.className = 'servico-card';
+    card.style.animationDelay = `${(index % 8) * 0.10}s`;
+    card.tabIndex = 0;
     card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `Ver detalhes de ${item.title}`);
 
     card.innerHTML = `
-      <div class="item-servico__foto-box">
-        <img src="${item.img}" alt="${item.title}" class="item-servico__foto" loading="lazy">
+      <div class="servico-card__foto-box">
+        <img src="${item.img}" alt="${item.title}" class="servico-card__foto" loading="lazy">
       </div>
-      <div class="item-servico__corpo">
-        <span class="item-servico__cat">${item.catLabel}</span>
-        <h3 class="item-servico__titulo">${item.title}</h3>
-        <p class="item-servico__sub">${item.sub}</p>
+      <div class="servico-card__conteudo">
+        <span class="servico-card__cat">${item.catLabel}</span>
+        <h3 class="servico-card__titulo">${item.title}</h3>
+        <p class="servico-card__desc">${item.desc}</p>
       </div>
-      <div class="item-servico__lado-direito">
-        <span class="item-servico__preco">${item.preco}</span>
-        <span class="item-servico__seta">→</span>
+      <div class="servico-card__lado-dir">
+        <span class="servico-card__preco">${item.preco}</span>
+        <span class="servico-card__duracao">${item.duracao}</span>
+        <span class="servico-card__seta">→</span>
       </div>
     `;
 
@@ -238,6 +297,8 @@ function renderLista() {
 
     listaEl.appendChild(card);
   });
+
+  initCardObserver();
 }
 
 // Filtros
@@ -285,7 +346,7 @@ function abrirModal(id) {
         <a href="https://wa.me/5511999999999?text=${mensagemWa}" target="_blank" rel="noopener" class="modal__cta">
           Agendar ${item.title} →
         </a>
-        <button type="button" class="modal__proximo" title="Ver próximo procedimento" onclick="abrirModal('${proxItem.id}')">
+        <button type="button" class="modal__proximo" title="Ver próximo serviço" onclick="abrirModal('${proxItem.id}')">
           →
         </button>
       </div>
@@ -312,4 +373,5 @@ document.addEventListener('keydown', (e) => {
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
   renderLista();
+  initSectionObserver();
 });

@@ -26,39 +26,39 @@
       </div>
       <div class="hero__scrim"></div>
       <div class="hero__conteudo">
-        <div class="hero__selo">
+        <div class="hero__selo anim-fade-up delay-1">
           <span>Seja Bem Vinda</span>
         </div>
         <div class="hero__titulo">
-          <h1>Bruna Carvalho<br><em>Lash Designer</em></h1>
-          <div class="hero__filete"></div>
-          <p class="hero__frase">Especialista em extensão de cílios. Cada aplicação começa por ouvir você.</p>
-          <p class="hero__frase-cilios">Cílios pensados para o <em>seu olhar</em> — técnica segura, desenho
+          <h1 class="anim-fade-up delay-2">Bruna Carvalho<br><em>Lash Designer</em></h1>
+          <div class="hero__filete anim-fade-up delay-3"></div>
+          <p class="hero__frase anim-fade-up delay-4">Especialista em extensão de cílios. Cada aplicação começa por ouvir você.</p>
+          <p class="hero__frase-cilios anim-fade-up delay-5">Cílios pensados para o <em>seu olhar</em> — técnica segura, desenho
             personalizado.</p>
         </div>
-        <a href="#menu" class="hero__scroll-cue" aria-label="Deslize para ver o menu">
+        <a href="#menu" class="hero__scroll-cue anim-fade-up delay-6" aria-label="Deslize para ver o menu">
           <span>Ver Menu de Serviços</span>
           <div class="hero__scroll-linha"></div>
         </a>
       </div>
     </section>
 
-    <!-- 2. SEÇÃO MENU / LISTA EDITORIAL (ESTÉTICA LPB — ROSA & CREME) -->
+    <!-- 2. SEÇÃO MENU / LISTA EDITORIAL (ROLAGEM LIVRE) -->
     <section class="secao-menu" id="menu" data-screen-label="Serviços">
       <div class="container">
 
-        <header class="secao-menu__header">
+        <header class="secao-menu__header anim-fade-up delay-1">
           <span class="etiqueta">Menu de Serviços</span>
-          <h2 class="secao-menu__titulo">Procedimentos & <em>Valores</em></h2>
+          <h2 class="secao-menu__titulo">Procedimentos &amp; <em>Valores</em></h2>
           <p class="secao-menu__sub">Toque em qualquer serviço para abrir a descrição completa e fotos.</p>
         </header>
 
         <!-- FILTROS DE CATEGORIA (CHIPS) -->
-        <nav class="studio__filtros" aria-label="Filtrar serviços">
+        <nav class="studio__filtros anim-fade-up delay-2" aria-label="Filtrar serviços">
           <button type="button" class="filtro-chip is-ativo" data-filter="todos">Todos (11)</button>
-          <button type="button" class="filtro-chip" data-filter="volumes">Extensões & Volumes</button>
+          <button type="button" class="filtro-chip" data-filter="volumes">Extensões &amp; Volumes</button>
           <button type="button" class="filtro-chip" data-filter="mapping">Mappings de Olhar</button>
-          <button type="button" class="filtro-chip" data-filter="especiais">Especiais & Cuidados</button>
+          <button type="button" class="filtro-chip" data-filter="especiais">Especiais &amp; Cuidados</button>
         </nav>
 
         <!-- LISTA EDITORIAL DE SERVIÇOS (RENDERIZADA VIA JS) -->
@@ -67,75 +67,92 @@
       </div>
     </section>
 
-    <!-- 3. AGENDAMENTO & ORIENTAÇÕES -->
+    <!-- 3. AGENDAMENTO & ORIENTAÇÕES (TELA CHEIA PADRÃO VITRINE) -->
     <section class="secao-orientacoes" id="orientacoes" data-screen-label="Orientações">
-      <div class="container">
-        <span class="etiqueta">Antes do Atendimento</span>
-        <h2 class="secao-orientacoes__titulo">Orientações para o <em>seu dia</em></h2>
+      <div class="secao-orientacoes__foto-wrap">
+        <img src="assets/img/hero.jpg" alt="Aplicação de extensão de cílios" class="secao-orientacoes__foto">
+      </div>
+      <div class="secao-orientacoes__scrim"></div>
+      <div class="secao-orientacoes__conteudo">
+        <div class="secao-orientacoes__topo">
+          <span class="etiqueta anim-fade-up delay-1">Antes de vir</span>
+        </div>
 
-        <div class="orientacoes__card">
-          <div class="orientacao__item">
-            <span class="orientacao__num">01</span>
-            <div class="orientacao__info">
-              <strong>Confirmação de Horário</strong>
-              <p>Confirmamos seu agendamento 1 dia antes via WhatsApp.</p>
+        <div class="secao-orientacoes__corpo">
+          <h2 class="secao-orientacoes__titulo anim-fade-up delay-2">Orientações para o <em>seu dia</em>.</h2>
+
+          <div class="orientacoes__card anim-fade-up delay-3">
+            <div class="orientacao__item">
+              <span class="orientacao__num">01</span>
+              <div class="orientacao__info">
+                <strong>Confirmação</strong>
+                <p>Até um dia antes do seu horário marcado.</p>
+              </div>
+            </div>
+            <div class="orientacao__item">
+              <span class="orientacao__num">02</span>
+              <div class="orientacao__info">
+                <strong>Pontualidade</strong>
+                <p>Tolerância máxima de 15 minutos de atraso.</p>
+              </div>
+            </div>
+            <div class="orientacao__item">
+              <span class="orientacao__num">03</span>
+              <div class="orientacao__info">
+                <strong>Preparação</strong>
+                <p>Venha com a região dos olhos sem maquiagem.</p>
+              </div>
+            </div>
+            <div class="orientacao__item orientacao__item--ultimo">
+              <span class="orientacao__num">04</span>
+              <div class="orientacao__info">
+                <strong>Pagamento</strong>
+                <p>Dinheiro, Pix, cartão de débito ou crédito.</p>
+              </div>
             </div>
           </div>
-          <div class="orientacao__item">
-            <span class="orientacao__num">02</span>
-            <div class="orientacao__info">
-              <strong>Pontualidade</strong>
-              <p>Tolerância máxima de 15 minutos para preservar o tempo do seu design.</p>
-            </div>
-          </div>
-          <div class="orientacao__item orientacao__item--ultimo">
-            <span class="orientacao__num">03</span>
-            <div class="orientacao__info">
-              <strong>Sem Maquiagem nos Olhos</strong>
-              <p>Venha sem rímel, delineador ou cosméticos oleosos na região dos cílios.</p>
-            </div>
-          </div>
+        </div>
+
+        <div class="secao-orientacoes__scroll-cue anim-fade-up delay-4">
+          <span>Deslize</span>
+          <div class="hero__scroll-linha"></div>
         </div>
       </div>
     </section>
 
-    <!-- 4. CONTATO & LOCALIZAÇÃO -->
+    <!-- 4. CONTATO & LOCALIZAÇÃO (TELA CHEIA) -->
     <section class="secao-contato" id="contato" data-screen-label="Contato">
       <div class="secao-contato__foto-wrap">
-        <img src="assets/img/Footer.png" alt="Mariana Alves Lash Designer" class="secao-contato__foto">
+        <img src="assets/img/Footer.png" alt="Bruna Carvalho Lash Designer" class="secao-contato__foto">
       </div>
       <div class="secao-contato__scrim"></div>
-      <div class="container secao-contato__conteudo">
-        <span class="etiqueta">Atendimento Privativo</span>
-        <h2 class="secao-contato__titulo">Agende seu <em>momento</em></h2>
-        <p class="secao-contato__desc">Reserve seu horário exclusivo e viva uma experiência personalizada.</p>
-
-        <div class="secao-contato__acoes">
-          <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio%20de%20c%C3%ADlios"
-            target="_blank" rel="noopener" class="btn-whatsapp">
-            Agendar pelo WhatsApp <span>→</span>
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener" class="btn-instagram">
-            Acompanhar no Instagram <span>↗</span>
-          </a>
+      <div class="secao-contato__conteudo">
+        <div class="secao-contato__topo">
+          <span class="etiqueta anim-fade-up delay-1">Atendimento Exclusivo</span>
         </div>
 
-        <div class="secao-contato__info">
-          <span>Bruna Carvalho · Lash Designer</span>
-          <span>São Paulo — Atendimento com hora marcada</span>
+        <div class="secao-contato__corpo">
+          <h2 class="secao-contato__titulo anim-fade-up delay-2">Agende seu <em>momento</em></h2>
+          <p class="secao-contato__desc anim-fade-up delay-3">Atendimento personalizado com hora marcada em estúdio privativo.</p>
+
+          <div class="secao-contato__acoes">
+            <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio%20de%20c%C3%ADlios"
+              target="_blank" rel="noopener" class="btn-whatsapp anim-fade-up delay-4">
+              Agendar pelo WhatsApp <span>→</span>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="btn-instagram anim-fade-up delay-5">
+              Acompanhar no Instagram <span>↗</span>
+            </a>
+          </div>
+
+          <div class="secao-contato__info anim-fade-up delay-6">
+            <span>Bruna Carvalho · Lash Designer</span>
+            <span>São Paulo — Atendimento com hora marcada</span>
+          </div>
         </div>
       </div>
     </section>
 
-  </div>
-
-  <!-- BARRA FIXA FLUTUANTE INFERIOR -->
-  <div class="barra-fixa-agendar">
-    <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio%20de%20c%C3%ADlios"
-      target="_blank" rel="noopener" class="btn-barra-fixa">
-      <span>Agendar meu Horário</span>
-      <span class="btn-barra-fixa__icon">→</span>
-    </a>
   </div>
 
   <!-- MODAL DE DETALHES DO PROCEDIMENTO -->
