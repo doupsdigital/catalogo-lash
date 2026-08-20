@@ -1,8 +1,9 @@
 /* ==========================================================================
-   LASHMENU — MODELO MOSAICO (JS INTERATIVO COM FILTROS, ANIMAÇÕES E MODAL)
+   LASHMENU — MODELO MOSAICO DARK (JS COM GRID, ANIMAÇÕES E MODAL)
    ========================================================================== */
 
 const PROCEDIMENTOS = [
+  // --- 1. EXTENSÕES & VOLUMES ---
   {
     id: 'brasileiro',
     cat: 'volumes',
@@ -12,31 +13,103 @@ const PROCEDIMENTOS = [
     duracao: '1h30',
     img: 'assets/img/volume-brasileiro.png',
     destaque: true,
-    desc: 'Fios em formato Y tecnológicos que preenchem as falhas naturais, criando um efeito de rímel marcante, leve e com excelente retenção.',
+    desc: 'Fios tecnológicos com formato Y que preenchem as falhas naturais com leveza incomparável, alta durabilidade e acabamento marcante.',
     specs: [
       ['Investimento', 'R$ 150'],
-      ['Manutenção', 'R$ 90 (até 20 dias)'],
-      ['Duração', '1h30 em cabine'],
-      ['Efeito', 'Preenchimento & Leveza']
+      ['Manutenção Pontual', 'R$ 90 (até 20 dias)'],
+      ['Duração em Cabine', '1h30'],
+      ['Efeito', 'Preenchimento, Textura & Leveza'],
+      ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+    ]
+  },
+  {
+    id: 'classico',
+    cat: 'volumes',
+    catLabel: 'Fio a Fio Clássico',
+    title: 'Clássico Fio a Fio',
+    preco: 'R$ 120',
+    duracao: '1h30',
+    img: 'assets/img/classico-fio-a-fio.png',
+    desc: 'Um fio sintético ultrafino acoplado a cada cílio natural saudável. O resultado mais elegante e discreto: olhar iluminado com efeito de rímel perfeito.',
+    specs: [
+      ['Investimento', 'R$ 120'],
+      ['Manutenção Pontual', 'R$ 70 (até 18 dias)'],
+      ['Duração em Cabine', '1h30'],
+      ['Efeito', 'Natural, Discreto & Elegante'],
+      ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+    ]
+  },
+  {
+    id: 'egipcio',
+    cat: 'volumes',
+    catLabel: 'Extensão em W',
+    title: 'Volume Egípcio',
+    preco: 'R$ 160',
+    duracao: '1h30',
+    img: 'assets/img/volume-egipcio.png',
+    desc: 'Fios especiais em formato W (3D tecnológico) que proporcionam densidade homogênea, efeito aveludado e volume equilibrado sem pesar nos olhos.',
+    specs: [
+      ['Investimento', 'R$ 160'],
+      ['Manutenção Pontual', 'R$ 95 (até 20 dias)'],
+      ['Duração em Cabine', '1h30'],
+      ['Efeito', 'Densidade Aveludada & Uniforme'],
+      ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
     ]
   },
   {
     id: 'hibrido',
     cat: 'volumes',
-    catLabel: 'Volume & Fio a Fio',
+    catLabel: 'Clássico + Volume',
     title: 'Volume Híbrido',
-    preco: 'R$ 150',
-    duracao: '1h30',
+    preco: 'R$ 160',
+    duracao: '1h45',
     img: 'assets/img/volume-hibrido.png',
-    tall: true,
-    desc: 'A fusão perfeita entre a delicadeza do clássico fio a fio e tufos de volume, proporcionando textura irregular e densidade sob medida.',
+    desc: 'A combinação artesanal entre a delicadeza do fio a fio clássico e leques de volume, criando textura multidimensional, profundidade e brilho no olhar.',
     specs: [
-      ['Investimento', 'R$ 150'],
-      ['Manutenção', 'R$ 90 (até 20 dias)'],
-      ['Duração', '1h30 em cabine'],
-      ['Efeito', 'Textura & Densidade']
+      ['Investimento', 'R$ 160'],
+      ['Manutenção Pontual', 'R$ 95 (até 20 dias)'],
+      ['Duração em Cabine', '1h45'],
+      ['Efeito', 'Textura Desconstruída & Volume Sob Medida'],
+      ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
     ]
   },
+  {
+    id: 'russo',
+    cat: 'volumes',
+    catLabel: 'Fans Artesanais 3D–6D',
+    title: 'Volume Russo',
+    preco: 'R$ 190',
+    duracao: '2h00',
+    img: 'assets/img/volume-russo.png',
+    desc: 'Técnica de alta precisão com fans ultrafinos (3 a 6 fios de seda) montados à mão na hora. Cria um volume expressivo, extremamente macio, denso e sofisticado.',
+    specs: [
+      ['Investimento', 'R$ 190'],
+      ['Manutenção Pontual', 'R$ 110 (até 20 dias)'],
+      ['Duração em Cabine', '2h00'],
+      ['Efeito', 'Glamour, Densidade & Toque de Pluma'],
+      ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+    ]
+  },
+  {
+    id: 'mega',
+    cat: 'volumes',
+    catLabel: 'Densidade Máxima 8D–12D',
+    title: 'Mega Volume',
+    preco: 'R$ 240',
+    duracao: '2h30',
+    img: 'assets/img/mega-volume.png',
+    destaque: true,
+    desc: 'O ápice da densidade e do impacto visual: leques artesanais com fios ultrafinos de 0.03mm. Proporciona um olhar super pretinho, aveludado e hipnotizante.',
+    specs: [
+      ['Investimento', 'R$ 240'],
+      ['Manutenção Pontual', 'R$ 140 (até 18 dias)'],
+      ['Duração em Cabine', '2h30'],
+      ['Efeito', 'Impacto Máximo, Densidade Total & Preto Profundo'],
+      ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+    ]
+  },
+
+  // --- 2. MAPPINGS DE OLHAR (DESIGNS PERSONALIZADOS) ---
   {
     id: 'gatinho',
     cat: 'mapping',
@@ -45,60 +118,12 @@ const PROCEDIMENTOS = [
     preco: 'Incluso',
     duracao: 'Design',
     img: 'assets/img/mapping-gatinho.png',
-    desc: 'Crescimento milimétrico dos fios em direção ao canto externo. Alonga o olhar, cria um efeito felino refinado e valoriza o formato dos olhos.',
+    desc: 'Crescimento milimétrico dos fios em direção ao canto externo. Alonga o olhar, cria um efeito felino refinado e valoriza o contorno dos olhos.',
     specs: [
-      ['Estilo de Mapping', 'Alongado / Felino'],
-      ['Indicado para', 'Olhos amendoados e redondos'],
-      ['Combinação', 'Brasileiro, Híbrido e Fox']
-    ]
-  },
-  {
-    id: 'egipcio',
-    cat: 'volumes',
-    catLabel: 'Extensão em W',
-    title: 'Volume Egípcio',
-    preco: 'R$ 150',
-    duracao: '1h30',
-    img: 'assets/img/volume-egipcio.png',
-    desc: 'Fios em formato W que geram um efeito de volume denso, uniforme e aveludado sem sobrecarregar a raiz dos cílios naturais.',
-    specs: [
-      ['Investimento', 'R$ 150'],
-      ['Manutenção', 'R$ 90 (até 20 dias)'],
-      ['Duração', '1h30 em cabine'],
-      ['Efeito', 'Densidade & Volume']
-    ]
-  },
-  {
-    id: 'fox',
-    cat: 'volumes',
-    catLabel: 'Assinatura',
-    title: 'Fox Eyes',
-    preco: 'R$ 150',
-    duracao: '1h30',
-    img: 'assets/img/fox-eyes.png',
-    tall: true,
-    desc: 'O desenho de maior sucesso do estúdio: canto externo esticado e alinhado para um visual sensual, sofisticado e marcante.',
-    specs: [
-      ['Investimento', 'R$ 150'],
-      ['Manutenção', 'R$ 90 (até 20 dias)'],
-      ['Duração', '1h30 em cabine'],
-      ['Efeito', 'Lifting & Olhar Felino']
-    ]
-  },
-  {
-    id: 'classico',
-    cat: 'volumes',
-    catLabel: 'Fio a Fio Clássico',
-    title: 'Clássico Fio a Fio',
-    preco: 'R$ 150',
-    duracao: '1h30',
-    img: 'assets/img/classico-fio-a-fio.png',
-    desc: 'Um fio de extensão colado sobre cada fio natural saudável. O resultado mais elegante e discreto: parece o seu cílio natural com rímel perfeito.',
-    specs: [
-      ['Investimento', 'R$ 150'],
-      ['Manutenção', 'R$ 90 (até 20 dias)'],
-      ['Duração', '1h30 em cabine'],
-      ['Efeito', 'Natural & Discreto']
+      ['Investimento', 'Incluso na técnica escolhida'],
+      ['Estilo de Design', 'Alongado / Felino'],
+      ['Indicação', 'Olhos amendoados, redondos ou juntos'],
+      ['Combinações', 'Brasileiro, Russo, Híbrido e Clássico']
     ]
   },
   {
@@ -109,28 +134,12 @@ const PROCEDIMENTOS = [
     preco: 'Incluso',
     duracao: 'Design',
     img: 'assets/img/mapping-boneca.png',
-    desc: 'Fios com maior comprimento posicionados estrategicamente no centro da íris. Abre e ilumina o olhar, proporcionando aspecto doce e jovial.',
+    desc: 'Fios com maior comprimento posicionados estrategicamente no centro da íris. Abre e ilumina o olhar, proporcionando aspecto doce, expressivo e jovial.',
     specs: [
-      ['Estilo de Mapping', 'Olhar Aberto / Centralizado'],
-      ['Indicado para', 'Olhos caídos ou fundos'],
-      ['Combinação', 'Clássico e Brasileiro']
-    ]
-  },
-  {
-    id: 'lifting',
-    cat: 'especiais',
-    catLabel: 'Cílios Naturais',
-    title: 'Lash Lifting & Tintura',
-    preco: 'R$ 150',
-    duracao: '1h',
-    img: 'assets/img/lash-lifting.png',
-    destaque: true,
-    desc: 'Tratamento de curvatura e nutrição intensa nos seus próprios cílios naturais com tintura preta. Zero manutenção e durabilidade de 6 a 8 semanas.',
-    specs: [
-      ['Investimento', 'R$ 150'],
-      ['Duração do procedimento', '1h em cabine'],
-      ['Durabilidade do efeito', '6 a 8 semanas'],
-      ['Manutenção diária', 'Zero manutenção']
+      ['Investimento', 'Incluso na técnica escolhida'],
+      ['Estilo de Design', 'Olhar Aberto / Centralizado'],
+      ['Indicação', 'Olhos caídos, fundos ou orientais'],
+      ['Combinações', 'Clássico, Brasileiro e Egípcio']
     ]
   },
   {
@@ -141,11 +150,48 @@ const PROCEDIMENTOS = [
     preco: 'Incluso',
     duracao: 'Design',
     img: 'assets/img/mapping-esquilo.png',
-    desc: 'Pico de comprimento posicionado exatamente no arco da sobrancelha. Ideal para disfarçar pálpebra caída e criar um efeito de lifting imediato.',
+    desc: 'Pico de comprimento posicionado exatamente no arco da sobrancelha (ponto alto). Disfarça pálpebra caída e cria um efeito de lifting imediato.',
     specs: [
-      ['Estilo de Mapping', 'Lifting da Pálpebra'],
-      ['Indicado para', 'Pálpebras gordinhas ou caídas'],
-      ['Combinação', 'Híbrido e Egípcio']
+      ['Investimento', 'Incluso na técnica escolhida'],
+      ['Estilo de Design', 'Efeito Lifting da Pálpebra'],
+      ['Indicação', 'Pálpebras gordinhas, caídas ou maduras'],
+      ['Combinações', 'Híbrido, Russo e Egípcio']
+    ]
+  },
+  {
+    id: 'fox',
+    cat: 'mapping',
+    catLabel: 'Design Assinatura',
+    title: 'Fox Eyes Signature',
+    preco: 'R$ 170',
+    duracao: '1h45',
+    img: 'assets/img/fox-eyes.png',
+    desc: 'O desenho de maior sucesso do estúdio: extremidade externa esticada e alinhada com mapping milimétrico para um visual sensual, moderno e marcante.',
+    specs: [
+      ['Investimento', 'R$ 170'],
+      ['Manutenção Pontual', 'R$ 100 (até 20 dias)'],
+      ['Duração em Cabine', '1h45'],
+      ['Efeito', 'Lifting, Puxado & Olhar Felino Marcante'],
+      ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+    ]
+  },
+
+  // --- 3. ESPECIAIS & CUIDADOS ---
+  {
+    id: 'lifting',
+    cat: 'especiais',
+    catLabel: 'Cílios Naturais',
+    title: 'Lash Lifting & Nutrição',
+    preco: 'R$ 130',
+    duracao: '1h00',
+    img: 'assets/img/lash-lifting.png',
+    destaque: true,
+    desc: 'Tratamento de curvatura, nutrição profunda com queratina e tintura preta nos seus próprios cílios naturais. Zero manutenção e durabilidade de 6 a 8 semanas.',
+    specs: [
+      ['Investimento', 'R$ 130'],
+      ['Duração em Cabine', '1h00'],
+      ['Durabilidade do Efeito', '6 a 8 semanas (acompanha o ciclo natural)'],
+      ['Manutenção Diária', 'Zero manutenção — livre para usar rímel']
     ]
   },
   {
@@ -156,11 +202,12 @@ const PROCEDIMENTOS = [
     preco: 'R$ 50',
     duracao: '30min',
     img: 'assets/img/remocao.png',
-    desc: 'Remoção química indolor realizada com gel removedor específico que dissolve a cola sem arrancar ou danificar nenhum fio natural.',
+    desc: 'Remoção química indolor realizada com gel removedor profissional específico que dissolve o adesivo sem tracionar ou danificar nenhum fio natural.',
     specs: [
       ['Investimento', 'R$ 50'],
-      ['Duração', '30 minutos'],
-      ['Segurança', 'Preserva os fios naturais 100%']
+      ['Duração em Cabine', '30 minutos'],
+      ['Segurança', 'Preservação de 100% da integridade dos fios naturais'],
+      ['Indicação', 'Remoção de extensões anteriores ou pausa']
     ]
   },
   {
@@ -173,9 +220,10 @@ const PROCEDIMENTOS = [
     img: 'assets/img/cuidados.jpg',
     desc: 'Orientações práticas para prolongar a retenção dos seus cílios: evitar água nas primeiras 24h, higienizar com shampoo neutro e escovar diariamente.',
     specs: [
-      ['Primeiras 24h', 'Sem água ou vapor direto'],
-      ['Higienização', 'Shampoo neutro para cílios'],
-      ['Rotina diária', 'Escovinha seca 1x ao dia']
+      ['Primeiras 24 Horas', 'Não molhar e evitar vapor/sauna'],
+      ['Higienização Diária', 'Shampoo neutro para cílios com água fria'],
+      ['Rotina Diária', 'Escovação suave 1 a 2 vezes ao dia'],
+      ['Produtos', 'Evitar rímel e demaquilantes à base de óleo']
     ]
   }
 ];
@@ -191,7 +239,6 @@ const modalSheetEl = document.querySelector('[data-modal-sheet]');
 const modalFecharEl = document.querySelector('[data-modal-fechar]');
 
 let filtroAtivo = 'todos';
-let itemAbertoId = null;
 
 // IntersectionObserver para Disparar Animações por Seção
 function initSectionObserver() {
@@ -206,10 +253,9 @@ function initSectionObserver() {
         entry.target.classList.add('is-visible');
       } else {
         entry.target.classList.remove('is-visible');
-        // Se saiu da seção de catálogo, reseta os cards para reanimar quando voltar
         if (entry.target.classList.contains('secao-catalogo')) {
-          document.querySelectorAll('.tile').forEach((t) => {
-            t.classList.remove('is-revealed');
+          document.querySelectorAll('.tile').forEach((tile) => {
+            tile.classList.remove('is-revealed');
           });
         }
       }
@@ -240,15 +286,14 @@ function initTileObserver() {
     entries.forEach((entry) => {
       const tile = entry.target;
       if (entry.isIntersecting) {
-        const delay = (batchCount % 4) * 0.18;
+        const delay = (batchCount % 4) * 0.16;
         tile.style.animationDelay = `${delay}s`;
         tile.classList.add('is-revealed');
-        
+
         batchCount++;
         clearTimeout(batchTimer);
-        batchTimer = setTimeout(() => { batchCount = 0; }, 300);
+        batchTimer = setTimeout(() => { batchCount = 0; }, 250);
       } else {
-        // Ao sair do viewport, remove a classe para reanimar suavemente ao retornar
         tile.classList.remove('is-revealed');
       }
     });
@@ -265,21 +310,27 @@ function getItensVisiveis() {
   return PROCEDIMENTOS.filter(item => item.cat === filtroAtivo);
 }
 
-// Renderizar Grid Mosaico com animação escalonada
+function atualizarContador() {
+  const total = getItensVisiveis().length;
+  if (contadorEl) {
+    contadorEl.textContent = `Mostrando ${total} procedimento${total !== 1 ? 's' : ''}`;
+  }
+}
+
+// Renderizar Mosaico
 function renderGrid() {
   const lista = getItensVisiveis();
-  contadorEl.textContent = `${lista.length} procedimento${lista.length === 1 ? '' : 's'} no mosaico`;
-
   gridEl.innerHTML = '';
 
   lista.forEach((item, index) => {
-    const tile = document.createElement('button');
-    tile.type = 'button';
+    const tile = document.createElement('article');
     tile.className = 'tile';
-    tile.style.animationDelay = `${(index % 8) * 0.10}s`;
-
     if (item.destaque) tile.classList.add('tile--destaque');
-    if (item.tall) tile.classList.add('tile--tall');
+
+    tile.style.animationDelay = `${(index % 6) * 0.12}s`;
+    tile.tabIndex = 0;
+    tile.setAttribute('role', 'button');
+    tile.setAttribute('aria-label', `Ver detalhes de ${item.title}`);
 
     tile.innerHTML = `
       <img src="${item.img}" alt="${item.title}" class="tile__foto" loading="lazy">
@@ -287,17 +338,29 @@ function renderGrid() {
       <div class="tile__conteudo">
         <span class="tile__cat">${item.catLabel}</span>
         <h3 class="tile__titulo">${item.title}</h3>
-        <div class="tile__rodape-info">
+        <div class="tile__meta">
           <span class="tile__preco">${item.preco}</span>
           <span class="tile__duracao">${item.duracao}</span>
         </div>
       </div>
+      <div class="tile__toque-cue">
+        <span>Toque para detalhes</span>
+        <span>+</span>
+      </div>
     `;
 
     tile.addEventListener('click', () => abrirModal(item.id));
+    tile.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        abrirModal(item.id);
+      }
+    });
+
     gridEl.appendChild(tile);
   });
 
+  atualizarContador();
   initTileObserver();
 }
 
@@ -316,7 +379,6 @@ function abrirModal(id) {
   const item = PROCEDIMENTOS.find(p => p.id === id);
   if (!item) return;
 
-  itemAbertoId = id;
   const lista = getItensVisiveis();
   const idxAtual = lista.findIndex(p => p.id === id);
   const proxItem = lista[(idxAtual + 1) % lista.length];
@@ -362,6 +424,14 @@ function fecharModal() {
   modalEl.setAttribute('hidden', '');
   document.body.style.overflow = '';
 }
+
+modalFecharEl.addEventListener('click', fecharModal);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !modalEl.hasAttribute('hidden')) {
+    fecharModal();
+  }
+});
 
 // Suavização do primeiro scroll da Capa para o topo exato do Mosaico
 function initHeroScrollLock() {
