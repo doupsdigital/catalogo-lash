@@ -321,7 +321,7 @@ function abrirModal(id) {
   const idxAtual = lista.findIndex(p => p.id === id);
   const proxItem = lista[(idxAtual + 1) % lista.length];
 
-  const mensagemWa = encodeURIComponent(`Olá Mariana! Gostaria de agendar o procedimento de ${item.title}.`);
+  const mensagemWa = encodeURIComponent(`Olá Amanda! Gostaria de agendar o procedimento de ${item.title}.`);
 
   modalSheetEl.innerHTML = `
     <div class="modal__foto-wrap">
