@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initStyleTabs();
   initSmoothScroll();
   initMockupSlider();
-  initModelsShowroom();
+  initOption1Provador();
+  initOption2CardSelectors();
+  initOption3Carousel();
 });
 
 /* ── 1. Header Scroll Effect ─────────────────────────────────────────────── */
@@ -220,14 +222,182 @@ function initSmoothScroll() {
   });
 }
 
-/* ── 8. Showroom de Modelos ao Vivo (Carrossel Swipe + Seletor de Cores) ──── */
-function initModelsShowroom() {
-  const track = document.getElementById('models-carousel-track');
-  const prevBtn = document.getElementById('models-btn-prev');
-  const nextBtn = document.getElementById('models-btn-next');
-  const dots = document.querySelectorAll('.models-dot');
-  const paletteBtns = document.querySelectorAll('.models-palette-btn');
-  const slides = document.querySelectorAll('.models-slide');
+/* ── 8. Opção 1: Provador Interativo (Abas + Toggle de Cores) ─────────────── */
+function initOption1Provador() {
+  const modelBtns = document.querySelectorAll('.provador-model-btn');
+  const colorBtns = document.querySelectorAll('.provador-color-btn');
+  const iframeEl = document.getElementById('provador-iframe');
+  const badgeEl = document.getElementById('provador-badge');
+  const tagEl = document.getElementById('provador-tag');
+  const paletteTagEl = document.getElementById('provador-palette-tag');
+  const titleEl = document.getElementById('provador-title');
+  const descEl = document.getElementById('provador-desc');
+  const checklistEl = document.getElementById('provador-checklist');
+  const ctaEl = document.getElementById('provador-cta');
+  const ctaTextEl = document.getElementById('provador-cta-text');
+
+  if (!modelBtns.length || !iframeEl) return;
+
+  const data = {
+    glamour: {
+      title: 'Modelo Glamour',
+      tag: 'Cinematográfico',
+      desc: 'A experiência mais imersiva e cinematográfica com vídeo fluido na capa e carrossel completo de 13 procedimentos em tela cheia.',
+      checklist: [
+        '<strong>Vídeo Hero na capa:</strong> Transição instantânea sem corte.',
+        '<strong>Carrossel imersivo:</strong> Navegação horizontal em tela cheia (100dvh).',
+        '<strong>Modal de procedimentos:</strong> Tempo, investimento e orientações de manutenção.'
+      ],
+      midnight: {
+        designer: 'Mariana Alves',
+        iframe: '../../glamour-midnight/index.html?preview=1',
+        link: '../../glamour-midnight/index.html'
+      },
+      rose: {
+        designer: 'Mariana Alves',
+        iframe: '../../glamour-rose/index.html?preview=1',
+        link: '../../glamour-rose/index.html'
+      }
+    },
+    harmonia: {
+      title: 'Modelo Harmonia',
+      tag: 'Mosaico Visual',
+      desc: 'Mosaico moderno e encantador com fotos reais de cada mapping, chips de filtros inteligentes e foco na harmonização do olhar.',
+      checklist: [
+        '<strong>Grid fotográfico moderno:</strong> Visualização rica dos procedimentos.',
+        '<strong>Filtros por categoria:</strong> Volumes, Mappings e Especiais.',
+        '<strong>Visagismo em foco:</strong> Comparação intuitiva de resultados.'
+      ],
+      midnight: {
+        designer: 'Amanda Carvalho',
+        iframe: '../../harmonia-midnight/index.html?preview=1',
+        link: '../../harmonia-midnight/index.html'
+      },
+      rose: {
+        designer: 'Amanda Carvalho',
+        iframe: '../../harmonia-rose/index.html?preview=1',
+        link: '../../harmonia-rose/index.html'
+      }
+    },
+    classico: {
+      title: 'Modelo Clássico',
+      tag: 'Lista Editorial',
+      desc: 'Cardápio editorial limpo, prático e sofisticado. Acesso rápido e organizado a todos os serviços com máxima legibilidade.',
+      checklist: [
+        '<strong>Lista editorial limpa:</strong> Tipografia de alto luxo e contraste perfeito.',
+        '<strong>Agilidade máxima:</strong> Decisão e agendamento em poucos segundos.',
+        '<strong>100% responsivo:</strong> Leitura confortável em qualquer smartphone.'
+      ],
+      midnight: {
+        designer: 'Bruna Carvalho',
+        iframe: '../../classico-midnight/index.html?preview=1',
+        link: '../../classico-midnight/index.html'
+      },
+      rose: {
+        designer: 'Bruna Carvalho',
+        iframe: '../../classico-rose/index.html?preview=1',
+        link: '../../classico-rose/index.html'
+      }
+    }
+  };
+
+  let currentModel = 'glamour';
+  let currentColor = 'midnight';
+
+  function updateProvador() {
+    const item = data[currentModel];
+    const combo = item[currentColor];
+    const colorLabel = currentColor === 'midnight' ? 'Midnight' : 'Rosé';
+    const colorIcon = currentColor === 'midnight' ? '🖤' : '🎀';
+
+    iframeEl.style.opacity = '0.3';
+    setTimeout(() => {
+      iframeEl.src = combo.iframe;
+      iframeEl.style.opacity = '1';
+    }, 150);
+
+    if (badgeEl) badgeEl.textContent = `${combo.designer} · ${item.title.replace('Modelo ', '')} ${colorLabel}`;
+    if (tagEl) tagEl.textContent = item.tag;
+    if (paletteTagEl) paletteTagEl.textContent = `${colorIcon} Versão ${colorLabel}`;
+    if (titleEl) titleEl.textContent = item.title;
+    if (descEl) descEl.textContent = item.desc;
+    if (checklistEl) {
+      checklistEl.innerHTML = item.checklist.map((li) => `<li>${li}</li>`).join('');
+    }
+    if (ctaEl) ctaEl.href = combo.link;
+    if (ctaTextEl) ctaTextEl.textContent = `Abrir ${item.title} (${colorLabel}) em tela cheia`;
+  }
+
+  modelBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      modelBtns.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      currentModel = btn.getAttribute('data-model') || 'glamour';
+      updateProvador();
+    });
+  });
+
+  colorBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      colorBtns.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      currentColor = btn.getAttribute('data-color') || 'midnight';
+      updateProvador();
+    });
+  });
+}
+
+/* ── 9. Opção 2: Cards com Mini-Seletor de Cor Integrado ─────────────────── */
+function initOption2CardSelectors() {
+  const cards = document.querySelectorAll('.opt2-card');
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    const pills = card.querySelectorAll('.opt2-pill');
+    const iframe = card.querySelector('.opt2-iframe');
+    const badge = card.querySelector('.opt2-phone-badge');
+    const cta = card.querySelector('.opt2-cta');
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        pills.forEach((p) => p.classList.remove('is-active'));
+        pill.classList.add('is-active');
+
+        const color = pill.getAttribute('data-color');
+        const link = pill.getAttribute('data-link');
+        const label = pill.getAttribute('data-label');
+
+        if (iframe) {
+          const newSrc = color === 'rose' ? iframe.getAttribute('data-src-rose') : iframe.getAttribute('data-src-midnight');
+          if (newSrc && iframe.src !== newSrc) {
+            iframe.style.opacity = '0.3';
+            setTimeout(() => {
+              iframe.src = newSrc;
+              iframe.style.opacity = '1';
+            }, 120);
+          }
+        }
+
+        if (badge && label) {
+          badge.textContent = label;
+        }
+
+        if (cta && link) {
+          cta.href = link;
+        }
+      });
+    });
+  });
+}
+
+/* ── 10. Opção 3: Carrossel Horizontal Swipe com Seletor Global ──────────── */
+function initOption3Carousel() {
+  const track = document.getElementById('opt3-carousel-track');
+  const prevBtn = document.getElementById('opt3-btn-prev');
+  const nextBtn = document.getElementById('opt3-btn-next');
+  const dots = document.querySelectorAll('.opt3-dot');
+  const paletteBtns = document.querySelectorAll('.opt3-palette-btn');
+  const slides = document.querySelectorAll('.opt3-slide');
 
   if (!track || !slides.length) return;
 
@@ -263,7 +433,7 @@ function initModelsShowroom() {
 
   dots.forEach((dot) => {
     dot.addEventListener('click', () => {
-      const idx = parseInt(dot.getAttribute('data-models-slide'), 10);
+      const idx = parseInt(dot.getAttribute('data-slide'), 10);
       scrollToSlide(idx);
     });
   });
@@ -279,29 +449,29 @@ function initModelsShowroom() {
         activeIndex = newIndex;
         updateDots();
       }
-    }, 50);
+    }, 60);
   }, { passive: true });
 
-  // Seletor Global de Paleta (Troca todos os modelos simultaneamente)
+  // Seletor Global de Paleta (Troca todos os slides de uma vez)
   paletteBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       paletteBtns.forEach((b) => b.classList.remove('is-active'));
       btn.classList.add('is-active');
 
-      const color = btn.getAttribute('data-models-color'); // 'midnight' ou 'rose'
+      const color = btn.getAttribute('data-opt3-color'); // 'midnight' ou 'rose'
       const colorLabel = color === 'midnight' ? 'Midnight' : 'Rosé';
 
       slides.forEach((slide) => {
-        const iframe = slide.querySelector('.showroom-iframe');
-        const badge = slide.querySelector('.showroom-badge-text');
-        const btnLink = slide.querySelector('.models-slide-btn');
-        const modelKey = slide.getAttribute('data-slide-model');
-        const prettyModelName = modelKey ? modelKey.charAt(0).toUpperCase() + modelKey.slice(1) : '';
+        const iframe = slide.querySelector('.opt3-slide-iframe');
+        const badge = slide.querySelector('.opt3-phone-badge');
+        const cta = slide.querySelector('.opt3-slide-cta');
+        const modelName = slide.getAttribute('data-slide-model');
+        const prettyModelName = modelName ? modelName.charAt(0).toUpperCase() + modelName.slice(1) : '';
 
         if (iframe) {
           const newSrc = color === 'rose' ? iframe.getAttribute('data-src-rose') : iframe.getAttribute('data-src-midnight');
           if (newSrc && iframe.src !== newSrc) {
-            iframe.style.opacity = '0.25';
+            iframe.style.opacity = '0.3';
             setTimeout(() => {
               iframe.src = newSrc;
               iframe.style.opacity = '1';
@@ -313,15 +483,14 @@ function initModelsShowroom() {
           badge.textContent = `${prettyModelName} ${colorLabel}`;
         }
 
-        if (btnLink) {
-          const newLink = color === 'rose' ? btnLink.getAttribute('data-link-rose') : btnLink.getAttribute('data-link-midnight');
+        if (cta) {
+          const newLink = color === 'rose' ? cta.getAttribute('data-link-rose') : cta.getAttribute('data-link-midnight');
           if (newLink) {
-            btnLink.href = newLink;
+            cta.href = newLink;
           }
         }
       });
     });
   });
 }
-
 

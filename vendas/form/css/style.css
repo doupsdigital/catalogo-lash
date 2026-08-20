@@ -1448,28 +1448,30 @@ h1, h2, h3, h4 {
   border-bottom: 2px dashed rgba(192, 75, 107, 0.18);
 }
 
-/* ==========================================================================
-   5. SHOWROOM DE MODELOS AO VIVO (CARROSSEL INTERATIVO + SELETOR DE CORES)
-   ========================================================================== */
-
-.models-showroom-section {
-  padding: clamp(36px, 5.5vw, 64px) 0;
+.section-option-showcase--opt3 {
   background: var(--bg);
-  position: relative;
+  border-bottom: 2px dashed rgba(192, 75, 107, 0.18);
 }
 
-.models-header-compact {
-  text-align: center;
-  margin-bottom: clamp(16px, 2.5vw, 24px);
-}
-
-.models-header-compact .section-title {
-  margin-bottom: 10px;
+.option-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(192, 75, 107, 0.12);
+  border: 1px solid rgba(192, 75, 107, 0.35);
+  color: var(--accent);
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
 }
 
 .color-dot {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   display: inline-block;
   flex-shrink: 0;
@@ -1485,139 +1487,156 @@ h1, h2, h3, h4 {
   box-shadow: 0 0 0 1.5px rgba(229, 152, 173, 0.4);
 }
 
-/* ── Seletor Global de Cores Compacto ───────────────────────────────────── */
-.models-palette-switch {
-  display: inline-flex;
+/* ── OPÇÃO 1: PROVADOR INTERATIVO ───────────────────────────────────────── */
+.provador-controls {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 4px;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
 }
 
-.models-palette-label {
-  font-size: 0.78rem;
+.provador-model-tabs {
+  display: flex;
+  background: var(--surface);
+  padding: 5px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.provador-model-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.provador-model-btn:hover {
+  color: var(--text);
+}
+
+.provador-model-btn.is-active {
+  background: #ffffff;
+  color: var(--text);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  font-weight: 700;
+}
+
+.provador-color-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.provador-color-label {
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: .06em;
 }
 
-.models-palette-pills {
-  display: flex;
-  gap: 6px;
-}
-
-.models-palette-btn {
+.provador-color-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
+  gap: 7px;
+  padding: 8px 15px;
   border-radius: var(--radius-pill);
   border: 1.5px solid var(--border);
   background: #ffffff;
   color: var(--text-muted);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.models-palette-btn:hover {
+.provador-color-btn:hover {
   border-color: var(--accent);
   color: var(--text);
 }
 
-.models-palette-btn.is-active {
+.provador-color-btn.is-active {
   border-color: var(--accent);
-  background: rgba(192, 75, 107, 0.09);
+  background: rgba(192, 75, 107, 0.08);
   color: var(--accent);
   font-weight: 700;
 }
 
-/* ── Carrossel e Card Compacto ──────────────────────────────────────────── */
-.models-carousel-container {
-  position: relative;
-  max-width: 720px;
+.provador-stage {
+  max-width: 920px;
   margin: 0 auto;
 }
 
-.models-carousel-track {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 4px 4px 12px;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.models-carousel-track::-webkit-scrollbar {
-  display: none;
-}
-
-.models-slide {
-  min-width: 100%;
-  max-width: 100%;
-  scroll-snap-align: center;
-  flex-shrink: 0;
-}
-
-.models-slide-card {
+.provador-card {
   display: grid;
-  grid-template-columns: 230px 1fr;
+  grid-template-columns: 1fr 1.25fr;
   background: #ffffff;
-  border-radius: 22px;
+  border-radius: 24px;
   border: 1px solid var(--border);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.07);
   overflow: hidden;
-  transition: box-shadow 0.25s ease;
+  transition: all 0.3s ease;
 }
 
-.models-slide-preview {
+.provador-card-visual {
+  position: relative;
+  min-height: 440px;
   background: radial-gradient(circle at center, #241c20 0%, #0d0b0a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 12px;
+  padding: 24px 16px;
   overflow: hidden;
 }
 
-/* ── Mini Phone Mockup Otimizado ────────────────────────────────────────── */
-.showroom-phone {
-  --phone-w: 184px;
-  --phone-h: 380px;
-  --screen-w: calc(var(--phone-w) - 12px); /* 172px */
-  --screen-h: calc(var(--phone-h) - 12px); /* 368px */
+/* ── MINI PHONE MOCKUP PARA OS CARDS ─────────────────────────────────────── */
+.card-mini-phone {
+  --phone-w: 204px;
+  --phone-h: 420px;
+  --screen-w: calc(var(--phone-w) - 14px); /* 190px */
+  --screen-h: calc(var(--phone-h) - 14px); /* 406px */
   --base-w: 390px;
   --base-h: 834px;
 
   width: var(--phone-w);
   height: var(--phone-h);
   background: #120e10;
-  border-radius: 28px;
-  padding: 6px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  border-radius: 32px;
+  padding: 7px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.12);
   position: relative;
   margin: 0 auto;
   flex-shrink: 0;
 }
 
-.showroom-phone .phone-notch {
+.card-mini-phone .phone-notch {
   position: absolute;
-  top: 10px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 50px;
-  height: 10px;
+  width: 58px;
+  height: 11px;
   background: #120e10;
-  border-radius: 5px;
+  border-radius: 6px;
   z-index: 30;
   pointer-events: none;
 }
 
-.showroom-phone .phone-screen {
+.card-mini-phone .phone-screen {
   position: relative;
-  border-radius: 22px;
+  border-radius: 25px;
   overflow: hidden;
   background: #0d0b0a;
   width: var(--screen-w);
@@ -1626,7 +1645,7 @@ h1, h2, h3, h4 {
   user-select: none;
 }
 
-.showroom-phone .phone-screen-scaler {
+.card-mini-phone .phone-screen-scaler {
   position: absolute;
   top: 0;
   left: 0;
@@ -1637,14 +1656,14 @@ h1, h2, h3, h4 {
   overflow: hidden;
 }
 
-.showroom-phone .phone-screen-scaler iframe {
+.card-mini-phone .phone-screen-scaler iframe {
   width: var(--base-w);
   height: var(--base-h);
   border: 0;
   display: block;
 }
 
-.showroom-phone .phone-overlay-badge {
+.card-mini-phone .phone-overlay-badge {
   position: absolute;
   bottom: 8px;
   left: 50%;
@@ -1652,12 +1671,12 @@ h1, h2, h3, h4 {
   background: rgba(250, 248, 245, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  padding: 3px 9px;
+  padding: 3px 10px;
   border-radius: var(--radius-pill);
-  font-size: 0.60rem;
+  font-size: 0.62rem;
   font-weight: 700;
   color: var(--text);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
   border: 1px solid var(--border);
   white-space: nowrap;
   display: flex;
@@ -1667,61 +1686,375 @@ h1, h2, h3, h4 {
   pointer-events: none;
 }
 
-/* ── Conteúdo do Slide ─────────────────────────────────────────────────── */
-.models-slide-content {
-  padding: clamp(18px, 3vw, 26px);
+.provador-card-content {
+  padding: clamp(24px, 4vw, 38px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.provador-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.provador-tag {
+  background: rgba(192, 75, 107, 0.10);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.provador-palette-indicator {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.provador-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.provador-desc {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.provador-checklist {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.provador-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.87rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.provador-checklist li::before {
+  content: '✓';
+  color: #10b981;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.provador-actions {
+  margin-top: 6px;
+}
+
+.provador-btn-live {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ── OPÇÃO 2: 3 CARDS COM MINI-SELETOR INTEGRADO ────────────────────────── */
+.opt2-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.opt2-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.opt2-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.09);
+}
+
+.opt2-card-media {
+  position: relative;
+  min-height: 380px;
+  background: radial-gradient(circle at center, #241c20 0%, #0d0b0a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+  overflow: hidden;
+}
+
+.opt2-card-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.opt2-model-kicker {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 2px;
+}
+
+.opt2-model-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  color: var(--text);
+}
+
+.opt2-model-desc {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.48;
+}
+
+.opt2-color-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.opt2-color-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.opt2-color-pills {
+  display: flex;
+  gap: 8px;
+}
+
+.opt2-pill {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.80rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.opt2-pill:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.opt2-pill.is-active {
+  border-color: var(--accent);
+  background: rgba(192, 75, 107, 0.09);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.opt2-cta {
+  width: 100%;
+  justify-content: center;
+  font-size: 0.85rem;
+  padding: 11px 16px;
+}
+
+/* ── OPÇÃO 3: SHOWROOM CARROSSEL ────────────────────────────────────────── */
+.opt3-global-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.opt3-switch-label {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.opt3-switch-pills {
+  display: flex;
+  gap: 8px;
+}
+
+.opt3-palette-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border);
+  background: #ffffff;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.opt3-palette-btn.is-active {
+  border-color: var(--accent);
+  background: rgba(192, 75, 107, 0.10);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.opt3-carousel-container {
+  position: relative;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.opt3-carousel-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 8px 4px 18px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.opt3-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.opt3-slide {
+  min-width: 100%;
+  max-width: 100%;
+  scroll-snap-align: center;
+  flex-shrink: 0;
+}
+
+.opt3-slide-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.opt3-slide-photo {
+  position: relative;
+  min-height: 440px;
+  background: radial-gradient(circle at center, #241c20 0%, #0d0b0a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  overflow: hidden;
+}
+
+.opt3-slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  transition: opacity 0.25s ease;
+}
+
+.opt3-slide-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(20, 16, 14, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #f3efe9;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.74rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.opt3-slide-info {
+  padding: clamp(22px, 3.5vw, 36px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 14px;
 }
 
-.models-slide-kicker {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  margin-bottom: 2px;
-}
-
-.models-slide-name {
+.opt3-slide-title {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: clamp(1.35rem, 2.2vw, 1.65rem);
+  font-size: 1.75rem;
   color: var(--text);
-  line-height: 1.15;
 }
 
-.models-slide-tagline {
-  margin: 4px 0 0;
-  font-size: 0.84rem;
+.opt3-slide-desc {
+  margin: 0;
+  font-size: 0.90rem;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-.models-slide-btn {
+.opt3-slide-points {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 4px 0;
+}
+
+.opt3-slide-cta {
   width: 100%;
   justify-content: center;
-  padding: 11px 16px;
-  font-size: 0.86rem;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
-/* ── Navegação & Dots ───────────────────────────────────────────────────── */
-.models-nav-btn {
+.opt3-nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: #ffffff;
   border: 1px solid var(--border);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   color: var(--text);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -1731,30 +2064,30 @@ h1, h2, h3, h4 {
   transition: all 0.2s ease;
 }
 
-.models-nav-btn:hover {
+.opt3-nav-btn:hover {
   background: var(--accent);
   color: #ffffff;
   border-color: var(--accent);
 }
 
-.models-nav-btn--prev {
-  left: -20px;
+.opt3-nav-btn--prev {
+  left: -22px;
 }
 
-.models-nav-btn--next {
-  right: -20px;
+.opt3-nav-btn--next {
+  right: -22px;
 }
 
-.models-dots {
+.opt3-dots {
   display: flex;
   justify-content: center;
-  gap: 7px;
-  margin-top: 10px;
+  gap: 8px;
+  margin-top: 14px;
 }
 
-.models-dot {
-  width: 8px;
-  height: 8px;
+.opt3-dot {
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   border: none;
   background: var(--border);
@@ -1763,64 +2096,53 @@ h1, h2, h3, h4 {
   padding: 0;
 }
 
-.models-dot.is-active {
-  width: 22px;
+.opt3-dot.is-active {
+  width: 26px;
   border-radius: var(--radius-pill);
   background: var(--accent);
 }
 
-/* ── RESPONSIVIDADE MOBILE (100% ENCAIXADO NA TELA) ─────────────────────── */
-@media (max-width: 680px) {
-  .models-slide-card {
+/* ── RESPONSIVIDADE DAS 3 OPÇÕES ────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .opt2-cards-grid {
     grid-template-columns: 1fr;
-    max-width: 320px;
+    max-width: 420px;
     margin: 0 auto;
-    border-radius: 20px;
   }
 
-  .models-slide-preview {
-    padding: 12px 8px;
-  }
-
-  .showroom-phone {
-    --phone-w: 160px;
-    --phone-h: 330px;
-    border-radius: 24px;
-    padding: 5px;
-  }
-
-  .showroom-phone .phone-screen {
-    border-radius: 19px;
-  }
-
-  .showroom-phone .phone-notch {
-    width: 44px;
-    height: 8px;
-    top: 8px;
-  }
-
-  .models-slide-content {
-    padding: 14px 16px 16px;
-    gap: 10px;
-    text-align: center;
-  }
-
-  .models-slide-name {
-    font-size: 1.28rem;
-  }
-
-  .models-slide-tagline {
-    font-size: 0.80rem;
-    margin: 2px 0 0;
-  }
-
-  .models-slide-btn {
-    padding: 9px 14px;
-    font-size: 0.82rem;
-  }
-
-  .models-nav-btn {
+  .opt3-nav-btn {
     display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .provador-card {
+    grid-template-columns: 1fr;
+  }
+
+  .provador-card-visual {
+    min-height: 260px;
+  }
+
+  .provador-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .provador-model-tabs {
+    flex-direction: column;
+  }
+
+  .provador-color-switch {
+    justify-content: center;
+  }
+
+  .opt3-slide-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .opt3-slide-photo {
+    min-height: 240px;
   }
 }
 
