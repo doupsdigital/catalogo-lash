@@ -240,13 +240,13 @@ function initTileObserver() {
     entries.forEach((entry) => {
       const tile = entry.target;
       if (entry.isIntersecting) {
-        const delay = (batchCount % 4) * 0.12;
+        const delay = (batchCount % 4) * 0.18;
         tile.style.animationDelay = `${delay}s`;
         tile.classList.add('is-revealed');
         
         batchCount++;
         clearTimeout(batchTimer);
-        batchTimer = setTimeout(() => { batchCount = 0; }, 200);
+        batchTimer = setTimeout(() => { batchCount = 0; }, 300);
       } else {
         // Ao sair do viewport, remove a classe para reanimar suavemente ao retornar
         tile.classList.remove('is-revealed');
@@ -276,7 +276,7 @@ function renderGrid() {
     const tile = document.createElement('button');
     tile.type = 'button';
     tile.className = 'tile';
-    tile.style.animationDelay = `${(index % 8) * 0.06}s`;
+    tile.style.animationDelay = `${(index % 8) * 0.10}s`;
 
     if (item.destaque) tile.classList.add('tile--destaque');
     if (item.tall) tile.classList.add('tile--tall');

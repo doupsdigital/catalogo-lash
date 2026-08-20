@@ -75,11 +75,11 @@ button {
   color: #c9a389;
 }
 
-/* ---------- Entrance Animations & Stagger ---------- */
+/* ---------- Entrance Animations & Stagger (Lento, Fluido & Sofisticado) ---------- */
 .anim-fade-up {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(26px);
+  transition: opacity 1.35s cubic-bezier(0.16, 1, 0.3, 1), transform 1.35s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -88,17 +88,17 @@ button {
   transform: translateY(0);
 }
 
-.delay-1 { transition-delay: 0.06s; }
-.delay-2 { transition-delay: 0.14s; }
-.delay-3 { transition-delay: 0.22s; }
-.delay-4 { transition-delay: 0.30s; }
-.delay-5 { transition-delay: 0.38s; }
-.delay-6 { transition-delay: 0.46s; }
+.delay-1 { transition-delay: 0.10s; }
+.delay-2 { transition-delay: 0.22s; }
+.delay-3 { transition-delay: 0.34s; }
+.delay-4 { transition-delay: 0.46s; }
+.delay-5 { transition-delay: 0.58s; }
+.delay-6 { transition-delay: 0.70s; }
 
 /* Background Photo Subtle Zoom Effect */
 .hero__foto-wrap,
 .secao-contato__foto-wrap {
-  transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 10s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
 }
 
@@ -405,7 +405,7 @@ button {
 }
 
 .tile.is-revealed {
-  animation: tileRevealLuxury 1.15s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation: tileRevealLuxury 1.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .tile::after {
@@ -426,7 +426,7 @@ button {
 }
 
 .tile.is-revealed::after {
-  animation: tileShine 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation: tileShine 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: inherit;
 }
 
