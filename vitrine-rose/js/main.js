@@ -61,57 +61,153 @@ document.addEventListener('DOMContentLoaded', () => {
   const PROCEDIMENTOS = [
     {
       id: 'brasileiro', img: 'assets/img/volume-brasileiro.png', alt: 'Volume brasileiro em cílios',
-      cat: 'Volume', nome: 'Volume Brasileiro',
-      desc: 'Fios em Y que preenchem as falhas e criam efeito de rímel leve, sem peso no olhar.',
-      specs: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']],
-    },
-    {
-      id: 'gatinho', img: 'assets/img/mapping-gatinho.png', alt: 'Mapping gatinho com efeito alongado',
-      cat: 'Mapping', nome: 'Gatinho',
-      desc: 'Crescimento gradual até o canto externo. Alonga, puxa o olhar para cima e afina o formato — efeito felino.',
-      specs: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']],
-    },
-    {
-      id: 'hibrido', img: 'assets/img/volume-hibrido.png', alt: 'Volume híbrido de cílios',
-      cat: 'Volume', nome: 'Volume Híbrido',
-      desc: 'Mistura de fio a fio e volume no mesmo desenho: textura de cílio real com a densidade do volume.',
-      specs: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']],
-    },
-    {
-      id: 'egipcio', img: 'assets/img/volume-egipcio.png', alt: 'Aplicação de volume egípcio',
-      cat: 'Volume', nome: 'Volume Egípcio',
-      desc: 'Desenho marcado com fios em leque e pontas definidas. Presença sem perder a naturalidade.',
-      specs: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']],
-    },
-    {
-      id: 'boneca', img: 'assets/img/mapping-boneca.png', alt: 'Mapping boneca desenhado no olho',
-      cat: 'Mapping', nome: 'Boneca',
-      desc: 'Fios mais longos no centro do olho. Abre o olhar e deixa a expressão doce, quase de bonequinha.',
-      specs: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']],
-    },
-    {
-      id: 'foxeyes', img: 'assets/img/fox-eyes.png', alt: 'Efeito fox eyes em cílios',
-      cat: 'Assinatura', nome: 'Fox Eyes',
-      desc: 'O desenho mais pedido da casa: canto externo esticado, olhar felino e simétrico. Exige mapping milimétrico.',
-      specs: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']],
-    },
-    {
-      id: 'lifting', img: 'assets/img/lash-lifting.png', alt: 'Procedimento de lash lifting',
-      cat: 'Sem extensão', nome: 'Lash Lifting',
-      desc: 'Curvatura no seu próprio fio, com nutrição e tintura. Zero manutenção diária, efeito de 6 a 8 semanas.',
-      specs: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h']],
+      cat: 'Extensão em Y', nome: 'Volume Brasileiro',
+      desc: 'Fios tecnológicos com formato Y que preenchem as falhas naturais com leveza incomparável, alta durabilidade e acabamento marcante.',
+      specs: [
+        ['Investimento', 'R$ 150'],
+        ['Manutenção Pontual', 'R$ 90 (até 20 dias)'],
+        ['Duração em Cabine', '1h30'],
+        ['Efeito', 'Preenchimento, Textura & Leveza'],
+        ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+      ],
     },
     {
       id: 'classico', img: 'assets/img/classico-fio-a-fio.png', alt: 'Extensão de cílios clássico fio a fio',
-      cat: 'Fio a fio', nome: 'Clássico Fio a Fio',
-      desc: 'Um fio de extensão para cada fio natural. O resultado mais discreto da casa: parece cílio seu, só melhor.',
-      specs: [['Investimento', 'R$ 150'], ['Manutenção', 'R$ 90'], ['Duração', '1h30'], ['Retorno', '15 a 20 dias']],
+      cat: 'Fio a Fio Clássico', nome: 'Clássico Fio a Fio',
+      desc: 'Um fio sintético ultrafino acoplado a cada cílio natural saudável. O resultado mais elegante e discreto: olhar iluminado com efeito de rímel perfeito.',
+      specs: [
+        ['Investimento', 'R$ 120'],
+        ['Manutenção Pontual', 'R$ 70 (até 18 dias)'],
+        ['Duração em Cabine', '1h30'],
+        ['Efeito', 'Natural, Discreto & Elegante'],
+        ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+      ],
+    },
+    {
+      id: 'egipcio', img: 'assets/img/volume-egipcio.png', alt: 'Aplicação de volume egípcio',
+      cat: 'Extensão em W', nome: 'Volume Egípcio',
+      desc: 'Fios especiais em formato W (3D tecnológico) que proporcionam densidade homogênea, efeito aveludado e volume equilibrado sem pesar nos olhos.',
+      specs: [
+        ['Investimento', 'R$ 160'],
+        ['Manutenção Pontual', 'R$ 95 (até 20 dias)'],
+        ['Duração em Cabine', '1h30'],
+        ['Efeito', 'Densidade Aveludada & Uniforme'],
+        ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+      ],
+    },
+    {
+      id: 'hibrido', img: 'assets/img/volume-hibrido.png', alt: 'Volume híbrido de cílios',
+      cat: 'Clássico + Volume', nome: 'Volume Híbrido',
+      desc: 'A combinação artesanal entre a delicadeza do fio a fio clássico e leques de volume, criando textura multidimensional, profundidade e brilho no olhar.',
+      specs: [
+        ['Investimento', 'R$ 160'],
+        ['Manutenção Pontual', 'R$ 95 (até 20 dias)'],
+        ['Duração em Cabine', '1h45'],
+        ['Efeito', 'Textura Desconstruída & Volume Sob Medida'],
+        ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+      ],
+    },
+    {
+      id: 'russo', img: 'assets/img/volume-russo.png', alt: 'Volume russo com fans artesanais',
+      cat: 'Fans Artesanais 3D–6D', nome: 'Volume Russo',
+      desc: 'Técnica de alta precisão com fans ultrafinos (3 a 6 fios de seda) montados à mão na hora. Cria um volume expressivo, extremamente macio, denso e sofisticado.',
+      specs: [
+        ['Investimento', 'R$ 190'],
+        ['Manutenção Pontual', 'R$ 110 (até 20 dias)'],
+        ['Duração em Cabine', '2h00'],
+        ['Efeito', 'Glamour, Densidade & Toque de Pluma'],
+        ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+      ],
+    },
+    {
+      id: 'mega', img: 'assets/img/mega-volume.png', alt: 'Mega volume com densidade máxima',
+      cat: 'Densidade Máxima 8D–12D', nome: 'Mega Volume',
+      desc: 'O ápice da densidade e do impacto visual: leques artesanais com fios ultrafinos de 0.03mm. Proporciona um olhar super pretinho, aveludado e hipnotizante.',
+      specs: [
+        ['Investimento', 'R$ 240'],
+        ['Manutenção Pontual', 'R$ 140 (até 18 dias)'],
+        ['Duração em Cabine', '2h30'],
+        ['Efeito', 'Impacto Máximo, Densidade Total & Preto Profundo'],
+        ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+      ],
+    },
+    {
+      id: 'gatinho', img: 'assets/img/mapping-gatinho.png', alt: 'Mapping gatinho com efeito alongado',
+      cat: 'Mapping de Olhar', nome: 'Mapping Gatinho',
+      desc: 'Crescimento milimétrico dos fios em direção ao canto externo. Alonga o olhar, cria um efeito felino refinado e valoriza o contorno dos olhos.',
+      specs: [
+        ['Investimento', 'Incluso na técnica escolhida'],
+        ['Estilo de Design', 'Alongado / Felino'],
+        ['Indicação', 'Olhos amendoados, redondos ou juntos'],
+        ['Combinações', 'Brasileiro, Russo, Híbrido e Clássico']
+      ],
+    },
+    {
+      id: 'boneca', img: 'assets/img/mapping-boneca.png', alt: 'Mapping boneca desenhado no olho',
+      cat: 'Mapping de Olhar', nome: 'Mapping Boneca',
+      desc: 'Fios com maior comprimento posicionados estrategicamente no centro da íris. Abre e ilumina o olhar, proporcionando aspecto doce, expressivo e jovial.',
+      specs: [
+        ['Investimento', 'Incluso na técnica escolhida'],
+        ['Estilo de Design', 'Olhar Aberto / Centralizado'],
+        ['Indicação', 'Olhos caídos, fundos ou orientais'],
+        ['Combinações', 'Clássico, Brasileiro e Egípcio']
+      ],
+    },
+    {
+      id: 'esquilo', img: 'assets/img/mapping-esquilo.png', alt: 'Mapping esquilo com efeito lifting',
+      cat: 'Mapping de Olhar', nome: 'Mapping Esquilo',
+      desc: 'Pico de comprimento posicionado exatamente no arco da sobrancelha (ponto alto). Disfarça pálpebra caída e cria um efeito de lifting imediato.',
+      specs: [
+        ['Investimento', 'Incluso na técnica escolhida'],
+        ['Estilo de Design', 'Efeito Lifting da Pálpebra'],
+        ['Indicação', 'Pálpebras gordinhas, caídas ou maduras'],
+        ['Combinações', 'Híbrido, Russo e Egípcio']
+      ],
+    },
+    {
+      id: 'fox', img: 'assets/img/fox-eyes.png', alt: 'Efeito fox eyes em cílios',
+      cat: 'Design Assinatura', nome: 'Fox Eyes Signature',
+      desc: 'O desenho de maior sucesso do estúdio: extremidade externa esticada e alinhada com mapping milimétrico para um visual sensual, moderno e marcante.',
+      specs: [
+        ['Investimento', 'R$ 170'],
+        ['Manutenção Pontual', 'R$ 100 (até 20 dias)'],
+        ['Duração em Cabine', '1h45'],
+        ['Efeito', 'Lifting, Puxado & Olhar Felino Marcante'],
+        ['Recomendação', 'Mínimo de 40% dos fios para manutenção']
+      ],
+    },
+    {
+      id: 'lifting', img: 'assets/img/lash-lifting.png', alt: 'Procedimento de lash lifting',
+      cat: 'Cílios Naturais', nome: 'Lash Lifting & Nutrição',
+      desc: 'Tratamento de curvatura, nutrição profunda com queratina e tintura preta nos seus próprios cílios naturais. Zero manutenção e durabilidade de 6 a 8 semanas.',
+      specs: [
+        ['Investimento', 'R$ 130'],
+        ['Duração em Cabine', '1h00'],
+        ['Durabilidade do Efeito', '6 a 8 semanas (acompanha o ciclo natural)'],
+        ['Manutenção Diária', 'Zero manutenção — livre para usar rímel']
+      ],
     },
     {
       id: 'remocao', img: 'assets/img/remocao.png', alt: 'Remoção de extensão de cílios',
-      cat: 'Sessão única', nome: 'Remoção',
-      desc: 'Remoção segura das extensões com produto específico, sem puxar ou danificar o fio natural.',
-      specs: [['Investimento', 'R$ 100'], ['Duração', '45min']],
+      cat: 'Segurança & Saúde', nome: 'Remoção Segura',
+      desc: 'Remoção química indolor realizada com gel removedor profissional específico que dissolve o adesivo sem tracionar ou danificar nenhum fio natural.',
+      specs: [
+        ['Investimento', 'R$ 50'],
+        ['Duração em Cabine', '30 minutos'],
+        ['Segurança', 'Preservação de 100% da integridade dos fios naturais'],
+        ['Indicação', 'Remoção de extensões anteriores ou pausa']
+      ],
+    },
+    {
+      id: 'cuidados', img: 'assets/img/cuidados.jpg', alt: 'Guia de cuidados pós-aplicação',
+      cat: 'Guia de Durabilidade', nome: 'Cuidados Pós-Aplicação',
+      desc: 'Orientações práticas para prolongar a retenção dos seus cílios: evitar água nas primeiras 24h, higienizar com shampoo neutro e escovar diariamente.',
+      specs: [
+        ['Primeiras 24 Horas', 'Não molhar e evitar vapor/sauna'],
+        ['Higienização Diária', 'Shampoo neutro para cílios com água fria'],
+        ['Rotina Diária', 'Escovação suave 1 a 2 vezes ao dia'],
+        ['Produtos', 'Evitar rímel e demaquilantes à base de óleo']
+      ],
     },
   ];
 
@@ -131,6 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `).join('');
 
+    const mensagemWa = encodeURIComponent(`Olá Mariana! Gostaria de agendar o procedimento de ${item.nome}.`);
+
     sheet.innerHTML = `
       <div class="detalhe-procedimento__foto-wrap">
         <img src="${item.img}" alt="${item.alt}" class="detalhe-procedimento__foto">
@@ -143,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="detalhe-procedimento__desc">${item.desc}</p>
         <div class="detalhe-procedimento__specs">${specsHtml}</div>
         <div class="detalhe-procedimento__acoes">
-          <a href="https://wa.me/5511999999999" class="detalhe-procedimento__cta" target="_blank" rel="noopener">Quero esse</a>
+          <a href="https://wa.me/5511999999999?text=${mensagemWa}" class="detalhe-procedimento__cta" target="_blank" rel="noopener">Quero esse</a>
           <button type="button" class="detalhe-procedimento__proximo" data-proximo aria-label="Próximo procedimento">→</button>
         </div>
       </div>
