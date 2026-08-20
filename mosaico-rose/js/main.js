@@ -197,7 +197,7 @@ let itemAbertoId = null;
 function initSectionObserver() {
   const observerOptions = {
     root: mosaicoApp,
-    threshold: 0.3
+    threshold: 0.25
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -211,6 +211,47 @@ function initSectionObserver() {
   }, observerOptions);
 
   sections.forEach((section) => observer.observe(section));
+}
+
+// Observer Individual para os Cards do Mosaico (Carregamento progressivo ao rolar)
+let tileObserver = null;
+
+function initTileObserver() {
+  if (tileObserver) {
+    tileObserver.disconnect();
+  }
+
+  const observerOptions = {
+    root: mosaicoApp,
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  };
+
+  let batchCount = 0;
+  let batchTimer = null;
+
+  tileObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const tile = entry.target;
+        
+        // Efeito cascata dinâmico para cards que entram juntos
+        const delay = (batchCount % 6) * 0.08;
+        tile.style.animationDelay = `${delay}s`;
+        tile.classList.add('is-revealed');
+        
+        batchCount++;
+        clearTimeout(batchTimer);
+        batchTimer = setTimeout(() => { batchCount = 0; }, 150);
+
+        tileObserver.unobserve(tile);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.tile').forEach((tile) => {
+    tileObserver.observe(tile);
+  });
 }
 
 // Filtragem
@@ -230,7 +271,7 @@ function renderGrid() {
     const tile = document.createElement('button');
     tile.type = 'button';
     tile.className = 'tile';
-    tile.style.animationDelay = `${index * 0.05}s`;
+    tile.style.animationDelay = `${(index % 8) * 0.06}s`;
 
     if (item.destaque) tile.classList.add('tile--destaque');
     if (item.tall) tile.classList.add('tile--tall');
@@ -251,6 +292,8 @@ function renderGrid() {
     tile.addEventListener('click', () => abrirModal(item.id));
     gridEl.appendChild(tile);
   });
+
+  initTileObserver();
 }
 
 // Filtros
