@@ -317,13 +317,64 @@ document.addEventListener('DOMContentLoaded', () => {
   const sections = Array.from(document.querySelectorAll('.vitrine > section'));
   if (!vitrine || sections.length === 0) return;
 
-  // Modo Focus Catalog (Apresentação do Catálogo Animado no Showroom com Modal)
+  // Modo Focus Catalog (Apresentação do Catálogo Animado no Showroom com Efeito Visual de Toque)
   const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
   if (isCatalogFocus) {
     const procSection = document.querySelector('.procedimentos');
     const track = document.querySelector('.procedimentos__lista');
     const modal = document.querySelector('[data-detalhe]');
     const cards = document.querySelectorAll('.card-procedimento');
+
+    // Injeta estilo do efeito de toque (Ripple de dedo)
+    if (!document.getElementById('virtual-tap-style')) {
+      const style = document.createElement('style');
+      style.id = 'virtual-tap-style';
+      style.textContent = `
+        .virtual-user-tap {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(212, 163, 115, 0.55) 45%, rgba(255, 255, 255, 0) 75%);
+          border: 2px solid rgba(255, 255, 255, 0.95);
+          box-shadow: 0 0 18px rgba(255, 255, 255, 0.9), 0 0 32px rgba(212, 163, 115, 0.7);
+          transform: translate(-50%, -50%) scale(0.3);
+          animation: virtualTapAnim 0.38s cubic-bezier(0.1, 0.7, 0.3, 1) forwards;
+          pointer-events: none;
+          z-index: 9999;
+        }
+        @keyframes virtualTapAnim {
+          0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0.95; }
+          50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.9; }
+          100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    function simulateUserTap(element, onComplete) {
+      if (!element) { if (onComplete) onComplete(); return; }
+      const prevPos = element.style.position;
+      if (getComputedStyle(element).position === 'static') {
+        element.style.position = 'relative';
+      }
+      const tap = document.createElement('div');
+      tap.className = 'virtual-user-tap';
+      element.appendChild(tap);
+      element.style.transition = 'transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.18s ease';
+      element.style.transform = 'scale(0.93)';
+      element.style.filter = 'brightness(1.2)';
+
+      setTimeout(() => {
+        element.style.transform = '';
+        element.style.filter = '';
+        if (tap.parentNode) tap.parentNode.removeChild(tap);
+        if (prevPos) element.style.position = prevPos;
+        if (onComplete) onComplete();
+      }, 340);
+    }
 
     if (procSection) {
       vitrine.style.scrollSnapType = 'none';
@@ -353,28 +404,29 @@ document.addEventListener('DOMContentLoaded', () => {
             track.scrollTo({ left: cardW * 2, behavior: 'smooth' });
           }, 2300);
 
-          // 4. Clica no card para abrir o modal de detalhes
+          // 4. Mostra o toque do usuário no card e abre o modal de detalhes
           setTimeout(() => {
-            if (cards[2]) {
-              cards[2].click();
-            } else if (cards[0]) {
-              cards[0].click();
-            }
+            const targetCard = cards[2] || cards[0];
+            simulateUserTap(targetCard, () => {
+              targetCard.click();
+            });
           }, 3500);
 
-          // 5. Fecha o modal após 1.4s de exibição
+          // 5. Fecha o modal com toque visual após 1.4s
           setTimeout(() => {
             const closeBtn = document.querySelector('[data-fechar]');
             if (closeBtn) {
-              closeBtn.click();
+              simulateUserTap(closeBtn, () => {
+                closeBtn.click();
+              });
             } else if (modal) {
               modal.hidden = true;
               vitrine.classList.remove('modal-aberto');
             }
-          }, 5000);
+          }, 5300);
 
           // 6. Reinicia o ciclo
-          setTimeout(loop, 5800);
+          setTimeout(loop, 6200);
         }
 
         setTimeout(loop, 400);

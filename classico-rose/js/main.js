@@ -457,10 +457,62 @@ document.addEventListener('DOMContentLoaded', () => {
   initSectionObserver();
   initHeroScrollLock();
 
-  // Modo Preview Catálogo (Demonstração da Lista Editorial Navegando de Cima pra Baixo + Modal)
+  // Modo Preview Catálogo (Demonstração da Lista Editorial Navegando de Cima pra Baixo + Efeito de Toque)
   const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
   if (isCatalogFocus) {
     const menuSection = document.querySelector('.secao-menu');
+
+    // Injeta estilo do efeito de toque
+    if (!document.getElementById('virtual-tap-style')) {
+      const style = document.createElement('style');
+      style.id = 'virtual-tap-style';
+      style.textContent = `
+        .virtual-user-tap {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(229, 152, 173, 0.60) 45%, rgba(255, 255, 255, 0) 75%);
+          border: 2px solid rgba(255, 255, 255, 0.95);
+          box-shadow: 0 0 18px rgba(255, 255, 255, 0.9), 0 0 32px rgba(229, 152, 173, 0.7);
+          transform: translate(-50%, -50%) scale(0.3);
+          animation: virtualTapAnim 0.38s cubic-bezier(0.1, 0.7, 0.3, 1) forwards;
+          pointer-events: none;
+          z-index: 9999;
+        }
+        @keyframes virtualTapAnim {
+          0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0.95; }
+          50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.9; }
+          100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    function simulateUserTap(element, onComplete) {
+      if (!element) { if (onComplete) onComplete(); return; }
+      const prevPos = element.style.position;
+      if (getComputedStyle(element).position === 'static') {
+        element.style.position = 'relative';
+      }
+      const tap = document.createElement('div');
+      tap.className = 'virtual-user-tap';
+      element.appendChild(tap);
+      element.style.transition = 'transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.18s ease';
+      element.style.transform = 'scale(0.93)';
+      element.style.filter = 'brightness(1.2)';
+
+      setTimeout(() => {
+        element.style.transform = '';
+        element.style.filter = '';
+        if (tap.parentNode) tap.parentNode.removeChild(tap);
+        if (prevPos) element.style.position = prevPos;
+        if (onComplete) onComplete();
+      }, 340);
+    }
+
     if (menuSection && studioApp) {
       const snapToMenu = () => {
         studioApp.scrollTop = menuSection.offsetTop;
@@ -484,28 +536,35 @@ document.addEventListener('DOMContentLoaded', () => {
           studioApp.scrollTo({ top: menuSection.offsetTop + 360, behavior: 'smooth' });
         }, 2300);
 
-        // 4. Clica em um item da lista para abrir o modal de detalhes
+        // 4. Mostra o toque no item da lista e abre o modal de detalhes
         setTimeout(() => {
           const cards = document.querySelectorAll('.servico-card');
-          if (cards.length > 2) {
-            cards[2].click();
-          } else if (cards.length > 0) {
-            cards[0].click();
+          const targetCard = cards[2] || cards[0];
+          if (targetCard) {
+            simulateUserTap(targetCard, () => {
+              targetCard.click();
+            });
           } else if (typeof abrirModal === 'function' && typeof PROCEDIMENTOS !== 'undefined') {
             abrirModal(PROCEDIMENTOS[1].id);
           }
         }, 3500);
 
-        // 5. Fecha o modal após 1.4s
+        // 5. Fecha o modal com toque visual após 1.4s
         setTimeout(() => {
-          fecharModal();
-        }, 5000);
+          if (modalFecharEl) {
+            simulateUserTap(modalFecharEl, () => {
+              fecharModal();
+            });
+          } else {
+            fecharModal();
+          }
+        }, 5300);
 
         // 6. Reinicia o ciclo
-        setTimeout(loop, 5800);
+        setTimeout(loop, 6200);
       }
 
-      setTimeout(loop, 500);
+      setTimeout(loop, 400);
     }
   }
 });

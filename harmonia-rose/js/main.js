@@ -467,10 +467,62 @@ document.addEventListener('DOMContentLoaded', () => {
   initSectionObserver();
   initHeroScrollLock();
 
-  // Modo Preview Catálogo (Demonstração do Mosaico Navegando de Cima pra Baixo + Modal)
+  // Modo Preview Catálogo (Demonstração do Mosaico Navegando de Cima pra Baixo + Efeito de Toque)
   const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
   if (isCatalogFocus) {
     const catalogoSection = document.querySelector('.secao-catalogo');
+
+    // Injeta estilo do efeito de toque
+    if (!document.getElementById('virtual-tap-style')) {
+      const style = document.createElement('style');
+      style.id = 'virtual-tap-style';
+      style.textContent = `
+        .virtual-user-tap {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(229, 152, 173, 0.60) 45%, rgba(255, 255, 255, 0) 75%);
+          border: 2px solid rgba(255, 255, 255, 0.95);
+          box-shadow: 0 0 18px rgba(255, 255, 255, 0.9), 0 0 32px rgba(229, 152, 173, 0.7);
+          transform: translate(-50%, -50%) scale(0.3);
+          animation: virtualTapAnim 0.38s cubic-bezier(0.1, 0.7, 0.3, 1) forwards;
+          pointer-events: none;
+          z-index: 9999;
+        }
+        @keyframes virtualTapAnim {
+          0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0.95; }
+          50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.9; }
+          100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    function simulateUserTap(element, onComplete) {
+      if (!element) { if (onComplete) onComplete(); return; }
+      const prevPos = element.style.position;
+      if (getComputedStyle(element).position === 'static') {
+        element.style.position = 'relative';
+      }
+      const tap = document.createElement('div');
+      tap.className = 'virtual-user-tap';
+      element.appendChild(tap);
+      element.style.transition = 'transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.18s ease';
+      element.style.transform = 'scale(0.93)';
+      element.style.filter = 'brightness(1.2)';
+
+      setTimeout(() => {
+        element.style.transform = '';
+        element.style.filter = '';
+        if (tap.parentNode) tap.parentNode.removeChild(tap);
+        if (prevPos) element.style.position = prevPos;
+        if (onComplete) onComplete();
+      }, 340);
+    }
+
     if (catalogoSection && mosaicoApp) {
       const snapToCat = () => {
         mosaicoApp.scrollTop = catalogoSection.offsetTop;
@@ -494,26 +546,33 @@ document.addEventListener('DOMContentLoaded', () => {
           mosaicoApp.scrollTo({ top: catalogoSection.offsetTop + 360, behavior: 'smooth' });
         }, 2300);
 
-        // 4. Clica em um card do mosaico para abrir os detalhes
+        // 4. Mostra o toque no card do mosaico e abre os detalhes
         setTimeout(() => {
           const tiles = document.querySelectorAll('.tile');
-          if (tiles.length > 2) {
-            tiles[2].click();
-          } else if (tiles.length > 0) {
-            tiles[0].click();
+          const targetTile = tiles[2] || tiles[0];
+          if (targetTile) {
+            simulateUserTap(targetTile, () => {
+              targetTile.click();
+            });
           }
         }, 3500);
 
-        // 5. Fecha o modal após 1.4s
+        // 5. Fecha o modal com toque visual após 1.4s
         setTimeout(() => {
-          fecharModal();
-        }, 5000);
+          if (modalFecharEl) {
+            simulateUserTap(modalFecharEl, () => {
+              fecharModal();
+            });
+          } else {
+            fecharModal();
+          }
+        }, 5300);
 
         // 6. Reinicia o ciclo
-        setTimeout(loop, 5800);
+        setTimeout(loop, 6200);
       }
 
-      setTimeout(loop, 500);
+      setTimeout(loop, 400);
     }
   }
 });
