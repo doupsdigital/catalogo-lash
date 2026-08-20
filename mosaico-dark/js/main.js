@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LASHMENU — MODELO MOSAICO (JS INTERATIVO COM FILTROS E MODAL)
+   LASHMENU — MODELO MOSAICO (JS INTERATIVO COM FILTROS, ANIMAÇÕES E MODAL)
    ========================================================================== */
 
 const PROCEDIMENTOS = [
@@ -181,6 +181,8 @@ const PROCEDIMENTOS = [
 ];
 
 // Elementos DOM
+const mosaicoApp = document.querySelector('.mosaico-app');
+const sections = document.querySelectorAll('.mosaico-app > section');
 const gridEl = document.querySelector('[data-grid]');
 const contadorEl = document.querySelector('[data-contador]');
 const filtroBtns = document.querySelectorAll('.filtro-chip');
@@ -191,23 +193,46 @@ const modalFecharEl = document.querySelector('[data-modal-fechar]');
 let filtroAtivo = 'todos';
 let itemAbertoId = null;
 
+// IntersectionObserver para Disparar Animações por Seção
+function initSectionObserver() {
+  const observerOptions = {
+    root: mosaicoApp,
+    threshold: 0.3
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      } else {
+        // Remove class when out of view so animation re-triggers cleanly
+        entry.target.classList.remove('is-visible');
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach((section) => observer.observe(section));
+}
+
 // Filtragem
 function getItensVisiveis() {
   if (filtroAtivo === 'todos') return PROCEDIMENTOS;
   return PROCEDIMENTOS.filter(item => item.cat === filtroAtivo);
 }
 
-// Renderizar Grid Mosaico
+// Renderizar Grid Mosaico com animação escalonada
 function renderGrid() {
   const lista = getItensVisiveis();
   contadorEl.textContent = `${lista.length} procedimento${lista.length === 1 ? '' : 's'} no mosaico`;
 
   gridEl.innerHTML = '';
 
-  lista.forEach(item => {
+  lista.forEach((item, index) => {
     const tile = document.createElement('button');
     tile.type = 'button';
     tile.className = 'tile';
+    tile.style.animationDelay = `${index * 0.05}s`;
+
     if (item.destaque) tile.classList.add('tile--destaque');
     if (item.tall) tile.classList.add('tile--tall');
 
@@ -302,4 +327,5 @@ document.addEventListener('keydown', (e) => {
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
   renderGrid();
+  initSectionObserver();
 });
