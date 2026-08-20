@@ -134,7 +134,7 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: 22% 16%;
-  filter: saturate(0.85) contrast(1.05) brightness(0.80);
+  filter: saturate(1.02) contrast(1.08) brightness(0.96);
 }
 
 .hero__scrim {
@@ -142,10 +142,10 @@ button {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(12, 9, 8, 0.45) 0%,
-    rgba(12, 9, 8, 0.20) 28%,
-    rgba(12, 9, 8, 0.70) 62%,
-    rgba(12, 9, 8, 0.95) 100%
+    rgba(12, 10, 9, 0.35) 0%,
+    rgba(12, 10, 9, 0.15) 30%,
+    rgba(12, 10, 9, 0.72) 62%,
+    rgba(12, 10, 9, 0.94) 100%
   );
 }
 
@@ -502,7 +502,7 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: 50% 30%;
-  filter: saturate(0.7) contrast(1.05) brightness(0.78);
+  filter: saturate(0.95) contrast(1.08) brightness(0.92);
 }
 
 .secao-orientacoes__scrim {
@@ -510,9 +510,9 @@ button {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(12, 10, 9, 0.85) 0%,
-    rgba(12, 10, 9, 0.45) 35%,
-    rgba(12, 10, 9, 0.95) 100%
+    rgba(12, 10, 9, 0.70) 0%,
+    rgba(12, 10, 9, 0.28) 35%,
+    rgba(12, 10, 9, 0.94) 100%
   );
 }
 
@@ -612,7 +612,7 @@ button {
 }
 
 /* ==========================================================================
-   4. SEÇÃO CONTATO & RODAPÉ (SNAP SCREEN 4 - TELA CHEIA 100DVH)
+   4. SEÇÃO CONTATO & RODAPÉ (SNAP SCREEN 4 - TELA CHEIA 100DVH COM NITIDEZ TOTAL)
    ========================================================================== */
 .secao-contato {
   min-height: 100dvh;
@@ -636,7 +636,7 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: center 20%;
-  filter: saturate(0.8) brightness(0.65);
+  filter: saturate(0.95) contrast(1.08) brightness(0.95);
 }
 
 .secao-contato__scrim {
@@ -644,9 +644,10 @@ button {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(15, 12, 11, 0.40) 0%,
-    rgba(15, 12, 11, 0.85) 55%,
-    #0f0c0b 100%
+    rgba(12, 10, 9, 0.15) 0%,
+    rgba(12, 10, 9, 0.25) 35%,
+    rgba(12, 10, 9, 0.90) 65%,
+    #0d0b0a 100%
   );
 }
 
@@ -674,7 +675,7 @@ button {
 .secao-contato__titulo {
   margin: 0;
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 36px;
+  font-size: 38px;
   line-height: 1.1;
   font-weight: 400;
   color: #f3efe9;
@@ -688,7 +689,7 @@ button {
 .secao-contato__desc {
   margin: 0;
   font-size: 14px;
-  color: rgba(243, 239, 233, 0.8);
+  color: rgba(243, 239, 233, 0.85);
   max-width: 320px;
   line-height: 1.45;
 }
@@ -716,19 +717,20 @@ button {
 }
 
 .btn-whatsapp {
-  background: #c9a389;
-  color: #0f0c0b;
-  box-shadow: 0 6px 20px rgba(201, 163, 137, 0.35);
+  background: #f3efe9;
+  color: #12100e;
+  box-shadow: 0 4px 14px rgba(243, 239, 233, 0.15);
 }
 
 .btn-whatsapp:hover {
-  background: #dfa87a;
+  background: #c9a389;
+  color: #12100e;
   transform: translateY(-2px);
 }
 
 .btn-instagram {
   background: rgba(25, 20, 17, 0.85);
-  border: 1.5px solid rgba(201, 163, 137, 0.35);
+  border: 1px solid rgba(243, 239, 233, 0.3);
   color: #f3efe9;
   backdrop-filter: blur(8px);
 }
