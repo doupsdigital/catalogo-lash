@@ -293,10 +293,7 @@ function initModelsShowroom() {
 
       slides.forEach((slide) => {
         const iframe = slide.querySelector('.showroom-iframe');
-        const badge = slide.querySelector('.showroom-badge-text');
         const btnLink = slide.querySelector('.models-slide-btn');
-        const modelKey = slide.getAttribute('data-slide-model');
-        const prettyModelName = modelKey ? modelKey.charAt(0).toUpperCase() + modelKey.slice(1) : '';
 
         if (iframe) {
           const newSrc = color === 'rose' ? iframe.getAttribute('data-src-rose') : iframe.getAttribute('data-src-midnight');
@@ -307,16 +304,6 @@ function initModelsShowroom() {
               iframe.style.opacity = '1';
             }, 120);
           }
-        }
-
-        if (badge && modelKey) {
-          const mechanicLabels = {
-            glamour: '🎬 Carrossel Imersivo',
-            harmonia: '🧩 Mosaico Visual',
-            classico: '📋 Lista Editorial'
-          };
-          const prefix = mechanicLabels[modelKey] || prettyModelName;
-          badge.textContent = `${prefix} · ${colorLabel}`;
         }
 
         if (btnLink) {
