@@ -3,586 +3,714 @@
 
 <head>
   <meta charset="utf-8">
-  <title>LashMenu — o catálogo digital para Lash Designers</title>
+  <title>LashMenu — Catálogo Digital para Lash Designers</title>
   <meta name="description"
-    content="Tenha o seu próprio LashMenu: um catálogo digital profissional, personalizado com o seu nome, seus serviços e a sua identidade — pronto para compartilhar em um único link.">
+    content="Tenha o seu próprio LashMenu: um catálogo digital profissional, personalizado com o seu nome, serviços e valores — pronto para compartilhar em um único link.">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Jost:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="topo" data-topo>
-    <a href="#hero" class="topo__marca">
-      <span class="marca-lashmenu marca-lashmenu--topo"><span class="marca-lashmenu__lash">Lash</span><span class="marca-lashmenu__menu">Menu</span></span>
-      <span class="topo__tagline">para lash designers</span>
-    </a>
-    <a href="#pacotes" class="topo__cta">Quero o meu</a>
-  </header>
+  <!-- TOP ANNOUNCEMENT BAR (PROVA SOCIAL) -->
+  <div class="top-announcement-bar">
+    <div class="container">
+      <div class="announcement-content">
+        <div class="topbar-avatars">
+          <img src="../../glamour-midnight/assets/img/hero.jpg" alt="Lash Designer" class="topbar-avatar">
+          <img src="../../glamour-midnight/assets/img/sobre.jpg" alt="Lash Designer" class="topbar-avatar">
+          <img src="../../glamour-midnight/assets/img/contato.jpg" alt="Lash Designer" class="topbar-avatar">
+        </div>
+        <div class="topbar-stars">★★★★★</div>
+        <span class="announcement-text"><strong>4.9/5</strong> · Mais de <strong>350+ Lash Designers</strong> já usam</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative Blobs (Dourado & Champagne) -->
+  <div class="bg-blobs">
+    <div class="blob blob--top-right"></div>
+    <div class="blob blob--bottom-left"></div>
+  </div>
 
   <main>
 
-    <!-- 1. HERO -->
-    <section class="hero" id="hero">
-      <div class="hero__foto-wrap" data-parallax>
-        <img src="../../glamour-midnight/assets/img/Hero.png" alt="Lash designer aplicando extensão de cílios" class="hero__foto">
-      </div>
-      <div class="hero__scrim"></div>
-      <div class="container hero__conteudo">
-        <p class="kicker reveal">LashMenu · catálogo digital para lash designers</p>
-        <h1 class="hero__titulo reveal">Suas clientes merecem<br>conhecer <em>o seu trabalho</em> assim.</h1>
-        <p class="hero__sub reveal">Um catálogo digital profissional, personalizado com o seu nome, seus serviços e a
-          sua identidade — pronto para compartilhar em um único link.</p>
-        <div class="hero__acoes reveal">
-          <a href="#pacotes" class="btn btn--primary">Quero o meu</a>
-        </div>
-        <p class="hero__micro reveal">Escolha o modelo, envie suas informações e receba o seu LashMenu personalizado.</p>
-      </div>
-      <div class="hero__scroll-cue">
-        <span>Deslize</span>
-        <div class="hero__scroll-linha"></div>
-      </div>
-    </section>
-
-    <!-- 2. A DOR -->
-    <section class="secao secao--escura" id="dor">
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section" id="hero">
       <div class="container">
-        <p class="kicker reveal">A realidade de hoje</p>
-        <h2 class="titulo reveal">Quando uma cliente pergunta seus valores,<br><em>o que você envia?</em></h2>
+        <div class="hero-grid">
 
-        <div class="dor__antes reveal">
-          <div class="chip-antes">
-            <span class="chip-antes__rotulo">Mensagem solta no WhatsApp</span>
-            <p class="chip-antes__texto">"Oi flor! Volume Brasileiro fica R$150, Fox Eyes R$150, faço de terça a
-              sábado 😊"</p>
-          </div>
-          <div class="chip-antes">
-            <span class="chip-antes__rotulo">Um PDF que ninguém termina de ler</span>
-            <p class="chip-antes__texto">Tabela.pdf — 4 páginas, fonte pequena, sem nenhuma foto do seu trabalho.</p>
-          </div>
-          <div class="chip-antes">
-            <span class="chip-antes__rotulo">Uma arte feita correndo no Canva</span>
-            <p class="chip-antes__texto">Entre um atendimento e outro, tentando deixar bonito e ainda errando o
-              preço.</p>
-          </div>
-        </div>
+          <!-- Left — Content -->
+          <div class="hero-content">
+            <div class="hero-brand-block hero-animate-1">
+              <h1 class="hero-brand-h1">Lash<em>Menu</em></h1>
+              <p class="hero-brand-tagline">Catálogo digital para Lash Designers</p>
+            </div>
 
-        <p class="dor__transicao reveal">Imagine responder assim quando uma cliente pedir seus valores.</p>
+            <h2 class="hero-title hero-animate-2">
+              Destaque seu estúdio da concorrência com uma vitrine digital <span class="text-gradient">impecável.</span>
+            </h2>
 
-        <div class="conversa reveal">
-          <p class="conversa__linha conversa__linha--pergunta">"Oii! Quais são os valores dos procedimentos?"</p>
-          <p class="conversa__linha conversa__linha--resposta">Claro! Você pode ver tudo no meu <em>LashMenu</em> ✨</p>
-          <div class="link-chip">
-            <span class="link-chip__dot"></span>
-            <span class="link-chip__url"><span class="link-chip__nome">marianaalves</span><span class="link-chip__dominio">.lashmenu.com</span></span>
-          </div>
-        </div>
+            <p class="hero-subtitle hero-animate-3">
+              Um catálogo digital profissional, elegante e personalizado com seu nome, fotos e valores. Chega de mandar mensagens soltas de preços no WhatsApp.
+            </p>
 
-        <div class="dor__revelacao reveal">
-          <div class="tela-produto tela-produto--solo">
-            <img src="../../glamour-midnight/assets/img/volume-brasileiro.png" alt="Prévia real do LashMenu — Volume Brasileiro" class="tela-produto__foto">
-            <div class="tela-produto__scrim"></div>
-            <span class="tela-produto__nome">Volume Brasileiro</span>
-            <div class="tela-produto__info">
-              <span class="tela-produto__preco">R$ 150</span>
-              <span class="tela-produto__meta">1h30 · volume leve</span>
+            <div class="hero-actions hero-animate-4">
+              <a href="#pacotes" class="btn btn--primary btn--pulsing">
+                Garantir meu LashMenu
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14m-7-7 7 7-7 7"/>
+                </svg>
+              </a>
+              <a href="#demo" class="btn btn--outline">
+                Ver modelos
+              </a>
+            </div>
+
+            <div class="trust-badges hero-animate-5">
+              <span class="trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                Entrega rápida
+              </span>
+              <span class="trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+                100% Personalizado
+              </span>
+              <span class="trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>
+                </svg>
+                Pagamento único
+              </span>
             </div>
           </div>
-          <p class="dor__legenda">Essa é uma prévia real do seu LashMenu.</p>
+
+          <!-- Right — Phone Mockup (Produto Real Glamour-Midnight com Vídeo e Telas Oficiais) -->
+          <div class="hero-mockup-wrapper hero-animate-mockup">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+
+              <div class="phone-screen">
+                <div class="phone-screen-scaler">
+                  <iframe
+                    id="vitrine-preview-frame"
+                    src="../../glamour-midnight/index.html?preview=1&v=2026"
+                    title="Prévia oficial do produto LashMenu"
+                    loading="eager"
+                    allow="autoplay"></iframe>
+                </div>
+
+                <!-- Overlay Pill -->
+                <div class="phone-overlay-badge">
+                  <span class="dot-pulse"></span>
+                  <span id="preview-screen-name">Catálogo ao vivo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- O QUE É O LASHMENU -->
-    <section class="secao secao--escura" id="sobre-lashmenu">
+    <!-- 2. FAIXA DINÂMICA DE CARDS DE VALOR (MARQUEE INFINITO) -->
+    <section class="marquee-ribbon-section">
+      <div class="marquee-ribbon-wrap">
+        <div class="marquee-ribbon-track">
+          
+          <!-- Card 1: Economia de Tempo -->
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Praticidade</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Economia de Tempo</h3>
+            <p class="mpc-desc">Pare de digitar textos longos e explicar os mesmos valores todos os dias no WhatsApp.</p>
+          </div>
+
+          <!-- Card 2: Valor Percebido Alto -->
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Autoridade</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Valor Percebido Alto</h3>
+            <p class="mpc-desc">Apresentação impecável que faz seu trabalho parecer mais caro e evita pedidos de desconto.</p>
+          </div>
+
+          <!-- Card 3: Agendamento Rápido -->
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Conversão</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Agendamento Rápido</h3>
+            <p class="mpc-desc">A cliente vê as fotos reais, entende os procedimentos e clica direto para agendar no WhatsApp.</p>
+          </div>
+
+          <!-- Card 4: 100% Personalizado -->
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Exclusivo</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">100% Personalizado</h3>
+            <p class="mpc-desc">Com seu nome, fotos reais dos seus procedimentos e a sua tabela de valores oficial.</p>
+          </div>
+
+          <!-- DUPLICADOS PARA LOOP INFINITO PERFEITAMENTE SUAVE -->
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Praticidade</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Economia de Tempo</h3>
+            <p class="mpc-desc">Pare de digitar textos longos e explicar os mesmos valores todos os dias no WhatsApp.</p>
+          </div>
+
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Autoridade</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Valor Percebido Alto</h3>
+            <p class="mpc-desc">Apresentação impecável que faz seu trabalho parecer mais caro e evita pedidos de desconto.</p>
+          </div>
+
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Conversão</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">Agendamento Rápido</h3>
+            <p class="mpc-desc">A cliente vê as fotos reais, entende os procedimentos e clica direto para agendar no WhatsApp.</p>
+          </div>
+
+          <div class="marquee-pillar-card">
+            <div class="mpc-top">
+              <span class="mpc-badge">Exclusivo</span>
+              <div class="mpc-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="mpc-title">100% Personalizado</h3>
+            <p class="mpc-desc">Com seu nome, fotos reais dos seus procedimentos e a sua tabela de valores oficial.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. COMPARATIVO "VS" -->
+    <section class="vs-section" id="comparativo">
       <div class="container">
-        <div class="marca-lashmenu marca-lashmenu--grande reveal"><span class="marca-lashmenu__lash">Lash</span><span class="marca-lashmenu__menu">Menu</span></div>
-        <p class="kicker reveal">Conheça o LashMenu</p>
-        <h2 class="titulo reveal">Mais do que um catálogo.</h2>
-        <p class="lead reveal">O <em>LashMenu</em> é uma forma mais bonita, profissional e prática de apresentar o seu
-          trabalho.</p>
+        <div class="section-header">
+          <p class="section-kicker reveal">A diferença na prática</p>
+          <h2 class="section-title reveal">Quando uma cliente pede seus&nbsp;valores,<br>o que você envia?</h2>
+          <p class="section-subtitle reveal">A primeira impressão define se a cliente vai valorizar seu trabalho ou pedir desconto.</p>
+        </div>
 
-        <div class="pilares reveal">
-          <div class="pilar">
-            <span class="pilar__num">01</span>
-            <h3 class="pilar__titulo">Personalizado</h3>
-            <p class="pilar__texto">Seu nome, seus serviços, seus valores e a sua identidade.</p>
+        <div class="vs-container reveal">
+          <!-- VS Badge Desktop -->
+          <div class="vs-badge">VS</div>
+
+          <!-- Sem LashMenu -->
+          <div class="vs-card vs-card--bad">
+            <div class="vs-card-header">
+              <div class="vs-icon-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+                </svg>
+              </div>
+              <h3 class="vs-card-title">Como a maioria faz hoje</h3>
+            </div>
+            <ul class="vs-list">
+              <li class="vs-item">
+                <span class="vs-item-icon">✕</span>
+                Mensagens de texto soltas e confusas no WhatsApp
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✕</span>
+                PDF pesado de 4 páginas que quase ninguém abre
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✕</span>
+                Artes feitas às pressas no Canva entre um atendimento e outro
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✕</span>
+                A cliente não entende os estilos e sempre pergunta o mesmo
+              </li>
+            </ul>
           </div>
-          <div class="pilar">
-            <span class="pilar__num">02</span>
-            <h3 class="pilar__titulo">Profissional</h3>
-            <p class="pilar__texto">Uma experiência pensada para valorizar a forma como suas clientes conhecem o seu
-              trabalho.</p>
-          </div>
-          <div class="pilar">
-            <span class="pilar__num">03</span>
-            <h3 class="pilar__titulo">Pronto para compartilhar</h3>
-            <p class="pilar__texto">Você recebe um link exclusivo para enviar sempre que uma cliente quiser conhecer
-              seus serviços.</p>
+
+          <!-- Com LashMenu -->
+          <div class="vs-card vs-card--good">
+            <div class="vs-card-header">
+              <div class="vs-icon-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+              </div>
+              <h3 class="vs-card-title">Com o seu LashMenu</h3>
+            </div>
+            <ul class="vs-list">
+              <li class="vs-item">
+                <span class="vs-item-icon">✓</span>
+                <div class="vs-item-text">
+                  Um link elegante e exclusivo:
+                  <div class="vs-link-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                    <span>seunome.lashmenu.com</span>
+                  </div>
+                </div>
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✓</span>
+                Fotos em alta qualidade com explicações e tempos de procedimento
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✓</span>
+                Você não precisa criar nada — entregamos 100% pronto
+              </li>
+              <li class="vs-item">
+                <span class="vs-item-icon">✓</span>
+                Transmite autoridade imediata e valoriza seus procedimentos
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- UM LINK. TODO O SEU TRABALHO. -->
-    <section class="secao secao--escura secao--link" id="link">
-      <div class="container container--estreito">
-        <p class="kicker reveal">Seu link exclusivo</p>
-        <h2 class="titulo reveal">Um link. Todo o seu trabalho.</h2>
-        <p class="lead reveal">Suas clientes acessam seus serviços, valores e informações em um único lugar.</p>
-
-        <div class="link-chip link-chip--grande reveal">
-          <span class="link-chip__dot"></span>
-          <span class="link-chip__url"><span class="link-chip__nome">seunome</span><span class="link-chip__dominio">.lashmenu.com</span></span>
+    <!-- 4. PILARES / BENEFÍCIOS -->
+    <section class="features-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title reveal" style="color: #ffffff;">
+            Tudo o que seu estúdio precisa.<br>
+            <span style="color: var(--accent);">Em uma experiência impecável.</span>
+          </h2>
         </div>
 
-        <div class="link-fluxo reveal">
-          <div class="link-fluxo__etapa">
-            <span class="link-fluxo__rotulo">Hoje</span>
-            <span class="link-fluxo__antes">WhatsApp</span>
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <div class="feature-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Um Link na Bio e WhatsApp</h3>
+            <p class="feature-desc">Envie para suas clientes ou coloque no Instagram. Elas abrem em qualquer celular com carregamento instantâneo.</p>
           </div>
-          <span class="link-fluxo__seta">↓</span>
-          <div class="link-fluxo__etapa">
-            <span class="link-fluxo__rotulo">Com o LashMenu</span>
-            <span class="link-fluxo__antes link-fluxo__antes--destaque">seunome.lashmenu.com</span>
+
+          <div class="feature-card reveal">
+            <div class="feature-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Procedimentos & Valores Claros</h3>
+            <p class="feature-desc">Volume Brasileiro, Fox Eyes, Lash Lifting, remoção e manutenção com valores e durações bem explicados.</p>
           </div>
-          <span class="link-fluxo__seta">↓</span>
-          <div class="link-fluxo__etapa">
-            <span class="link-fluxo__rotulo">E então</span>
-            <div class="tela-produto link-fluxo__tela">
-              <img src="../../vitrine-dark/assets/img/Hero.png" alt="Catálogo abrindo" class="tela-produto__foto">
-              <div class="tela-produto__scrim"></div>
-              <span class="tela-produto__etq">Catálogo abrindo</span>
+
+          <div class="feature-card reveal">
+            <div class="feature-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Você Não Cria Nada</h3>
+            <p class="feature-desc">Não perca horas no Canva. Você apenas envia seus dados e nós configuramos tudo com perfeição.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. SHOWROOM DE MODELOS AO VIVO (CARROSSEL INTERATIVO + SELETOR DE CORES)
+         ========================================================================= -->
+    <section class="models-showroom-section" id="demo">
+      <div class="container">
+        <div class="section-header models-header-compact">
+          <p class="section-kicker reveal">Modelos Exclusivos</p>
+          <h2 class="section-title reveal">Escolha o estilo do seu LashMenu</h2>
+          
+          <!-- Seletor Global de Cores Compacto -->
+          <div class="models-palette-switch reveal">
+            <span class="models-palette-label">Coleção:</span>
+            <div class="models-palette-pills">
+              <button type="button" class="models-palette-btn is-active" data-models-color="midnight">
+                <span class="color-dot color-dot--midnight"></span>
+                <span>🖤 Midnight</span>
+              </button>
+              <button type="button" class="models-palette-btn" data-models-color="rose">
+                <span class="color-dot color-dot--rose"></span>
+                <span>🎀 Rosé</span>
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- 3. APRESENTAÇÃO DO PRODUTO -->
-    <section class="secao secao--escura" id="produto">
-      <div class="container">
-        <p class="kicker reveal">O produto</p>
-        <h2 class="titulo reveal">Não envie apenas seus preços.<br><em>Envie o seu LashMenu.</em></h2>
-        <p class="lead reveal">Seus procedimentos, valores e informações reunidos em uma experiência criada
-          especialmente para o seu negócio.</p>
+        <!-- Carrossel Showroom Compacto -->
+        <div class="models-carousel-container">
+          <button type="button" class="models-nav-btn models-nav-btn--prev is-hidden" id="models-btn-prev" aria-label="Modelo anterior">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="models-nav-btn models-nav-btn--next" id="models-btn-next" aria-label="Próximo modelo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
 
-        <div class="galeria-telas reveal">
-          <div class="tela-produto tela-produto--g1">
-            <img src="../../vitrine-dark/assets/img/Hero.png" alt="Capa personalizada do catálogo" class="tela-produto__foto">
-            <div class="tela-produto__scrim"></div>
-            <span class="tela-produto__etq">Capa</span>
+          <div class="models-carousel-track" id="models-carousel-track">
+            
+            <!-- Slide 1: Modelo Glamour -->
+            <div class="models-slide" data-slide-model="glamour">
+              <div class="models-slide-card">
+                <div class="models-slide-preview">
+                  <div class="showroom-phone">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                      <div class="phone-screen-scaler">
+                        <iframe class="showroom-iframe" src="../../glamour-midnight/index.html?preview=catalog" data-src-midnight="../../glamour-midnight/index.html?preview=catalog" data-src-rose="../../glamour-rose/index.html?preview=catalog" title="Prévia Modelo Glamour" loading="eager" allow="autoplay"></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="models-slide-content">
+                  <div class="models-slide-heading">
+                    <h3 class="models-slide-name">✨ Modelo 01 — Glamour</h3>
+                    <p class="models-slide-tagline">Carrossel horizontal em tela cheia com fotos ampliadas e detalhes completos de cada serviço.</p>
+                  </div>
+                  <a href="../../glamour-midnight/index.html" target="_blank" rel="noopener" class="btn btn--primary models-slide-btn" data-link-midnight="../../glamour-midnight/index.html" data-link-rose="../../glamour-rose/index.html">
+                    <span>Testar Modelo Glamour</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: Modelo Harmonia -->
+            <div class="models-slide" data-slide-model="harmonia">
+              <div class="models-slide-card">
+                <div class="models-slide-preview">
+                  <div class="showroom-phone">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                      <div class="phone-screen-scaler">
+                        <iframe class="showroom-iframe" src="../../harmonia-midnight/index.html?preview=catalog" data-src-midnight="../../harmonia-midnight/index.html?preview=catalog" data-src-rose="../../harmonia-rose/index.html?preview=catalog" title="Prévia Modelo Harmonia" loading="lazy"></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="models-slide-content">
+                  <div class="models-slide-heading">
+                    <h3 class="models-slide-name">🌸 Modelo 02 — Harmonia</h3>
+                    <p class="models-slide-tagline">Mosaico visual fotográfico com filtros dinâmicos por técnica e foco na harmonização do olhar.</p>
+                  </div>
+                  <a href="../../harmonia-midnight/index.html" target="_blank" rel="noopener" class="btn btn--primary models-slide-btn" data-link-midnight="../../harmonia-midnight/index.html" data-link-rose="../../harmonia-rose/index.html">
+                    <span>Testar Modelo Harmonia</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3: Modelo Clássico -->
+            <div class="models-slide" data-slide-model="classico">
+              <div class="models-slide-card">
+                <div class="models-slide-preview">
+                  <div class="showroom-phone">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                      <div class="phone-screen-scaler">
+                        <iframe class="showroom-iframe" src="../../classico-midnight/index.html?preview=catalog" data-src-midnight="../../classico-midnight/index.html?preview=catalog" data-src-rose="../../classico-rose/index.html?preview=catalog" title="Prévia Modelo Clássico" loading="lazy"></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="models-slide-content">
+                  <div class="models-slide-heading">
+                    <h3 class="models-slide-name">👑 Modelo 03 — Clássico</h3>
+                    <p class="models-slide-tagline">Cardápio editorial categorizado, limpo e direto ao ponto para agendamento instantâneo.</p>
+                  </div>
+                  <a href="../../classico-midnight/index.html" target="_blank" rel="noopener" class="btn btn--primary models-slide-btn" data-link-midnight="../../classico-midnight/index.html" data-link-rose="../../classico-rose/index.html">
+                    <span>Testar Modelo Clássico</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <div class="tela-produto tela-produto--g2">
-            <img src="../../vitrine-dark/assets/img/mapping-gatinho.png" alt="Tela de procedimentos do catálogo" class="tela-produto__foto">
-            <div class="tela-produto__scrim"></div>
-            <span class="tela-produto__etq">Procedimentos</span>
-          </div>
-          <div class="tela-produto tela-produto--g3">
-            <img src="../../vitrine-dark/assets/img/cuidados.jpg" alt="Tela de cuidados do catálogo" class="tela-produto__foto">
-            <div class="tela-produto__scrim"></div>
-            <span class="tela-produto__etq">Cuidados</span>
-          </div>
-          <div class="tela-produto tela-produto--g4">
-            <img src="../../vitrine-dark/assets/img/Footer.png" alt="Tela final de contato do catálogo" class="tela-produto__foto">
-            <div class="tela-produto__scrim"></div>
-            <span class="tela-produto__etq">Contato</span>
+
+          <!-- Indicadores de Pontos (Dots) -->
+          <div class="models-dots">
+            <button type="button" class="models-dot is-active" data-models-slide="0" aria-label="Ir para modelo 1"></button>
+            <button type="button" class="models-dot" data-models-slide="1" aria-label="Ir para modelo 2"></button>
+            <button type="button" class="models-dot" data-models-slide="2" aria-label="Ir para modelo 3"></button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4. DIFERENCIAL -->
-    <section class="secao secao--escura" id="diferencial">
+    <!-- 6. COMO FUNCIONA (3 PASSOS) -->
+    <section class="steps-section" id="como-funciona">
       <div class="container">
-        <p class="kicker reveal">O principal diferencial</p>
-        <h2 class="titulo reveal">Você não cria.<br><em>Você recebe pronto.</em></h2>
-        <p class="lead reveal">
-          Não precisa aprender a editar.<br>
-          Não precisa organizar páginas.<br>
-          Não precisa ajustar fotos.<br>
-          Não precisa abrir o Canva.
+        <div class="section-header">
+          <p class="section-kicker reveal">Simples e Rápido</p>
+          <h2 class="section-title reveal">Como ter o seu em 3 passos</h2>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card reveal">
+            <div class="step-bg-number">01</div>
+            <div class="step-number">01</div>
+            <h3 class="step-title">Escolha seu pacote</h3>
+            <p class="step-desc">Selecione o plano ideal e garanta sua vaga. O processo de compra é 100% seguro.</p>
+          </div>
+
+          <div class="step-card reveal">
+            <div class="step-bg-number">02</div>
+            <div class="step-number">02</div>
+            <h3 class="step-title">Envie suas informações</h3>
+            <p class="step-desc">Preencha um formulário rápido com seu nome, serviços, valores, chave Pix e suas fotos.</p>
+          </div>
+
+          <div class="step-card reveal">
+            <div class="step-bg-number">03</div>
+            <div class="step-number">03</div>
+            <h3 class="step-title">Receba pronto para usar</h3>
+            <p class="step-desc">Entregamos seu link exclusivo pronto para você colocar na bio do Instagram e mandar no WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. PACOTES / PRICING -->
+    <section class="pricing-section" id="pacotes">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-kicker reveal">Investimento Único</p>
+          <h2 class="section-title reveal">Escolha o seu LashMenu</h2>
+          <p class="section-subtitle reveal">Sem mensalidades. Você paga uma única vez e o catálogo é seu.</p>
+        </div>
+
+        <div class="pricing-grid">
+
+          <!-- Essencial -->
+          <div class="pricing-card pricing-card--regular reveal">
+            <span class="pricing-tag">Plano Essencial</span>
+            <h3 class="pricing-title">LashMenu Essencial</h3>
+            <div class="pricing-price-wrap">
+              <div class="pricing-installment">3x de R$ 69,90</div>
+              <div class="pricing-cash">ou R$ 197 à vista</div>
+            </div>
+            <ul class="pricing-features">
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Escolha do modelo visual
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Seu nome e foto na capa
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Seus serviços, descrições e valores
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Link exclusivo <strong>seunome.lashmenu.com</strong>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Personalização completa feita por nós
+              </li>
+            </ul>
+            <a href="https://pay.hotmart.com" target="_blank" class="btn btn--outline pricing-cta">
+              Quero o Essencial
+            </a>
+          </div>
+
+          <!-- Custom (Destaque) -->
+          <div class="pricing-card pricing-card--featured reveal">
+            <div class="pricing-card-badge">Mais Recomendado</div>
+            <span class="pricing-tag">Plano Custom</span>
+            <h3 class="pricing-title">LashMenu Custom</h3>
+            <div class="pricing-price-wrap">
+              <div class="pricing-installment">3x de R$ 99,90</div>
+              <div class="pricing-cash">ou R$ 297 à vista</div>
+            </div>
+            <ul class="pricing-features">
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                <strong>Tudo do LashMenu Essencial</strong>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                <strong>Suas próprias fotos dos procedimentos</strong>
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Personalização visual sob medida
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Ajustes e revisões inclusas
+              </li>
+              <li class="pricing-feature-item">
+                <span class="pricing-feature-check">✓</span>
+                Suporte prioritário na entrega
+              </li>
+            </ul>
+            <a href="https://pay.hotmart.com" target="_blank" class="btn btn--primary pricing-cta">
+              Quero o LashMenu Custom
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14m-7-7 7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. GARANTIA -->
+    <section class="guarantee-section">
+      <div class="container container--xs">
+        <div class="guarantee-icon reveal">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <h3 class="guarantee-title reveal">Garantia de Satisfação</h3>
+        <p class="guarantee-desc reveal">
+          Personalizamos tudo com o máximo de carinho e atenção aos detalhes. Caso queira algum ajuste nas informações após a entrega, fazemos para deixar o seu catálogo 100% perfeito.
         </p>
-        <p class="lead lead--destaque reveal">Escolha o estilo do seu LashMenu, envie suas informações e nós cuidamos
-          da personalização.</p>
-
-        <div class="passos reveal">
-          <div class="passo">
-            <span class="passo__num">01</span>
-            <p class="passo__texto"><strong>Escolha</strong> o estilo que combina com você.</p>
-          </div>
-          <div class="passo">
-            <span class="passo__num">02</span>
-            <p class="passo__texto"><strong>Envie</strong> suas informações e, dependendo do pacote, suas próprias
-              fotos.</p>
-          </div>
-          <div class="passo">
-            <span class="passo__num">03</span>
-            <p class="passo__texto"><strong>Personalizamos</strong> tudo no seu LashMenu.</p>
-          </div>
-          <div class="passo">
-            <span class="passo__num">04</span>
-            <p class="passo__texto"><strong>Compartilhe</strong> seu link exclusivo com suas clientes.</p>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- 5. O QUE A CLIENTE VÊ -->
-    <section class="secao secao--escura" id="cliente-ve">
+    <!-- 9. FAQ -->
+    <section class="faq-section" id="faq">
       <div class="container">
-        <p class="kicker reveal">A experiência da sua cliente</p>
-        <h2 class="titulo reveal">Tudo o que sua cliente precisa saber.<br><em>Em um único lugar.</em></h2>
-
-        <div class="tags-info reveal">
-          <span>Procedimentos</span>
-          <span>Valores</span>
-          <span>Estilos</span>
-          <span>Manutenção</span>
-          <span>Cuidados</span>
-          <span>Orientações</span>
-          <span>Formas de pagamento</span>
-          <span>Instagram &amp; WhatsApp</span>
+        <div class="section-header">
+          <p class="section-kicker reveal">Tire suas dúvidas</p>
+          <h2 class="section-title reveal">Perguntas Frequentes</h2>
         </div>
 
-        <div class="galeria-telas galeria-telas--trio reveal">
-          <div class="tela-produto tela-produto--g2">
-            <img src="../../vitrine-dark/assets/img/volume-egipcio.png" alt="Estilos disponíveis no catálogo" class="tela-produto__foto">
-            <div class="tela-produto__scrim"></div>
-            <span class="tela-produto__etq">Estilos</span>
-          </div>
-          <div class="tela-produto tela-produto--g2">
-            <img src="../../vitrine-dark/assets/img/manutencao.jpg" alt="Informações de manutenção do catálogo" class="tela-produto__foto">
-            <div class="tela-produto__scrim"></div>
-            <span class="tela-produto__etq">Manutenção</span>
-          </div>
-          <div class="tela-produto tela-produto--g2">
-            <img src="../../vitrine-dark/assets/img/contato.jpg" alt="Tela de contato e agendamento do catálogo" class="tela-produto__foto">
-            <div class="tela-produto__scrim"></div>
-            <span class="tela-produto__etq">Contato</span>
-          </div>
-        </div>
-      </div>
-    </section>
+        <div class="faq-list">
 
-    <!-- 6. DEMONSTRAÇÃO -->
-    <section class="secao secao--escura secao--demo" id="demo">
-      <div class="container">
-        <p class="kicker reveal">Demonstração ao vivo</p>
-        <h2 class="titulo reveal">Veja como pode ficar o seu.</h2>
-        <p class="lead reveal">Navegue de verdade pelo catálogo abaixo — é o produto real, funcionando.</p>
-
-        <div class="demo__tabs reveal" data-demo-tabs role="tablist" aria-label="Escolha um estilo para visualizar">
-          <button type="button" class="demo__tab is-active" data-demo-src="../../vitrine-dark/index.html" role="tab" aria-selected="true">Elegance</button>
-          <button type="button" class="demo__tab" data-demo-src="../../../vitrine-rose/index.html" role="tab" aria-selected="false">Dourado Realeza</button>
-          <button type="button" class="demo__tab" data-demo-src="../../../vitrine-rose/index.html" role="tab" aria-selected="false">Clean</button>
-        </div>
-
-        <div class="demo__phone reveal">
-          <div class="demo__phone-frame">
-            <div class="demo__phone-notch"></div>
-            <div class="demo__phone-screen">
-              <iframe data-demo-frame src="../../vitrine-dark/index.html" title="Demonstração do catálogo digital" loading="lazy"></iframe>
+          <div class="faq-item reveal">
+            <button class="faq-question-btn" type="button">
+              <span>Eu preciso entender de design ou saber editar?</span>
+              <span class="faq-chevron">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Não! Essa é a principal vantagem do LashMenu. Você apenas nos envia suas informações e nós configuramos tudo pronto para você.
+              </div>
             </div>
           </div>
-        </div>
 
-        <p class="demo__legenda reveal">Cada LashMenu é personalizado com as suas informações.</p>
-      </div>
-    </section>
-
-    <!-- 7. PARA QUEM É -->
-    <section class="secao secao--clara" id="para-quem">
-      <div class="container">
-        <p class="kicker kicker--clara reveal">Para quem é</p>
-        <h2 class="titulo titulo--clara reveal">Feito para Lash Designers que querem valorizar a forma como
-          apresentam o próprio trabalho.</h2>
-
-        <ul class="checklist reveal">
-          <li>Para quem está cansada de enviar preços pelo WhatsApp.</li>
-          <li>Para quem quer parar de perder tempo criando artes no Canva.</li>
-          <li>Para quem quer transmitir uma imagem mais profissional.</li>
-          <li>Para quem quer ter todas as informações organizadas em um único link.</li>
-          <li>Para quem quer facilitar a experiência da cliente antes mesmo do atendimento.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 8. ESCOLHA SEU ESTILO -->
-    <section class="secao secao--escura" id="estilos">
-      <div class="container">
-        <p class="kicker reveal">Estilos disponíveis</p>
-        <h2 class="titulo reveal">Escolha o estilo do seu <em>LashMenu</em>.</h2>
-
-        <div class="estilos__grid reveal">
-          <article class="card-estilo">
-            <div class="card-estilo__foto">
-              <img src="../../glamour-midnight/assets/img/Hero.png" alt="Modelo Glamour">
-            </div>
-            <span class="card-estilo__num">01</span>
-            <h3 class="card-estilo__nome">Modelo Glamour</h3>
-            <p class="card-estilo__desc">Cinematográfico com vídeo na capa e carrossel em tela cheia (Midnight &amp; Rosé).</p>
-            <button type="button" class="card-estilo__link" data-ver-demo="../../glamour-midnight/index.html">Ver ao vivo →</button>
-          </article>
-
-          <article class="card-estilo">
-            <div class="card-estilo__foto">
-              <img src="../../harmonia-rose/assets/img/Hero.png" alt="Modelo Harmonia">
-            </div>
-            <span class="card-estilo__num">02</span>
-            <h3 class="card-estilo__nome">Modelo Harmonia</h3>
-            <p class="card-estilo__desc">Mosaico visual de fotos com filtros inteligentes de visagismo (Midnight &amp; Rosé).</p>
-            <button type="button" class="card-estilo__link" data-ver-demo="../../harmonia-rose/index.html">Ver ao vivo →</button>
-          </article>
-
-          <article class="card-estilo">
-            <div class="card-estilo__foto">
-              <img src="../../classico-midnight/assets/img/Hero.png" alt="Modelo Clássico">
-            </div>
-            <span class="card-estilo__num">03</span>
-            <h3 class="card-estilo__nome">Modelo Clássico</h3>
-            <p class="card-estilo__desc">Lista editorial limpa, categorizada e direta para agilidade (Midnight &amp; Rosé).</p>
-            <button type="button" class="card-estilo__link" data-ver-demo="../../classico-midnight/index.html">Ver ao vivo →</button>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 9. COMO FUNCIONA DEPOIS DA COMPRA -->
-    <section class="secao secao--escura" id="como-funciona">
-      <div class="container">
-        <p class="kicker reveal">Depois da compra</p>
-        <h2 class="titulo reveal">Simples para você.<br><em>Personalizado para o seu negócio.</em></h2>
-
-        <div class="timeline reveal">
-          <div class="timeline__item">
-            <span class="timeline__num">01</span>
-            <div class="timeline__texto">
-              <strong>Escolha seu pacote</strong>
-              <p>Selecione a opção ideal para você.</p>
+          <div class="faq-item reveal">
+            <button class="faq-question-btn" type="button">
+              <span>Posso usar fotos dos meus próprios atendimentos?</span>
+              <span class="faq-chevron">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Sim! No pacote <strong>LashMenu Custom</strong> você pode nos enviar fotos reais dos seus procedimentos e nós aplicamos em cada serviço.
+              </div>
             </div>
           </div>
-          <div class="timeline__item">
-            <span class="timeline__num">02</span>
-            <div class="timeline__texto">
-              <strong>Envie suas informações</strong>
-              <p>Após a compra, você receberá acesso ao formulário para enviar suas informações.</p>
+
+          <div class="faq-item reveal">
+            <button class="faq-question-btn" type="button">
+              <span>Tem alguma mensalidade ou taxa extra?</span>
+              <span class="faq-chevron">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Não há mensalidades para o catálogo. O pagamento do pacote escolhido é único e seu link fica disponível para suas clientes.
+              </div>
             </div>
           </div>
-          <div class="timeline__item">
-            <span class="timeline__num">03</span>
-            <div class="timeline__texto">
-              <strong>Nós personalizamos</strong>
-              <p>Adaptamos o catálogo com seu nome, valores, informações e, dependendo do pacote, suas próprias
-                fotos.</p>
+
+          <div class="faq-item reveal">
+            <button class="faq-question-btn" type="button">
+              <span>Como envio meus preços e dados após a compra?</span>
+              <span class="faq-chevron">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Assim que sua compra for confirmada, você receberá o link de um formulário simples e prático para preencher com seus dados e enviar fotos.
+              </div>
             </div>
           </div>
-          <div class="timeline__item timeline__item--ultimo">
-            <span class="timeline__num">04</span>
-            <div class="timeline__texto">
-              <strong>Receba seu LashMenu</strong>
-              <p>Você recebe seu link exclusivo, pronto para enviar para suas clientes.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 10. PACOTES -->
-    <section class="secao secao--escura" id="pacotes">
-      <div class="container">
-        <p class="kicker reveal">Pacotes</p>
-        <h2 class="titulo reveal">Escolha o seu <em>LashMenu</em>.</h2>
-
-        <div class="pacotes__grid reveal">
-
-          <article class="card-pacote">
-            <p class="card-pacote__frase">Tudo o que você precisa para ter o seu LashMenu.</p>
-            <h3 class="card-pacote__nome">LashMenu Essencial</h3>
-            <ul class="card-pacote__lista">
-              <li>Escolha do estilo disponível</li>
-              <li>Seu nome personalizado</li>
-              <li>Sua foto na capa</li>
-              <li>Suas informações profissionais</li>
-              <li>Seus serviços e seus valores</li>
-              <li>Informações principais do seu LashMenu</li>
-              <li>Personalização completa feita por nós</li>
-              <li>Link exclusivo — seunome.lashmenu.com</li>
-            </ul>
-            <div class="card-pacote__preco">
-              <span class="card-pacote__valor">3x de R$ 69,90</span>
-              <span class="card-pacote__avista">ou R$197 à vista</span>
-            </div>
-            <a href="#pacotes" class="btn btn--primary card-pacote__cta" data-checkout="essential">Quero o meu LashMenu</a>
-          </article>
-
-          <article class="card-pacote card-pacote--destaque">
-            <span class="card-pacote__selo">Mais personalizado</span>
-            <p class="card-pacote__frase">Para deixar o seu LashMenu ainda mais com a sua identidade.</p>
-            <h3 class="card-pacote__nome">LashMenu Custom</h3>
-            <ul class="card-pacote__lista">
-              <li>Tudo do LashMenu Essencial</li>
-              <li>Envio das suas próprias fotos dos procedimentos</li>
-              <li>Personalização utilizando imagens reais do seu trabalho</li>
-              <li>Possibilidade de solicitar mais alterações</li>
-              <li>Maior nível de personalização visual</li>
-              <li>Adaptação visual utilizando o seu próprio material</li>
-            </ul>
-            <div class="card-pacote__preco">
-              <span class="card-pacote__valor">3x de R$ 99,90</span>
-              <span class="card-pacote__avista">ou R$297 à vista</span>
-            </div>
-            <a href="#pacotes" class="btn btn--primary card-pacote__cta" data-checkout="custom">Quero o meu LashMenu Custom</a>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- 11. COMPARATIVO -->
-    <section class="secao secao--clara" id="comparativo">
-      <div class="container">
-        <p class="kicker kicker--clara reveal">Comparativo</p>
-        <h2 class="titulo titulo--clara reveal">O que está incluído em cada pacote.</h2>
-
-        <table class="tabela-comparativo reveal">
-          <thead>
-            <tr>
-              <th scope="col">O que está incluído</th>
-              <th scope="col">Essencial</th>
-              <th scope="col">Custom</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Escolha do modelo</td><td class="sim">✓</td><td class="sim">✓</td></tr>
-            <tr><td>Nome personalizado</td><td class="sim">✓</td><td class="sim">✓</td></tr>
-            <tr><td>Foto na capa</td><td class="sim">✓</td><td class="sim">✓</td></tr>
-            <tr><td>Serviços e valores</td><td class="sim">✓</td><td class="sim">✓</td></tr>
-            <tr><td>Informações profissionais</td><td class="sim">✓</td><td class="sim">✓</td></tr>
-            <tr><td>Link exclusivo</td><td class="sim">✓</td><td class="sim">✓</td></tr>
-            <tr><td>Fotos próprias dos procedimentos</td><td class="nao">—</td><td class="sim">✓</td></tr>
-            <tr><td>Maior nível de personalização</td><td class="nao">—</td><td class="sim">✓</td></tr>
-            <tr><td>Mais possibilidades de alterações</td><td class="nao">—</td><td class="sim">✓</td></tr>
-          </tbody>
-        </table>
-
-        <div class="comparativo-mobile reveal">
-          <div class="comparativo-mobile__col">
-            <h3>Essencial</h3>
-            <ul>
-              <li class="sim">Escolha do modelo</li>
-              <li class="sim">Nome personalizado</li>
-              <li class="sim">Foto na capa</li>
-              <li class="sim">Serviços e valores</li>
-              <li class="sim">Informações profissionais</li>
-              <li class="sim">Link exclusivo</li>
-            </ul>
-          </div>
-          <div class="comparativo-mobile__col comparativo-mobile__col--destaque">
-            <h3>Custom</h3>
-            <ul>
-              <li class="sim">Tudo do Essencial</li>
-              <li class="sim">Fotos próprias dos procedimentos</li>
-              <li class="sim">Maior nível de personalização</li>
-              <li class="sim">Mais possibilidades de alterações</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 12. OBJEÇÃO -->
-    <section class="secao secao--escura" id="objecao">
-      <div class="container container--estreito">
-        <p class="kicker reveal">"Mas eu não sei editar"</p>
-        <h2 class="titulo reveal">Ótimo. Você não precisa saber.</h2>
-        <p class="lead lead--grande reveal">
-          Você não precisa entender de design.<br>
-          Não precisa saber usar Canva.<br>
-          Não precisa montar páginas.<br>
-          Não precisa perder horas tentando deixar tudo bonito.
-        </p>
-        <p class="lead lead--destaque reveal">Você envia as informações. Nós transformamos em algo que representa o
-          seu trabalho.</p>
-      </div>
-    </section>
-
-    <!-- 13. FAQ -->
-    <section class="secao secao--escura" id="faq">
-      <div class="container container--estreito">
-        <p class="kicker reveal">Perguntas frequentes</p>
-        <h2 class="titulo reveal">Dúvidas?</h2>
-
-        <div class="faq__lista reveal">
-          <details class="faq__item">
-            <summary>Eu preciso saber editar?</summary>
-            <p>Não. O seu LashMenu é personalizado por nós.</p>
-          </details>
-          <details class="faq__item">
-            <summary>Posso usar minhas próprias fotos?</summary>
-            <p>Sim. No pacote LashMenu Custom você pode enviar fotos dos seus próprios procedimentos para utilizarmos
-              no seu LashMenu.</p>
-          </details>
-          <details class="faq__item">
-            <summary>Como envio minhas informações?</summary>
-            <p>Após a compra, você receberá acesso a um formulário para enviar suas informações, fotos e demais dados
-              necessários.</p>
-          </details>
-          <details class="faq__item">
-            <summary>Posso escolher o estilo?</summary>
-            <p>Sim. Você poderá escolher entre os modelos disponíveis.</p>
-          </details>
-          <details class="faq__item">
-            <summary>Quanto tempo demora para receber?</summary>
-            <p>O prazo de personalização será informado no momento da compra.</p>
-          </details>
-          <details class="faq__item">
-            <summary>Posso alterar meu LashMenu depois?</summary>
-            <p>As informações sobre futuras alterações serão apresentadas junto com as condições do seu pacote.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- 14. CTA FINAL -->
-    <section class="cta-final" id="cta-final">
-      <div class="cta-final__foto-wrap">
-        <img src="../../vitrine-dark/assets/img/Footer.png" alt="Olhar em detalhe" class="cta-final__foto">
-      </div>
-      <div class="cta-final__scrim"></div>
-      <div class="container cta-final__conteudo">
-        <p class="kicker reveal">Seu trabalho. Do seu jeito.</p>
-        <h2 class="titulo reveal">Está na hora de ter<br>o seu próprio <em>LashMenu</em>.</h2>
-        <p class="lead reveal">Escolha seu estilo, envie suas informações e transforme a maneira como suas clientes
-          conhecem o seu trabalho.</p>
-        <div class="cta-final__botoes reveal">
-          <a href="#pacotes" class="btn btn--primary" data-checkout="essential">
-            Quero o meu LashMenu
-            <span>3x de R$69,90</span>
-          </a>
-          <a href="#pacotes" class="btn btn--ghost" data-checkout="custom">
-            Quero o LashMenu Custom
-            <span>3x de R$99,90</span>
-          </a>
         </div>
       </div>
     </section>
 
   </main>
 
-  <footer class="rodape">
-    <p>LashMenu — catálogo digital para Lash Designers</p>
-  </footer>
-
-  <!-- CTA STICKY MOBILE -->
-  <div class="sticky-cta" data-sticky-cta>
-    <a href="#pacotes" class="btn btn--primary">Quero o meu LashMenu</a>
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-mobile-cta">
+    <a href="#pacotes" class="btn btn--primary">
+      Garantir meu LashMenu
+    </a>
   </div>
 
   <script src="js/main.js"></script>
