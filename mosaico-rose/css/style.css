@@ -353,15 +353,16 @@ button {
   grid-auto-flow: dense;
 }
 
-/* Card do Mosaico (Tile) com efeito de surgimento fluido em profundidade */
+/* Card do Mosaico (Tile) com efeito de surgimento fluido em profundidade (Lento & Leve) */
 @keyframes tileRevealLuxury {
   0% {
     opacity: 0;
-    transform: translateY(38px) scale(0.92);
-    filter: blur(6px);
+    transform: translateY(45px) scale(0.93);
+    filter: blur(8px);
   }
-  60% {
-    filter: blur(0);
+  50% {
+    opacity: 0.85;
+    filter: blur(2px);
   }
   100% {
     opacity: 1;
@@ -376,11 +377,11 @@ button {
     transform: translateX(-100%) rotate(25deg);
     opacity: 0;
   }
-  40% {
-    opacity: 0.5;
+  35% {
+    opacity: 0.45;
   }
   100% {
-    transform: translateX(200%) rotate(25deg);
+    transform: translateX(220%) rotate(25deg);
     opacity: 0;
   }
 }
@@ -397,17 +398,17 @@ button {
   box-shadow: 0 8px 24px rgba(70, 25, 40, 0.08);
   aspect-ratio: 3 / 4.2;
   cursor: pointer;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.3s ease, 
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), 
+              border-color 0.4s ease, 
+              box-shadow 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   text-align: left;
   opacity: 0;
-  transform: translateY(38px) scale(0.92);
-  will-change: transform, opacity;
+  transform: translateY(45px) scale(0.93);
+  will-change: transform, opacity, filter;
 }
 
 .tile.is-revealed {
-  animation: tileRevealLuxury 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: tileRevealLuxury 1.15s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
 .tile::after {
@@ -428,7 +429,7 @@ button {
 }
 
 .tile.is-revealed::after {
-  animation: tileShine 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: tileShine 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   animation-delay: inherit;
 }
 

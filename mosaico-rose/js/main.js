@@ -197,7 +197,7 @@ let itemAbertoId = null;
 function initSectionObserver() {
   const observerOptions = {
     root: mosaicoApp,
-    threshold: 0.25
+    threshold: 0.2
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -206,6 +206,12 @@ function initSectionObserver() {
         entry.target.classList.add('is-visible');
       } else {
         entry.target.classList.remove('is-visible');
+        // Se saiu da seção de catálogo, reseta os cards para reanimar quando voltar
+        if (entry.target.classList.contains('secao-catalogo')) {
+          document.querySelectorAll('.tile').forEach((t) => {
+            t.classList.remove('is-revealed');
+          });
+        }
       }
     });
   }, observerOptions);
@@ -213,7 +219,7 @@ function initSectionObserver() {
   sections.forEach((section) => observer.observe(section));
 }
 
-// Observer Individual para os Cards do Mosaico (Carregamento progressivo ao rolar)
+// Observer Individual para os Cards do Mosaico (Re-anima suavemente sempre que entra no viewport)
 let tileObserver = null;
 
 function initTileObserver() {
@@ -223,8 +229,8 @@ function initTileObserver() {
 
   const observerOptions = {
     root: mosaicoApp,
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.08,
+    rootMargin: '20px 0px 10px 0px'
   };
 
   let batchCount = 0;
@@ -232,19 +238,18 @@ function initTileObserver() {
 
   tileObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+      const tile = entry.target;
       if (entry.isIntersecting) {
-        const tile = entry.target;
-        
-        // Efeito cascata dinâmico para cards que entram juntos
-        const delay = (batchCount % 6) * 0.08;
+        const delay = (batchCount % 4) * 0.12;
         tile.style.animationDelay = `${delay}s`;
         tile.classList.add('is-revealed');
         
         batchCount++;
         clearTimeout(batchTimer);
-        batchTimer = setTimeout(() => { batchCount = 0; }, 150);
-
-        tileObserver.unobserve(tile);
+        batchTimer = setTimeout(() => { batchCount = 0; }, 200);
+      } else {
+        // Ao sair do viewport, remove a classe para reanimar suavemente ao retornar
+        tile.classList.remove('is-revealed');
       }
     });
   }, observerOptions);
