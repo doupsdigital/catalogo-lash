@@ -362,16 +362,37 @@ function fecharModal() {
   document.body.style.overflow = '';
 }
 
-modalFecharEl.addEventListener('click', fecharModal);
+// Suavização do primeiro scroll da Capa para o topo exato do Menu
+function initHeroScrollLock() {
+  const heroSection = document.querySelector('.hero');
+  const menuSection = document.querySelector('.secao-menu');
+  if (!heroSection || !menuSection) return;
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !modalEl.hasAttribute('hidden')) {
-    fecharModal();
-  }
-});
+  let touchStartY = 0;
+  let isNavigating = false;
+
+  heroSection.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  heroSection.addEventListener('touchend', (e) => {
+    const touchEndY = e.changedTouches[0].clientY;
+    const diffY = touchStartY - touchEndY;
+    // Swipe para cima de pelo menos 25px enquanto estiver na Capa
+    if (diffY > 25 && studioApp.scrollTop < 50 && !isNavigating) {
+      isNavigating = true;
+      studioApp.scrollTo({
+        top: menuSection.offsetTop,
+        behavior: 'smooth'
+      });
+      setTimeout(() => { isNavigating = false; }, 700);
+    }
+  }, { passive: true });
+}
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
   renderLista();
   initSectionObserver();
+  initHeroScrollLock();
 });

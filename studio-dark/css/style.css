@@ -266,7 +266,7 @@ button {
   padding: 44px 0 60px;
   background: #0f0c0b;
   scroll-snap-align: start;
-  scroll-snap-stop: normal;
+  scroll-snap-stop: always;
   position: relative;
 }
 
