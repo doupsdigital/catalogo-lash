@@ -1,29 +1,167 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8">
-<title>Catálogo de Landing Pages</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  html, body { margin:0; padding:0; background:#0d0b0a; color:#f3efe9; font-family:system-ui,-apple-system,sans-serif; }
-  body { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; padding:40px 24px; }
-  h1 { margin:0; font-size:22px; font-weight:500; letter-spacing:.02em; }
-  ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; width:100%; max-width:320px; }
-  a { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border:1px solid rgba(243,239,233,.16); color:#f3efe9; text-decoration:none; font-size:14px; letter-spacing:.04em; transition:border-color .2s ease, color .2s ease; }
-  a:hover { border-color:#c9a389; color:#c9a389; }
-</style>
+  <meta charset="utf-8">
+  <title>LashMenu — Hub de Vendas & Operação</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background:#0d0b0a;
+      color:#f3efe9;
+      font-family:'Jost',system-ui,-apple-system,sans-serif;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+    }
+    .card {
+      background:#14100e;
+      border:1px solid rgba(201,163,137,0.3);
+      border-radius:28px;
+      padding:40px 32px;
+      max-width:480px;
+      width:100%;
+      box-shadow:0 24px 60px rgba(0,0,0,0.7);
+    }
+    .header {
+      text-align:center;
+      margin-bottom:30px;
+    }
+    h1 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.4rem;
+      font-weight:400;
+      color:#ffffff;
+      margin-bottom:6px;
+      line-height:1.1;
+    }
+    h1 em {
+      color:#c9a389;
+      font-style:italic;
+      font-weight:600;
+    }
+    .subtitle {
+      font-size:0.92rem;
+      color:rgba(243,239,233,0.7);
+    }
+    
+    .nav-list {
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      margin-bottom:28px;
+    }
+    .nav-item {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px 20px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(243,239,233,0.12);
+      color:#f3efe9;
+      text-decoration:none;
+      transition:all 0.25s ease;
+    }
+    .nav-item:hover {
+      background:rgba(201,163,137,0.12);
+      border-color:#c9a389;
+      color:#ffffff;
+      transform:translateY(-2px);
+      box-shadow:0 8px 24px rgba(0,0,0,0.4);
+    }
+    .nav-item--featured {
+      background:rgba(201,163,137,0.08);
+      border-color:rgba(201,163,137,0.4);
+    }
+    .item-info {
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+    }
+    .item-tag {
+      font-size:0.72rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      color:#c9a389;
+    }
+    .item-title {
+      font-size:1.05rem;
+      font-weight:600;
+      color:#ffffff;
+    }
+    .item-desc {
+      font-size:0.80rem;
+      color:rgba(243,239,233,0.6);
+    }
+    .item-arrow {
+      color:#c9a389;
+      font-size:1.2rem;
+      transition:transform 0.2s ease;
+    }
+    .nav-item:hover .item-arrow {
+      transform:translateX(4px);
+    }
+    
+    .footer {
+      text-align:center;
+      font-size:0.75rem;
+      color:rgba(243,239,233,0.4);
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Catálogo de Templates</h1>
-  <ul>
-    <li><a href="/vendas/lpb/">LashMenu — LPB (Página de Vendas) <span>→</span></a></li>
-    <li><a href="/vendas/lpa/">LashMenu — LPA (Editorial Clássico) <span>→</span></a></li>
-    <li><a href="/glamour-midnight/">Glamour Midnight — Mariana Alves <span>→</span></a></li>
-    <li><a href="/glamour-rose/">Glamour Rosé — Mariana Alves <span>→</span></a></li>
-    <li><a href="/harmonia-midnight/">Harmonia Midnight — Amanda Carvalho <span>→</span></a></li>
-    <li><a href="/harmonia-rose/">Harmonia Rosé — Amanda Carvalho <span>→</span></a></li>
-    <li><a href="/classico-midnight/">Clássico Midnight — Bruna Carvalho <span>→</span></a></li>
-    <li><a href="/classico-rose/">Clássico Rosé — Bruna Carvalho <span>→</span></a></li>
-  </ul>
+  <div class="card">
+    <div class="header">
+      <h1>Lash<em>Menu</em></h1>
+      <p class="subtitle">Painel de Vendas & Operação Comercial</p>
+    </div>
+
+    <div class="nav-list">
+      
+      <!-- LPB: Glamour Rosé -->
+      <a href="/vendas/lpb/" class="nav-item nav-item--featured">
+        <div class="item-info">
+          <span class="item-tag">🌸 Versão Principal (A/B Test)</span>
+          <span class="item-title">Página de Vendas — LPB</span>
+          <span class="item-desc">Estética Glamour Rosé com foco em conversão</span>
+        </div>
+        <span class="item-arrow">→</span>
+      </a>
+
+      <!-- LPA: Nude Editorial -->
+      <a href="/vendas/lpa/" class="nav-item">
+        <div class="item-info">
+          <span class="item-tag">✨ Versão Editorial (A/B Test)</span>
+          <span class="item-title">Página de Vendas — LPA</span>
+          <span class="item-desc">Estética Nude & Champagne de Alta Costura</span>
+        </div>
+        <span class="item-arrow">→</span>
+      </a>
+
+      <!-- Formulário de Onboarding -->
+      <a href="/vendas/form/" class="nav-item">
+        <div class="item-info">
+          <span class="item-tag">📋 Pós-Venda / Onboarding</span>
+          <span class="item-title">Formulário de Coleta</span>
+          <span class="item-desc">Envio de fotos, serviços e dados da cliente</span>
+        </div>
+        <span class="item-arrow">→</span>
+      </a>
+
+    </div>
+
+    <div class="footer">LashMenu © 2026 · Todos os direitos reservados</div>
+  </div>
 </body>
+
 </html>
