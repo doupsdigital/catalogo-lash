@@ -1673,25 +1673,17 @@ h1, h2, h3, h4 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 14px;
-}
-
-.models-slide-kicker {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  margin-bottom: 2px;
+  gap: 12px;
 }
 
 .models-slide-name {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: clamp(1.35rem, 2.2vw, 1.65rem);
-  color: var(--text);
-  line-height: 1.15;
+  font-size: clamp(1.25rem, 2.1vw, 1.55rem);
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: .01em;
 }
 
 .models-slide-tagline {
@@ -1806,7 +1798,7 @@ h1, h2, h3, h4 {
   }
 
   .models-slide-name {
-    font-size: 1.28rem;
+    font-size: 1.16rem;
   }
 
   .models-slide-tagline {
