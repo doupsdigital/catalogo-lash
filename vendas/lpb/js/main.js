@@ -309,8 +309,14 @@ function initModelsShowroom() {
           }
         }
 
-        if (badge && prettyModelName) {
-          badge.textContent = `${prettyModelName} ${colorLabel}`;
+        if (badge && modelKey) {
+          const mechanicLabels = {
+            glamour: '🎬 Carrossel Imersivo',
+            harmonia: '🧩 Mosaico Visual',
+            classico: '📋 Lista Editorial'
+          };
+          const prefix = mechanicLabels[modelKey] || prettyModelName;
+          badge.textContent = `${prefix} · ${colorLabel}`;
         }
 
         if (btnLink) {

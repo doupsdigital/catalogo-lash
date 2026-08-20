@@ -466,4 +466,27 @@ document.addEventListener('DOMContentLoaded', () => {
   renderGrid();
   initSectionObserver();
   initHeroScrollLock();
+
+  // Modo Preview Catálogo (Demonstração do Mosaico e Filtros no Showroom)
+  const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
+  if (isCatalogFocus) {
+    const catalogoSection = document.querySelector('.secao-catalogo');
+    if (catalogoSection && mosaicoApp) {
+      setTimeout(() => {
+        mosaicoApp.scrollTop = catalogoSection.offsetTop;
+      }, 100);
+
+      const filters = ['todos', 'volumes', 'mapping', 'especiais'];
+      let fIdx = 0;
+      setInterval(() => {
+        fIdx = (fIdx + 1) % filters.length;
+        const targetFilter = filters[fIdx];
+        filtroAtivo = targetFilter;
+        filtroBtns.forEach((btn) => {
+          btn.classList.toggle('is-ativo', btn.dataset.filter === targetFilter);
+        });
+        renderGrid();
+      }, 3000);
+    }
+  }
 });

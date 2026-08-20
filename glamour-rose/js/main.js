@@ -307,3 +307,92 @@ document.addEventListener('DOMContentLoaded', () => {
   modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) close(); });
 });
+
+/* ---------- Modo Preview / Auto-Tour no Mockup Controlado por Visibilidade ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const isPreview = window.location.search.includes('preview') || window.self !== window.top;
+  if (!isPreview) return;
+
+  const vitrine = document.querySelector('.vitrine');
+  const sections = Array.from(document.querySelectorAll('.vitrine > section'));
+  if (!vitrine || sections.length === 0) return;
+
+  // Modo Focus Catalog (Apresentação do Catálogo Animado no Showroom)
+  const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
+  if (isCatalogFocus) {
+    const procSection = document.getElementById('procedimentos');
+    const track = document.querySelector('.procedimentos__track');
+    if (procSection && vitrine) {
+      setTimeout(() => {
+        vitrine.scrollTop = procSection.offsetTop;
+      }, 100);
+      
+      if (track) {
+        let cardIdx = 0;
+        const totalCards = 13;
+        setInterval(() => {
+          cardIdx = (cardIdx + 1) % totalCards;
+          const cardWidth = track.clientWidth || 300;
+          track.scrollTo({
+            left: cardIdx * (cardWidth * 0.85),
+            behavior: 'smooth'
+          });
+        }, 2600);
+      }
+    }
+    return;
+  }
+
+  let currentIdx = 0;
+  let timerId = null;
+  let isRunning = false;
+
+  function stopTourAndReset() {
+    isRunning = false;
+    if (timerId) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+    currentIdx = 0;
+    vitrine.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  function scheduleNext() {
+    if (!isRunning) return;
+    const currentSection = sections[currentIdx];
+    const isHero = currentSection && currentSection.classList.contains('hero');
+    const delay = isHero ? 6000 : 4500;
+
+    timerId = setTimeout(() => {
+      if (!isRunning) return;
+      currentIdx = (currentIdx + 1) % sections.length;
+      const targetSection = sections[currentIdx];
+
+      if (targetSection) {
+        vitrine.scrollTo({
+          top: targetSection.offsetTop,
+          behavior: 'smooth'
+        });
+      }
+      scheduleNext();
+    }, delay);
+  }
+
+  function startTour() {
+    if (isRunning) return;
+    isRunning = true;
+    scheduleNext();
+  }
+
+  window.addEventListener('message', (event) => {
+    if (!event.data) return;
+    if (event.data.type === 'START_TOUR') {
+      startTour();
+    } else if (event.data.type === 'RESET_TOUR') {
+      stopTourAndReset();
+    }
+  });
+});

@@ -364,6 +364,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }, delay);
   }
 
+  // Modo Focus Catalog (Apresentação do Catálogo Animado no Showroom)
+  const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
+  if (isCatalogFocus) {
+    const procSection = document.getElementById('procedimentos');
+    const track = document.querySelector('.procedimentos__track');
+    if (procSection && vitrine) {
+      setTimeout(() => {
+        vitrine.scrollTop = procSection.offsetTop;
+      }, 100);
+      
+      if (track) {
+        let cardIdx = 0;
+        const totalCards = 13;
+        setInterval(() => {
+          cardIdx = (cardIdx + 1) % totalCards;
+          const cardWidth = track.clientWidth || 300;
+          track.scrollTo({
+            left: cardIdx * (cardWidth * 0.85),
+            behavior: 'smooth'
+          });
+        }, 2600);
+      }
+    }
+    return; // não roda o tour geral de seções quando está em modo catálogo
+  }
+
   function startTour() {
     if (isRunning) return;
     isRunning = true;

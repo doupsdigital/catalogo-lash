@@ -456,4 +456,26 @@ document.addEventListener('DOMContentLoaded', () => {
   renderLista();
   initSectionObserver();
   initHeroScrollLock();
+
+  // Modo Preview Catálogo (Demonstração da Lista Editorial no Showroom)
+  const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
+  if (isCatalogFocus) {
+    const menuSection = document.querySelector('.secao-menu');
+    if (menuSection && studioApp) {
+      setTimeout(() => {
+        studioApp.scrollTop = menuSection.offsetTop;
+      }, 100);
+
+      // Auto-scroll suave descendo e subindo na lista
+      let scrollDown = true;
+      setInterval(() => {
+        const targetScroll = scrollDown ? menuSection.offsetTop + 280 : menuSection.offsetTop;
+        studioApp.scrollTo({
+          top: targetScroll,
+          behavior: 'smooth'
+        });
+        scrollDown = !scrollDown;
+      }, 3200);
+    }
+  }
 });
