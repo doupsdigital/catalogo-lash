@@ -1,496 +1,371 @@
 /* ==========================================================================
-   LASHMENU — SCRIPTS DE INTERAÇÃO E ANIMAÇÕES
+   LASHMENU — FORMULÁRIO DE ONBOARDING MULTI-STEP (JAVASCRIPT)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initHeaderScroll();
-  initScrollReveal();
-  initCounters();
-  initFaqAccordion();
-  initStyleTabs();
-  initSmoothScroll();
-  initMockupSlider();
-  initOption1Provador();
-  initOption2CardSelectors();
-  initOption3Carousel();
+  initMultiStepNavigation();
+  initModelAndColorSelection();
+  initServicesBuilder();
+  initPhotoDropzone();
+  initPhoneMask();
+  initSlugFormatter();
+  initFormSubmission();
 });
 
-/* ── 1. Header Scroll Effect ─────────────────────────────────────────────── */
-function initHeaderScroll() {
-  const header = document.querySelector('.header-nav');
-  if (!header) return;
+/* ── 1. Navegação Multi-Step com Validação ───────────────────────────────── */
+let currentStep = 1;
+const totalSteps = 4;
 
-  const handleScroll = () => {
-    if (window.scrollY > 40) {
-      header.classList.add('is-scrolled');
+function initMultiStepNavigation() {
+  const nextBtns = document.querySelectorAll('.btn-next-step');
+  const prevBtns = document.querySelectorAll('.btn-prev-step');
+
+  nextBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetStep = parseInt(btn.getAttribute('data-next'), 10);
+      if (validateStep(currentStep)) {
+        goToStep(targetStep);
+      }
+    });
+  });
+
+  prevBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetStep = parseInt(btn.getAttribute('data-prev'), 10);
+      goToStep(targetStep);
+    });
+  });
+}
+
+function goToStep(stepNumber) {
+  if (stepNumber < 1 || stepNumber > totalSteps) return;
+
+  const currentStepEl = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+  const targetStepEl = document.querySelector(`.form-step[data-step="${stepNumber}"]`);
+
+  if (currentStepEl && targetStepEl) {
+    currentStepEl.classList.remove('is-active');
+    targetStepEl.classList.add('is-active');
+    currentStep = stepNumber;
+
+    updateProgressBar(currentStep);
+    updateSummaryTags();
+
+    // Rola suavemente para o topo do formulário no mobile
+    const formCard = document.querySelector('.form-card');
+    if (formCard) {
+      const topOffset = formCard.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top: topOffset, behavior: 'smooth' });
+    }
+  }
+}
+
+function updateProgressBar(step) {
+  const progressBarFill = document.getElementById('progress-bar-fill');
+  const nodes = document.querySelectorAll('.step-node');
+
+  const percent = ((step) / totalSteps) * 100;
+  if (progressBarFill) {
+    progressBarFill.style.width = `${percent}%`;
+  }
+
+  nodes.forEach((node) => {
+    const nodeStep = parseInt(node.getAttribute('data-step-node'), 10);
+    node.classList.toggle('is-active', nodeStep === step);
+    node.classList.toggle('is-completed', nodeStep < step);
+  });
+}
+
+function validateStep(step) {
+  const currentStepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+  if (!currentStepEl) return true;
+
+  const requiredInputs = currentStepEl.querySelectorAll('input[required]');
+  let isValid = true;
+
+  requiredInputs.forEach((input) => {
+    if (!input.value.trim()) {
+      isValid = false;
+      input.classList.add('is-invalid');
+      input.focus();
+      input.style.borderColor = '#dc2626';
+      setTimeout(() => {
+        input.style.borderColor = '';
+      }, 2500);
+    }
+  });
+
+  return isValid;
+}
+
+/* ── 2. Seleção Visual de Modelo e Cor ───────────────────────────────────── */
+function initModelAndColorSelection() {
+  // Modelos
+  const modelCards = document.querySelectorAll('.model-select-card');
+  modelCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      modelCards.forEach((c) => c.classList.remove('is-selected'));
+      card.classList.add('is-selected');
+      const radio = card.querySelector('.model-radio');
+      if (radio) radio.checked = true;
+    });
+  });
+
+  // Paleta de Cores
+  const paletteCards = document.querySelectorAll('.palette-card');
+  paletteCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      paletteCards.forEach((c) => c.classList.remove('is-selected'));
+      card.classList.add('is-selected');
+      const radio = card.querySelector('.palette-radio');
+      if (radio) radio.checked = true;
+    });
+  });
+}
+
+/* ── 3. Builder Dinâmico de Procedimentos ───────────────────────────────── */
+const defaultServices = [
+  { name: 'Volume Brasileiro', price: '160,00', duration: '2h', maintenance: '90,00' },
+  { name: 'Volume Russo', price: '180,00', duration: '2h15', maintenance: '100,00' },
+  { name: 'Fox Eyes', price: '190,00', duration: '2h', maintenance: '110,00' },
+  { name: 'Lash Lifting', price: '130,00', duration: '1h15', maintenance: '-' },
+  { name: 'Mega Volume', price: '220,00', duration: '2h30', maintenance: '130,00' }
+];
+
+function initServicesBuilder() {
+  const container = document.getElementById('services-builder');
+  const addBtn = document.getElementById('btn-add-service');
+  if (!container || !addBtn) return;
+
+  // Carrega procedimentos padrão
+  defaultServices.forEach((svc) => renderServiceRow(container, svc));
+
+  // Botão Adicionar
+  addBtn.addEventListener('click', () => {
+    renderServiceRow(container, { name: '', price: '', duration: '', maintenance: '' });
+  });
+}
+
+function renderServiceRow(container, data) {
+  const row = document.createElement('div');
+  row.className = 'service-row-card';
+  row.innerHTML = `
+    <div class="service-mini-field">
+      <label class="sm-label">Procedimento</label>
+      <input type="text" class="sm-input service-name" placeholder="Ex: Volume Egípcio" value="${data.name || ''}" required>
+    </div>
+    <div class="service-mini-field">
+      <label class="sm-label">Valor (R$)</label>
+      <input type="text" class="sm-input service-price" placeholder="160,00" value="${data.price || ''}">
+    </div>
+    <div class="service-mini-field">
+      <label class="sm-label">Duração</label>
+      <input type="text" class="sm-input service-duration" placeholder="2h" value="${data.duration || ''}">
+    </div>
+    <div class="service-mini-field">
+      <label class="sm-label">Manutenção</label>
+      <input type="text" class="sm-input service-maintenance" placeholder="90,00" value="${data.maintenance || ''}">
+    </div>
+    <button type="button" class="btn-remove-service" title="Remover procedimento">✕</button>
+  `;
+
+  row.querySelector('.btn-remove-service').addEventListener('click', () => {
+    const allRows = container.querySelectorAll('.service-row-card');
+    if (allRows.length > 1) {
+      row.remove();
+      updateSummaryTags();
     } else {
-      header.classList.remove('is-scrolled');
+      alert('Você precisa ter pelo menos 1 procedimento no seu catálogo.');
     }
-  };
+  });
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
+  container.appendChild(row);
 }
 
-/* ── 2. Scroll Reveal Animations ─────────────────────────────────────────── */
-function initScrollReveal() {
-  const reveals = document.querySelectorAll('.reveal');
-  if (!reveals.length) return;
+/* ── 4. Dropzone & Upload de Foto de Capa ────────────────────────────────── */
+function initPhotoDropzone() {
+  const dropzone = document.getElementById('avatar-dropzone');
+  const fileInput = document.getElementById('input-avatar-file');
+  const dropzoneEmpty = document.getElementById('dropzone-empty');
+  const dropzonePreview = document.getElementById('dropzone-preview');
+  const previewImg = document.getElementById('avatar-preview-img');
+  const removeBtn = document.getElementById('btn-remove-avatar');
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-  );
+  if (!dropzone || !fileInput) return;
 
-  reveals.forEach((el) => observer.observe(el));
-}
-
-/* ── 3. Animated Counters ────────────────────────────────────────────────── */
-function initCounters() {
-  const counters = document.querySelectorAll('[data-counter]');
-  if (!counters.length) return;
-
-  const animateCount = (el) => {
-    const target = parseInt(el.getAttribute('data-counter'), 10);
-    const suffix = el.getAttribute('data-suffix') || '';
-    const prefix = el.getAttribute('data-prefix') || '';
-    const duration = 1200;
-    const startTime = performance.now();
-
-    const updateCount = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const currentVal = Math.round(eased * target);
-
-      el.textContent = `${prefix}${currentVal}${suffix}`;
-
-      if (progress < 1) {
-        requestAnimationFrame(updateCount);
-      } else {
-        el.textContent = `${prefix}${target}${suffix}`;
-      }
-    };
-
-    requestAnimationFrame(updateCount);
-  };
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCount(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.3 }
-  );
-
-  counters.forEach((el) => observer.observe(el));
-}
-
-/* ── 4. Mockup Live Preview & Visibility Controller ────────────────────── */
-function initMockupSlider() {
-  const nameLabel = document.getElementById('preview-screen-name');
-  const iframe = document.getElementById('vitrine-preview-frame');
-  const mockupWrapper = document.querySelector('.hero-mockup-wrapper');
-
-  // Atualiza label do badge superior da tela
-  window.addEventListener('message', (event) => {
-    if (event.data && event.data.type === 'VITRINE_SCREEN_CHANGE') {
-      const labelMap = {
-        'Hero': 'Capa Oficial',
-        'Procedimentos': 'Procedimentos & Valores',
-        'Manutenção e Cuidados': 'Manutenção & Cuidados',
-        'Agendamento': 'Orientações & Agendamento',
-        'Contato': 'Contato & WhatsApp'
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        previewImg.src = event.target.result;
+        dropzoneEmpty.classList.add('is-hidden');
+        dropzonePreview.classList.remove('is-hidden');
       };
-      if (nameLabel) {
-        nameLabel.textContent = labelMap[event.data.label] || event.data.label || 'Catálogo ao vivo';
-      }
+      reader.readAsDataURL(file);
     }
   });
 
-  if (!iframe || !mockupWrapper) return;
-
-  // Dispara o tour apenas quando o celular estiver no campo de visão e reseta ao sair
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      try {
-        if (entry.isIntersecting) {
-          iframe.contentWindow?.postMessage({ type: 'START_TOUR' }, '*');
-        } else {
-          iframe.contentWindow?.postMessage({ type: 'RESET_TOUR' }, '*');
-          if (nameLabel) {
-            nameLabel.textContent = 'Capa Oficial';
-          }
-        }
-      } catch (e) {}
+  if (removeBtn) {
+    removeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      fileInput.value = '';
+      previewImg.src = '';
+      dropzonePreview.classList.add('is-hidden');
+      dropzoneEmpty.classList.remove('is-hidden');
     });
-  }, {
-    threshold: 0.25
-  });
+  }
+}
 
-  // Trata carregamento do iframe
-  iframe.addEventListener('load', () => {
-    const rect = mockupWrapper.getBoundingClientRect();
-    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-    if (isVisible) {
-      iframe.contentWindow?.postMessage({ type: 'START_TOUR' }, '*');
+/* ── 5. Máscara de Telefone (WhatsApp) ──────────────────────────────────── */
+function initPhoneMask() {
+  const phoneInput = document.getElementById('input-whatsapp');
+  if (!phoneInput) return;
+
+  phoneInput.addEventListener('input', (e) => {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 11) value = value.slice(0, 11);
+
+    if (value.length > 10) {
+      e.target.value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    } else if (value.length > 6) {
+      e.target.value = value.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
+    } else if (value.length > 2) {
+      e.target.value = value.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
+    } else if (value.length > 0) {
+      e.target.value = `(${value}`;
     }
   });
-
-  observer.observe(mockupWrapper);
 }
 
-/* ── 5. FAQ Accordion ────────────────────────────────────────────────────── */
-function initFaqAccordion() {
-  const faqItems = document.querySelectorAll('.faq-item');
-  if (!faqItems.length) return;
+/* ── 6. Formatador de Subdomínio (Slug) ─────────────────────────────────── */
+function initSlugFormatter() {
+  const nameInput = document.getElementById('input-designer-name');
+  const slugInput = document.getElementById('input-slug');
+  if (!slugInput) return;
 
-  faqItems.forEach((item) => {
-    const btn = item.querySelector('.faq-question-btn');
-    if (!btn) return;
-
-    btn.addEventListener('click', () => {
-      const isOpen = item.classList.contains('is-open');
-
-      faqItems.forEach((other) => {
-        if (other !== item) {
-          other.classList.remove('is-open');
-        }
-      });
-
-      if (isOpen) {
-        item.classList.remove('is-open');
-      } else {
-        item.classList.add('is-open');
+  // Ao digitar o nome, sugere o slug automaticamente se ainda estiver vazio
+  if (nameInput) {
+    nameInput.addEventListener('blur', () => {
+      if (!slugInput.value.trim() && nameInput.value.trim()) {
+        const firstWord = nameInput.value.trim().split(' ')[0];
+        slugInput.value = formatSlug(firstWord);
       }
     });
+  }
+
+  slugInput.addEventListener('input', (e) => {
+    e.target.value = formatSlug(e.target.value);
   });
 }
 
-/* ── 6. Style Demo Switcher / Tabs ────────────────────────────────────────── */
-function initStyleTabs() {
-  const tabBtns = document.querySelectorAll('.demo-tab-btn');
-  const iframe = document.querySelector('[data-demo-frame]');
-  
-  if (!tabBtns.length) return;
-
-  tabBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const src = btn.getAttribute('data-demo-src');
-      if (iframe && src) {
-        iframe.src = src;
-      }
-    });
-  });
+function formatSlug(text) {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-');
 }
 
-/* ── 7. Smooth Scroll for Anchor Links ───────────────────────────────────── */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#' || targetId === '') return;
+/* ── 7. Atualização das Tags de Resumo na Etapa 4 ───────────────────────── */
+function updateSummaryTags() {
+  const nameVal = document.getElementById('input-designer-name')?.value || 'Sua Marca';
+  const modelRadio = document.querySelector('input[name="selected_model"]:checked');
+  const colorRadio = document.querySelector('input[name="selected_color"]:checked');
+  const servicesCount = document.querySelectorAll('.service-row-card').length;
 
-      const targetEl = document.querySelector(targetId);
-      if (targetEl) {
-        e.preventDefault();
-        const headerOffset = 80;
-        const elementPosition = targetEl.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  const modelMap = { glamour: '✨ Modelo Glamour', harmonia: '🌸 Modelo Harmonia', classico: '👑 Modelo Clássico' };
+  const colorMap = { midnight: '🖤 Midnight', rose: '🎀 Rosé' };
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
+  const sumName = document.getElementById('sum-name');
+  const sumModel = document.getElementById('sum-model');
+  const sumColor = document.getElementById('sum-color');
+  const sumServices = document.getElementById('sum-services');
+
+  if (sumName) sumName.textContent = nameVal.trim() || 'Lash Designer';
+  if (sumModel) sumModel.textContent = modelMap[modelRadio?.value] || 'Modelo Glamour';
+  if (sumColor) sumColor.textContent = colorMap[colorRadio?.value] || 'Midnight';
+  if (sumServices) sumServices.textContent = `${servicesCount} Procedimentos`;
 }
 
-/* ── 8. Opção 1: Provador Interativo (Abas + Toggle de Cores) ─────────────── */
-function initOption1Provador() {
-  const modelBtns = document.querySelectorAll('.provador-model-btn');
-  const colorBtns = document.querySelectorAll('.provador-color-btn');
-  const iframeEl = document.getElementById('provador-iframe');
-  const badgeEl = document.getElementById('provador-badge');
-  const tagEl = document.getElementById('provador-tag');
-  const paletteTagEl = document.getElementById('provador-palette-tag');
-  const titleEl = document.getElementById('provador-title');
-  const descEl = document.getElementById('provador-desc');
-  const checklistEl = document.getElementById('provador-checklist');
-  const ctaEl = document.getElementById('provador-cta');
-  const ctaTextEl = document.getElementById('provador-cta-text');
+/* ── 8. Envio do Formulário & Tela de Sucesso ───────────────────────────── */
+function initFormSubmission() {
+  const form = document.getElementById('onboarding-form');
+  const successScreen = document.getElementById('success-screen');
+  const successLinkDisplay = document.getElementById('success-link-display');
+  const whatsappConfirmBtn = document.getElementById('btn-whatsapp-confirm');
 
-  if (!modelBtns.length || !iframeEl) return;
+  if (!form) return;
 
-  const data = {
-    glamour: {
-      title: 'Modelo Glamour',
-      tag: 'Cinematográfico',
-      desc: 'A experiência mais imersiva e cinematográfica com vídeo fluido na capa e carrossel completo de 13 procedimentos em tela cheia.',
-      checklist: [
-        '<strong>Vídeo Hero na capa:</strong> Transição instantânea sem corte.',
-        '<strong>Carrossel imersivo:</strong> Navegação horizontal em tela cheia (100dvh).',
-        '<strong>Modal de procedimentos:</strong> Tempo, investimento e orientações de manutenção.'
-      ],
-      midnight: {
-        designer: 'Mariana Alves',
-        iframe: '../../glamour-midnight/index.html?preview=1',
-        link: '../../glamour-midnight/index.html'
-      },
-      rose: {
-        designer: 'Mariana Alves',
-        iframe: '../../glamour-rose/index.html?preview=1',
-        link: '../../glamour-rose/index.html'
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const designerName = document.getElementById('input-designer-name')?.value || 'Lash Designer';
+    const studioName = document.getElementById('input-studio-name')?.value || '';
+    const whatsapp = document.getElementById('input-whatsapp')?.value || '';
+    const instagram = document.getElementById('input-instagram')?.value || '';
+    const location = document.getElementById('input-location')?.value || '';
+    const slug = document.getElementById('input-slug')?.value || 'catalogo';
+    
+    const selectedModel = document.querySelector('input[name="selected_model"]:checked')?.value || 'glamour';
+    const selectedColor = document.querySelector('input[name="selected_color"]:checked')?.value || 'midnight';
+
+    // Procedimentos coletados
+    const serviceRows = document.querySelectorAll('.service-row-card');
+    const servicesList = [];
+    serviceRows.forEach((row) => {
+      const name = row.querySelector('.service-name')?.value;
+      const price = row.querySelector('.service-price')?.value;
+      const duration = row.querySelector('.service-duration')?.value;
+      const maintenance = row.querySelector('.service-maintenance')?.value;
+      if (name) {
+        servicesList.push(`• ${name}: R$ ${price} (${duration}) | Manut: R$ ${maintenance}`);
       }
-    },
-    harmonia: {
-      title: 'Modelo Harmonia',
-      tag: 'Mosaico Visual',
-      desc: 'Mosaico moderno e encantador com fotos reais de cada mapping, chips de filtros inteligentes e foco na harmonização do olhar.',
-      checklist: [
-        '<strong>Grid fotográfico moderno:</strong> Visualização rica dos procedimentos.',
-        '<strong>Filtros por categoria:</strong> Volumes, Mappings e Especiais.',
-        '<strong>Visagismo em foco:</strong> Comparação intuitiva de resultados.'
-      ],
-      midnight: {
-        designer: 'Amanda Carvalho',
-        iframe: '../../harmonia-midnight/index.html?preview=1',
-        link: '../../harmonia-midnight/index.html'
-      },
-      rose: {
-        designer: 'Amanda Carvalho',
-        iframe: '../../harmonia-rose/index.html?preview=1',
-        link: '../../harmonia-rose/index.html'
-      }
-    },
-    classico: {
-      title: 'Modelo Clássico',
-      tag: 'Lista Editorial',
-      desc: 'Cardápio editorial limpo, prático e sofisticado. Acesso rápido e organizado a todos os serviços com máxima legibilidade.',
-      checklist: [
-        '<strong>Lista editorial limpa:</strong> Tipografia de alto luxo e contraste perfeito.',
-        '<strong>Agilidade máxima:</strong> Decisão e agendamento em poucos segundos.',
-        '<strong>100% responsivo:</strong> Leitura confortável em qualquer smartphone.'
-      ],
-      midnight: {
-        designer: 'Bruna Carvalho',
-        iframe: '../../classico-midnight/index.html?preview=1',
-        link: '../../classico-midnight/index.html'
-      },
-      rose: {
-        designer: 'Bruna Carvalho',
-        iframe: '../../classico-rose/index.html?preview=1',
-        link: '../../classico-rose/index.html'
-      }
+    });
+
+    const pixKey = document.getElementById('input-pix-key')?.value || '';
+    const depositRule = document.getElementById('input-deposit-rule')?.value || '';
+    const extraNotes = document.getElementById('input-extra-notes')?.value || '';
+    const driveLink = document.getElementById('input-drive-link')?.value || '';
+
+    // Monta texto formatado para envio direto ao WhatsApp de suporte
+    const message = `✨ *NOVO FORMULÁRIO DE PERSONALIZAÇÃO LASHMENU*\n\n` +
+      `👤 *Lash Designer:* ${designerName}\n` +
+      `🏢 *Studio:* ${studioName || 'Não informado'}\n` +
+      `📱 *WhatsApp:* ${whatsapp}\n` +
+      `📸 *Instagram:* @${instagram}\n` +
+      `📍 *Localização:* ${location || 'Não informado'}\n` +
+      `🌐 *Subdomínio:* ${slug}.lashmenu.com\n\n` +
+      `🎨 *Modelo Escolhido:* ${selectedModel.toUpperCase()}\n` +
+      `🎨 *Paleta Escolhida:* ${selectedColor.toUpperCase()}\n\n` +
+      `📋 *Procedimentos:* \n${servicesList.join('\n')}\n\n` +
+      `🔑 *Chave Pix:* ${pixKey || 'Não informada'}\n` +
+      `💰 *Regra de Sinal:* ${depositRule || 'Não informada'}\n` +
+      `📝 *Orientações:* ${extraNotes || 'Nenhuma'}\n` +
+      `📁 *Link das Fotos:* ${driveLink || 'Foto enviada no formulário'}`;
+
+    const adminWhatsAppNumber = '5511999999999'; // Número do seu suporte para recebimento
+    const encodedMsg = encodeURIComponent(message);
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${adminWhatsAppNumber}&text=${encodedMsg}`;
+
+    if (whatsappConfirmBtn) {
+      whatsappConfirmBtn.href = whatsappUrl;
     }
-  };
 
-  let currentModel = 'glamour';
-  let currentColor = 'midnight';
-
-  function updateProvador() {
-    const item = data[currentModel];
-    const combo = item[currentColor];
-    const colorLabel = currentColor === 'midnight' ? 'Midnight' : 'Rosé';
-    const colorIcon = currentColor === 'midnight' ? '🖤' : '🎀';
-
-    iframeEl.style.opacity = '0.3';
-    setTimeout(() => {
-      iframeEl.src = combo.iframe;
-      iframeEl.style.opacity = '1';
-    }, 150);
-
-    if (badgeEl) badgeEl.textContent = `${combo.designer} · ${item.title.replace('Modelo ', '')} ${colorLabel}`;
-    if (tagEl) tagEl.textContent = item.tag;
-    if (paletteTagEl) paletteTagEl.textContent = `${colorIcon} Versão ${colorLabel}`;
-    if (titleEl) titleEl.textContent = item.title;
-    if (descEl) descEl.textContent = item.desc;
-    if (checklistEl) {
-      checklistEl.innerHTML = item.checklist.map((li) => `<li>${li}</li>`).join('');
+    if (successLinkDisplay) {
+      successLinkDisplay.textContent = `${slug}.lashmenu.com`;
     }
-    if (ctaEl) ctaEl.href = combo.link;
-    if (ctaTextEl) ctaTextEl.textContent = `Abrir ${item.title} (${colorLabel}) em tela cheia`;
-  }
 
-  modelBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      modelBtns.forEach((b) => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      currentModel = btn.getAttribute('data-model') || 'glamour';
-      updateProvador();
-    });
-  });
+    // Esconde o formulário e exibe a tela de sucesso
+    form.style.display = 'none';
+    const progressTrack = document.querySelector('.steps-progress');
+    if (progressTrack) progressTrack.style.display = 'none';
 
-  colorBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      colorBtns.forEach((b) => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      currentColor = btn.getAttribute('data-color') || 'midnight';
-      updateProvador();
-    });
+    if (successScreen) {
+      successScreen.classList.remove('is-hidden');
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
-
-/* ── 9. Opção 2: Cards com Mini-Seletor de Cor Integrado ─────────────────── */
-function initOption2CardSelectors() {
-  const cards = document.querySelectorAll('.opt2-card');
-  if (!cards.length) return;
-
-  cards.forEach((card) => {
-    const pills = card.querySelectorAll('.opt2-pill');
-    const iframe = card.querySelector('.opt2-iframe');
-    const badge = card.querySelector('.opt2-phone-badge');
-    const cta = card.querySelector('.opt2-cta');
-
-    pills.forEach((pill) => {
-      pill.addEventListener('click', () => {
-        pills.forEach((p) => p.classList.remove('is-active'));
-        pill.classList.add('is-active');
-
-        const color = pill.getAttribute('data-color');
-        const link = pill.getAttribute('data-link');
-        const label = pill.getAttribute('data-label');
-
-        if (iframe) {
-          const newSrc = color === 'rose' ? iframe.getAttribute('data-src-rose') : iframe.getAttribute('data-src-midnight');
-          if (newSrc && iframe.src !== newSrc) {
-            iframe.style.opacity = '0.3';
-            setTimeout(() => {
-              iframe.src = newSrc;
-              iframe.style.opacity = '1';
-            }, 120);
-          }
-        }
-
-        if (badge && label) {
-          badge.textContent = label;
-        }
-
-        if (cta && link) {
-          cta.href = link;
-        }
-      });
-    });
-  });
-}
-
-/* ── 10. Opção 3: Carrossel Horizontal Swipe com Seletor Global ──────────── */
-function initOption3Carousel() {
-  const track = document.getElementById('opt3-carousel-track');
-  const prevBtn = document.getElementById('opt3-btn-prev');
-  const nextBtn = document.getElementById('opt3-btn-next');
-  const dots = document.querySelectorAll('.opt3-dot');
-  const paletteBtns = document.querySelectorAll('.opt3-palette-btn');
-  const slides = document.querySelectorAll('.opt3-slide');
-
-  if (!track || !slides.length) return;
-
-  let activeIndex = 0;
-
-  function scrollToSlide(index) {
-    if (index < 0) index = 0;
-    if (index >= slides.length) index = slides.length - 1;
-    activeIndex = index;
-
-    const slideWidth = track.clientWidth;
-    track.scrollTo({
-      left: slideWidth * activeIndex,
-      behavior: 'smooth'
-    });
-
-    updateDots();
-  }
-
-  function updateDots() {
-    dots.forEach((dot, idx) => {
-      dot.classList.toggle('is-active', idx === activeIndex);
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => scrollToSlide(activeIndex - 1));
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => scrollToSlide(activeIndex + 1));
-  }
-
-  dots.forEach((dot) => {
-    dot.addEventListener('click', () => {
-      const idx = parseInt(dot.getAttribute('data-slide'), 10);
-      scrollToSlide(idx);
-    });
-  });
-
-  // Atualiza dot ativo no scroll touch / manual
-  let scrollTimeout;
-  track.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      const slideWidth = track.clientWidth || 1;
-      const newIndex = Math.round(track.scrollLeft / slideWidth);
-      if (newIndex !== activeIndex && newIndex >= 0 && newIndex < slides.length) {
-        activeIndex = newIndex;
-        updateDots();
-      }
-    }, 60);
-  }, { passive: true });
-
-  // Seletor Global de Paleta (Troca todos os slides de uma vez)
-  paletteBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      paletteBtns.forEach((b) => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-
-      const color = btn.getAttribute('data-opt3-color'); // 'midnight' ou 'rose'
-      const colorLabel = color === 'midnight' ? 'Midnight' : 'Rosé';
-
-      slides.forEach((slide) => {
-        const iframe = slide.querySelector('.opt3-slide-iframe');
-        const badge = slide.querySelector('.opt3-phone-badge');
-        const cta = slide.querySelector('.opt3-slide-cta');
-        const modelName = slide.getAttribute('data-slide-model');
-        const prettyModelName = modelName ? modelName.charAt(0).toUpperCase() + modelName.slice(1) : '';
-
-        if (iframe) {
-          const newSrc = color === 'rose' ? iframe.getAttribute('data-src-rose') : iframe.getAttribute('data-src-midnight');
-          if (newSrc && iframe.src !== newSrc) {
-            iframe.style.opacity = '0.3';
-            setTimeout(() => {
-              iframe.src = newSrc;
-              iframe.style.opacity = '1';
-            }, 120);
-          }
-        }
-
-        if (badge && prettyModelName) {
-          badge.textContent = `${prettyModelName} ${colorLabel}`;
-        }
-
-        if (cta) {
-          const newLink = color === 'rose' ? cta.getAttribute('data-link-rose') : cta.getAttribute('data-link-midnight');
-          if (newLink) {
-            cta.href = newLink;
-          }
-        }
-      });
-    });
-  });
-}
-
