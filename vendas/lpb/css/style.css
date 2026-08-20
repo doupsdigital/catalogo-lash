@@ -1567,10 +1567,10 @@ h1, h2, h3, h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 4px 0 8px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 4px 0 6px;
   gap: 16px;
   width: 100%;
   max-width: 330px;
@@ -1578,7 +1578,9 @@ h1, h2, h3, h4 {
 }
 
 .models-slide-preview {
-  background: transparent;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
