@@ -393,7 +393,7 @@ button {
   overflow: hidden;
   border: 1px solid rgba(201, 163, 137, 0.18);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-  aspect-ratio: 3 / 4.2;
+  aspect-ratio: 3 / 5.2;
   cursor: pointer;
   transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), 
               border-color 0.4s ease, 
