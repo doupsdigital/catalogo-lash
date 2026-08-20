@@ -735,10 +735,17 @@ img, video {
   transform: translateY(-2px);
 }
 
-.btn-whatsapp span,
-.btn-instagram span {
-  font-size: 15px;
+.btn__left {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  letter-spacing: .20em;
 }
+
+.btn__left span { font-size: 11.5px; }
+.btn__icon { width: 17px; height: 17px; flex-shrink: 0; display: block; }
+.btn__arrow { font-size: 16px; line-height: 1; opacity: .85; }
 
 .contato__info {
   display: flex;
