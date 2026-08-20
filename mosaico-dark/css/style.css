@@ -522,36 +522,78 @@ button {
 }
 
 /* ==========================================================================
-   3. SEÇÃO ORIENTAÇÕES (SNAP SCREEN 3 - TELA CHEIA 100DVH COM RESPIRO)
+   3. SEÇÃO ORIENTAÇÕES (SNAP SCREEN 3 - TELA CHEIA PADRÃO VITRINE DARK)
    ========================================================================== */
 .secao-orientacoes {
   min-height: 100dvh;
   height: 100dvh;
   width: 100%;
-  background: #14100e;
-  border-top: 1px solid rgba(201, 163, 137, 0.12);
+  position: relative;
+  overflow: hidden;
+  background: #0f0c0b;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px 0;
-  position: relative;
 }
 
-.secao-orientacoes .container {
+.secao-orientacoes__foto-wrap {
+  position: absolute;
+  inset: -10%;
+  overflow: hidden;
+  will-change: transform;
+  transition: transform 10s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.secao-orientacoes.is-visible .secao-orientacoes__foto-wrap {
+  transform: scale(1.06);
+}
+
+.secao-orientacoes__foto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  filter: saturate(0.7) contrast(1.05) brightness(0.78);
+}
+
+.secao-orientacoes__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 10, 9, 0.85) 0%,
+    rgba(12, 10, 9, 0.45) 35%,
+    rgba(12, 10, 9, 0.95) 100%
+  );
+}
+
+.secao-orientacoes__conteudo {
+  position: relative;
+  z-index: 3;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  justify-content: space-between;
+  padding: 44px 24px 34px;
+}
+
+.secao-orientacoes__topo {
+  display: flex;
+  justify-content: center;
+}
+
+.secao-orientacoes__corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .secao-orientacoes__titulo {
-  margin: 4px 0 16px;
+  margin: 0;
   font-family: 'Fraunces', Georgia, serif;
   font-size: 32px;
+  line-height: 1.15;
   font-weight: 400;
   color: #f3efe9;
-  line-height: 1.15;
 }
 
 .secao-orientacoes__titulo em {
@@ -561,19 +603,20 @@ button {
 
 .orientacoes__card {
   background: rgba(25, 20, 17, 0.85);
-  border: 1px solid rgba(201, 163, 137, 0.2);
-  border-radius: 18px;
-  padding: 12px 20px;
+  border: 1px solid rgba(201, 163, 137, 0.20);
+  border-radius: 16px;
+  padding: 6px 18px;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .orientacao__item {
   display: grid;
-  grid-template-columns: 32px 1fr;
+  grid-template-columns: 28px 1fr;
   gap: 14px;
   align-items: center;
-  padding: 16px 0;
+  padding: 12px 0;
   border-bottom: 1px solid rgba(201, 163, 137, 0.12);
 }
 
@@ -583,7 +626,7 @@ button {
 
 .orientacao__num {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 20px;
+  font-size: 19px;
   font-style: italic;
   color: #c9a389;
   font-weight: 600;
@@ -591,16 +634,31 @@ button {
 
 .orientacao__info strong {
   display: block;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #f3efe9;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .orientacao__info p {
-  font-size: 12.5px;
+  margin: 0;
+  font-size: 12px;
   color: rgba(243, 239, 233, 0.75);
   line-height: 1.45;
+}
+
+.secao-orientacoes__scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(243, 239, 233, 0.6);
+}
+
+.secao-orientacoes__scroll-cue span {
+  font-size: 9.5px;
+  letter-spacing: .34em;
+  text-transform: uppercase;
 }
 
 /* ==========================================================================
