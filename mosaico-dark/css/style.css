@@ -131,7 +131,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 22% 18%;
+  object-position: 6% 18%;
   filter: saturate(0.85) contrast(1.05) brightness(0.80);
 }
 
