@@ -365,177 +365,311 @@ body {
   pointer-events: none;
 }
 
-/* ── Etapa 2: Seleção de Modelo & Cores ─────────────────────────────────── */
-.models-selection-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 28px;
-}
-
-.model-select-card {
-  position: relative;
-  cursor: pointer;
-  border-radius: var(--radius-lg);
-  border: 2px solid var(--border);
-  background: var(--bg-card);
-  padding: 20px 16px;
+/* ── Etapa 2: Provador Interativo de Modelos & Cores ───────────────────── */
+.provador-controls {
   display: flex;
   flex-direction: column;
-  transition: all 0.25s ease;
-  user-select: none;
+  gap: 14px;
+  margin-bottom: 22px;
 }
 
-.model-select-card:hover {
+.provador-model-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.provador-model-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-family: var(--font-main);
+  font-size: 0.90rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+
+.provador-model-btn:hover {
   border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  color: var(--text);
+  background: var(--bg-card-alt);
 }
 
-.model-select-card.is-selected {
+.provador-model-btn.is-active {
   border-color: var(--accent);
-  background: rgba(192, 75, 107, 0.03);
-  box-shadow: 0 8px 24px var(--accent-glow);
+  background: var(--accent-soft);
+  color: var(--accent);
+  box-shadow: 0 4px 14px var(--accent-glow);
 }
 
-.model-radio {
+.provador-color-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.provador-color-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+}
+
+.provador-color-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.provador-color-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.provador-color-btn.is-active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.color-dot--midnight { background: #0d0b0a; border: 1.5px solid #ffffff; }
+.color-dot--rose { background: #e598ad; border: 1.5px solid #ffffff; }
+
+/* Palco do Provador */
+.provador-stage {
+  margin-bottom: 24px;
+}
+
+.provador-card {
+  background: #faf8f5;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.provador-card-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mini Phone */
+.card-mini-phone {
+  --phone-w: 180px;
+  --phone-h: 375px;
+  --screen-w: calc(var(--phone-w) - 10px);
+  --screen-h: calc(var(--phone-h) - 10px);
+  --base-w: 390px;
+  --base-h: 834px;
+
+  width: var(--phone-w);
+  height: var(--phone-h);
+  background: #14100e;
+  border-radius: 30px;
+  padding: 5px;
+  box-shadow: 
+    0 20px 42px -6px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.card-mini-phone .phone-notch {
   position: absolute;
-  opacity: 0;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 9px;
+  background: #14100e;
+  border-radius: 5px;
+  z-index: 30;
   pointer-events: none;
 }
 
-.msc-top {
+.card-mini-phone .phone-screen {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #0d0b0a;
+  width: var(--screen-w);
+  height: var(--screen-h);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
+  transform: translate3d(0, 0, 0);
+  isolation: isolate;
+}
+
+.card-mini-phone .phone-screen-scaler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--base-w);
+  height: var(--base-h);
+  transform: scale(calc(var(--screen-w) / var(--base-w)), calc(var(--screen-h) / var(--base-h)));
+  transform-origin: top left;
+  overflow: hidden;
+  background: #0d0b0a;
+}
+
+.card-mini-phone .phone-screen-scaler iframe {
+  width: var(--base-w);
+  height: var(--base-h);
+  border: 0;
+  display: block;
+}
+
+.phone-overlay-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 16, 14, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
+  gap: 5px;
+  z-index: 30;
+  pointer-events: none;
 }
 
-.msc-icon {
-  font-size: 1.4rem;
+/* Conteúdo do Card */
+.provador-card-content {
+  display: flex;
+  flex-direction: column;
 }
 
-.msc-tag {
-  font-size: 0.68rem;
+.provador-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.provador-tag {
+  font-size: 0.70rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .08em;
   color: var(--accent);
   background: var(--accent-soft);
-  padding: 3px 8px;
+  padding: 3px 10px;
   border-radius: var(--radius-pill);
 }
 
-.msc-title {
-  font-size: 1.05rem;
+.provador-palette-indicator {
+  font-size: 0.74rem;
   font-weight: 700;
-  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
+.provador-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
   color: var(--text);
+  margin-bottom: 8px;
 }
 
-.msc-desc {
-  font-size: 0.80rem;
+.provador-desc {
+  font-size: 0.88rem;
   color: var(--text-muted);
-  line-height: 1.45;
+  line-height: 1.5;
   margin-bottom: 16px;
-  flex-grow: 1;
 }
 
-.msc-radio-indicator {
+.provador-checklist {
+  list-style: none;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 10px;
-  border-radius: var(--radius-pill);
-  background: var(--bg-card-alt);
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  transition: all 0.2s ease;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
-.model-select-card.is-selected .msc-radio-indicator {
-  background: var(--accent);
-  color: #ffffff;
-}
-
-/* Paleta de Cores */
-.color-palette-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 10px;
-}
-
-.palette-card {
-  position: relative;
-  cursor: pointer;
-  border-radius: var(--radius-md);
-  border: 2px solid var(--border);
-  padding: 14px 16px;
+.provador-checklist li {
+  font-size: 0.84rem;
+  color: var(--text);
   display: flex;
-  align-items: center;
-  gap: 14px;
-  transition: all 0.2s ease;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
 }
 
-.palette-card:hover {
-  border-color: var(--accent);
-}
-
-.palette-card.is-selected {
-  border-color: var(--accent);
-  background: rgba(192, 75, 107, 0.04);
-}
-
-.palette-radio {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.palette-card-content {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-}
-
-.palette-swatches {
-  display: flex;
-  gap: 4px;
+.provador-checklist li::before {
+  content: '✓';
+  color: var(--accent);
+  font-weight: 800;
   flex-shrink: 0;
 }
 
-.swatch {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-}
-
-.swatch--dark { background: #0d0b0a; }
-.swatch--gold { background: #c9a389; }
-.swatch--offwhite { background: #f3efe9; }
-
-.swatch--rose { background: #e598ad; }
-.swatch--berry { background: #c04b6b; }
-.swatch--cream { background: #faf8f5; }
-
-.palette-info {
+.provador-active-confirmation {
   display: flex;
-  flex-direction: column;
-}
-
-.palette-name {
-  font-size: 0.90rem;
+  align-items: center;
+  gap: 8px;
+  background: var(--success-soft);
+  border: 1px solid rgba(22, 163, 74, 0.25);
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  color: var(--success);
+  font-size: 0.84rem;
   font-weight: 700;
-  color: var(--text);
 }
 
-.palette-sub {
+.pac-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--success);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.75rem;
-  color: var(--text-muted);
+  font-weight: 900;
 }
 
 /* ── Etapa 3: Procedimentos & Valores ───────────────────────────────────── */
@@ -903,12 +1037,24 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .models-selection-grid {
+  .provador-model-tabs {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
 
-  .color-palette-cards {
+  .provador-card {
     grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .provador-header-meta {
+    justify-content: center;
+  }
+
+  .provador-checklist {
+    text-align: left;
   }
 
   .service-row-card {

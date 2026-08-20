@@ -98,27 +98,122 @@ function validateStep(step) {
   return isValid;
 }
 
-/* ── 2. Seleção Visual de Modelo e Cor ───────────────────────────────────── */
+/* ── 2. Provador Interativo ao Vivo (Seleção de Modelo & Cor) ────────────── */
+const provadorModels = {
+  glamour: {
+    tag: 'Cinematográfico',
+    title: 'Modelo 01 — Glamour',
+    desc: 'A experiência mais imersiva e cinematográfica com vídeo fluido na capa e carrossel de fotos ampliadas em tela cheia.',
+    checklist: [
+      '<strong>Vídeo Hero na capa:</strong> Transição instantânea sem corte.',
+      '<strong>Carrossel imersivo:</strong> Navegação horizontal de fotos.',
+      '<strong>Modal completo:</strong> Detalhes, duração e manutenção.'
+    ],
+    nameMidnight: 'Mariana Alves · Glamour Midnight',
+    nameRose: 'Mariana Alves · Glamour Rosé',
+    srcMidnight: '../../glamour-midnight/index.html?preview=1',
+    srcRose: '../../glamour-rose/index.html?preview=1'
+  },
+  harmonia: {
+    tag: 'Mosaico Visual',
+    title: 'Modelo 02 — Harmonia',
+    desc: 'Mosaico visual fotográfico com filtros dinâmicos por técnica e foco na harmonização e realce do olhar.',
+    checklist: [
+      '<strong>Grade de fotos inteligente:</strong> Filtro por técnica.',
+      '<strong>Toque nos cards:</strong> Modal completo com detalhes.',
+      '<strong>Design leve e arejado:</strong> Valoriza fotos reais.'
+    ],
+    nameMidnight: 'Amanda Carvalho · Harmonia Midnight',
+    nameRose: 'Amanda Carvalho · Harmonia Rosé',
+    srcMidnight: '../../harmonia-midnight/index.html?preview=1',
+    srcRose: '../../harmonia-rose/index.html?preview=1'
+  },
+  classico: {
+    tag: 'Editorial Chic',
+    title: 'Modelo 03 — Clássico',
+    desc: 'Cardápio editorial categorizado, limpo e direto ao ponto, ideal para leitura rápida e agendamento prático.',
+    checklist: [
+      '<strong>Categorias organizadas:</strong> Clássico, Volumes e Especiais.',
+      '<strong>Layout editorial limpo:</strong> Alta sofisticação visual.',
+      '<strong>Agendamento imediato:</strong> Botão direto no WhatsApp.'
+    ],
+    nameMidnight: 'Bruna Carvalho · Clássico Midnight',
+    nameRose: 'Bruna Carvalho · Clássico Rosé',
+    srcMidnight: '../../classico-midnight/index.html?preview=1',
+    srcRose: '../../classico-rose/index.html?preview=1'
+  }
+};
+
+let activeProvadorModel = 'glamour';
+let activeProvadorColor = 'midnight';
+
 function initModelAndColorSelection() {
-  // Modelos
-  const modelCards = document.querySelectorAll('.model-select-card');
-  modelCards.forEach((card) => {
-    card.addEventListener('click', () => {
-      modelCards.forEach((c) => c.classList.remove('is-selected'));
-      card.classList.add('is-selected');
-      const radio = card.querySelector('.model-radio');
-      if (radio) radio.checked = true;
+  const modelBtns = document.querySelectorAll('.provador-model-btn');
+  const colorBtns = document.querySelectorAll('.provador-color-btn');
+
+  const iframe = document.getElementById('provador-iframe');
+  const badge = document.getElementById('provador-badge');
+  const tag = document.getElementById('provador-tag');
+  const paletteTag = document.getElementById('provador-palette-tag');
+  const title = document.getElementById('provador-title');
+  const desc = document.getElementById('provador-desc');
+  const checklist = document.getElementById('provador-checklist');
+
+  const hiddenModel = document.getElementById('input-selected-model');
+  const hiddenColor = document.getElementById('input-selected-color');
+
+  function updateProvadorView() {
+    const data = provadorModels[activeProvadorModel];
+    if (!data) return;
+
+    // Atualiza classes ativas
+    modelBtns.forEach((b) => b.classList.toggle('is-active', b.getAttribute('data-model') === activeProvadorModel));
+    colorBtns.forEach((b) => b.classList.toggle('is-active', b.getAttribute('data-color') === activeProvadorColor));
+
+    // Atualiza textos
+    if (tag) tag.textContent = data.tag;
+    if (paletteTag) paletteTag.textContent = activeProvadorColor === 'midnight' ? '🖤 Versão Midnight' : '🎀 Versão Rosé';
+    if (title) title.textContent = data.title;
+    if (desc) desc.textContent = data.desc;
+
+    if (badge) {
+      badge.textContent = activeProvadorColor === 'midnight' ? data.nameMidnight : data.nameRose;
+    }
+
+    if (checklist) {
+      checklist.innerHTML = data.checklist.map((item) => `<li>${item}</li>`).join('');
+    }
+
+    // Atualiza iframe
+    if (iframe) {
+      const newSrc = activeProvadorColor === 'midnight' ? data.srcMidnight : data.srcRose;
+      if (iframe.src !== newSrc) {
+        iframe.style.opacity = '0.25';
+        setTimeout(() => {
+          iframe.src = newSrc;
+          iframe.style.opacity = '1';
+        }, 100);
+      }
+    }
+
+    // Atualiza campos ocultos do form
+    if (hiddenModel) hiddenModel.value = activeProvadorModel;
+    if (hiddenColor) hiddenColor.value = activeProvadorColor;
+
+    updateSummaryTags();
+  }
+
+  modelBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeProvadorModel = btn.getAttribute('data-model');
+      updateProvadorView();
     });
   });
 
-  // Paleta de Cores
-  const paletteCards = document.querySelectorAll('.palette-card');
-  paletteCards.forEach((card) => {
-    card.addEventListener('click', () => {
-      paletteCards.forEach((c) => c.classList.remove('is-selected'));
-      card.classList.add('is-selected');
-      const radio = card.querySelector('.palette-radio');
-      if (radio) radio.checked = true;
+  colorBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeProvadorColor = btn.getAttribute('data-color');
+      updateProvadorView();
     });
   });
 }
@@ -271,8 +366,8 @@ function formatSlug(text) {
 /* ── 7. Atualização das Tags de Resumo na Etapa 4 ───────────────────────── */
 function updateSummaryTags() {
   const nameVal = document.getElementById('input-designer-name')?.value || 'Sua Marca';
-  const modelRadio = document.querySelector('input[name="selected_model"]:checked');
-  const colorRadio = document.querySelector('input[name="selected_color"]:checked');
+  const selectedModel = document.getElementById('input-selected-model')?.value || activeProvadorModel;
+  const selectedColor = document.getElementById('input-selected-color')?.value || activeProvadorColor;
   const servicesCount = document.querySelectorAll('.service-row-card').length;
 
   const modelMap = { glamour: '✨ Modelo Glamour', harmonia: '🌸 Modelo Harmonia', classico: '👑 Modelo Clássico' };
@@ -284,8 +379,8 @@ function updateSummaryTags() {
   const sumServices = document.getElementById('sum-services');
 
   if (sumName) sumName.textContent = nameVal.trim() || 'Lash Designer';
-  if (sumModel) sumModel.textContent = modelMap[modelRadio?.value] || 'Modelo Glamour';
-  if (sumColor) sumColor.textContent = colorMap[colorRadio?.value] || 'Midnight';
+  if (sumModel) sumModel.textContent = modelMap[selectedModel] || 'Modelo Glamour';
+  if (sumColor) sumColor.textContent = colorMap[selectedColor] || 'Midnight';
   if (sumServices) sumServices.textContent = `${servicesCount} Procedimentos`;
 }
 
@@ -308,8 +403,8 @@ function initFormSubmission() {
     const location = document.getElementById('input-location')?.value || '';
     const slug = document.getElementById('input-slug')?.value || 'catalogo';
     
-    const selectedModel = document.querySelector('input[name="selected_model"]:checked')?.value || 'glamour';
-    const selectedColor = document.querySelector('input[name="selected_color"]:checked')?.value || 'midnight';
+    const selectedModel = document.getElementById('input-selected-model')?.value || activeProvadorModel;
+    const selectedColor = document.getElementById('input-selected-color')?.value || activeProvadorColor;
 
     // Procedimentos coletados
     const serviceRows = document.querySelectorAll('.service-row-card');

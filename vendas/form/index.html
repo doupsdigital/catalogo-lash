@@ -126,102 +126,92 @@
           </div>
 
           <!-- ===================================================================
-               ETAPA 2: ESCOLHA DO MODELO & COR
+               ETAPA 2: PROVADOR INTERATIVO (ESCOLHA DO MODELO & COR)
                =================================================================== -->
           <div class="form-step" data-step="2">
             <div class="step-header">
               <span class="step-kicker">Etapa 2 de 4</span>
-              <h2 class="step-title">Escolha o Modelo e a Paleta Visual</h2>
-              <p class="step-subtitle">Selecione o design que mais combina com o estilo visual da sua marca.</p>
+              <h2 class="step-title">Escolha o Modelo &amp; Paleta Visual</h2>
+              <p class="step-subtitle">Alterne entre os designs e as cores no provador interativo abaixo para escolher a combinação perfeita para o seu estúdio.</p>
             </div>
 
-            <!-- Seleção de Modelo -->
-            <div class="models-selection-grid">
-              
-              <!-- Modelo 01: Glamour -->
-              <label class="model-select-card is-selected">
-                <input type="radio" name="selected_model" value="glamour" checked class="model-radio">
-                <div class="msc-body">
-                  <div class="msc-top">
-                    <span class="msc-icon">✨</span>
-                    <span class="msc-tag">Mais Escolhido</span>
-                  </div>
-                  <h3 class="msc-title">Modelo 01 — Glamour</h3>
-                  <p class="msc-desc">Carrossel horizontal cinematográfico em tela cheia com fotos ampliadas e detalhes completos de cada serviço.</p>
-                  <div class="msc-radio-indicator">
-                    <span class="indicator-check">✓ Selecionado</span>
-                  </div>
-                </div>
-              </label>
+            <!-- Controles do Provador -->
+            <div class="provador-controls">
+              <!-- Abas dos 3 Modelos -->
+              <div class="provador-model-tabs" role="tablist" aria-label="Escolha o modelo">
+                <button type="button" class="provador-model-btn is-active" data-model="glamour">
+                  <span class="provador-model-icon">✨</span>
+                  <span class="provador-model-name">Modelo Glamour</span>
+                </button>
+                <button type="button" class="provador-model-btn" data-model="harmonia">
+                  <span class="provador-model-icon">🌸</span>
+                  <span class="provador-model-name">Modelo Harmonia</span>
+                </button>
+                <button type="button" class="provador-model-btn" data-model="classico">
+                  <span class="provador-model-icon">👑</span>
+                  <span class="provador-model-name">Modelo Clássico</span>
+                </button>
+              </div>
 
-              <!-- Modelo 02: Harmonia -->
-              <label class="model-select-card">
-                <input type="radio" name="selected_model" value="harmonia" class="model-radio">
-                <div class="msc-body">
-                  <div class="msc-top">
-                    <span class="msc-icon">🌸</span>
-                    <span class="msc-tag">Estilo Mosaico</span>
-                  </div>
-                  <h3 class="msc-title">Modelo 02 — Harmonia</h3>
-                  <p class="msc-desc">Mosaico visual fotográfico com filtros dinâmicos por técnica e foco na harmonização e realce do olhar.</p>
-                  <div class="msc-radio-indicator">
-                    <span class="indicator-check">✓ Selecionado</span>
-                  </div>
-                </div>
-              </label>
-
-              <!-- Modelo 03: Clássico -->
-              <label class="model-select-card">
-                <input type="radio" name="selected_model" value="classico" class="model-radio">
-                <div class="msc-body">
-                  <div class="msc-top">
-                    <span class="msc-icon">👑</span>
-                    <span class="msc-tag">Editorial Chic</span>
-                  </div>
-                  <h3 class="msc-title">Modelo 03 — Clássico</h3>
-                  <p class="msc-desc">Cardápio editorial categorizado, limpo e direto ao ponto, ideal para leitura rápida e agendamento prático.</p>
-                  <div class="msc-radio-indicator">
-                    <span class="indicator-check">✓ Selecionado</span>
-                  </div>
-                </div>
-              </label>
-
+              <!-- Seletor de Paleta / Cor -->
+              <div class="provador-color-switch" role="radiogroup" aria-label="Escolha a paleta">
+                <span class="provador-color-label">Coleção:</span>
+                <button type="button" class="provador-color-btn is-active" data-color="midnight">
+                  <span class="color-dot color-dot--midnight"></span>
+                  <span>🖤 Midnight</span>
+                </button>
+                <button type="button" class="provador-color-btn" data-color="rose">
+                  <span class="color-dot color-dot--rose"></span>
+                  <span>🎀 Rosé</span>
+                </button>
+              </div>
             </div>
 
-            <!-- Seleção de Paleta de Cores -->
-            <div class="color-palette-select-wrap">
-              <label class="field-label">Escolha a Paleta de Cores Oficial:</label>
-              <div class="color-palette-cards">
+            <!-- Card do Provador com Celular ao Vivo e Descrição -->
+            <div class="provador-stage">
+              <div class="provador-card">
                 
-                <label class="palette-card is-selected">
-                  <input type="radio" name="selected_color" value="midnight" checked class="palette-radio">
-                  <div class="palette-card-content">
-                    <div class="palette-swatches">
-                      <span class="swatch swatch--dark"></span>
-                      <span class="swatch swatch--gold"></span>
-                      <span class="swatch swatch--offwhite"></span>
-                    </div>
-                    <div class="palette-info">
-                      <span class="palette-name">🖤 Coleção Midnight</span>
-                      <span class="palette-sub">Preto Obsidian, Ouro & Elegância Noturna</span>
+                <!-- Coluna Visual (Celular ao Vivo) -->
+                <div class="provador-card-visual">
+                  <div class="card-mini-phone">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                      <div class="phone-screen-scaler">
+                        <iframe id="provador-iframe" src="../../glamour-midnight/index.html?preview=1" title="Prévia ao vivo" loading="lazy" allow="autoplay"></iframe>
+                      </div>
+                      <div class="phone-overlay-badge">
+                        <span class="dot-pulse"></span>
+                        <span id="provador-badge">Mariana Alves · Glamour Midnight</span>
+                      </div>
                     </div>
                   </div>
-                </label>
+                </div>
 
-                <label class="palette-card">
-                  <input type="radio" name="selected_color" value="rose" class="palette-radio">
-                  <div class="palette-card-content">
-                    <div class="palette-swatches">
-                      <span class="swatch swatch--rose"></span>
-                      <span class="swatch swatch--berry"></span>
-                      <span class="swatch swatch--cream"></span>
-                    </div>
-                    <div class="palette-info">
-                      <span class="palette-name">🎀 Coleção Rosé</span>
-                      <span class="palette-sub">Rosé Suave, Berry & Delicadeza Feminina</span>
-                    </div>
+                <!-- Coluna de Informações e Confirmação -->
+                <div class="provador-card-content">
+                  <div class="provador-header-meta">
+                    <span class="provador-tag" id="provador-tag">Cinematográfico</span>
+                    <span class="provador-palette-indicator" id="provador-palette-tag">🖤 Versão Midnight</span>
                   </div>
-                </label>
+                  
+                  <h3 class="provador-title" id="provador-title">Modelo Glamour</h3>
+                  <p class="provador-desc" id="provador-desc">A experiência mais imersiva e cinematográfica com vídeo fluido na capa e carrossel de fotos ampliadas em tela cheia.</p>
+
+                  <ul class="provador-checklist" id="provador-checklist">
+                    <li><strong>Vídeo Hero na capa:</strong> Transição instantânea sem corte.</li>
+                    <li><strong>Carrossel imersivo:</strong> Navegação horizontal de fotos.</li>
+                    <li><strong>Modal completo:</strong> Detalhes, duração e manutenção.</li>
+                  </ul>
+
+                  <!-- Inputs ocultos para envio do formulário -->
+                  <input type="hidden" name="selected_model" id="input-selected-model" value="glamour">
+                  <input type="hidden" name="selected_color" id="input-selected-color" value="midnight">
+
+                  <div class="provador-active-confirmation">
+                    <span class="pac-icon">✓</span>
+                    <span id="provador-active-label">Combinação selecionada para o seu LashMenu</span>
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -231,7 +221,7 @@
                 ← Voltar
               </button>
               <button type="button" class="btn btn--primary btn-next-step" data-next="3">
-                <span>Continuar para Procedimentos</span>
+                <span>Confirmar e Ir para Procedimentos</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
               </button>
             </div>
