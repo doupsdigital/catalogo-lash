@@ -673,10 +673,6 @@ button {
   background: #0f0c0b;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 40px 0 36px;
 }
 
 .secao-contato__foto-wrap {
@@ -707,12 +703,26 @@ button {
 .secao-contato__conteudo {
   position: relative;
   z-index: 2;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  justify-content: space-between;
+  padding: 44px 24px 34px;
+}
+
+.secao-contato__topo {
+  display: flex;
+  justify-content: center;
+}
+
+.secao-contato__corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .secao-contato__titulo {
+  margin: 0;
   font-family: 'Fraunces', Georgia, serif;
   font-size: 36px;
   line-height: 1.1;
@@ -726,6 +736,7 @@ button {
 }
 
 .secao-contato__desc {
+  margin: 0;
   font-size: 14px;
   color: rgba(243, 239, 233, 0.8);
   max-width: 320px;
@@ -736,7 +747,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .btn-whatsapp,
