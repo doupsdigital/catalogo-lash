@@ -48,7 +48,7 @@ button {
   background: #0f0c0b;
   position: relative;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
-  padding-bottom: 80px;
+  padding-bottom: 0;
 }
 
 .container {
@@ -595,52 +595,7 @@ button {
 }
 
 /* ==========================================================================
-   5. BARRA FIXA FLUTUANTE INFERIOR
-   ========================================================================== */
-.barra-fixa-agendar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  display: flex;
-  justify-content: center;
-  padding: 12px 20px;
-  background: linear-gradient(180deg, transparent 0%, rgba(10, 8, 7, 0.95) 40%, #0a0807 100%);
-  pointer-events: none;
-}
-
-.btn-barra-fixa {
-  pointer-events: auto;
-  width: 100%;
-  max-width: 440px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  background: #c9a389;
-  color: #0f0c0b;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(201, 163, 137, 0.4);
-  transition: all 0.25s ease;
-}
-
-.btn-barra-fixa:hover {
-  background: #dfa87a;
-  transform: translateY(-2px);
-}
-
-.btn-barra-fixa__icon {
-  font-size: 16px;
-}
-
-/* ==========================================================================
-   6. MODAL DE DETALHES DO PROCEDIMENTO
+   5. MODAL DE DETALHES DO PROCEDIMENTO
    ========================================================================== */
 .modal-detalhe {
   position: fixed;
