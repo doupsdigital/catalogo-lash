@@ -467,26 +467,53 @@ document.addEventListener('DOMContentLoaded', () => {
   initSectionObserver();
   initHeroScrollLock();
 
-  // Modo Preview Catálogo (Demonstração do Mosaico e Filtros no Showroom)
+  // Modo Preview Catálogo (Demonstração do Mosaico Navegando de Cima pra Baixo + Modal)
   const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
   if (isCatalogFocus) {
     const catalogoSection = document.querySelector('.secao-catalogo');
     if (catalogoSection && mosaicoApp) {
-      setTimeout(() => {
+      const snapToCat = () => {
         mosaicoApp.scrollTop = catalogoSection.offsetTop;
-      }, 100);
+      };
+      snapToCat();
+      setTimeout(snapToCat, 50);
+      setTimeout(snapToCat, 250);
+      setTimeout(snapToCat, 600);
 
-      const filters = ['todos', 'volumes', 'mapping', 'especiais'];
-      let fIdx = 0;
-      setInterval(() => {
-        fIdx = (fIdx + 1) % filters.length;
-        const targetFilter = filters[fIdx];
-        filtroAtivo = targetFilter;
-        filtroBtns.forEach((btn) => {
-          btn.classList.toggle('is-ativo', btn.dataset.filter === targetFilter);
-        });
-        renderGrid();
-      }, 3000);
+      function loop() {
+        // 1. Volta ao topo da seção
+        mosaicoApp.scrollTo({ top: catalogoSection.offsetTop, behavior: 'smooth' });
+
+        // 2. Rola para baixo suavemente (mostrando mais cards)
+        setTimeout(() => {
+          mosaicoApp.scrollTo({ top: catalogoSection.offsetTop + 180, behavior: 'smooth' });
+        }, 1100);
+
+        // 3. Rola mais um pouco para baixo
+        setTimeout(() => {
+          mosaicoApp.scrollTo({ top: catalogoSection.offsetTop + 360, behavior: 'smooth' });
+        }, 2300);
+
+        // 4. Clica em um card do mosaico para abrir os detalhes
+        setTimeout(() => {
+          const tiles = document.querySelectorAll('.tile');
+          if (tiles.length > 2) {
+            tiles[2].click();
+          } else if (tiles.length > 0) {
+            tiles[0].click();
+          }
+        }, 3500);
+
+        // 5. Fecha o modal após 1.4s
+        setTimeout(() => {
+          fecharModal();
+        }, 5000);
+
+        // 6. Reinicia o ciclo
+        setTimeout(loop, 5800);
+      }
+
+      setTimeout(loop, 500);
     }
   }
 });

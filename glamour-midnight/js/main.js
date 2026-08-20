@@ -317,6 +317,72 @@ document.addEventListener('DOMContentLoaded', () => {
   const sections = Array.from(document.querySelectorAll('.vitrine > section'));
   if (!vitrine || sections.length === 0) return;
 
+  // Modo Focus Catalog (Apresentação do Catálogo Animado no Showroom com Modal)
+  const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
+  if (isCatalogFocus) {
+    const procSection = document.getElementById('procedimentos');
+    const track = document.querySelector('.procedimentos__track');
+    const modal = document.getElementById('modal-procedimento');
+    const closeBtn = modal ? modal.querySelector('[data-fechar]') : null;
+    const cards = document.querySelectorAll('.procedimento-card');
+
+    if (procSection) {
+      vitrine.style.scrollSnapType = 'none';
+      const snapToProc = () => {
+        vitrine.scrollTop = procSection.offsetTop;
+      };
+      snapToProc();
+      setTimeout(snapToProc, 50);
+      setTimeout(snapToProc, 250);
+      setTimeout(snapToProc, 600);
+      window.addEventListener('resize', snapToProc);
+
+      if (track && cards.length) {
+        function loop() {
+          // 1. Volta ao início suavemente
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+
+          // 2. Desliza para o card 1
+          setTimeout(() => {
+            const cardW = track.clientWidth * 0.76;
+            track.scrollTo({ left: cardW * 1, behavior: 'smooth' });
+          }, 1100);
+
+          // 3. Desliza para o card 2
+          setTimeout(() => {
+            const cardW = track.clientWidth * 0.76;
+            track.scrollTo({ left: cardW * 2, behavior: 'smooth' });
+          }, 2300);
+
+          // 4. Clica no card para abrir o modal de detalhes
+          setTimeout(() => {
+            if (cards[2]) {
+              cards[2].click();
+            } else if (cards[0]) {
+              cards[0].click();
+            }
+          }, 3500);
+
+          // 5. Fecha o modal após 1.4s de exibição
+          setTimeout(() => {
+            if (closeBtn) {
+              closeBtn.click();
+            } else if (modal) {
+              modal.hidden = true;
+              vitrine.classList.remove('modal-aberto');
+            }
+          }, 5000);
+
+          // 6. Reinicia o ciclo
+          setTimeout(loop, 5800);
+        }
+
+        setTimeout(loop, 500);
+      }
+    }
+    return; // Não executa o tour geral de seções
+  }
+
   let currentIdx = 0;
   let timerId = null;
   let isRunning = false;
@@ -332,17 +398,13 @@ document.addEventListener('DOMContentLoaded', () => {
       top: 0,
       behavior: 'smooth'
     });
-    try {
-      const label = sections[0]?.getAttribute('data-screen-label') || 'Hero';
-      window.parent.postMessage({ type: 'VITRINE_SCREEN_CHANGE', label: label, index: 0 }, '*');
-    } catch (e) {}
   }
 
   function scheduleNext() {
     if (!isRunning) return;
     const currentSection = sections[currentIdx];
     const isHero = currentSection && currentSection.classList.contains('hero');
-    const delay = isHero ? 6000 : 4500; // 6 segundos na capa hero (vídeo), 4.5s nas outras
+    const delay = isHero ? 6000 : 4500;
 
     timerId = setTimeout(() => {
       if (!isRunning) return;
@@ -354,40 +416,9 @@ document.addEventListener('DOMContentLoaded', () => {
           top: targetSection.offsetTop,
           behavior: 'smooth'
         });
-
-        try {
-          const label = targetSection.getAttribute('data-screen-label') || 'Vitrine';
-          window.parent.postMessage({ type: 'VITRINE_SCREEN_CHANGE', label: label, index: currentIdx }, '*');
-        } catch (e) {}
       }
       scheduleNext();
     }, delay);
-  }
-
-  // Modo Focus Catalog (Apresentação do Catálogo Animado no Showroom)
-  const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
-  if (isCatalogFocus) {
-    const procSection = document.getElementById('procedimentos');
-    const track = document.querySelector('.procedimentos__track');
-    if (procSection && vitrine) {
-      setTimeout(() => {
-        vitrine.scrollTop = procSection.offsetTop;
-      }, 100);
-      
-      if (track) {
-        let cardIdx = 0;
-        const totalCards = 13;
-        setInterval(() => {
-          cardIdx = (cardIdx + 1) % totalCards;
-          const cardWidth = track.clientWidth || 300;
-          track.scrollTo({
-            left: cardIdx * (cardWidth * 0.85),
-            behavior: 'smooth'
-          });
-        }, 2600);
-      }
-    }
-    return; // não roda o tour geral de seções quando está em modo catálogo
   }
 
   function startTour() {
@@ -396,7 +427,6 @@ document.addEventListener('DOMContentLoaded', () => {
     scheduleNext();
   }
 
-  // Escuta comandos de visibilidade da página pai
   window.addEventListener('message', (event) => {
     if (!event.data) return;
     if (event.data.type === 'START_TOUR') {

@@ -457,25 +457,53 @@ document.addEventListener('DOMContentLoaded', () => {
   initSectionObserver();
   initHeroScrollLock();
 
-  // Modo Preview Catálogo (Demonstração da Lista Editorial no Showroom)
+  // Modo Preview Catálogo (Demonstração da Lista Editorial Navegando de Cima pra Baixo + Modal)
   const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
   if (isCatalogFocus) {
     const menuSection = document.querySelector('.secao-menu');
     if (menuSection && studioApp) {
-      setTimeout(() => {
+      const snapToMenu = () => {
         studioApp.scrollTop = menuSection.offsetTop;
-      }, 100);
+      };
+      snapToMenu();
+      setTimeout(snapToMenu, 50);
+      setTimeout(snapToMenu, 250);
+      setTimeout(snapToMenu, 600);
 
-      // Auto-scroll suave descendo e subindo na lista
-      let scrollDown = true;
-      setInterval(() => {
-        const targetScroll = scrollDown ? menuSection.offsetTop + 280 : menuSection.offsetTop;
-        studioApp.scrollTo({
-          top: targetScroll,
-          behavior: 'smooth'
-        });
-        scrollDown = !scrollDown;
-      }, 3200);
+      function loop() {
+        // 1. Volta ao topo da seção
+        studioApp.scrollTo({ top: menuSection.offsetTop, behavior: 'smooth' });
+
+        // 2. Rola para baixo na lista editorial
+        setTimeout(() => {
+          studioApp.scrollTo({ top: menuSection.offsetTop + 180, behavior: 'smooth' });
+        }, 1100);
+
+        // 3. Rola mais um pouco para baixo
+        setTimeout(() => {
+          studioApp.scrollTo({ top: menuSection.offsetTop + 360, behavior: 'smooth' });
+        }, 2300);
+
+        // 4. Clica em um item da lista para abrir o modal de detalhes
+        setTimeout(() => {
+          const items = document.querySelectorAll('.studio__item');
+          if (items.length > 2) {
+            items[2].click();
+          } else if (items.length > 0) {
+            items[0].click();
+          }
+        }, 3500);
+
+        // 5. Fecha o modal após 1.4s
+        setTimeout(() => {
+          fecharModal();
+        }, 5000);
+
+        // 6. Reinicia o ciclo
+        setTimeout(loop, 5800);
+      }
+
+      setTimeout(loop, 500);
     }
   }
 });
