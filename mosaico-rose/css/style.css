@@ -1,25 +1,26 @@
 /* ==========================================================================
-   LASHMENU — MODELO MOSAICO ROSE (MOSAIC GRID COM PALETA LPB: ROSA & CREME)
+   LASHMENU — MODELO MOSAICO ROSE (ROSE & CREME LPB + SNAP SCROLL NAVIGATION)
    ========================================================================== */
 
 /* ---------- Reset & Base ---------- */
-*, *::before, *::after {
-  box-sizing: border-box;
+html, body {
   margin: 0;
   padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
   background: #0d0a0b;
   color: #1f181b;
   font-family: 'Jost', system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
-  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }
 
 a {
@@ -39,16 +40,25 @@ button {
   cursor: pointer;
 }
 
-/* ---------- Container ---------- */
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* ---------- Shell / Scroll Snap Container ---------- */
 .mosaico-app {
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
-  min-height: 100vh;
+  height: 100%;
   background: #fbf8f5; /* Creme perolado suave */
   position: relative;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
-  padding-bottom: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
 .container {
@@ -66,14 +76,17 @@ button {
 }
 
 /* ==========================================================================
-   1. HERO SECTION (PADRÃO UNIFICADO)
+   1. HERO SECTION (SNAP SCREEN 1)
    ========================================================================== */
 .hero {
+  min-height: 100dvh;
   height: 100dvh;
   width: 100%;
   position: relative;
   overflow: hidden;
   background: #14100e;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .hero__foto-wrap {
@@ -213,11 +226,15 @@ button {
 }
 
 /* ==========================================================================
-   2. SEÇÃO CATÁLOGO / MOSAICO (ESTÉTICA LPB)
+   2. SEÇÃO CATÁLOGO / MOSAICO (SNAP SCREEN 2 - ROLAGEM LIVRE NO GRID)
    ========================================================================== */
 .secao-catalogo {
-  padding: 48px 0 36px;
+  min-height: 100dvh;
+  padding: 44px 0 60px;
   background: #fbf8f5;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  position: relative;
 }
 
 .secao-catalogo__header {
@@ -413,20 +430,36 @@ button {
 }
 
 /* ==========================================================================
-   3. SEÇÃO ORIENTAÇÕES (ESTILO PEROLADO & ROSA)
+   3. SEÇÃO ORIENTAÇÕES (SNAP SCREEN 3 - TELA CHEIA 100DVH COM RESPIRO)
    ========================================================================== */
 .secao-orientacoes {
-  padding: 44px 0;
+  min-height: 100dvh;
+  height: 100dvh;
+  width: 100%;
   background: #f6efe9;
   border-top: 1px solid rgba(192, 75, 107, 0.12);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
+  position: relative;
+}
+
+.secao-orientacoes .container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .secao-orientacoes__titulo {
-  margin: 6px 0 20px;
+  margin: 4px 0 16px;
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 400;
   color: #1f181b;
+  line-height: 1.15;
 }
 
 .secao-orientacoes__titulo em {
@@ -437,17 +470,17 @@ button {
 .orientacoes__card {
   background: #ffffff;
   border: 1px solid rgba(192, 75, 107, 0.16);
-  border-radius: 16px;
-  padding: 8px 18px;
-  box-shadow: 0 8px 24px rgba(70, 25, 40, 0.05);
+  border-radius: 18px;
+  padding: 12px 20px;
+  box-shadow: 0 12px 32px rgba(70, 25, 40, 0.06);
 }
 
 .orientacao__item {
   display: grid;
-  grid-template-columns: 28px 1fr;
+  grid-template-columns: 32px 1fr;
   gap: 14px;
   align-items: center;
-  padding: 14px 0;
+  padding: 16px 0;
   border-bottom: 1px solid rgba(192, 75, 107, 0.10);
 }
 
@@ -457,7 +490,7 @@ button {
 
 .orientacao__num {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 19px;
+  font-size: 20px;
   font-style: italic;
   color: #c04b6b;
   font-weight: 600;
@@ -465,27 +498,35 @@ button {
 
 .orientacao__info strong {
   display: block;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 600;
   color: #1f181b;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .orientacao__info p {
-  font-size: 12px;
+  font-size: 12.5px;
   color: #6e5a62;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 /* ==========================================================================
-   4. SEÇÃO CONTATO & RODAPÉ
+   4. SEÇÃO CONTATO & RODAPÉ (SNAP SCREEN 4 - TELA CHEIA 100DVH)
    ========================================================================== */
 .secao-contato {
+  min-height: 100dvh;
+  height: 100dvh;
+  width: 100%;
   position: relative;
-  padding: 60px 0 40px;
   overflow: hidden;
   background: #1f181b;
   color: #fbf8f5;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px 0 36px;
 }
 
 .secao-contato__foto-wrap {
@@ -508,7 +549,7 @@ button {
   background: linear-gradient(
     180deg,
     rgba(31, 24, 27, 0.45) 0%,
-    rgba(31, 24, 27, 0.88) 60%,
+    rgba(31, 24, 27, 0.88) 55%,
     #1f181b 100%
   );
 }
@@ -523,7 +564,7 @@ button {
 
 .secao-contato__titulo {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 34px;
+  font-size: 36px;
   line-height: 1.1;
   font-weight: 400;
   color: #fbf8f5;
@@ -535,15 +576,16 @@ button {
 }
 
 .secao-contato__desc {
-  font-size: 13.5px;
+  font-size: 14px;
   color: rgba(251, 248, 245, 0.8);
-  max-width: 300px;
+  max-width: 320px;
+  line-height: 1.45;
 }
 
 .secao-contato__acoes {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   margin-top: 8px;
 }
 
@@ -552,8 +594,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 50px;
-  padding: 0 20px;
+  min-height: 52px;
+  padding: 0 22px;
   font-size: 11.5px;
   font-weight: 700;
   letter-spacing: .18em;
