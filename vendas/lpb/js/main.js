@@ -226,7 +226,7 @@ function initSmoothScroll() {
 function initOption1Provador() {
   const modelBtns = document.querySelectorAll('.provador-model-btn');
   const colorBtns = document.querySelectorAll('.provador-color-btn');
-  const imgEl = document.getElementById('provador-img');
+  const iframeEl = document.getElementById('provador-iframe');
   const badgeEl = document.getElementById('provador-badge');
   const tagEl = document.getElementById('provador-tag');
   const paletteTagEl = document.getElementById('provador-palette-tag');
@@ -236,7 +236,7 @@ function initOption1Provador() {
   const ctaEl = document.getElementById('provador-cta');
   const ctaTextEl = document.getElementById('provador-cta-text');
 
-  if (!modelBtns.length || !imgEl) return;
+  if (!modelBtns.length || !iframeEl) return;
 
   const data = {
     glamour: {
@@ -250,12 +250,12 @@ function initOption1Provador() {
       ],
       midnight: {
         designer: 'Mariana Alves',
-        img: '../../glamour-midnight/assets/img/Hero.png',
+        iframe: '../../glamour-midnight/index.html?preview=1',
         link: '../../glamour-midnight/index.html'
       },
       rose: {
         designer: 'Mariana Alves',
-        img: '../../glamour-rose/assets/img/Hero.png',
+        iframe: '../../glamour-rose/index.html?preview=1',
         link: '../../glamour-rose/index.html'
       }
     },
@@ -270,12 +270,12 @@ function initOption1Provador() {
       ],
       midnight: {
         designer: 'Amanda Carvalho',
-        img: '../../harmonia-midnight/assets/img/Hero.png',
+        iframe: '../../harmonia-midnight/index.html?preview=1',
         link: '../../harmonia-midnight/index.html'
       },
       rose: {
         designer: 'Amanda Carvalho',
-        img: '../../harmonia-rose/assets/img/Hero.png',
+        iframe: '../../harmonia-rose/index.html?preview=1',
         link: '../../harmonia-rose/index.html'
       }
     },
@@ -290,12 +290,12 @@ function initOption1Provador() {
       ],
       midnight: {
         designer: 'Bruna Carvalho',
-        img: '../../classico-midnight/assets/img/Hero.png',
+        iframe: '../../classico-midnight/index.html?preview=1',
         link: '../../classico-midnight/index.html'
       },
       rose: {
         designer: 'Bruna Carvalho',
-        img: '../../classico-rose/assets/img/Hero.png',
+        iframe: '../../classico-rose/index.html?preview=1',
         link: '../../classico-rose/index.html'
       }
     }
@@ -310,11 +310,10 @@ function initOption1Provador() {
     const colorLabel = currentColor === 'midnight' ? 'Midnight' : 'Rosé';
     const colorIcon = currentColor === 'midnight' ? '🖤' : '🎀';
 
-    imgEl.style.opacity = '0.3';
+    iframeEl.style.opacity = '0.3';
     setTimeout(() => {
-      imgEl.src = combo.img;
-      imgEl.alt = `Prévia do ${item.title} (${colorLabel})`;
-      imgEl.style.opacity = '1';
+      iframeEl.src = combo.iframe;
+      iframeEl.style.opacity = '1';
     }, 150);
 
     if (badgeEl) badgeEl.textContent = `${combo.designer} · ${item.title.replace('Modelo ', '')} ${colorLabel}`;
@@ -326,7 +325,7 @@ function initOption1Provador() {
       checklistEl.innerHTML = item.checklist.map((li) => `<li>${li}</li>`).join('');
     }
     if (ctaEl) ctaEl.href = combo.link;
-    if (ctaTextEl) ctaTextEl.textContent = `Testar ${item.title} (${colorLabel}) ao vivo`;
+    if (ctaTextEl) ctaTextEl.textContent = `Abrir ${item.title} (${colorLabel}) em tela cheia`;
   }
 
   modelBtns.forEach((btn) => {
@@ -355,7 +354,8 @@ function initOption2CardSelectors() {
 
   cards.forEach((card) => {
     const pills = card.querySelectorAll('.opt2-pill');
-    const img = card.querySelector('.opt2-card-img');
+    const iframe = card.querySelector('.opt2-iframe');
+    const badge = card.querySelector('.opt2-phone-badge');
     const cta = card.querySelector('.opt2-cta');
 
     pills.forEach((pill) => {
@@ -365,16 +365,21 @@ function initOption2CardSelectors() {
 
         const color = pill.getAttribute('data-color');
         const link = pill.getAttribute('data-link');
+        const label = pill.getAttribute('data-label');
 
-        if (img) {
-          const newSrc = color === 'rose' ? img.getAttribute('data-img-rose') : img.getAttribute('data-img-midnight');
-          if (newSrc) {
-            img.style.opacity = '0.3';
+        if (iframe) {
+          const newSrc = color === 'rose' ? iframe.getAttribute('data-src-rose') : iframe.getAttribute('data-src-midnight');
+          if (newSrc && iframe.src !== newSrc) {
+            iframe.style.opacity = '0.3';
             setTimeout(() => {
-              img.src = newSrc;
-              img.style.opacity = '1';
+              iframe.src = newSrc;
+              iframe.style.opacity = '1';
             }, 120);
           }
+        }
+
+        if (badge && label) {
+          badge.textContent = label;
         }
 
         if (cta && link) {
@@ -454,20 +459,28 @@ function initOption3Carousel() {
       btn.classList.add('is-active');
 
       const color = btn.getAttribute('data-opt3-color'); // 'midnight' ou 'rose'
+      const colorLabel = color === 'midnight' ? 'Midnight' : 'Rosé';
 
       slides.forEach((slide) => {
-        const img = slide.querySelector('.opt3-slide-img');
+        const iframe = slide.querySelector('.opt3-slide-iframe');
+        const badge = slide.querySelector('.opt3-phone-badge');
         const cta = slide.querySelector('.opt3-slide-cta');
+        const modelName = slide.getAttribute('data-slide-model');
+        const prettyModelName = modelName ? modelName.charAt(0).toUpperCase() + modelName.slice(1) : '';
 
-        if (img) {
-          const newSrc = color === 'rose' ? img.getAttribute('data-img-rose') : img.getAttribute('data-img-midnight');
-          if (newSrc) {
-            img.style.opacity = '0.3';
+        if (iframe) {
+          const newSrc = color === 'rose' ? iframe.getAttribute('data-src-rose') : iframe.getAttribute('data-src-midnight');
+          if (newSrc && iframe.src !== newSrc) {
+            iframe.style.opacity = '0.3';
             setTimeout(() => {
-              img.src = newSrc;
-              img.style.opacity = '1';
+              iframe.src = newSrc;
+              iframe.style.opacity = '1';
             }, 120);
           }
+        }
+
+        if (badge && prettyModelName) {
+          badge.textContent = `${prettyModelName} ${colorLabel}`;
         }
 
         if (cta) {

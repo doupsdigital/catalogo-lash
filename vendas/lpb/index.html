@@ -380,7 +380,7 @@
         <div class="section-header">
           <div class="option-badge">Opção 1 · Provador Interativo</div>
           <h2 class="section-title">Experimente os Modelos &amp; Cores</h2>
-          <p class="section-subtitle">Alterne entre os 3 designs e as duas paletas para ver a combinação perfeita para o seu estúdio.</p>
+          <p class="section-subtitle">Alterne entre os 3 designs e as duas paletas para ver a combinação perfeita para o seu estúdio em tempo real.</p>
         </div>
 
         <!-- Controles da Opção 1 -->
@@ -419,8 +419,18 @@
         <div class="provador-stage" id="provador-stage">
           <div class="provador-card">
             <div class="provador-card-visual">
-              <img id="provador-img" src="../../glamour-midnight/assets/img/Hero.png" alt="Prévia do Modelo Glamour Midnight" class="provador-card-img">
-              <div class="provador-visual-badge" id="provador-badge">Mariana Alves · Glamour Midnight</div>
+              <div class="card-mini-phone">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="phone-screen-scaler">
+                    <iframe id="provador-iframe" src="../../glamour-midnight/index.html?preview=1" title="Prévia ao vivo" loading="lazy" allow="autoplay"></iframe>
+                  </div>
+                  <div class="phone-overlay-badge">
+                    <span class="dot-pulse"></span>
+                    <span id="provador-badge">Mariana Alves · Glamour Midnight</span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="provador-card-content">
               <div class="provador-header-meta">
@@ -438,7 +448,7 @@
 
               <div class="provador-actions">
                 <a id="provador-cta" href="../../glamour-midnight/index.html" target="_blank" rel="noopener" class="btn btn--primary provador-btn-live">
-                  <span id="provador-cta-text">Testar Modelo Glamour (Midnight) ao vivo</span>
+                  <span id="provador-cta-text">Abrir Modelo Glamour (Midnight) em tela cheia</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
                 </a>
               </div>
@@ -454,15 +464,25 @@
         <div class="section-header">
           <div class="option-badge">Opção 2 · Cards com Seletor Direto</div>
           <h2 class="section-title">3 Estilos com Escolha de Cores</h2>
-          <p class="section-subtitle">Conheça cada um dos 3 modelos e alterne entre a paleta Midnight e Rosé no próprio card.</p>
+          <p class="section-subtitle">Conheça cada um dos 3 modelos em tempo real e alterne entre a paleta Midnight e Rosé no próprio card.</p>
         </div>
 
         <div class="opt2-cards-grid">
           <!-- Card Glamour -->
           <article class="opt2-card" data-opt2-card="glamour">
             <div class="opt2-card-media">
-              <img src="../../glamour-midnight/assets/img/Hero.png" alt="Modelo Glamour" class="opt2-card-img" data-img-midnight="../../glamour-midnight/assets/img/Hero.png" data-img-rose="../../glamour-rose/assets/img/Hero.png">
-              <span class="opt2-badge">Vídeo &amp; Carrossel</span>
+              <div class="card-mini-phone">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="phone-screen-scaler">
+                    <iframe class="opt2-iframe" src="../../glamour-midnight/index.html?preview=1" data-src-midnight="../../glamour-midnight/index.html?preview=1" data-src-rose="../../glamour-rose/index.html?preview=1" title="Prévia Glamour" loading="lazy" allow="autoplay"></iframe>
+                  </div>
+                  <div class="phone-overlay-badge">
+                    <span class="dot-pulse"></span>
+                    <span class="opt2-phone-badge">Glamour Midnight</span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="opt2-card-body">
               <div class="opt2-model-header">
@@ -474,11 +494,11 @@
               <div class="opt2-color-selector">
                 <span class="opt2-color-title">Escolha a cor:</span>
                 <div class="opt2-color-pills">
-                  <button type="button" class="opt2-pill is-active" data-color="midnight" data-link="../../glamour-midnight/index.html">
+                  <button type="button" class="opt2-pill is-active" data-color="midnight" data-link="../../glamour-midnight/index.html" data-label="Glamour Midnight">
                     <span class="color-dot color-dot--midnight"></span>
                     <span>Midnight</span>
                   </button>
-                  <button type="button" class="opt2-pill" data-color="rose" data-link="../../glamour-rose/index.html">
+                  <button type="button" class="opt2-pill" data-color="rose" data-link="../../glamour-rose/index.html" data-label="Glamour Rosé">
                     <span class="color-dot color-dot--rose"></span>
                     <span>Rosé</span>
                   </button>
@@ -486,7 +506,7 @@
               </div>
 
               <a href="../../glamour-midnight/index.html" target="_blank" rel="noopener" class="btn btn--outline opt2-cta">
-                <span>Ver Glamour ao vivo</span>
+                <span>Abrir Glamour em tela cheia</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
               </a>
             </div>
@@ -495,8 +515,18 @@
           <!-- Card Harmonia -->
           <article class="opt2-card" data-opt2-card="harmonia">
             <div class="opt2-card-media">
-              <img src="../../harmonia-rose/assets/img/Hero.png" alt="Modelo Harmonia" class="opt2-card-img" data-img-midnight="../../harmonia-midnight/assets/img/Hero.png" data-img-rose="../../harmonia-rose/assets/img/Hero.png">
-              <span class="opt2-badge">Mosaico Fotográfico</span>
+              <div class="card-mini-phone">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="phone-screen-scaler">
+                    <iframe class="opt2-iframe" src="../../harmonia-rose/index.html?preview=1" data-src-midnight="../../harmonia-midnight/index.html?preview=1" data-src-rose="../../harmonia-rose/index.html?preview=1" title="Prévia Harmonia" loading="lazy"></iframe>
+                  </div>
+                  <div class="phone-overlay-badge">
+                    <span class="dot-pulse"></span>
+                    <span class="opt2-phone-badge">Harmonia Rosé</span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="opt2-card-body">
               <div class="opt2-model-header">
@@ -508,11 +538,11 @@
               <div class="opt2-color-selector">
                 <span class="opt2-color-title">Escolha a cor:</span>
                 <div class="opt2-color-pills">
-                  <button type="button" class="opt2-pill" data-color="midnight" data-link="../../harmonia-midnight/index.html">
+                  <button type="button" class="opt2-pill" data-color="midnight" data-link="../../harmonia-midnight/index.html" data-label="Harmonia Midnight">
                     <span class="color-dot color-dot--midnight"></span>
                     <span>Midnight</span>
                   </button>
-                  <button type="button" class="opt2-pill is-active" data-color="rose" data-link="../../harmonia-rose/index.html">
+                  <button type="button" class="opt2-pill is-active" data-color="rose" data-link="../../harmonia-rose/index.html" data-label="Harmonia Rosé">
                     <span class="color-dot color-dot--rose"></span>
                     <span>Rosé</span>
                   </button>
@@ -520,7 +550,7 @@
               </div>
 
               <a href="../../harmonia-rose/index.html" target="_blank" rel="noopener" class="btn btn--outline opt2-cta">
-                <span>Ver Harmonia ao vivo</span>
+                <span>Abrir Harmonia em tela cheia</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
               </a>
             </div>
@@ -529,8 +559,18 @@
           <!-- Card Clássico -->
           <article class="opt2-card" data-opt2-card="classico">
             <div class="opt2-card-media">
-              <img src="../../classico-midnight/assets/img/Hero.png" alt="Modelo Clássico" class="opt2-card-img" data-img-midnight="../../classico-midnight/assets/img/Hero.png" data-img-rose="../../classico-rose/assets/img/Hero.png">
-              <span class="opt2-badge">Lista Editorial</span>
+              <div class="card-mini-phone">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="phone-screen-scaler">
+                    <iframe class="opt2-iframe" src="../../classico-midnight/index.html?preview=1" data-src-midnight="../../classico-midnight/index.html?preview=1" data-src-rose="../../classico-rose/index.html?preview=1" title="Prévia Clássico" loading="lazy"></iframe>
+                  </div>
+                  <div class="phone-overlay-badge">
+                    <span class="dot-pulse"></span>
+                    <span class="opt2-phone-badge">Clássico Midnight</span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="opt2-card-body">
               <div class="opt2-model-header">
@@ -542,11 +582,11 @@
               <div class="opt2-color-selector">
                 <span class="opt2-color-title">Escolha a cor:</span>
                 <div class="opt2-color-pills">
-                  <button type="button" class="opt2-pill is-active" data-color="midnight" data-link="../../classico-midnight/index.html">
+                  <button type="button" class="opt2-pill is-active" data-color="midnight" data-link="../../classico-midnight/index.html" data-label="Clássico Midnight">
                     <span class="color-dot color-dot--midnight"></span>
                     <span>Midnight</span>
                   </button>
-                  <button type="button" class="opt2-pill" data-color="rose" data-link="../../classico-rose/index.html">
+                  <button type="button" class="opt2-pill" data-color="rose" data-link="../../classico-rose/index.html" data-label="Clássico Rosé">
                     <span class="color-dot color-dot--rose"></span>
                     <span>Rosé</span>
                   </button>
@@ -554,7 +594,7 @@
               </div>
 
               <a href="../../classico-midnight/index.html" target="_blank" rel="noopener" class="btn btn--outline opt2-cta">
-                <span>Ver Clássico ao vivo</span>
+                <span>Abrir Clássico em tela cheia</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
               </a>
             </div>
@@ -569,7 +609,7 @@
         <div class="section-header">
           <div class="option-badge">Opção 3 · Showroom Carrossel</div>
           <h2 class="section-title">Deslize para Conhecer a Coleção</h2>
-          <p class="section-subtitle">Navegue horizontalmente pelos 3 modelos e alterne a cor de todos com um único toque.</p>
+          <p class="section-subtitle">Navegue horizontalmente pelos 3 modelos em tempo real e alterne a cor de todos com um único toque.</p>
         </div>
 
         <!-- Seletor Global de Cor para o Carrossel -->
@@ -597,10 +637,21 @@
             <div class="opt3-slide" data-slide-model="glamour">
               <div class="opt3-slide-inner">
                 <div class="opt3-slide-photo">
-                  <img src="../../glamour-midnight/assets/img/Hero.png" alt="Modelo Glamour" class="opt3-slide-img" data-img-midnight="../../glamour-midnight/assets/img/Hero.png" data-img-rose="../../glamour-rose/assets/img/Hero.png">
-                  <span class="opt3-slide-tag">✨ Modelo 01</span>
+                  <div class="card-mini-phone">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                      <div class="phone-screen-scaler">
+                        <iframe class="opt3-slide-iframe" src="../../glamour-midnight/index.html?preview=1" data-src-midnight="../../glamour-midnight/index.html?preview=1" data-src-rose="../../glamour-rose/index.html?preview=1" title="Prévia Glamour" loading="lazy" allow="autoplay"></iframe>
+                      </div>
+                      <div class="phone-overlay-badge">
+                        <span class="dot-pulse"></span>
+                        <span class="opt3-phone-badge">Glamour Midnight</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="opt3-slide-info">
+                  <span class="opt3-slide-tag">✨ Modelo 01</span>
                   <h3 class="opt3-slide-title">Modelo Glamour</h3>
                   <p class="opt3-slide-desc">Cinematográfico com vídeo de aplicação na capa, transição suave sem corte e carrossel de fotos em tela cheia.</p>
                   <div class="opt3-slide-points">
@@ -619,10 +670,21 @@
             <div class="opt3-slide" data-slide-model="harmonia">
               <div class="opt3-slide-inner">
                 <div class="opt3-slide-photo">
-                  <img src="../../harmonia-midnight/assets/img/Hero.png" alt="Modelo Harmonia" class="opt3-slide-img" data-img-midnight="../../harmonia-midnight/assets/img/Hero.png" data-img-rose="../../harmonia-rose/assets/img/Hero.png">
-                  <span class="opt3-slide-tag">🌸 Modelo 02</span>
+                  <div class="card-mini-phone">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                      <div class="phone-screen-scaler">
+                        <iframe class="opt3-slide-iframe" src="../../harmonia-midnight/index.html?preview=1" data-src-midnight="../../harmonia-midnight/index.html?preview=1" data-src-rose="../../harmonia-rose/index.html?preview=1" title="Prévia Harmonia" loading="lazy"></iframe>
+                      </div>
+                      <div class="phone-overlay-badge">
+                        <span class="dot-pulse"></span>
+                        <span class="opt3-phone-badge">Harmonia Midnight</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="opt3-slide-info">
+                  <span class="opt3-slide-tag">🌸 Modelo 02</span>
                   <h3 class="opt3-slide-title">Modelo Harmonia</h3>
                   <p class="opt3-slide-desc">Mosaico com fotos reais de cada mapping, chips de filtros inteligentes e foco na harmonização do olhar.</p>
                   <div class="opt3-slide-points">
@@ -641,10 +703,21 @@
             <div class="opt3-slide" data-slide-model="classico">
               <div class="opt3-slide-inner">
                 <div class="opt3-slide-photo">
-                  <img src="../../classico-midnight/assets/img/Hero.png" alt="Modelo Clássico" class="opt3-slide-img" data-img-midnight="../../classico-midnight/assets/img/Hero.png" data-img-rose="../../classico-rose/assets/img/Hero.png">
-                  <span class="opt3-slide-tag">👑 Modelo 03</span>
+                  <div class="card-mini-phone">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                      <div class="phone-screen-scaler">
+                        <iframe class="opt3-slide-iframe" src="../../classico-midnight/index.html?preview=1" data-src-midnight="../../classico-midnight/index.html?preview=1" data-src-rose="../../classico-rose/index.html?preview=1" title="Prévia Clássico" loading="lazy"></iframe>
+                      </div>
+                      <div class="phone-overlay-badge">
+                        <span class="dot-pulse"></span>
+                        <span class="opt3-phone-badge">Clássico Midnight</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="opt3-slide-info">
+                  <span class="opt3-slide-tag">👑 Modelo 03</span>
                   <h3 class="opt3-slide-title">Modelo Clássico</h3>
                   <p class="opt3-slide-desc">Lista editorial limpa, categorizada e com tipografia de alta moda. Perfeita para decisões rápidas da cliente.</p>
                   <div class="opt3-slide-points">

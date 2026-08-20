@@ -1592,33 +1592,98 @@ h1, h2, h3, h4 {
 
 .provador-card-visual {
   position: relative;
-  min-height: 380px;
-  background: #0d0b0a;
+  min-height: 440px;
+  background: radial-gradient(circle at center, #241c20 0%, #0d0b0a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
   overflow: hidden;
 }
 
-.provador-card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  transition: transform 0.4s ease, opacity 0.25s ease;
+/* ── MINI PHONE MOCKUP PARA OS CARDS ─────────────────────────────────────── */
+.card-mini-phone {
+  --phone-w: 204px;
+  --phone-h: 420px;
+  --screen-w: calc(var(--phone-w) - 14px); /* 190px */
+  --screen-h: calc(var(--phone-h) - 14px); /* 406px */
+  --base-w: 390px;
+  --base-h: 834px;
+
+  width: var(--phone-w);
+  height: var(--phone-h);
+  background: #120e10;
+  border-radius: 32px;
+  padding: 7px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  position: relative;
+  margin: 0 auto;
+  flex-shrink: 0;
 }
 
-.provador-visual-badge {
+.card-mini-phone .phone-notch {
   position: absolute;
-  bottom: 16px;
-  left: 16px;
-  background: rgba(20, 16, 14, 0.82);
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 11px;
+  background: #120e10;
+  border-radius: 6px;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.card-mini-phone .phone-screen {
+  position: relative;
+  border-radius: 25px;
+  overflow: hidden;
+  background: #0d0b0a;
+  width: var(--screen-w);
+  height: var(--screen-h);
+  pointer-events: none;
+  user-select: none;
+}
+
+.card-mini-phone .phone-screen-scaler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--base-w);
+  height: var(--base-h);
+  transform: scale(calc(var(--screen-w) / var(--base-w)), calc(var(--screen-h) / var(--base-h)));
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.card-mini-phone .phone-screen-scaler iframe {
+  width: var(--base-w);
+  height: var(--base-h);
+  border: 0;
+  display: block;
+}
+
+.card-mini-phone .phone-overlay-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(250, 248, 245, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: #f3efe9;
-  padding: 6px 14px;
+  padding: 3px 10px;
   border-radius: var(--radius-pill);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: .04em;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--text);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 30;
+  pointer-events: none;
 }
 
 .provador-card-content {
@@ -1727,32 +1792,13 @@ h1, h2, h3, h4 {
 
 .opt2-card-media {
   position: relative;
-  height: 240px;
-  background: #0d0b0a;
+  min-height: 380px;
+  background: radial-gradient(circle at center, #241c20 0%, #0d0b0a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
   overflow: hidden;
-}
-
-.opt2-card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  transition: opacity 0.25s ease, transform 0.35s ease;
-}
-
-.opt2-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  background: rgba(20, 16, 14, 0.82);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #f3efe9;
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-  font-size: 0.70rem;
-  font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .opt2-card-body {
@@ -1927,8 +1973,12 @@ h1, h2, h3, h4 {
 
 .opt3-slide-photo {
   position: relative;
-  min-height: 340px;
-  background: #0d0b0a;
+  min-height: 440px;
+  background: radial-gradient(circle at center, #241c20 0%, #0d0b0a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
   overflow: hidden;
 }
 
