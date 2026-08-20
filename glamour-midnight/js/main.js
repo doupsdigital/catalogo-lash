@@ -320,11 +320,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Modo Focus Catalog (Apresentação do Catálogo Animado no Showroom com Modal)
   const isCatalogFocus = window.location.search.includes('preview=catalog') || window.location.search.includes('focus=catalog');
   if (isCatalogFocus) {
-    const procSection = document.getElementById('procedimentos');
-    const track = document.querySelector('.procedimentos__track');
-    const modal = document.getElementById('modal-procedimento');
-    const closeBtn = modal ? modal.querySelector('[data-fechar]') : null;
-    const cards = document.querySelectorAll('.procedimento-card');
+    const procSection = document.querySelector('.procedimentos');
+    const track = document.querySelector('.procedimentos__lista');
+    const modal = document.querySelector('[data-detalhe]');
+    const cards = document.querySelectorAll('.card-procedimento');
 
     if (procSection) {
       vitrine.style.scrollSnapType = 'none';
@@ -333,8 +332,8 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       snapToProc();
       setTimeout(snapToProc, 50);
-      setTimeout(snapToProc, 250);
-      setTimeout(snapToProc, 600);
+      setTimeout(snapToProc, 200);
+      setTimeout(snapToProc, 500);
       window.addEventListener('resize', snapToProc);
 
       if (track && cards.length) {
@@ -365,6 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // 5. Fecha o modal após 1.4s de exibição
           setTimeout(() => {
+            const closeBtn = document.querySelector('[data-fechar]');
             if (closeBtn) {
               closeBtn.click();
             } else if (modal) {
@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(loop, 5800);
         }
 
-        setTimeout(loop, 500);
+        setTimeout(loop, 400);
       }
     }
     return; // Não executa o tour geral de seções

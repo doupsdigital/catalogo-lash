@@ -486,11 +486,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 4. Clica em um item da lista para abrir o modal de detalhes
         setTimeout(() => {
-          const items = document.querySelectorAll('.studio__item');
-          if (items.length > 2) {
-            items[2].click();
-          } else if (items.length > 0) {
-            items[0].click();
+          const cards = document.querySelectorAll('.servico-card');
+          if (cards.length > 2) {
+            cards[2].click();
+          } else if (cards.length > 0) {
+            cards[0].click();
+          } else if (typeof abrirModal === 'function' && typeof PROCEDIMENTOS !== 'undefined') {
+            abrirModal(PROCEDIMENTOS[1].id);
           }
         }, 3500);
 
