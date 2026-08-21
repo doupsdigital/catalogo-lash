@@ -2173,7 +2173,24 @@ body {
   .node-label {
     display: none;
   }
+}
 
+/* ── Utilitários & Animações ────────────────────────────────────────────── */
+.spin {
+  animation: spinLoader 0.9s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spinLoader {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 720px) {
   .step-nodes {
     padding: 0 10px;
   }

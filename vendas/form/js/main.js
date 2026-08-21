@@ -473,6 +473,7 @@ function renderServiceRow(container, data) {
   fileInput.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) {
+      row._customPhotoFile = file; // Arquivo original para upload no Supabase
       const reader = new FileReader();
       reader.onload = (evt) => {
         photoThumb.src = evt.target.result;
@@ -611,6 +612,8 @@ function openProcedureModal(row) {
 }
 
 /* ── 4. Dropzone & Upload de Foto ou Vídeo de Capa ───────────────────────── */
+let uploadedCoverFile = null;
+
 function initPhotoDropzone() {
   const dropzone = document.getElementById('avatar-dropzone');
   const fileInput = document.getElementById('input-avatar-file');
@@ -625,6 +628,7 @@ function initPhotoDropzone() {
   fileInput.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) {
+      uploadedCoverFile = file; // Arquivo original da Capa para upload no Supabase
       const isVideo = file.type.startsWith('video/');
       const reader = new FileReader();
 
@@ -659,6 +663,7 @@ function initPhotoDropzone() {
   if (removeBtn) {
     removeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
+      uploadedCoverFile = null;
       fileInput.value = '';
       if (previewImg) {
         previewImg.src = '';
@@ -865,17 +870,24 @@ function updateSummaryTags() {
   if (sumServices) sumServices.textContent = `${servicesCount} Procedimentos`;
 }
 
-/* ── 8. Envio do Formulário & Tela de Sucesso ───────────────────────────── */
+/* ── 8. Envio do Formulário & Integração Supabase ──────────────────────── */
 function initFormSubmission() {
   const form = document.getElementById('onboarding-form');
   const successScreen = document.getElementById('success-screen');
   const successLinkDisplay = document.getElementById('success-link-display');
   const whatsappConfirmBtn = document.getElementById('btn-whatsapp-confirm');
+  const submitBtn = document.getElementById('btn-submit-final');
 
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>Salvando &amp; Gerando Catálogo...</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>`;
+    }
 
     const designerName = document.getElementById('input-designer-name')?.value || 'Lash Designer';
     const whatsapp = document.getElementById('input-whatsapp')?.value || '';
@@ -885,27 +897,163 @@ function initFormSubmission() {
     
     const selectedModel = document.getElementById('input-selected-model')?.value || selectedModelId;
     const selectedColor = document.getElementById('input-selected-color')?.value || selectedColorId;
-
-    // Procedimentos coletados
-    const serviceRows = document.querySelectorAll('.service-row-card');
-    const servicesList = [];
-    let customPhotosCount = 0;
-    serviceRows.forEach((row) => {
-      const name = row.querySelector('.service-name')?.value;
-      const price = row.querySelector('.service-price')?.value;
-      const duration = row.querySelector('.service-duration')?.value;
-      const maintenance = row.querySelector('.service-maintenance')?.value;
-      const hasCustomPhoto = row.getAttribute('data-has-custom-photo') === 'true';
-      if (hasCustomPhoto) customPhotosCount++;
-      const photoTag = hasCustomPhoto ? '[📸 Foto Própria]' : '[🖼️ Foto Padrão]';
-      if (name) {
-        servicesList.push(`• ${name}: R$ ${price} (${duration}) | Manut: R$ ${maintenance} ${photoTag}`);
-      }
-    });
-
     const heroPhrase = document.getElementById('input-hero-phrase')?.value || '';
 
-    // Monta texto formatado para envio direto ao WhatsApp de suporte
+    // Captura parâmetros da URL do checkout (se houver)
+    const urlParams = new URLSearchParams(window.location.search);
+    const platformOrderId = urlParams.get('order_id') || urlParams.get('id') || '';
+    const clientEmail = urlParams.get('email') || '';
+
+    // 1. Upload da Capa (se houver arquivo anexado)
+    let coverMediaUrl = null;
+    let coverMediaType = 'image';
+
+    if (uploadedCoverFile && window.supabaseClient) {
+      try {
+        const isVideo = uploadedCoverFile.type.startsWith('video/');
+        coverMediaType = isVideo ? 'video' : 'image';
+        const fileExt = uploadedCoverFile.name.split('.').pop() || (isVideo ? 'mp4' : 'jpg');
+        const coverPath = `covers/${slug}-cover-${Date.now()}.${fileExt}`;
+
+        const { error: coverUploadErr } = await window.supabaseClient.storage
+          .from('catalog-assets')
+          .upload(coverPath, uploadedCoverFile, { upsert: true });
+
+        if (!coverUploadErr) {
+          const { data: publicUrlData } = window.supabaseClient.storage
+            .from('catalog-assets')
+            .getPublicUrl(coverPath);
+          coverMediaUrl = publicUrlData.publicUrl;
+        } else {
+          console.warn('Aviso no upload da capa:', coverUploadErr);
+        }
+      } catch (errCover) {
+        console.warn('Erro ao processar mídia de capa:', errCover);
+      }
+    }
+
+    // 2. Coleta e Upload de Procedimentos
+    const serviceRows = document.querySelectorAll('.service-row-card');
+    const servicesPayload = [];
+    const servicesListForMessage = [];
+    let customPhotosCount = 0;
+
+    for (let i = 0; i < serviceRows.length; i++) {
+      const row = serviceRows[i];
+      const name = row.querySelector('.service-name')?.value || '';
+      const price = row.querySelector('.service-price')?.value || '';
+      const duration = row.querySelector('.service-duration')?.value || '';
+      const maintenance = row.querySelector('.service-maintenance')?.value || '';
+      const cat = row.querySelector('.service-cat')?.value || 'Extensão de Cílios';
+      const desc = row.querySelector('.service-desc')?.value || '';
+      const effect = row.querySelector('.service-effect')?.value || '';
+      const recommendation = row.querySelector('.service-recommendation')?.value || '';
+      const isCustom = row.getAttribute('data-has-custom-photo') === 'true';
+
+      let finalPhotoUrl = row.querySelector('.service-photo-thumb')?.src || '';
+
+      // Se enviou foto personalizada neste card, faz upload
+      if (row._customPhotoFile && window.supabaseClient) {
+        try {
+          const fileExt = row._customPhotoFile.name.split('.').pop() || 'jpg';
+          const svcPath = `services/${slug}-proc-${i + 1}-${Date.now()}.${fileExt}`;
+
+          const { error: svcUploadErr } = await window.supabaseClient.storage
+            .from('catalog-assets')
+            .upload(svcPath, row._customPhotoFile, { upsert: true });
+
+          if (!svcUploadErr) {
+            const { data: svcUrlData } = window.supabaseClient.storage
+              .from('catalog-assets')
+              .getPublicUrl(svcPath);
+            finalPhotoUrl = svcUrlData.publicUrl;
+          }
+        } catch (errSvc) {
+          console.warn('Erro ao enviar foto do procedimento:', errSvc);
+        }
+      }
+
+      if (isCustom) customPhotosCount++;
+      const photoTag = isCustom ? '[📸 Foto Própria]' : '[🖼️ Foto Padrão]';
+
+      if (name.trim()) {
+        servicesListForMessage.push(`• ${name}: R$ ${price} (${duration}) | Manut: R$ ${maintenance} ${photoTag}`);
+        servicesPayload.push({
+          name: name.trim(),
+          price: price.trim(),
+          duration: duration.trim(),
+          maintenance: maintenance.trim(),
+          category: cat.trim(),
+          description: desc.trim(),
+          effect: effect.trim(),
+          recommendation: recommendation.trim(),
+          photo_url: finalPhotoUrl,
+          is_custom_photo: isCustom
+        });
+      }
+    }
+
+    // 3. Gravação no Banco de Dados Supabase
+    let orderId = null;
+    if (window.supabaseClient) {
+      try {
+        const orderRecord = {
+          platform_order_id: platformOrderId,
+          client_email: clientEmail,
+          client_name: designerName,
+          whatsapp: whatsapp,
+          instagram: instagram,
+          location: location,
+          slug: slug,
+          model_id: selectedModel,
+          color_id: selectedColor,
+          hero_phrase: heroPhrase,
+          cover_media_url: coverMediaUrl,
+          cover_media_type: coverMediaType,
+          status: 'pendente_revisao',
+          published_url: `https://${slug}.lashmenu.com`
+        };
+
+        const { data: insertedOrder, error: orderErr } = await window.supabaseClient
+          .from('orders')
+          .insert([orderRecord])
+          .select()
+          .single();
+
+        if (orderErr) {
+          console.error('Erro ao gravar pedido:', orderErr);
+        } else if (insertedOrder && insertedOrder.id) {
+          orderId = insertedOrder.id;
+
+          const servicesRecords = servicesPayload.map((svc, idx) => ({
+            order_id: orderId,
+            name: svc.name,
+            price: svc.price,
+            duration: svc.duration,
+            maintenance: svc.maintenance,
+            category: svc.category,
+            description: svc.description,
+            effect: svc.effect,
+            recommendation: svc.recommendation,
+            photo_url: svc.photo_url,
+            is_custom_photo: svc.is_custom_photo,
+            order_index: idx + 1
+          }));
+
+          const { error: servicesErr } = await window.supabaseClient
+            .from('order_services')
+            .insert(servicesRecords);
+
+          if (servicesErr) {
+            console.error('Erro ao gravar procedimentos:', servicesErr);
+          }
+        }
+      } catch (dbErr) {
+        console.error('Erro inesperado no banco de dados:', dbErr);
+      }
+    }
+
+    // 4. Monta mensagem de notificação de WhatsApp
     const message = `✨ *NOVO FORMULÁRIO DE PERSONALIZAÇÃO LASHMENU*\n\n` +
       `👤 *Lash Designer:* ${designerName}\n` +
       `📱 *WhatsApp:* ${whatsapp}\n` +
@@ -915,10 +1063,11 @@ function initFormSubmission() {
       `🎨 *Modelo Escolhido:* ${selectedModel.toUpperCase()}\n` +
       `🎨 *Paleta Escolhida:* ${selectedColor.toUpperCase()}\n` +
       `💬 *Frase da Capa:* ${heroPhrase}\n\n` +
-      `📋 *Procedimentos (${serviceRows.length}):* \n${servicesList.join('\n')}\n\n` +
-      `📸 *Fotos Próprias Trocadas nos Cards:* ${customPhotosCount} de ${serviceRows.length}`;
+      `📋 *Procedimentos (${servicesPayload.length}):* \n${servicesListForMessage.join('\n')}\n\n` +
+      `📸 *Fotos Próprias Trocadas nos Cards:* ${customPhotosCount} de ${servicesPayload.length}` +
+      (orderId ? `\n\n🆔 *ID do Pedido no Supabase:* ${orderId}` : '');
 
-    const adminWhatsAppNumber = '5511999999999'; // Número do seu suporte para recebimento
+    const adminWhatsAppNumber = '5511999999999';
     const encodedMsg = encodeURIComponent(message);
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${adminWhatsAppNumber}&text=${encodedMsg}`;
 
@@ -930,7 +1079,13 @@ function initFormSubmission() {
       successLinkDisplay.textContent = `${slug}.lashmenu.com`;
     }
 
-    // Esconde o formulário e exibe a tela de sucesso
+    // Restaura botão
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHtml;
+    }
+
+    // Exibe a tela de sucesso
     form.style.display = 'none';
     const progressTrack = document.querySelector('.steps-progress');
     if (progressTrack) progressTrack.style.display = 'none';
