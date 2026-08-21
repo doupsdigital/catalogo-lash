@@ -74,7 +74,7 @@
     // 3. Aplica o Tema Escolhido (Modelo + Paleta)
     const model = order.model_id || 'glamour';
     const color = order.color_id || 'midnight';
-    const themePath = `../${model}-${color}/css/style.css`;
+    const themePath = `../${model}-${color}/css/style.css?v=2026`;
     if (themeStylesheet) {
       themeStylesheet.href = themePath;
     }
@@ -99,10 +99,10 @@
     const designerName = order.client_name || 'Lash Designer';
     const cleanPhone = (order.whatsapp || '').replace(/\D/g, '');
     const instagram = (order.instagram || '').replace(/^@/, '');
-    const location = order.location || '';
-    const heroPhrase = order.hero_phrase || 'Especialista em extensão de cílios e visagismo do olhar.';
+    const location = order.location || 'Atendimento com horário marcado';
+    const heroPhrase = order.hero_phrase || 'Especialista em extensão de cílios. Cada aplicação começa por ouvir você.';
     
-    // Mídia de Capa
+    // Mídia de Capa (Foto ou Vídeo)
     const isVideo = order.cover_media_type === 'video' && order.cover_media_url;
     const coverMediaHtml = isVideo
       ? `<video class="hero__foto hero__video" src="${order.cover_media_url}" autoplay muted loop playsinline preload="auto"></video>`
@@ -111,33 +111,30 @@
     // Renderiza os Cards de Procedimentos
     const servicesCardsHtml = services.map((svc, idx) => {
       const priceText = svc.price ? `R$ ${svc.price}` : 'Sob Consulta';
-      const durationText = svc.duration ? `· ${svc.duration}` : '';
-      const maintenanceText = svc.maintenance ? `· Manut: R$ ${svc.maintenance}` : '';
+      const durationText = svc.duration ? `${svc.duration}` : '1h30';
+      const categoryText = svc.category || 'fios selecionados';
       const photoUrl = svc.photo_url || `../glamour-midnight/assets/img/hero.jpg`;
 
       return `
         <article class="card-procedimento" data-idx="${idx}" tabindex="0" role="button" aria-label="Ver detalhes de ${svc.name}">
           <div class="card-procedimento__foto-box">
             <img src="${photoUrl}" alt="${svc.name}" class="card-procedimento__foto" loading="lazy" onerror="this.src='../glamour-midnight/assets/img/hero.jpg'">
+            <h3 class="card-procedimento__nome">${svc.name}</h3>
           </div>
           <div class="card-procedimento__info">
-            <h3 class="card-procedimento__nome">${svc.name}</h3>
-            <p class="card-procedimento__sub">${svc.category || 'Extensão de Cílios'}</p>
-            <div class="card-procedimento__detalhes">
-              <span class="card-procedimento__preco">${priceText}</span>
-              <span class="card-procedimento__tempo">${durationText}</span>
-            </div>
-            ${svc.maintenance ? `<span class="card-procedimento__manut">${maintenanceText}</span>` : ''}
+            <span class="card-procedimento__preco">${priceText}</span>
+            <p class="card-procedimento__meta">${durationText} · ${categoryText}</p>
           </div>
         </article>
       `;
     }).join('');
 
-    // Estrutura Principal da Vitrine
+    // Estrutura Completa de 4 Seções (Hero -> Procedimentos -> Orientações -> Contato)
     app.innerHTML = `
-      <div class="vitrine">
-        <!-- 1. HERO CAPA -->
-        <section class="hero" data-screen-label="Capa">
+      <div class="vitrine" id="vitrine-scroll">
+        
+        <!-- SEÇÃO 1: HERO CAPA -->
+        <section class="hero" id="screen-hero" data-screen-label="Hero">
           <div class="hero__foto-wrap">
             ${coverMediaHtml}
           </div>
@@ -152,15 +149,15 @@
               <p class="hero__frase">${heroPhrase}</p>
               <p class="hero__frase-cilios">Cílios pensados para o <em>seu olhar</em> — técnica segura, desenho personalizado.</p>
             </div>
-            <div class="hero__scroll-cue">
+            <a href="#screen-procedimentos" class="hero__scroll-cue" style="text-decoration: none; color: inherit;">
               <span>Deslize</span>
               <div class="hero__scroll-linha"></div>
-            </div>
+            </a>
           </div>
         </section>
 
-        <!-- 2. SEÇÃO DE PROCEDIMENTOS -->
-        <section class="procedimentos" id="catalogo" data-screen-label="Procedimentos">
+        <!-- SEÇÃO 2: PROCEDIMENTOS -->
+        <section class="procedimentos" id="screen-procedimentos" data-screen-label="Procedimentos">
           <div class="procedimentos__foto-wrap">
             <img src="${order.cover_media_url || `../${model}-${color}/assets/img/Hero.png`}" alt="${designerName}" class="procedimentos__foto" onerror="this.src='../glamour-midnight/assets/img/hero.jpg'">
           </div>
@@ -174,162 +171,181 @@
                 ${servicesCardsHtml}
               </div>
             </div>
+            <a href="#screen-orientacoes" class="hero__scroll-cue" style="text-decoration: none; color: inherit; margin-top: 10px;">
+              <span>Deslize</span>
+              <div class="hero__scroll-linha"></div>
+            </a>
           </div>
         </section>
 
-        <!-- 3. FOOTER / AGENDAMENTO DIRETO -->
-        <footer class="procedimentos__rodape">
-          <div class="container-rodape">
-            <a href="https://api.whatsapp.com/send?phone=${cleanPhone}&text=Ol%C3%A1%2C%20${encodeURIComponent(designerName)}!%20Estava%20olhando%20seu%20cat%C3%A1logo%20e%20gostaria%20de%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener noreferrer" class="btn-whatsapp-flutuante">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.771.815 2.791.815 3.179 0 5.767-2.587 5.768-5.766.001-3.18-2.586-5.767-5.768-5.767zm9.969 5.766c-.002 5.519-4.49 9.998-10 9.998-1.758 0-3.414-.467-4.869-1.282l-5.131 1.346 1.374-5.011c-.91-1.503-1.374-3.238-1.374-5.051 0-5.52 4.488-10 10-10 5.514 0 10 4.48 10 10z"/></svg>
-              <span>Agendar com ${designerName.split(' ')[0]}</span>
+        <!-- SEÇÃO 3: ORIENTAÇÕES / ANTES DE VIR -->
+        <section class="agendamento" id="screen-orientacoes" data-screen-label="Orientações">
+          <div class="agendamento__foto-wrap">
+            <img src="${order.cover_media_url || `../${model}-${color}/assets/img/Hero.png`}" alt="Orientações" class="agendamento__foto" onerror="this.src='../glamour-midnight/assets/img/hero.jpg'">
+          </div>
+          <div class="agendamento__scrim"></div>
+          <div class="agendamento__conteudo">
+            <span class="etiqueta">Antes de vir</span>
+            <div class="agendamento__corpo">
+              <h2 class="agendamento__frase">Orientações para o <em>seu dia</em>.</h2>
+              <div class="agendamento__lista">
+                <div class="agendamento__item">
+                  <span class="agendamento__numeral">01</span>
+                  <div class="agendamento__texto">
+                    <strong>Confirmação</strong>
+                    <p>Até um dia antes do seu horário marcado.</p>
+                  </div>
+                </div>
+                <div class="agendamento__item">
+                  <span class="agendamento__numeral">02</span>
+                  <div class="agendamento__texto">
+                    <strong>Pontualidade</strong>
+                    <p>Tolerância máxima de 15 minutos de atraso.</p>
+                  </div>
+                </div>
+                <div class="agendamento__item">
+                  <span class="agendamento__numeral">03</span>
+                  <div class="agendamento__texto">
+                    <strong>Preparação</strong>
+                    <p>Venha com a região dos olhos limpa e sem maquiagem.</p>
+                  </div>
+                </div>
+                <div class="agendamento__item agendamento__item--ultimo">
+                  <span class="agendamento__numeral">04</span>
+                  <div class="agendamento__texto">
+                    <strong>Manutenção</strong>
+                    <p>Recomendada entre 15 a 20 dias para fios impecáveis.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="#screen-contato" class="hero__scroll-cue" style="text-decoration: none; color: inherit;">
+              <span>Deslize</span>
+              <div class="hero__scroll-linha"></div>
             </a>
-            ${instagram ? `<a href="https://instagram.com/${instagram}" target="_blank" rel="noopener noreferrer" class="link-instagram">@${instagram}</a>` : ''}
-            ${location ? `<p class="texto-localizacao">📍 ${location}</p>` : ''}
           </div>
-        </footer>
+        </section>
 
-        <!-- 4. MODAL DE DETALHES DO PROCEDIMENTO -->
-        <div class="modal-overlay is-hidden" id="modal-procedimento" aria-hidden="true">
-          <div class="modal-backdrop" id="modal-backdrop"></div>
-          <div class="modal-container">
-            <button type="button" class="modal-fechar" id="modal-close-btn" aria-label="Fechar modal">✕</button>
-            <div class="modal-foto-wrap">
-              <img src="" alt="" class="modal-foto" id="modal-img">
-            </div>
-            <div class="modal-conteudo">
-              <span class="modal-categoria" id="modal-cat">Técnica</span>
-              <h2 class="modal-titulo" id="modal-title">Procedimento</h2>
-              
-              <div class="modal-precos">
-                <div class="modal-preco-box">
-                  <span class="modal-label">Aplicação</span>
-                  <span class="modal-valor" id="modal-price">R$ 0,00</span>
-                </div>
-                <div class="modal-preco-box">
-                  <span class="modal-label">Duração</span>
-                  <span class="modal-valor" id="modal-duration">0h00</span>
-                </div>
-                <div class="modal-preco-box" id="modal-maint-box">
-                  <span class="modal-label">Manutenção</span>
-                  <span class="modal-valor" id="modal-maintenance">R$ 0,00</span>
-                </div>
-              </div>
-
-              <div class="modal-descricoes">
-                <div class="modal-bloco" id="modal-desc-block">
-                  <h4>Sobre o Procedimento</h4>
-                  <p id="modal-desc"></p>
-                </div>
-                <div class="modal-bloco" id="modal-effect-block">
-                  <h4>Efeito no Olhar</h4>
-                  <p id="modal-effect"></p>
-                </div>
-                <div class="modal-bloco" id="modal-rec-block">
-                  <h4>Regra de Manutenção</h4>
-                  <p id="modal-rec"></p>
-                </div>
-              </div>
-
-              <a href="#" target="_blank" rel="noopener noreferrer" class="btn-modal-agendar" id="modal-whatsapp-btn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.771.815 2.791.815 3.179 0 5.767-2.587 5.768-5.766.001-3.18-2.586-5.767-5.768-5.767zm9.969 5.766c-.002 5.519-4.49 9.998-10 9.998-1.758 0-3.414-.467-4.869-1.282l-5.131 1.346 1.374-5.011c-.91-1.503-1.374-3.238-1.374-5.051 0-5.52 4.488-10 10-10 5.514 0 10 4.48 10 10z"/></svg>
-                <span>Agendar este Procedimento</span>
+        <!-- SEÇÃO 4: CONTATO & AGENDAMENTO -->
+        <section class="contato" id="screen-contato" data-screen-label="Contato">
+          <div class="contato__foto-wrap">
+            <img src="${order.cover_media_url || `../${model}-${color}/assets/img/Hero.png`}" alt="Contato" class="contato__foto" onerror="this.src='../glamour-midnight/assets/img/hero.jpg'">
+          </div>
+          <div class="contato__scrim"></div>
+          <div class="contato__conteudo">
+            <p class="contato__titulo"><em>Vamos</em><br>desenhar<br>seu olhar.</p>
+            <div class="contato__acoes">
+              <a class="btn-whatsapp" href="https://api.whatsapp.com/send?phone=${cleanPhone}&text=Ol%C3%A1%2C%20${encodeURIComponent(designerName)}!%20Estava%20olhando%20seu%20cat%C3%A1logo%20e%20gostaria%20de%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener">
+                <span class="btn__left">
+                  <svg class="btn__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.43 0-2.82-.37-4.05-1.08l-.29-.17-3.12.82.83-3.04-.19-.3a8.132 8.132 0 0 1-1.25-4.46c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.58c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.22-.16-.47-.28z"/></svg>
+                  <span>Agendar no WhatsApp</span>
+                </span>
+                <span class="btn__arrow">→</span>
               </a>
+              ${instagram ? `
+                <a class="btn-instagram" href="https://instagram.com/${instagram}" target="_blank" rel="noopener">
+                  <span class="btn__left">
+                    <svg class="btn__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <span>@${instagram}</span>
+                  </span>
+                  <span class="btn__arrow">→</span>
+                </a>
+              ` : ''}
+            </div>
+            <div class="contato__info">
+              <span>Dinheiro · Pix · Débito · Crédito</span>
+              ${location ? `<span>📍 ${location}</span>` : ''}
             </div>
           </div>
+        </section>
+
+      </div>
+
+      <!-- MODAL DE DETALHES DO PROCEDIMENTO (BOTTOM SHEET LUXO) -->
+      <div class="detalhe-procedimento" id="modal-procedimento" hidden>
+        <div class="detalhe-procedimento__backdrop" id="modal-backdrop" style="position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100;"></div>
+        <div class="detalhe-procedimento__sheet" id="modal-sheet" style="position: fixed; bottom: 0; left: 0; right: 0; max-height: 85vh; overflow-y: auto; z-index: 101;">
+          <!-- Injetado dinamicamente no clique -->
         </div>
       </div>
     `;
 
-    // 6. Interatividade do Modal
-    initModalEvents(services, designerName, cleanPhone);
+    // 6. Interatividade dos Modais de Procedimento
+    initProcedureModalEvents(services, designerName, cleanPhone);
   }
 
-  function initModalEvents(services, designerName, cleanPhone) {
-    const modal = document.getElementById('modal-procedimento');
-    const backdrop = document.getElementById('modal-backdrop');
-    const closeBtn = document.getElementById('modal-close-btn');
-
-    const modalImg = document.getElementById('modal-img');
-    const modalCat = document.getElementById('modal-cat');
-    const modalTitle = document.getElementById('modal-title');
-    const modalPrice = document.getElementById('modal-price');
-    const modalDuration = document.getElementById('modal-duration');
-    const modalMaintenance = document.getElementById('modal-maintenance');
-    const modalMaintBox = document.getElementById('modal-maint-box');
-
-    const modalDesc = document.getElementById('modal-desc');
-    const modalDescBlock = document.getElementById('modal-desc-block');
-    const modalEffect = document.getElementById('modal-effect');
-    const modalEffectBlock = document.getElementById('modal-effect-block');
-    const modalRec = document.getElementById('modal-rec');
-    const modalRecBlock = document.getElementById('modal-rec-block');
-    const modalWhatsappBtn = document.getElementById('modal-whatsapp-btn');
+  function initProcedureModalEvents(services, designerName, cleanPhone) {
+    const modalWrapper = document.getElementById('modal-procedimento');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const modalSheet = document.getElementById('modal-sheet');
 
     const closeModal = () => {
-      if (modal) {
-        modal.classList.add('is-hidden');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
+      if (modalWrapper) {
+        modalWrapper.hidden = true;
       }
     };
 
-    if (backdrop) backdrop.addEventListener('click', closeModal);
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
+    if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
 
     document.querySelectorAll('.card-procedimento').forEach((card) => {
       card.addEventListener('click', () => {
         const idx = parseInt(card.getAttribute('data-idx'), 10);
         const svc = services[idx];
-        if (!svc) return;
+        if (!svc || !modalSheet) return;
 
-        if (modalImg) modalImg.src = svc.photo_url || '../glamour-midnight/assets/img/hero.jpg';
-        if (modalCat) modalCat.textContent = svc.category || 'Extensão de Cílios';
-        if (modalTitle) modalTitle.textContent = svc.name;
-        if (modalPrice) modalPrice.textContent = svc.price ? `R$ ${svc.price}` : 'Sob Consulta';
-        if (modalDuration) modalDuration.textContent = svc.duration || 'Consulte';
+        const photoUrl = svc.photo_url || '../glamour-midnight/assets/img/hero.jpg';
+        const price = svc.price ? `R$ ${svc.price}` : 'Consulte';
+        const duration = svc.duration || '1h30';
+        const maintenance = svc.maintenance ? `R$ ${svc.maintenance}` : 'Sob consulta';
+        const category = svc.category || 'Extensão de Cílios';
+        const description = svc.description || 'Aplicação minuciosa com fios de alta tecnologia para um acabamento marcante e duradouro.';
+        const effect = svc.effect || 'Preenchimento, volume e realce do olhar';
+        const recommendation = svc.recommendation || 'Manutenção recomendada de 15 a 20 dias para preservar o preenchimento perfeito.';
 
-        if (svc.maintenance && modalMaintBox && modalMaintenance) {
-          modalMaintBox.style.display = 'flex';
-          modalMaintenance.textContent = `R$ ${svc.maintenance}`;
-        } else if (modalMaintBox) {
-          modalMaintBox.style.display = 'none';
-        }
+        const whatsappMsg = `Olá, ${designerName.split(' ')[0]}! Estava vendo seu catálogo digital e quero agendar: *${svc.name}* (${price}).`;
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(whatsappMsg)}`;
 
-        if (svc.description && modalDesc && modalDescBlock) {
-          modalDescBlock.style.display = 'block';
-          modalDesc.textContent = svc.description;
-        } else if (modalDescBlock) {
-          modalDescBlock.style.display = 'none';
-        }
+        modalSheet.innerHTML = `
+          <div class="detalhe-procedimento__foto-box" style="position: relative; height: 260px; overflow: hidden;">
+            <img src="${photoUrl}" alt="${svc.name}" style="width: 100%; height: 100%; object-fit: cover;">
+            <button type="button" class="detalhe-procedimento__fechar" id="btn-close-sheet" style="position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">✕</button>
+          </div>
+          <div class="detalhe-procedimento__conteudo" style="padding: 24px;">
+            <span class="detalhe-procedimento__etiqueta">${category}</span>
+            <h2 class="detalhe-procedimento__nome" style="font-size: 1.6rem; margin: 6px 0 16px 0;">${svc.name}</h2>
+            
+            <div class="detalhe-procedimento__grid-valores" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px;">
+              <div>
+                <span style="font-size: 0.72rem; color: #a3958c; text-transform: uppercase; display: block;">Aplicação</span>
+                <strong style="font-size: 1.1rem; color: #fff;">${price}</strong>
+              </div>
+              <div>
+                <span style="font-size: 0.72rem; color: #a3958c; text-transform: uppercase; display: block;">Duração</span>
+                <strong style="font-size: 1.1rem; color: #fff;">${duration}</strong>
+              </div>
+              <div>
+                <span style="font-size: 0.72rem; color: #a3958c; text-transform: uppercase; display: block;">Manutenção</span>
+                <strong style="font-size: 1.1rem; color: #fff;">${maintenance}</strong>
+              </div>
+            </div>
 
-        if (svc.effect && modalEffect && modalEffectBlock) {
-          modalEffectBlock.style.display = 'block';
-          modalEffect.textContent = svc.effect;
-        } else if (modalEffectBlock) {
-          modalEffectBlock.style.display = 'none';
-        }
+            <div style="margin-bottom: 24px; line-height: 1.6; color: #d4c7bd; font-size: 0.92rem;">
+              <p style="margin-bottom: 12px;"><strong>Sobre:</strong> ${description}</p>
+              <p style="margin-bottom: 12px;"><strong>Efeito:</strong> ${effect}</p>
+              <p><strong>Recomendação:</strong> ${recommendation}</p>
+            </div>
 
-        if (svc.recommendation && modalRec && modalRecBlock) {
-          modalRecBlock.style.display = 'block';
-          modalRec.textContent = svc.recommendation;
-        } else if (modalRecBlock) {
-          modalRecBlock.style.display = 'none';
-        }
+            <a href="${whatsappUrl}" target="_blank" rel="noopener" class="btn-whatsapp" style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; background: #25d366; color: #fff; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: 0.95rem; gap: 8px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.43 0-2.82-.37-4.05-1.08l-.29-.17-3.12.82.83-3.04-.19-.3a8.132 8.132 0 0 1-1.25-4.46c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.58c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.22-.16-.47-.28z"/></svg>
+              <span>Agendar este Procedimento</span>
+            </a>
+          </div>
+        `;
 
-        if (modalWhatsappBtn) {
-          const msg = `Olá, ${designerName.split(' ')[0]}! Estava vendo seu catálogo digital e quero agendar o procedimento: *${svc.name}* (R$ ${svc.price || ''}).`;
-          modalWhatsappBtn.href = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(msg)}`;
-        }
+        document.getElementById('btn-close-sheet')?.addEventListener('click', closeModal);
 
-        if (modal) {
-          modal.classList.remove('is-hidden');
-          modal.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
+        if (modalWrapper) {
+          modalWrapper.hidden = false;
         }
       });
     });
