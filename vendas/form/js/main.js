@@ -398,8 +398,6 @@ function initFormSubmission() {
       }
     });
 
-    const pixKey = document.getElementById('input-pix-key')?.value || '';
-    const depositRule = document.getElementById('input-deposit-rule')?.value || '';
     const extraNotes = document.getElementById('input-extra-notes')?.value || '';
     const driveLink = document.getElementById('input-drive-link')?.value || '';
 
@@ -414,10 +412,8 @@ function initFormSubmission() {
       `🎨 *Modelo Escolhido:* ${selectedModel.toUpperCase()}\n` +
       `🎨 *Paleta Escolhida:* ${selectedColor.toUpperCase()}\n\n` +
       `📋 *Procedimentos:* \n${servicesList.join('\n')}\n\n` +
-      `🔑 *Chave Pix:* ${pixKey || 'Não informada'}\n` +
-      `💰 *Regra de Sinal:* ${depositRule || 'Não informada'}\n` +
-      `📝 *Orientações:* ${extraNotes || 'Nenhuma'}\n` +
-      `📁 *Link das Fotos:* ${driveLink || 'Foto enviada no formulário'}`;
+      `📁 *Link das Fotos:* ${driveLink || 'Foto anexada no formulário'}\n\n` +
+      `📝 *Observações / Pedidos Especiais:* \n${extraNotes || 'Nenhuma observação informada'}`;
 
     const adminWhatsAppNumber = '5511999999999'; // Número do seu suporte para recebimento
     const encodedMsg = encodeURIComponent(message);

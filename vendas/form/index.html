@@ -329,28 +329,6 @@
               </button>
             </div>
 
-            <!-- Informações Complementares -->
-            <div class="extra-info-section">
-              <h3 class="extra-section-title">Informações Complementares (Opcional)</h3>
-
-              <div class="fields-grid">
-                <div class="field-group">
-                  <label for="input-pix-key" class="field-label">Chave Pix para Sinal ou Agendamento</label>
-                  <input type="text" id="input-pix-key" name="pix_key" class="field-input" placeholder="Ex: chavepix@email.com ou Celular">
-                </div>
-
-                <div class="field-group">
-                  <label for="input-deposit-rule" class="field-label">Regra de Sinal / Taxa de Reserva</label>
-                  <input type="text" id="input-deposit-rule" name="deposit_rule" class="field-input" placeholder="Ex: Sinal de R$ 30 para confirmação da vaga">
-                </div>
-
-                <div class="field-group field-group--full">
-                  <label for="input-extra-notes" class="field-label">Orientações aos Clientes (Ex: chegar sem rímel, tolerância de atraso)</label>
-                  <textarea id="input-extra-notes" name="extra_notes" rows="3" class="field-input field-textarea" placeholder="Ex: Pedimos que venha sem maquiagem nos olhos. Tolerância máxima de 15 minutos de atraso."></textarea>
-                </div>
-              </div>
-            </div>
-
             <div class="step-footer">
               <button type="button" class="btn btn--outline btn-prev-step" data-prev="2">
                 ← Voltar
@@ -399,6 +377,13 @@
               <label for="input-drive-link" class="field-label">Link do Google Drive / iCloud / WhatsApp com Fotos Adicionais (Opcional)</label>
               <input type="url" id="input-drive-link" name="drive_link" class="field-input" placeholder="https://drive.google.com/drive/folders/...">
               <span class="field-hint">Se preferir enviar fotos dos procedimentos via pasta na nuvem ou direto pelo WhatsApp da nossa equipe.</span>
+            </div>
+
+            <!-- Informações Adicionais / Pedidos Especiais -->
+            <div class="field-group" style="margin-top: 20px;">
+              <label for="input-extra-notes" class="field-label">Informações Adicionais ou Pedidos Especiais (Opcional)</label>
+              <textarea id="input-extra-notes" name="extra_notes" rows="3" class="field-input field-textarea" placeholder="Ex: Gostaria de trocar um detalhe de cor, adicionar chave Pix, incluir uma regra de agendamento ou personalizar um texto da capa..."></textarea>
+              <span class="field-hint">Tem algum pedido especial? Se quiser alterar qualquer detalhe no modelo escolhido, adicionar regras de atendimento ou orientações extras, descreva aqui para nossa equipe.</span>
             </div>
 
             <!-- Resumo Rápido -->
