@@ -198,56 +198,129 @@ function initModelCardsSelection() {
   }
 }
 
-/* ── 3. Builder Dinâmico de Procedimentos ───────────────────────────────── */
+/* ── 3. Builder Dinâmico de Procedimentos & Fotos ────────────────────────── */
 const defaultServices = [
-  { name: 'Volume Brasileiro', price: '160,00', duration: '2h', maintenance: '90,00' },
-  { name: 'Volume Russo', price: '180,00', duration: '2h15', maintenance: '100,00' },
-  { name: 'Fox Eyes', price: '190,00', duration: '2h', maintenance: '110,00' },
-  { name: 'Lash Lifting', price: '130,00', duration: '1h15', maintenance: '-' },
-  { name: 'Mega Volume', price: '220,00', duration: '2h30', maintenance: '130,00' }
+  { name: 'Volume Brasileiro', price: '150,00', duration: '1h30', maintenance: '90,00', photo: '../../glamour-midnight/assets/img/volume-brasileiro.png' },
+  { name: 'Clássico Fio a Fio', price: '120,00', duration: '1h30', maintenance: '80,00', photo: '../../glamour-midnight/assets/img/classico-fio-a-fio.png' },
+  { name: 'Volume Egípcio', price: '160,00', duration: '1h30', maintenance: '95,00', photo: '../../glamour-midnight/assets/img/volume-egipcio.png' },
+  { name: 'Volume Híbrido', price: '160,00', duration: '1h45', maintenance: '95,00', photo: '../../glamour-midnight/assets/img/volume-hibrido.png' },
+  { name: 'Volume Russo', price: '190,00', duration: '2h00', maintenance: '110,00', photo: '../../glamour-midnight/assets/img/volume-russo.png' },
+  { name: 'Mega Volume', price: '240,00', duration: '2h30', maintenance: '130,00', photo: '../../glamour-midnight/assets/img/mega-volume.png' },
+  { name: 'Fox Eyes', price: '170,00', duration: '1h45', maintenance: '100,00', photo: '../../glamour-midnight/assets/img/fox-eyes.png' },
+  { name: 'Lash Lifting', price: '130,00', duration: '1h00', maintenance: 'Incluso', photo: '../../glamour-midnight/assets/img/lash-lifting.png' },
+  { name: 'Mapping Boneca / Gatinho', price: 'Incluso', duration: 'Design', maintenance: '-', photo: '../../glamour-midnight/assets/img/mapping-boneca.png' },
+  { name: 'Remoção dos Fios', price: '50,00', duration: '40min', maintenance: '-', photo: '../../glamour-midnight/assets/img/remocao.png' }
 ];
+
+function updateServicesCount() {
+  const container = document.getElementById('services-builder');
+  const countDisplay = document.getElementById('services-count-number');
+  if (container && countDisplay) {
+    const total = container.querySelectorAll('.service-row-card').length;
+    countDisplay.textContent = total;
+  }
+}
 
 function initServicesBuilder() {
   const container = document.getElementById('services-builder');
   const addBtn = document.getElementById('btn-add-service');
   if (!container || !addBtn) return;
 
-  // Carrega procedimentos padrão
+  // Carrega procedimentos oficiais do catálogo
   defaultServices.forEach((svc) => renderServiceRow(container, svc));
 
-  // Botão Adicionar
+  // Botão Adicionar Mais Procedimento
   addBtn.addEventListener('click', () => {
-    renderServiceRow(container, { name: '', price: '', duration: '', maintenance: '' });
+    renderServiceRow(container, {
+      name: '',
+      price: '',
+      duration: '',
+      maintenance: '',
+      photo: '../../glamour-midnight/assets/img/volume-brasileiro.png'
+    });
   });
 }
 
 function renderServiceRow(container, data) {
   const row = document.createElement('div');
   row.className = 'service-row-card';
+
+  const defaultPhoto = data.photo || '../../glamour-midnight/assets/img/volume-brasileiro.png';
+
   row.innerHTML = `
-    <div class="service-mini-field">
-      <label class="sm-label">Procedimento</label>
-      <input type="text" class="sm-input service-name" placeholder="Ex: Volume Egípcio" value="${data.name || ''}" required>
+    <!-- Miniatura da Foto -->
+    <div class="service-photo-box" title="Toque para trocar ou adicionar foto">
+      <img src="${defaultPhoto}" alt="Foto ${data.name || 'Procedimento'}" class="service-photo-thumb">
+      <div class="service-photo-overlay">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <span>Trocar</span>
+      </div>
+      <input type="file" accept="image/*" class="service-file-input">
     </div>
-    <div class="service-mini-field">
-      <label class="sm-label">Valor (R$)</label>
-      <input type="text" class="sm-input service-price" placeholder="160,00" value="${data.price || ''}">
+
+    <!-- Coluna com os Campos -->
+    <div class="service-fields-col">
+      <div class="service-fields-top">
+        <div class="service-mini-field" style="width: 100%;">
+          <label class="sm-label">Nome do Procedimento</label>
+          <input type="text" class="sm-input service-name" placeholder="Ex: Volume Egípcio" value="${data.name || ''}" required>
+        </div>
+      </div>
+
+      <div class="service-fields-bottom">
+        <div class="service-mini-field">
+          <label class="sm-label">Valor (R$)</label>
+          <input type="text" class="sm-input service-price" placeholder="150,00" value="${data.price || ''}">
+        </div>
+        <div class="service-mini-field">
+          <label class="sm-label">Duração</label>
+          <input type="text" class="sm-input service-duration" placeholder="1h30" value="${data.duration || ''}">
+        </div>
+        <div class="service-mini-field">
+          <label class="sm-label">Manutenção</label>
+          <input type="text" class="sm-input service-maintenance" placeholder="90,00" value="${data.maintenance || ''}">
+        </div>
+      </div>
     </div>
-    <div class="service-mini-field">
-      <label class="sm-label">Duração</label>
-      <input type="text" class="sm-input service-duration" placeholder="2h" value="${data.duration || ''}">
-    </div>
-    <div class="service-mini-field">
-      <label class="sm-label">Manutenção</label>
-      <input type="text" class="sm-input service-maintenance" placeholder="90,00" value="${data.maintenance || ''}">
-    </div>
-    <button type="button" class="btn-remove-service" title="Remover procedimento">✕</button>
+
+    <button type="button" class="btn-remove-service" title="Remover este procedimento">✕</button>
   `;
 
+  // Interação de Troca de Foto
+  const photoBox = row.querySelector('.service-photo-box');
+  const fileInput = row.querySelector('.service-file-input');
+  const photoThumb = row.querySelector('.service-photo-thumb');
+
+  photoBox.addEventListener('click', () => {
+    fileInput.click();
+  });
+
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        photoThumb.src = evt.target.result;
+        row.setAttribute('data-has-custom-photo', 'true');
+
+        let badge = photoBox.querySelector('.service-custom-badge');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'service-custom-badge';
+          badge.textContent = '✓ Própria';
+          photoBox.appendChild(badge);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Remoção
   row.querySelector('.btn-remove-service').addEventListener('click', () => {
     const allRows = container.querySelectorAll('.service-row-card');
     if (allRows.length > 1) {
       row.remove();
+      updateServicesCount();
       updateSummaryTags();
     } else {
       alert('Você precisa ter pelo menos 1 procedimento no seu catálogo.');
@@ -255,6 +328,7 @@ function renderServiceRow(container, data) {
   });
 
   container.appendChild(row);
+  updateServicesCount();
 }
 
 /* ── 4. Dropzone & Upload de Foto ou Vídeo de Capa ───────────────────────── */
@@ -418,13 +492,17 @@ function initFormSubmission() {
     // Procedimentos coletados
     const serviceRows = document.querySelectorAll('.service-row-card');
     const servicesList = [];
+    let customPhotosCount = 0;
     serviceRows.forEach((row) => {
       const name = row.querySelector('.service-name')?.value;
       const price = row.querySelector('.service-price')?.value;
       const duration = row.querySelector('.service-duration')?.value;
       const maintenance = row.querySelector('.service-maintenance')?.value;
+      const hasCustomPhoto = row.getAttribute('data-has-custom-photo') === 'true';
+      if (hasCustomPhoto) customPhotosCount++;
+      const photoTag = hasCustomPhoto ? '[📸 Foto Própria]' : '[🖼️ Foto Padrão]';
       if (name) {
-        servicesList.push(`• ${name}: R$ ${price} (${duration}) | Manut: R$ ${maintenance}`);
+        servicesList.push(`• ${name}: R$ ${price} (${duration}) | Manut: R$ ${maintenance} ${photoTag}`);
       }
     });
 
@@ -441,8 +519,9 @@ function initFormSubmission() {
       `🌐 *Subdomínio:* ${slug}.lashmenu.com\n\n` +
       `🎨 *Modelo Escolhido:* ${selectedModel.toUpperCase()}\n` +
       `🎨 *Paleta Escolhida:* ${selectedColor.toUpperCase()}\n\n` +
-      `📋 *Procedimentos:* \n${servicesList.join('\n')}\n\n` +
-      `📁 *Link das Fotos:* ${driveLink || 'Foto anexada no formulário'}\n\n` +
+      `📋 *Procedimentos (${serviceRows.length}):* \n${servicesList.join('\n')}\n\n` +
+      `📸 *Fotos Próprias Trocadas:* ${customPhotosCount} de ${serviceRows.length}\n` +
+      `📁 *Link Adicional Drive:* ${driveLink || 'Nenhum link extra'}\n\n` +
       `📝 *Observações / Pedidos Especiais:* \n${extraNotes || 'Nenhuma observação informada'}`;
 
     const adminWhatsAppNumber = '5511999999999'; // Número do seu suporte para recebimento

@@ -648,28 +648,148 @@ body {
   box-shadow: 0 4px 14px var(--accent-glow);
 }
 
-/* ── Etapa 3: Procedimentos & Valores ───────────────────────────────────── */
+/* ── Etapa 3: Procedimentos & Valores com Foto Integrada ────────────────── */
+.step-header-with-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.services-count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(192, 75, 107, 0.25);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.80rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.count-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
 .services-builder {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 18px;
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
 .service-row-card {
-  background: var(--bg-card-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
+  background: #ffffff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
-  gap: 10px;
+  grid-template-columns: 80px 1fr auto;
+  gap: 16px;
   align-items: center;
   transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .service-row-card:hover {
-  border-color: rgba(192, 75, 107, 0.3);
+  border-color: rgba(192, 75, 107, 0.35);
+  box-shadow: var(--shadow-md);
+}
+
+/* Miniatura da Foto do Procedimento */
+.service-photo-box {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  background: var(--bg-card-alt);
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.service-photo-box:hover {
+  border-color: var(--accent);
+  transform: scale(1.02);
+}
+
+.service-photo-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.service-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 4px;
+}
+
+.service-photo-box:hover .service-photo-overlay {
+  opacity: 1;
+}
+
+.service-custom-badge {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  background: #16a34a;
+  color: #ffffff;
+  font-size: 0.56rem;
+  font-weight: 800;
+  text-align: center;
+  border-radius: 4px;
+  padding: 2px 0;
+  line-height: 1;
+}
+
+.service-file-input {
+  display: none;
+}
+
+/* Coluna de Campos */
+.service-fields-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-fields-top {
+  display: flex;
+}
+
+.service-fields-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
 }
 
 .service-mini-field {
@@ -690,12 +810,13 @@ body {
   width: 100%;
   padding: 8px 10px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
   background: #ffffff;
   font-family: var(--font-main);
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   color: var(--text);
   outline: none;
+  transition: border-color 0.2s ease;
 }
 
 .sm-input:focus {
@@ -713,7 +834,6 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-top: 16px;
   transition: all 0.2s ease;
 }
 
@@ -725,9 +845,6 @@ body {
 .add-service-action {
   margin-bottom: 28px;
 }
-
-.extra-info-section {
-  padding-top: 24px;
   border-top: 1px solid var(--border);
 }
 
@@ -1030,16 +1147,31 @@ body {
   }
 
   .service-row-card {
+    grid-template-columns: 74px 1fr;
+    gap: 12px;
+    padding: 12px;
+    align-items: start;
+  }
+
+  .service-photo-box {
+    width: 74px;
+    height: 74px;
+  }
+
+  .service-fields-bottom {
     grid-template-columns: 1fr 1fr;
   }
 
-  .service-mini-field:first-child {
-    grid-column: 1 / -1;
+  .btn-remove-service {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
   }
 
-  .btn-remove-service {
-    grid-column: 1 / -1;
-    margin: 4px auto 0;
+  .service-row-card {
+    position: relative;
   }
 
   .node-label {
