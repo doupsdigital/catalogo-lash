@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5.5">
+  <link rel="stylesheet" href="css/style.css?v=6.0">
 </head>
 
 <body>
@@ -390,22 +390,28 @@
               <div class="cover-preview-btn-wrap">
                 <button type="button" class="btn-cover-preview" id="btn-open-cover-preview">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  <span>👁️ Ver Prévia da Minha Capa Oficial</span>
+                  <span>Ver Prévia da Capa</span>
                 </button>
               </div>
             </div>
 
-            <!-- Frase de Efeito da Capa (Slogan / Especialidade) -->
+            <!-- Frase de Efeito da Capa (Slogan / Especialidade em Textarea) -->
             <div class="field-group" style="margin-top: 20px;">
               <label for="input-hero-phrase" class="field-label">Frase de Efeito da Capa (Slogan / Especialidade)</label>
-              <input type="text" id="input-hero-phrase" name="hero_phrase" class="field-input" placeholder="Ex: Especialista em extensão de cílios e visagismo do olhar." value="Especialista em extensão de cílios e visagismo do olhar.">
-              <span class="field-hint">Esta frase aparece logo abaixo do seu nome na abertura do seu catálogo digital.</span>
+              <textarea id="input-hero-phrase" name="hero_phrase" rows="2" class="field-input field-textarea" placeholder="Ex: Especialista em extensão de cílios e visagismo do olhar.">Especialista em extensão de cílios e visagismo do olhar.</textarea>
+              <span class="field-hint">Esta frase aparece em destaque logo abaixo do seu nome na abertura do catálogo digital.</span>
             </div>
 
-            <!-- Informações Adicionais / Pedidos Especiais -->
-            <div class="field-group" style="margin-top: 20px;">
-              <label for="input-extra-notes" class="field-label">Informações Adicionais ou Pedidos Especiais (Opcional)</label>
-              <textarea id="input-extra-notes" name="extra_notes" rows="3" class="field-input field-textarea" placeholder="Tem algum pedido especial? Se quiser alterar alguma coisa no modelo escolhido, descreva aqui neste campo que nossa equipe vai avaliar a viabilidade de implementação."></textarea>
+            <!-- Box Suporte VIP / Personalização no WhatsApp -->
+            <div class="custom-request-box">
+              <div class="crb-text">
+                <strong>Deseja alterar alguma coisa ou outro tipo de personalização?</strong>
+                <span>Fale diretamente com nossa equipe de designers no WhatsApp.</span>
+              </div>
+              <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1%2C%20estou%20preenchendo%20o%20formul%C3%A1rio%20do%20LashMenu%20e%20gostaria%20de%20solicitar%20uma%20personaliza%C3%A7%C3%A3o%20especial." target="_blank" class="btn-support-whatsapp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.771.815 2.791.815 3.179 0 5.767-2.587 5.768-5.766.001-3.18-2.586-5.767-5.768-5.767zm9.969 5.766c-.002 5.519-4.49 9.998-10 9.998-1.758 0-3.414-.467-4.869-1.282l-5.131 1.346 1.374-5.011c-.91-1.503-1.374-3.238-1.374-5.051 0-5.52 4.488-10 10-10 5.514 0 10 4.48 10 10z"/></svg>
+                <span>Falar com a Equipe no WhatsApp</span>
+              </a>
             </div>
 
             <!-- Card de Expectativa de Entrega VIP -->
@@ -438,12 +444,11 @@
             </div>
 
             <div class="step-footer">
-              <button type="button" class="btn btn--outline btn-prev-step" data-prev="3">
-                ← Voltar aos Procedimentos
+              <button type="button" class="btn btn--outline btn-capsule btn-prev-step" data-prev="3">
+                ← Voltar
               </button>
-              <button type="submit" class="btn btn--primary btn--submit-final" id="btn-submit-final">
-                <span>✨ Finalizar e Gerar Meu Catálogo</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>
+              <button type="submit" class="btn btn--primary btn-capsule btn--submit-final" id="btn-submit-final">
+                <span>Concluir &amp; Gerar Catálogo →</span>
               </button>
             </div>
           </div>
@@ -565,7 +570,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=5.5"></script>
+  <script src="js/main.js?v=6.0"></script>
 </body>
 
 </html>
