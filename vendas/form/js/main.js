@@ -257,13 +257,14 @@ function renderServiceRow(container, data) {
   container.appendChild(row);
 }
 
-/* ── 4. Dropzone & Upload de Foto de Capa ────────────────────────────────── */
+/* ── 4. Dropzone & Upload de Foto ou Vídeo de Capa ───────────────────────── */
 function initPhotoDropzone() {
   const dropzone = document.getElementById('avatar-dropzone');
   const fileInput = document.getElementById('input-avatar-file');
   const dropzoneEmpty = document.getElementById('dropzone-empty');
   const dropzonePreview = document.getElementById('dropzone-preview');
   const previewImg = document.getElementById('avatar-preview-img');
+  const previewVideo = document.getElementById('avatar-preview-video');
   const removeBtn = document.getElementById('btn-remove-avatar');
 
   if (!dropzone || !fileInput) return;
@@ -271,12 +272,33 @@ function initPhotoDropzone() {
   fileInput.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) {
+      const isVideo = file.type.startsWith('video/');
       const reader = new FileReader();
+
       reader.onload = (event) => {
-        previewImg.src = event.target.result;
+        if (isVideo) {
+          if (previewImg) previewImg.classList.add('is-hidden');
+          if (previewVideo) {
+            previewVideo.src = event.target.result;
+            previewVideo.classList.remove('is-hidden');
+            previewVideo.play().catch(() => {});
+          }
+        } else {
+          if (previewVideo) {
+            previewVideo.pause();
+            previewVideo.src = '';
+            previewVideo.classList.add('is-hidden');
+          }
+          if (previewImg) {
+            previewImg.src = event.target.result;
+            previewImg.classList.remove('is-hidden');
+          }
+        }
+
         dropzoneEmpty.classList.add('is-hidden');
         dropzonePreview.classList.remove('is-hidden');
       };
+
       reader.readAsDataURL(file);
     }
   });
@@ -285,7 +307,15 @@ function initPhotoDropzone() {
     removeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       fileInput.value = '';
-      previewImg.src = '';
+      if (previewImg) {
+        previewImg.src = '';
+        previewImg.classList.add('is-hidden');
+      }
+      if (previewVideo) {
+        previewVideo.pause();
+        previewVideo.src = '';
+        previewVideo.classList.add('is-hidden');
+      }
       dropzonePreview.classList.add('is-hidden');
       dropzoneEmpty.classList.remove('is-hidden');
     });
