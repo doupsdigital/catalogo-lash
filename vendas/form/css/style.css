@@ -824,14 +824,6 @@ body {
 }
 
 .btn-proc-preview {
-.service-photo-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.btn-proc-preview {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -1186,8 +1178,6 @@ body {
 
 .add-service-action {
   margin-bottom: 28px;
-}
-  border-top: 1px solid var(--border);
 }
 
 .extra-section-title {
