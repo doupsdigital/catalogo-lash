@@ -789,7 +789,6 @@ function initFormSubmission() {
     });
 
     const extraNotes = document.getElementById('input-extra-notes')?.value || '';
-    const driveLink = document.getElementById('input-drive-link')?.value || '';
 
     // Monta texto formatado para envio direto ao WhatsApp de suporte
     const message = `✨ *NOVO FORMULÁRIO DE PERSONALIZAÇÃO LASHMENU*\n\n` +
@@ -802,8 +801,7 @@ function initFormSubmission() {
       `🎨 *Modelo Escolhido:* ${selectedModel.toUpperCase()}\n` +
       `🎨 *Paleta Escolhida:* ${selectedColor.toUpperCase()}\n\n` +
       `📋 *Procedimentos (${serviceRows.length}):* \n${servicesList.join('\n')}\n\n` +
-      `📸 *Fotos Próprias Trocadas:* ${customPhotosCount} de ${serviceRows.length}\n` +
-      `📁 *Link Adicional Drive:* ${driveLink || 'Nenhum link extra'}\n\n` +
+      `📸 *Fotos Próprias Trocadas nos Cards:* ${customPhotosCount} de ${serviceRows.length}\n\n` +
       `📝 *Observações / Pedidos Especiais:* \n${extraNotes || 'Nenhuma observação informada'}`;
 
     const adminWhatsAppNumber = '5511999999999'; // Número do seu suporte para recebimento
