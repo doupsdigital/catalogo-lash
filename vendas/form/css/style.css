@@ -819,11 +819,42 @@ body {
   text-overflow: ellipsis;
 }
 
+.service-photo-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-proc-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: #ffffff;
+  font-family: var(--font-main);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-proc-preview:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px var(--accent-glow);
+}
+
 .btn-change-photo-mini {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
+  gap: 5px;
+  padding: 6px 12px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--border);
   background: #ffffff;
@@ -832,14 +863,13 @@ body {
   font-weight: 700;
   color: var(--text-muted);
   transition: all 0.2s ease;
-  flex-shrink: 0;
-  pointer-events: none;
+  cursor: pointer;
 }
 
-.service-photo-bar:hover .btn-change-photo-mini {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-soft);
+.btn-change-photo-mini:hover {
+  border-color: var(--text);
+  color: var(--text);
+  background: var(--bg-card-alt);
 }
 
 .service-file-input {
@@ -847,12 +877,12 @@ body {
 }
 
 .btn-remove-service {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: #ffffff;
-  color: #dc2626;
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -863,7 +893,185 @@ body {
 
 .btn-remove-service:hover {
   background: #fee2e2;
-  border-color: #dc2626;
+  border-color: #ef4444;
+  color: #dc2626;
+  transform: scale(1.06);
+}
+
+/* ── Modal de Prévia do Procedimento (Catálogo) ────────────────────────── */
+.proc-preview-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.proc-preview-modal.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.proc-preview-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 11, 10, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.proc-preview-sheet {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  background: #14100e;
+  color: #ffffff;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  animation: modalPopIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 10;
+}
+
+@keyframes modalPopIn {
+  0% { transform: scale(0.92) translateY(20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.proc-preview-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.proc-preview-close:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: scale(1.08);
+}
+
+.proc-preview-photo-wrap {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background: #000000;
+}
+
+.proc-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.proc-preview-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(20,16,14,0.95) 100%);
+}
+
+.proc-preview-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.proc-preview-body {
+  padding: 18px 20px 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.proc-preview-kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 4px;
+}
+
+.proc-preview-title {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.proc-preview-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 12px 10px;
+  margin-bottom: 18px;
+}
+
+.proc-spec-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+}
+
+.proc-spec-k {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.proc-spec-v {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.proc-preview-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.proc-preview-footer .btn {
+  width: 100%;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.proc-preview-footer .btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .add-service-action {

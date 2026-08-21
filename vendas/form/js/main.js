@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMultiStepNavigation();
   initModelCardsSelection();
   initServicesBuilder();
+  initProcedureModal();
   initPhotoDropzone();
   initPhoneMask();
   initSlugFormatter();
@@ -248,13 +249,15 @@ function renderServiceRow(container, data) {
   const defaultPhoto = data.photo || '../../glamour-midnight/assets/img/volume-brasileiro.png';
 
   row.innerHTML = `
-    <!-- Topo: Nome do Procedimento + Botão Excluir -->
+    <!-- Topo: Nome do Procedimento + Botão Lixeira -->
     <div class="service-card-header">
       <div class="service-mini-field service-name-field">
         <label class="sm-label">Nome do Procedimento</label>
         <input type="text" class="sm-input service-name" placeholder="Ex: Volume Brasileiro" value="${data.name || ''}" required>
       </div>
-      <button type="button" class="btn-remove-service" title="Remover este procedimento">✕</button>
+      <button type="button" class="btn-remove-service" title="Remover este procedimento" aria-label="Remover procedimento">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+      </button>
     </div>
 
     <!-- Valores: Valor, Duração e Manutenção -->
@@ -273,31 +276,48 @@ function renderServiceRow(container, data) {
       </div>
     </div>
 
-    <!-- Base: Barra de Foto do Procedimento -->
-    <div class="service-photo-bar" title="Toque para trocar ou adicionar sua foto">
-      <div class="service-photo-thumb-wrap">
+    <!-- Base: Barra de Foto com Prévia e Troca -->
+    <div class="service-photo-bar">
+      <div class="service-photo-thumb-wrap" title="Ver prévia deste procedimento">
         <img src="${defaultPhoto}" alt="Foto ${data.name || 'Procedimento'}" class="service-photo-thumb">
       </div>
       <div class="service-photo-info">
         <span class="service-photo-status">Foto do Procedimento</span>
-        <span class="service-photo-hint">Toque para trocar pela foto real do seu trabalho</span>
+        <span class="service-photo-hint">Foto oficial ou personalizada</span>
       </div>
-      <button type="button" class="btn-change-photo-mini">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        <span>Trocar Foto</span>
-      </button>
+      <div class="service-photo-actions">
+        <button type="button" class="btn-proc-preview" title="Ver como fica no catálogo">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span>Ver Prévia</span>
+        </button>
+        <button type="button" class="btn-change-photo-mini" title="Trocar foto">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span>Trocar</span>
+        </button>
+      </div>
       <input type="file" accept="image/*" class="service-file-input">
     </div>
   `;
 
-  // Interação de Troca de Foto
-  const photoBar = row.querySelector('.service-photo-bar');
+  const thumbWrap = row.querySelector('.service-photo-thumb-wrap');
+  const previewBtn = row.querySelector('.btn-proc-preview');
+  const changeBtn = row.querySelector('.btn-change-photo-mini');
   const fileInput = row.querySelector('.service-file-input');
   const photoThumb = row.querySelector('.service-photo-thumb');
   const photoStatus = row.querySelector('.service-photo-status');
   const photoHint = row.querySelector('.service-photo-hint');
 
-  photoBar.addEventListener('click', () => {
+  // Abre Prévia
+  const openPreview = (e) => {
+    e.stopPropagation();
+    openProcedureModal(row);
+  };
+  thumbWrap.addEventListener('click', openPreview);
+  previewBtn.addEventListener('click', openPreview);
+
+  // Troca de Foto
+  changeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     fileInput.click();
   });
 
@@ -316,12 +336,18 @@ function renderServiceRow(container, data) {
         if (photoHint) {
           photoHint.textContent = 'Foto personalizada carregada com sucesso';
         }
+
+        // Se o modal estiver aberto para este card, atualiza a imagem no modal também
+        const modalImg = document.getElementById('proc-modal-img');
+        if (modalImg && currentModalRow === row) {
+          modalImg.src = evt.target.result;
+        }
       };
       reader.readAsDataURL(file);
     }
   });
 
-  // Remoção
+  // Remoção com Lixeira
   row.querySelector('.btn-remove-service').addEventListener('click', () => {
     const allRows = container.querySelectorAll('.service-row-card');
     if (allRows.length > 1) {
@@ -335,6 +361,71 @@ function renderServiceRow(container, data) {
 
   container.appendChild(row);
   updateServicesCount();
+}
+
+/* ── 3.1 Modal de Prévia do Procedimento (Catálogo) ─────────────────────── */
+let currentModalRow = null;
+
+function initProcedureModal() {
+  const modal = document.getElementById('proc-preview-modal');
+  const backdrop = document.getElementById('proc-preview-backdrop');
+  const closeBtn = document.getElementById('proc-preview-close');
+  const changePhotoBtn = document.getElementById('proc-modal-change-photo-btn');
+
+  if (!modal) return;
+
+  const closeModal = () => {
+    modal.classList.add('is-hidden');
+    modal.setAttribute('aria-hidden', 'true');
+    currentModalRow = null;
+  };
+
+  if (backdrop) backdrop.addEventListener('click', closeModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  if (changePhotoBtn) {
+    changePhotoBtn.addEventListener('click', () => {
+      if (currentModalRow) {
+        const fileInput = currentModalRow.querySelector('.service-file-input');
+        if (fileInput) fileInput.click();
+      }
+    });
+  }
+
+  // Fecha com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('is-hidden')) {
+      closeModal();
+    }
+  });
+}
+
+function openProcedureModal(row) {
+  const modal = document.getElementById('proc-preview-modal');
+  if (!modal || !row) return;
+
+  currentModalRow = row;
+
+  const nameVal = row.querySelector('.service-name')?.value || 'Procedimento';
+  const priceVal = row.querySelector('.service-price')?.value;
+  const durationVal = row.querySelector('.service-duration')?.value;
+  const maintenanceVal = row.querySelector('.service-maintenance')?.value;
+  const photoSrc = row.querySelector('.service-photo-thumb')?.src || '';
+
+  const modalImg = document.getElementById('proc-modal-img');
+  const modalTitle = document.getElementById('proc-modal-title');
+  const modalPrice = document.getElementById('proc-modal-price');
+  const modalDuration = document.getElementById('proc-modal-duration');
+  const modalMaintenance = document.getElementById('proc-modal-maintenance');
+
+  if (modalImg) modalImg.src = photoSrc;
+  if (modalTitle) modalTitle.textContent = nameVal.trim() || 'Procedimento';
+  if (modalPrice) modalPrice.textContent = priceVal ? `R$ ${priceVal}` : 'R$ 150,00';
+  if (modalDuration) modalDuration.textContent = durationVal || '1h30';
+  if (modalMaintenance) modalMaintenance.textContent = maintenanceVal ? `R$ ${maintenanceVal}` : '-';
+
+  modal.classList.remove('is-hidden');
+  modal.setAttribute('aria-hidden', 'false');
 }
 
 /* ── 4. Dropzone & Upload de Foto ou Vídeo de Capa ───────────────────────── */

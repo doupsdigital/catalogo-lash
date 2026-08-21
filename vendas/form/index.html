@@ -443,6 +443,45 @@
           </div>
         </div>
 
+        <!-- MODAL PREVIEW DO PROCEDIMENTO (EXPERIÊNCIA REAL DO CATÁLOGO) -->
+        <div class="proc-preview-modal is-hidden" id="proc-preview-modal" aria-hidden="true">
+          <div class="proc-preview-backdrop" id="proc-preview-backdrop"></div>
+          <div class="proc-preview-sheet">
+            <button type="button" class="proc-preview-close" id="proc-preview-close" aria-label="Fechar prévia">✕</button>
+            <div class="proc-preview-photo-wrap">
+              <img id="proc-modal-img" src="" alt="Foto do procedimento" class="proc-preview-img">
+              <div class="proc-preview-scrim"></div>
+              <span class="proc-preview-badge">Prévia no Catálogo</span>
+            </div>
+            <div class="proc-preview-body">
+              <span class="proc-preview-kicker">✨ Procedimento</span>
+              <h3 class="proc-preview-title" id="proc-modal-title">Volume Brasileiro</h3>
+              
+              <div class="proc-preview-specs">
+                <div class="proc-spec-item">
+                  <span class="proc-spec-k">Aplicação</span>
+                  <strong class="proc-spec-v" id="proc-modal-price">R$ 150,00</strong>
+                </div>
+                <div class="proc-spec-item">
+                  <span class="proc-spec-k">Duração</span>
+                  <strong class="proc-spec-v" id="proc-modal-duration">1h30</strong>
+                </div>
+                <div class="proc-spec-item">
+                  <span class="proc-spec-k">Manutenção</span>
+                  <strong class="proc-spec-v" id="proc-modal-maintenance">R$ 90,00</strong>
+                </div>
+              </div>
+
+              <div class="proc-preview-footer">
+                <button type="button" class="btn btn--outline btn--sm" id="proc-modal-change-photo-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                  <span>Trocar Foto deste Procedimento</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </div>
