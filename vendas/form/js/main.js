@@ -54,12 +54,8 @@ function goToStep(stepNumber) {
     updateProgressBar(currentStep);
     updateSummaryTags();
 
-    // Rola suavemente para o topo do formulário no mobile
-    const formCard = document.querySelector('.form-card');
-    if (formCard) {
-      const topOffset = formCard.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top: topOffset, behavior: 'smooth' });
-    }
+    // Rola suavemente para o topo absoluto para exibir a barra de passos (1-2-3-4)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
 
