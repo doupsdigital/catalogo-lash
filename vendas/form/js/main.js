@@ -143,12 +143,8 @@ function initModelCardsSelection() {
 
         // Atualiza o link de teste em tela cheia
         const testLink = card.querySelector('.opt2-test-link');
-        const testText = card.querySelector('.opt2-test-text');
         if (testLink && url) {
           testLink.href = url;
-        }
-        if (testText && label) {
-          testText.textContent = `Testar ${label} em tela cheia`;
         }
 
         // Se o card já estiver selecionado, atualiza a cor ativa
