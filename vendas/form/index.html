@@ -3,405 +3,446 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Futuro Formulário de Preenchimento — LashMenu</title>
+  <title>Personalize seu LashMenu — Formulário Oficial</title>
   <meta name="description"
-    content="Base de componentes de seleção de modelos e cores para o futuro formulário de personalização LashMenu.">
+    content="Preencha as informações do seu estúdio para personalizarmos o seu catálogo digital exclusivo LashMenu.">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header style="padding: 24px 20px; background: #ffffff; border-bottom: 1px solid var(--border); text-align: center;">
+  <!-- TOP BRAND HEADER -->
+  <header class="form-header">
     <div class="container">
-      <h1 style="font-family: var(--font-serif); font-size: 1.8rem; margin: 0 0 6px; color: var(--text);">Lash<em>Menu</em> · Futuro Formulário de Preenchimento</h1>
-      <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">Arquivo de preservação dos 3 modelos interativos de seleção para integração futura no formulário.</p>
+      <div class="header-inner">
+        <a href="../lpb/" class="brand-logo">
+          Lash<em>Menu</em>
+        </a>
+        <div class="header-badge">
+          <span class="dot-live"></span>
+          <span>Personalização do Catálogo</span>
+        </div>
+      </div>
     </div>
   </header>
 
-  <main>
+  <main class="form-main">
+    <div class="container container--form">
 
-    <!-- =========================================================================
-         COMPARAÇÃO DAS 3 OPÇÕES DE APRESENTAÇÃO DE MODELOS & CORES
-         ========================================================================= -->
-
-    <!-- OPÇÃO 1: PROVADOR INTERATIVO (ABAS + TOGGLE DE CORES) -->
-    <section class="section-option-showcase section-option-showcase--opt1" id="opcao-1">
-      <div class="container">
-        <div class="section-header">
-          <div class="option-badge">Opção 1 · Provador Interativo</div>
-          <h2 class="section-title">Experimente os Modelos &amp; Cores</h2>
-          <p class="section-subtitle">Alterne entre os 3 designs e as duas paletas para ver a combinação perfeita para o seu estúdio em tempo real.</p>
+      <!-- PROGRESS BAR MULTI-STEP -->
+      <div class="steps-progress">
+        <div class="progress-track">
+          <div class="progress-bar-fill" id="progress-bar-fill" style="width: 25%;"></div>
         </div>
-
-        <!-- Controles da Opção 1 -->
-        <div class="provador-controls">
-          <!-- Abas de Modelo -->
-          <div class="provador-model-tabs" role="tablist" aria-label="Escolha o modelo">
-            <button type="button" class="provador-model-btn is-active" data-model="glamour">
-              <span class="provador-model-icon">✨</span>
-              <span class="provador-model-name">Modelo Glamour</span>
-            </button>
-            <button type="button" class="provador-model-btn" data-model="harmonia">
-              <span class="provador-model-icon">🌸</span>
-              <span class="provador-model-name">Modelo Harmonia</span>
-            </button>
-            <button type="button" class="provador-model-btn" data-model="classico">
-              <span class="provador-model-icon">👑</span>
-              <span class="provador-model-name">Modelo Clássico</span>
-            </button>
+        <div class="step-nodes">
+          <div class="step-node is-active" data-step-node="1">
+            <div class="node-circle">1</div>
+            <span class="node-label">Identidade</span>
           </div>
-
-          <!-- Seletor de Paleta / Cor -->
-          <div class="provador-color-switch" role="radiogroup" aria-label="Escolha a paleta">
-            <span class="provador-color-label">Paleta:</span>
-            <button type="button" class="provador-color-btn is-active" data-color="midnight">
-              <span class="color-dot color-dot--midnight"></span>
-              <span>Midnight</span>
-            </button>
-            <button type="button" class="provador-color-btn" data-color="rose">
-              <span class="color-dot color-dot--rose"></span>
-              <span>Rosé</span>
-            </button>
+          <div class="step-node" data-step-node="2">
+            <div class="node-circle">2</div>
+            <span class="node-label">Modelo & Cor</span>
           </div>
-        </div>
-
-        <!-- Card Dinâmico da Opção 1 -->
-        <div class="provador-stage" id="provador-stage">
-          <div class="provador-card">
-            <div class="provador-card-visual">
-              <div class="card-mini-phone">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="phone-screen-scaler">
-                    <iframe id="provador-iframe" src="../../glamour-midnight/index.html?preview=1" title="Prévia ao vivo" loading="lazy" allow="autoplay"></iframe>
-                  </div>
-                  <div class="phone-overlay-badge">
-                    <span class="dot-pulse"></span>
-                    <span id="provador-badge">Mariana Alves · Glamour Midnight</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="provador-card-content">
-              <div class="provador-header-meta">
-                <span class="provador-tag" id="provador-tag">Cinematográfico</span>
-                <span class="provador-palette-indicator" id="provador-palette-tag">🖤 Versão Midnight</span>
-              </div>
-              <h3 class="provador-title" id="provador-title">Modelo Glamour</h3>
-              <p class="provador-desc" id="provador-desc">A experiência mais imersiva e cinematográfica com vídeo fluido na capa e carrossel completo de 13 procedimentos em tela cheia.</p>
-
-              <ul class="provador-checklist" id="provador-checklist">
-                <li><strong>Vídeo Hero na capa:</strong> Transição instantânea sem corte.</li>
-                <li><strong>Carrossel imersivo:</strong> Navegação horizontal em tela cheia (100dvh).</li>
-                <li><strong>Modal de procedimentos:</strong> Tempo, investimento e orientações de manutenção.</li>
-              </ul>
-
-              <div class="provador-actions">
-                <a id="provador-cta" href="../../glamour-midnight/index.html" target="_blank" rel="noopener" class="btn btn--primary provador-btn-live">
-                  <span id="provador-cta-text">Abrir Modelo Glamour (Midnight) em tela cheia</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
-                </a>
-              </div>
-            </div>
+          <div class="step-node" data-step-node="3">
+            <div class="node-circle">3</div>
+            <span class="node-label">Procedimentos</span>
+          </div>
+          <div class="step-node" data-step-node="4">
+            <div class="node-circle">4</div>
+            <span class="node-label">Fotos & Envio</span>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- OPÇÃO 2: 3 CARDS COM MINI-SELETOR DE COR INTEGRADO -->
-    <section class="section-option-showcase section-option-showcase--opt2" id="opcao-2">
-      <div class="container">
-        <div class="section-header">
-          <div class="option-badge">Opção 2 · Cards com Seletor Direto</div>
-          <h2 class="section-title">3 Estilos com Escolha de Cores</h2>
-          <p class="section-subtitle">Conheça cada um dos 3 modelos em tempo real e alterne entre a paleta Midnight e Rosé no próprio card.</p>
-        </div>
+      <!-- FORM CARD CONTAINER -->
+      <div class="form-card">
 
-        <div class="opt2-cards-grid">
-          <!-- Card Glamour -->
-          <article class="opt2-card" data-opt2-card="glamour">
-            <div class="opt2-card-media">
-              <div class="card-mini-phone">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="phone-screen-scaler">
-                    <iframe class="opt2-iframe" src="../../glamour-midnight/index.html?preview=1" data-src-midnight="../../glamour-midnight/index.html?preview=1" data-src-rose="../../glamour-rose/index.html?preview=1" title="Prévia Glamour" loading="lazy" allow="autoplay"></iframe>
-                  </div>
-                  <div class="phone-overlay-badge">
-                    <span class="dot-pulse"></span>
-                    <span class="opt2-phone-badge">Glamour Midnight</span>
-                  </div>
-                </div>
-              </div>
+        <form id="onboarding-form" novalidate>
+
+          <!-- ===================================================================
+               ETAPA 1: IDENTIDADE & LINKS
+               =================================================================== -->
+          <div class="form-step is-active" data-step="1">
+            <div class="step-header">
+              <span class="step-kicker">Etapa 1 de 4</span>
+              <h2 class="step-title">Dados do seu Estúdio</h2>
+              <p class="step-subtitle">Preencha com o seu nome e os dados de contato que vão aparecer no seu catálogo oficial.</p>
             </div>
-            <div class="opt2-card-body">
-              <div class="opt2-model-header">
-                <span class="opt2-model-kicker">Modelo 01</span>
-                <h3 class="opt2-model-title">Modelo Glamour</h3>
+
+            <div class="fields-grid">
+              <div class="field-group">
+                <label for="input-designer-name" class="field-label">Seu Nome Completo ou Como Quer ser Chamada <span class="req">*</span></label>
+                <input type="text" id="input-designer-name" name="designer_name" class="field-input" placeholder="Ex: Mariana Alves" required>
+                <span class="field-hint">Aparecerá em destaque na capa e no rodapé.</span>
               </div>
-              <p class="opt2-model-desc">Capa com vídeo dinâmico e carrossel de procedimentos em tela cheia. Alto impacto e autoridade imediata.</p>
-              
-              <div class="opt2-color-selector">
-                <span class="opt2-color-title">Escolha a cor:</span>
-                <div class="opt2-color-pills">
-                  <button type="button" class="opt2-pill is-active" data-color="midnight" data-link="../../glamour-midnight/index.html" data-label="Glamour Midnight">
-                    <span class="color-dot color-dot--midnight"></span>
-                    <span>Midnight</span>
-                  </button>
-                  <button type="button" class="opt2-pill" data-color="rose" data-link="../../glamour-rose/index.html" data-label="Glamour Rosé">
-                    <span class="color-dot color-dot--rose"></span>
-                    <span>Rosé</span>
-                  </button>
+
+              <div class="field-group">
+                <label for="input-studio-name" class="field-label">Nome do seu Espaço / Studio (Opcional)</label>
+                <input type="text" id="input-studio-name" name="studio_name" class="field-input" placeholder="Ex: Studio Mariana Alves Lash">
+              </div>
+
+              <div class="field-group">
+                <label for="input-whatsapp" class="field-label">WhatsApp para Agendamentos (com DDD) <span class="req">*</span></label>
+                <input type="tel" id="input-whatsapp" name="whatsapp" class="field-input" placeholder="(11) 99999-9999" required>
+                <span class="field-hint">O botão de agendamento abrirá direto uma conversa com este número.</span>
+              </div>
+
+              <div class="field-group">
+                <label for="input-instagram" class="field-label">Instagram Profissional</label>
+                <div class="input-prefix-wrap">
+                  <span class="input-prefix">@</span>
+                  <input type="text" id="input-instagram" name="instagram" class="field-input field-input--prefixed" placeholder="seunome.lash">
                 </div>
               </div>
 
-              <a href="../../glamour-midnight/index.html" target="_blank" rel="noopener" class="btn btn--outline opt2-cta">
-                <span>Abrir Glamour em tela cheia</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
-              </a>
-            </div>
-          </article>
+              <div class="field-group field-group--full">
+                <label for="input-location" class="field-label">Local de Atendimento / Cidade e Bairro</label>
+                <input type="text" id="input-location" name="location" class="field-input" placeholder="Ex: Moema, São Paulo - SP (ou Atendimento a Domicílio)">
+              </div>
 
-          <!-- Card Harmonia -->
-          <article class="opt2-card" data-opt2-card="harmonia">
-            <div class="opt2-card-media">
-              <div class="card-mini-phone">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="phone-screen-scaler">
-                    <iframe class="opt2-iframe" src="../../harmonia-rose/index.html?preview=1" data-src-midnight="../../harmonia-midnight/index.html?preview=1" data-src-rose="../../harmonia-rose/index.html?preview=1" title="Prévia Harmonia" loading="lazy"></iframe>
-                  </div>
-                  <div class="phone-overlay-badge">
-                    <span class="dot-pulse"></span>
-                    <span class="opt2-phone-badge">Harmonia Rosé</span>
-                  </div>
+              <div class="field-group field-group--full">
+                <label for="input-slug" class="field-label">Subdomínio Exclusivo Desejado <span class="req">*</span></label>
+                <div class="input-domain-wrap">
+                  <input type="text" id="input-slug" name="slug" class="field-input field-input--domain" placeholder="mariana" required>
+                  <span class="input-domain-suffix">.lashmenu.com</span>
                 </div>
+                <span class="field-hint">Este será o link oficial que você colocará na sua bio do Instagram.</span>
               </div>
             </div>
-            <div class="opt2-card-body">
-              <div class="opt2-model-header">
-                <span class="opt2-model-kicker">Modelo 02</span>
-                <h3 class="opt2-model-title">Modelo Harmonia</h3>
-              </div>
-              <p class="opt2-model-desc">Mosaico elegante de fotos com filtros inteligentes de visagismo por categoria. Ideal para valorizar resultados.</p>
-              
-              <div class="opt2-color-selector">
-                <span class="opt2-color-title">Escolha a cor:</span>
-                <div class="opt2-color-pills">
-                  <button type="button" class="opt2-pill" data-color="midnight" data-link="../../harmonia-midnight/index.html" data-label="Harmonia Midnight">
-                    <span class="color-dot color-dot--midnight"></span>
-                    <span>Midnight</span>
-                  </button>
-                  <button type="button" class="opt2-pill is-active" data-color="rose" data-link="../../harmonia-rose/index.html" data-label="Harmonia Rosé">
-                    <span class="color-dot color-dot--rose"></span>
-                    <span>Rosé</span>
-                  </button>
-                </div>
-              </div>
 
-              <a href="../../harmonia-rose/index.html" target="_blank" rel="noopener" class="btn btn--outline opt2-cta">
-                <span>Abrir Harmonia em tela cheia</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
-              </a>
+            <div class="step-footer">
+              <div></div>
+              <button type="button" class="btn btn--primary btn-next-step" data-next="2">
+                <span>Continuar para Modelo</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+              </button>
             </div>
-          </article>
-
-          <!-- Card Clássico -->
-          <article class="opt2-card" data-opt2-card="classico">
-            <div class="opt2-card-media">
-              <div class="card-mini-phone">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="phone-screen-scaler">
-                    <iframe class="opt2-iframe" src="../../classico-midnight/index.html?preview=1" data-src-midnight="../../classico-midnight/index.html?preview=1" data-src-rose="../../classico-rose/index.html?preview=1" title="Prévia Clássico" loading="lazy"></iframe>
-                  </div>
-                  <div class="phone-overlay-badge">
-                    <span class="dot-pulse"></span>
-                    <span class="opt2-phone-badge">Clássico Midnight</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="opt2-card-body">
-              <div class="opt2-model-header">
-                <span class="opt2-model-kicker">Modelo 03</span>
-                <h3 class="opt2-model-title">Modelo Clássico</h3>
-              </div>
-              <p class="opt2-model-desc">Cardápio editorial limpo, prático e sofisticado. Acesso rápido aos procedimentos com máxima legibilidade.</p>
-              
-              <div class="opt2-color-selector">
-                <span class="opt2-color-title">Escolha a cor:</span>
-                <div class="opt2-color-pills">
-                  <button type="button" class="opt2-pill is-active" data-color="midnight" data-link="../../classico-midnight/index.html" data-label="Clássico Midnight">
-                    <span class="color-dot color-dot--midnight"></span>
-                    <span>Midnight</span>
-                  </button>
-                  <button type="button" class="opt2-pill" data-color="rose" data-link="../../classico-rose/index.html" data-label="Clássico Rosé">
-                    <span class="color-dot color-dot--rose"></span>
-                    <span>Rosé</span>
-                  </button>
-                </div>
-              </div>
-
-              <a href="../../classico-midnight/index.html" target="_blank" rel="noopener" class="btn btn--outline opt2-cta">
-                <span>Abrir Clássico em tela cheia</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
-              </a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- OPÇÃO 3: CARROSSEL HORIZONTAL SWIPE COM SELETOR GLOBAL DE COR -->
-    <section class="section-option-showcase section-option-showcase--opt3" id="opcao-3">
-      <div class="container">
-        <div class="section-header">
-          <div class="option-badge">Opção 3 · Showroom Carrossel</div>
-          <h2 class="section-title">Deslize para Conhecer a Coleção</h2>
-          <p class="section-subtitle">Navegue horizontalmente pelos 3 modelos em tempo real e alterne a cor de todos com um único toque.</p>
-        </div>
-
-        <!-- Seletor Global de Cor para o Carrossel -->
-        <div class="opt3-global-switch">
-          <span class="opt3-switch-label">Ver toda a coleção em:</span>
-          <div class="opt3-switch-pills">
-            <button type="button" class="opt3-palette-btn is-active" data-opt3-color="midnight">
-              <span class="color-dot color-dot--midnight"></span>
-              <span>🖤 Midnight</span>
-            </button>
-            <button type="button" class="opt3-palette-btn" data-opt3-color="rose">
-              <span class="color-dot color-dot--rose"></span>
-              <span>🎀 Rosé</span>
-            </button>
           </div>
-        </div>
 
-        <!-- Carrossel Wrapper -->
-        <div class="opt3-carousel-container">
-          <button type="button" class="opt3-nav-btn opt3-nav-btn--prev" id="opt3-btn-prev" aria-label="Modelo anterior">‹</button>
-          <button type="button" class="opt3-nav-btn opt3-nav-btn--next" id="opt3-btn-next" aria-label="Próximo modelo">›</button>
+          <!-- ===================================================================
+               ETAPA 2: ESCOLHA DO MODELO & COR (OPÇÃO 2: CARDS COM SELETOR DIRETO)
+               =================================================================== -->
+          <div class="form-step" data-step="2">
+            <div class="step-header">
+              <span class="step-kicker">Etapa 2 de 4</span>
+              <h2 class="step-title">Escolha o Modelo &amp; Cor do seu LashMenu</h2>
+              <p class="step-subtitle">Veja a demonstração de cada modelo em tempo real, teste as cores e selecione o design oficial para o seu estúdio.</p>
+            </div>
 
-          <div class="opt3-carousel-track" id="opt3-carousel-track">
-            <!-- Slide 1: Glamour -->
-            <div class="opt3-slide" data-slide-model="glamour">
-              <div class="opt3-slide-inner">
-                <div class="opt3-slide-photo">
+            <!-- Grid com os 3 Cards de Modelos -->
+            <div class="opt2-cards-grid">
+              
+              <!-- Card 1: Modelo Glamour -->
+              <article class="opt2-card is-selected" data-model="glamour">
+                <div class="opt2-card-media">
                   <div class="card-mini-phone">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
                       <div class="phone-screen-scaler">
-                        <iframe class="opt3-slide-iframe" src="../../glamour-midnight/index.html?preview=1" data-src-midnight="../../glamour-midnight/index.html?preview=1" data-src-rose="../../glamour-rose/index.html?preview=1" title="Prévia Glamour" loading="lazy" allow="autoplay"></iframe>
+                        <iframe class="opt2-iframe" src="../../glamour-midnight/index.html?preview=1" data-src-midnight="../../glamour-midnight/index.html?preview=1" data-src-rose="../../glamour-rose/index.html?preview=1" title="Prévia Modelo Glamour" loading="lazy" allow="autoplay"></iframe>
                       </div>
                       <div class="phone-overlay-badge">
                         <span class="dot-pulse"></span>
-                        <span class="opt3-phone-badge">Glamour Midnight</span>
+                        <span class="opt2-phone-badge">Glamour Midnight</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="opt3-slide-info">
-                  <span class="opt3-slide-tag">✨ Modelo 01</span>
-                  <h3 class="opt3-slide-title">Modelo Glamour</h3>
-                  <p class="opt3-slide-desc">Cinematográfico com vídeo de aplicação na capa, transição suave sem corte e carrossel de fotos em tela cheia.</p>
-                  <div class="opt3-slide-points">
-                    <span>✓ Capa em vídeo fluido HD</span>
-                    <span>✓ Carrossel de 13 serviços</span>
-                    <span>✓ Modal de valores e tempo</span>
-                  </div>
-                  <a href="../../glamour-midnight/index.html" target="_blank" rel="noopener" class="btn btn--primary opt3-slide-cta" data-link-midnight="../../glamour-midnight/index.html" data-link-rose="../../glamour-rose/index.html">
-                    <span>Abrir Modelo Glamour</span> <span>↗</span>
-                  </a>
-                </div>
-              </div>
-            </div>
 
-            <!-- Slide 2: Harmonia -->
-            <div class="opt3-slide" data-slide-model="harmonia">
-              <div class="opt3-slide-inner">
-                <div class="opt3-slide-photo">
+                <div class="opt2-card-body">
+                  <div class="opt2-model-header">
+                    <span class="opt2-model-kicker">✨ Modelo 01</span>
+                    <h3 class="opt2-model-title">Modelo Glamour</h3>
+                  </div>
+                  <p class="opt2-model-desc">Capa com vídeo dinâmico e carrossel horizontal de procedimentos em tela cheia. Alto impacto visual e sofisticação.</p>
+                  
+                  <div class="opt2-color-selector">
+                    <span class="opt2-color-title">Escolha a cor:</span>
+                    <div class="opt2-color-pills">
+                      <button type="button" class="opt2-pill is-active" data-color="midnight" data-label="Glamour Midnight">
+                        <span class="color-dot color-dot--midnight"></span>
+                        <span>Midnight</span>
+                      </button>
+                      <button type="button" class="opt2-pill" data-color="rose" data-label="Glamour Rosé">
+                        <span class="color-dot color-dot--rose"></span>
+                        <span>Rosé</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <button type="button" class="btn-select-model-card">
+                    <span class="btn-select-text">✓ Modelo Selecionado</span>
+                  </button>
+                </div>
+              </article>
+
+              <!-- Card 2: Modelo Harmonia -->
+              <article class="opt2-card" data-model="harmonia">
+                <div class="opt2-card-media">
                   <div class="card-mini-phone">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
                       <div class="phone-screen-scaler">
-                        <iframe class="opt3-slide-iframe" src="../../harmonia-midnight/index.html?preview=1" data-src-midnight="../../harmonia-midnight/index.html?preview=1" data-src-rose="../../harmonia-rose/index.html?preview=1" title="Prévia Harmonia" loading="lazy"></iframe>
+                        <iframe class="opt2-iframe" src="../../harmonia-rose/index.html?preview=1" data-src-midnight="../../harmonia-midnight/index.html?preview=1" data-src-rose="../../harmonia-rose/index.html?preview=1" title="Prévia Modelo Harmonia" loading="lazy"></iframe>
                       </div>
                       <div class="phone-overlay-badge">
                         <span class="dot-pulse"></span>
-                        <span class="opt3-phone-badge">Harmonia Midnight</span>
+                        <span class="opt2-phone-badge">Harmonia Rosé</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="opt3-slide-info">
-                  <span class="opt3-slide-tag">🌸 Modelo 02</span>
-                  <h3 class="opt3-slide-title">Modelo Harmonia</h3>
-                  <p class="opt3-slide-desc">Mosaico com fotos reais de cada mapping, chips de filtros inteligentes e foco na harmonização do olhar.</p>
-                  <div class="opt3-slide-points">
-                    <span>✓ Grid fotográfico moderno</span>
-                    <span>✓ Filtros por categoria</span>
-                    <span>✓ Comparação de visagismo</span>
-                  </div>
-                  <a href="../../harmonia-midnight/index.html" target="_blank" rel="noopener" class="btn btn--primary opt3-slide-cta" data-link-midnight="../../harmonia-midnight/index.html" data-link-rose="../../harmonia-rose/index.html">
-                    <span>Abrir Modelo Harmonia</span> <span>↗</span>
-                  </a>
-                </div>
-              </div>
-            </div>
 
-            <!-- Slide 3: Clássico -->
-            <div class="opt3-slide" data-slide-model="classico">
-              <div class="opt3-slide-inner">
-                <div class="opt3-slide-photo">
+                <div class="opt2-card-body">
+                  <div class="opt2-model-header">
+                    <span class="opt2-model-kicker">🌸 Modelo 02</span>
+                    <h3 class="opt2-model-title">Modelo Harmonia</h3>
+                  </div>
+                  <p class="opt2-model-desc">Mosaico visual de fotos com filtros dinâmicos por técnica e foco na harmonização e realce do olhar.</p>
+                  
+                  <div class="opt2-color-selector">
+                    <span class="opt2-color-title">Escolha a cor:</span>
+                    <div class="opt2-color-pills">
+                      <button type="button" class="opt2-pill" data-color="midnight" data-label="Harmonia Midnight">
+                        <span class="color-dot color-dot--midnight"></span>
+                        <span>Midnight</span>
+                      </button>
+                      <button type="button" class="opt2-pill is-active" data-color="rose" data-label="Harmonia Rosé">
+                        <span class="color-dot color-dot--rose"></span>
+                        <span>Rosé</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <button type="button" class="btn-select-model-card">
+                    <span class="btn-select-text">Escolher Modelo Harmonia</span>
+                  </button>
+                </div>
+              </article>
+
+              <!-- Card 3: Modelo Clássico -->
+              <article class="opt2-card" data-model="classico">
+                <div class="opt2-card-media">
                   <div class="card-mini-phone">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
                       <div class="phone-screen-scaler">
-                        <iframe class="opt3-slide-iframe" src="../../classico-midnight/index.html?preview=1" data-src-midnight="../../classico-midnight/index.html?preview=1" data-src-rose="../../classico-rose/index.html?preview=1" title="Prévia Clássico" loading="lazy"></iframe>
+                        <iframe class="opt2-iframe" src="../../classico-midnight/index.html?preview=1" data-src-midnight="../../classico-midnight/index.html?preview=1" data-src-rose="../../classico-rose/index.html?preview=1" title="Prévia Modelo Clássico" loading="lazy"></iframe>
                       </div>
                       <div class="phone-overlay-badge">
                         <span class="dot-pulse"></span>
-                        <span class="opt3-phone-badge">Clássico Midnight</span>
+                        <span class="opt2-phone-badge">Clássico Midnight</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="opt3-slide-info">
-                  <span class="opt3-slide-tag">👑 Modelo 03</span>
-                  <h3 class="opt3-slide-title">Modelo Clássico</h3>
-                  <p class="opt3-slide-desc">Lista editorial limpa, categorizada e com tipografia de alta moda. Perfeita para decisões rápidas da cliente.</p>
-                  <div class="opt3-slide-points">
-                    <span>✓ Lista editorial elegante</span>
-                    <span>✓ Leitura rápida e direta</span>
-                    <span>✓ 100% responsivo</span>
+
+                <div class="opt2-card-body">
+                  <div class="opt2-model-header">
+                    <span class="opt2-model-kicker">👑 Modelo 03</span>
+                    <h3 class="opt2-model-title">Modelo Clássico</h3>
                   </div>
-                  <a href="../../classico-midnight/index.html" target="_blank" rel="noopener" class="btn btn--primary opt3-slide-cta" data-link-midnight="../../classico-midnight/index.html" data-link-rose="../../classico-rose/index.html">
-                    <span>Abrir Modelo Clássico</span> <span>↗</span>
-                  </a>
+                  <p class="opt2-model-desc">Cardápio editorial categorizado, limpo, prático e sofisticado. Acesso rápido e máxima legibilidade.</p>
+                  
+                  <div class="opt2-color-selector">
+                    <span class="opt2-color-title">Escolha a cor:</span>
+                    <div class="opt2-color-pills">
+                      <button type="button" class="opt2-pill is-active" data-color="midnight" data-label="Clássico Midnight">
+                        <span class="color-dot color-dot--midnight"></span>
+                        <span>Midnight</span>
+                      </button>
+                      <button type="button" class="opt2-pill" data-color="rose" data-label="Clássico Rosé">
+                        <span class="color-dot color-dot--rose"></span>
+                        <span>Rosé</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <button type="button" class="btn-select-model-card">
+                    <span class="btn-select-text">Escolher Modelo Clássico</span>
+                  </button>
                 </div>
-              </div>
+              </article>
+
+            </div>
+
+            <!-- Inputs ocultos sincronizados com a escolha -->
+            <input type="hidden" name="selected_model" id="input-selected-model" value="glamour">
+            <input type="hidden" name="selected_color" id="input-selected-color" value="midnight">
+
+            <div class="step-footer">
+              <button type="button" class="btn btn--outline btn-prev-step" data-prev="1">
+                ← Voltar
+              </button>
+              <button type="button" class="btn btn--primary btn-next-step" data-next="3">
+                <span>Continuar para Procedimentos</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+              </button>
             </div>
           </div>
 
-          <!-- Indicadores de Pontos (Dots) -->
-          <div class="opt3-dots">
-            <button type="button" class="opt3-dot is-active" data-slide="0" aria-label="Ir para slide 1"></button>
-            <button type="button" class="opt3-dot" data-slide="1" aria-label="Ir para slide 2"></button>
-            <button type="button" class="opt3-dot" data-slide="2" aria-label="Ir para slide 3"></button>
+          <!-- ===================================================================
+               ETAPA 3: PROCEDIMENTOS, VALORES & MANUTENÇÃO
+               =================================================================== -->
+          <div class="form-step" data-step="3">
+            <div class="step-header">
+              <span class="step-kicker">Etapa 3 de 4</span>
+              <h2 class="step-title">Seus Procedimentos & Valores</h2>
+              <p class="step-subtitle">Adicione ou edite os serviços que você atende com os respectivos valores e durações.</p>
+            </div>
+
+            <div class="services-builder" id="services-builder">
+              <!-- Cards Dinâmicos de Procedimentos serão gerados aqui -->
+            </div>
+
+            <div class="add-service-action">
+              <button type="button" class="btn btn--outline btn--sm" id="btn-add-service">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Adicionar Mais um Procedimento</span>
+              </button>
+            </div>
+
+            <!-- Informações Complementares -->
+            <div class="extra-info-section">
+              <h3 class="extra-section-title">Informações Complementares (Opcional)</h3>
+
+              <div class="fields-grid">
+                <div class="field-group">
+                  <label for="input-pix-key" class="field-label">Chave Pix para Sinal ou Agendamento</label>
+                  <input type="text" id="input-pix-key" name="pix_key" class="field-input" placeholder="Ex: chavepix@email.com ou Celular">
+                </div>
+
+                <div class="field-group">
+                  <label for="input-deposit-rule" class="field-label">Regra de Sinal / Taxa de Reserva</label>
+                  <input type="text" id="input-deposit-rule" name="deposit_rule" class="field-input" placeholder="Ex: Sinal de R$ 30 para confirmação da vaga">
+                </div>
+
+                <div class="field-group field-group--full">
+                  <label for="input-extra-notes" class="field-label">Orientações aos Clientes (Ex: chegar sem rímel, tolerância de atraso)</label>
+                  <textarea id="input-extra-notes" name="extra_notes" rows="3" class="field-input field-textarea" placeholder="Ex: Pedimos que venha sem maquiagem nos olhos. Tolerância máxima de 15 minutos de atraso."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-footer">
+              <button type="button" class="btn btn--outline btn-prev-step" data-prev="2">
+                ← Voltar
+              </button>
+              <button type="button" class="btn btn--primary btn-next-step" data-next="4">
+                <span>Continuar para Fotos</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- ===================================================================
+               ETAPA 4: FOTOS & ENVIO FINAL
+               =================================================================== -->
+          <div class="form-step" data-step="4">
+            <div class="step-header">
+              <span class="step-kicker">Etapa 4 de 4</span>
+              <h2 class="step-title">Envio das Fotos & Finalização</h2>
+              <p class="step-subtitle">Envie sua foto de perfil oficial e as fotos dos seus trabalhos para montarmos seu catálogo.</p>
+            </div>
+
+            <!-- Upload Foto Perfil -->
+            <div class="upload-box-wrapper">
+              <label class="field-label">Foto de Capa / Perfil Profissional <span class="req">*</span></label>
+              
+              <div class="upload-dropzone" id="avatar-dropzone">
+                <input type="file" id="input-avatar-file" accept="image/*" class="file-input-hidden">
+                <div class="dropzone-content" id="dropzone-empty">
+                  <div class="dropzone-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                  </div>
+                  <div class="dropzone-text">
+                    <strong>Clique para escolher sua foto</strong> ou arraste o arquivo aqui
+                  </div>
+                  <span class="dropzone-sub">Formatos aceitos: JPG, PNG (tamanho recomendado até 10MB)</span>
+                </div>
+                <div class="dropzone-preview is-hidden" id="dropzone-preview">
+                  <img id="avatar-preview-img" src="" alt="Prévia da foto">
+                  <button type="button" class="btn-remove-photo" id="btn-remove-avatar">✕ Trocar foto</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Link Alternativo Drive / Fotos dos Procedimentos -->
+            <div class="field-group" style="margin-top: 20px;">
+              <label for="input-drive-link" class="field-label">Link do Google Drive / iCloud / WhatsApp com Fotos Adicionais (Opcional)</label>
+              <input type="url" id="input-drive-link" name="drive_link" class="field-input" placeholder="https://drive.google.com/drive/folders/...">
+              <span class="field-hint">Se preferir enviar fotos dos procedimentos via pasta na nuvem ou direto pelo WhatsApp da nossa equipe.</span>
+            </div>
+
+            <!-- Resumo Rápido -->
+            <div class="submission-summary-box">
+              <h4 class="summary-box-title">Resumo da sua Personalização:</h4>
+              <div class="summary-tags" id="summary-tags">
+                <span class="sum-tag" id="sum-name">Mariana Alves</span>
+                <span class="sum-tag" id="sum-model">Modelo Glamour</span>
+                <span class="sum-tag" id="sum-color">Coleção Midnight</span>
+                <span class="sum-tag" id="sum-services">5 Procedimentos</span>
+              </div>
+            </div>
+
+            <div class="step-footer">
+              <button type="button" class="btn btn--outline btn-prev-step" data-prev="3">
+                ← Voltar
+              </button>
+              <button type="submit" class="btn btn--primary btn--submit-final" id="btn-submit-final">
+                <span>Enviar Dados &amp; Iniciar Criação</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- TELA DE SUCESSO PÓS-ENVIO -->
+        <div class="success-screen is-hidden" id="success-screen">
+          <div class="success-icon-wrap">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h2 class="success-title">Informações Recebidas com Sucesso! 🎉</h2>
+          <p class="success-desc">
+            Perfeito! Seus dados foram enviados e nossa equipe já iniciou a montagem do seu <strong>LashMenu oficial</strong>.
+          </p>
+          <div class="success-highlight-box">
+            <div class="sh-item">
+              <span class="sh-label">Prazo de Entrega:</span>
+              <strong class="sh-val">Até 24 horas úteis</strong>
+            </div>
+            <div class="sh-item">
+              <span class="sh-label">Seu Link Exclusivo:</span>
+              <strong class="sh-val" id="success-link-display">seunome.lashmenu.com</strong>
+            </div>
+          </div>
+          <div class="success-actions">
+            <a href="#" id="btn-whatsapp-confirm" target="_blank" class="btn btn--primary btn--whatsapp-direct">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.771.815 2.791.815 3.179 0 5.767-2.587 5.768-5.766.001-3.18-2.586-5.767-5.768-5.767zm9.969 5.766c-.002 5.519-4.49 9.998-10 9.998-1.758 0-3.414-.467-4.869-1.282l-5.131 1.346 1.374-5.011c-.91-1.503-1.374-3.238-1.374-5.051 0-5.52 4.488-10 10-10 5.514 0 10 4.48 10 10z"/></svg>
+              <span>Confirmar Entrega no WhatsApp da Equipe</span>
+            </a>
           </div>
         </div>
-      </div>
-    </section>
 
+      </div>
+
+    </div>
   </main>
+
+  <footer class="form-page-footer">
+    <div class="container">
+      <p>LashMenu © 2026 · Todos os direitos reservados · Suporte e Atendimento VIP</p>
+    </div>
+  </footer>
 
   <script src="js/main.js"></script>
 </body>
+
 </html>
