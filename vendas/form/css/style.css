@@ -400,143 +400,24 @@ body {
 
 .opt2-card-media {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Mini Celular */
-.card-mini-phone {
-  --phone-w: 176px;
-  --phone-h: 368px;
-  --screen-w: calc(var(--phone-w) - 10px);
-  --screen-h: calc(var(--phone-h) - 10px);
-  --base-w: 390px;
-  --base-h: 834px;
-
-  width: var(--phone-w);
-  height: var(--phone-h);
-  background: #14100e;
-  border-radius: 30px;
-  padding: 5px;
-  box-shadow: 
-    0 18px 40px -6px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.15);
-  position: relative;
-  flex-shrink: 0;
-}
-
-.card-mini-phone .phone-notch {
-  position: absolute;
-  top: 9px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 46px;
-  height: 9px;
-  background: #14100e;
-  border-radius: 5px;
-  z-index: 30;
-  pointer-events: none;
-}
-
-.card-mini-phone .phone-screen {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  background: #0d0b0a;
-  width: var(--screen-w);
-  height: var(--screen-h);
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
-  mask-image: radial-gradient(white, black);
-  transform: translate3d(0, 0, 0);
-  isolation: isolate;
-}
-
-.card-mini-phone .phone-screen-scaler {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: var(--base-w);
-  height: var(--base-h);
-  transform: scale(calc(var(--screen-w) / var(--base-w)), calc(var(--screen-h) / var(--base-h)));
-  transform-origin: top left;
-  overflow: hidden;
-  background: #0d0b0a;
-}
-
-.card-mini-phone .phone-screen-scaler iframe {
-  width: var(--base-w);
-  height: var(--base-h);
-  border: 0;
-  display: block;
-}
-
-.phone-overlay-badge {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(20, 16, 14, 0.94);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  z-index: 30;
-  pointer-events: none;
-}
-
-/* Corpo do Card */
-.opt2-card-body {
-  display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
-.opt2-model-header {
-  margin-bottom: 6px;
-}
-
-.opt2-model-kicker {
-  font-size: 0.72rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 2px;
-}
-
-.opt2-model-title {
-  font-family: var(--font-serif);
-  font-size: 1.55rem;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.opt2-model-desc {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 16px;
-}
-
-/* Seletor de Cor no Card */
+/* Seletor de Cor no Topo do Celular */
 .opt2-color-selector {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 18px;
+}
+
+.opt2-color-selector--top {
+  margin-bottom: 2px;
 }
 
 .opt2-color-title {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .06em;
@@ -584,20 +465,56 @@ body {
 .color-dot--midnight { background: #0d0b0a; border: 1.5px solid #ffffff; }
 .color-dot--rose { background: #e598ad; border: 1.5px solid #ffffff; }
 
+/* Link para Testar Modelo em Tela Cheia */
+.opt2-test-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  margin-bottom: 16px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  border: 1px solid rgba(192, 75, 107, 0.18);
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.opt2-test-link:hover {
+  background: var(--accent);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.opt2-test-link svg {
+  transition: transform 0.2s ease;
+}
+
+.opt2-test-link:hover svg {
+  transform: translate(2px, -2px);
+}
+
 /* Botão Selecionar Modelo */
 .btn-select-model-card {
   width: fit-content;
-  padding: 10px 20px;
+  padding: 10px 22px;
   border-radius: var(--radius-pill);
   border: 1.5px solid var(--border);
   background: #ffffff;
   color: var(--text);
   font-family: var(--font-main);
-  font-size: 0.88rem;
+  font-size: 0.90rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
   display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
   align-items: center;
   gap: 8px;
 }

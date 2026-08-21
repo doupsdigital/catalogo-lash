@@ -124,6 +124,7 @@ function initModelCardsSelection() {
 
         const color = pill.getAttribute('data-color');
         const label = pill.getAttribute('data-label');
+        const url = pill.getAttribute('data-url');
 
         if (iframe) {
           const src = color === 'midnight' ? iframe.getAttribute('data-src-midnight') : iframe.getAttribute('data-src-rose');
@@ -138,6 +139,16 @@ function initModelCardsSelection() {
 
         if (badge && label) {
           badge.textContent = label;
+        }
+
+        // Atualiza o link de teste em tela cheia
+        const testLink = card.querySelector('.opt2-test-link');
+        const testText = card.querySelector('.opt2-test-text');
+        if (testLink && url) {
+          testLink.href = url;
+        }
+        if (testText && label) {
+          testText.textContent = `Testar ${label} em tela cheia`;
         }
 
         // Se o card já estiver selecionado, atualiza a cor ativa
