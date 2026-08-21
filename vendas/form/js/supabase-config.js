@@ -19,6 +19,8 @@ if (window.supabase && typeof window.supabase.createClient === 'function') {
 window.lashSupabase = {
   // 1. Upload de Arquivo no Storage
   async uploadFile(bucket, path, file) {
+    if (!file) return null;
+
     // Tenta via SDK primeiro
     if (_supabaseSdk && _supabaseSdk.storage) {
       try {
@@ -53,7 +55,39 @@ window.lashSupabase = {
     }
   },
 
-  // 2. Inserir Registro em Tabela
+  // 2. Garante que o Subdomínio seja Único
+  async ensureUniqueSlug(baseSlug) {
+    let clean = (baseSlug || 'catalogo').toLowerCase().replace(/[^a-z0-9]/g, '') || 'catalogo';
+    let candidate = clean;
+    let counter = 1;
+
+    while (counter <= 50) {
+      const checkUrl = `${SUPABASE_URL}/rest/v1/orders?slug=eq.${encodeURIComponent(candidate)}&select=id`;
+      try {
+        const res = await fetch(checkUrl, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+        if (res.ok) {
+          const rows = await res.json();
+          if (!rows || rows.length === 0) {
+            return candidate; // Disponível!
+          }
+        } else {
+          return candidate;
+        }
+      } catch (e) {
+        return candidate;
+      }
+      counter++;
+      candidate = `${clean}${counter}`;
+    }
+    return `${clean}-${Date.now().toString().slice(-4)}`;
+  },
+
+  // 3. Inserir Registro em Tabela
   async insert(table, records) {
     const isArray = Array.isArray(records);
     const payload = isArray ? records : [records];

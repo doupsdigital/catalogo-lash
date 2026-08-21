@@ -893,8 +893,11 @@ function initFormSubmission() {
     const whatsapp = document.getElementById('input-whatsapp')?.value || '';
     const instagram = document.getElementById('input-instagram')?.value || '';
     const location = document.getElementById('input-location')?.value || '';
-    const slug = document.getElementById('input-slug')?.value || 'catalogo';
+    const rawSlug = document.getElementById('input-slug')?.value || 'catalogo';
     
+    // Garante que o subdomínio seja único e não dê conflito
+    const slug = window.lashSupabase ? await window.lashSupabase.ensureUniqueSlug(rawSlug) : rawSlug;
+
     const selectedModel = document.getElementById('input-selected-model')?.value || selectedModelId;
     const selectedColor = document.getElementById('input-selected-color')?.value || selectedColorId;
     const heroPhrase = document.getElementById('input-hero-phrase')?.value || '';
