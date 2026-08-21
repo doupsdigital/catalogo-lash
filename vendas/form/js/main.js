@@ -389,7 +389,7 @@ function renderServiceRow(container, data) {
     </div>
 
     <!-- Gaveta de Campos Avançados (Colapsada de início) -->
-    <div class="service-advanced-drawer">
+    <div class="service-advanced-drawer" style="display: none;">
       <div class="service-mini-field">
         <label class="sm-label">Descrição Persuasiva do Procedimento</label>
         <textarea class="sm-input service-desc" rows="2" placeholder="Descreva os benefícios e o visual da técnica...">${data.desc || ''}</textarea>
@@ -446,12 +446,18 @@ function renderServiceRow(container, data) {
   // Alterna gaveta de detalhes avançados
   if (toggleAdvBtn && advDrawer) {
     toggleAdvBtn.addEventListener('click', () => {
-      advDrawer.classList.toggle('is-open');
-      const isOpen = advDrawer.classList.contains('is-open');
-      toggleAdvBtn.classList.toggle('is-active', isOpen);
-      toggleAdvBtn.innerHTML = isOpen
-        ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>Fechar Detalhes Avançados</span>`
-        : `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg><span>Personalizar Descrição &amp; Efeitos (Opcional)</span>`;
+      const isCurrentlyHidden = advDrawer.style.display === 'none' || !advDrawer.classList.contains('is-open');
+      if (isCurrentlyHidden) {
+        advDrawer.style.display = 'flex';
+        advDrawer.classList.add('is-open');
+        toggleAdvBtn.classList.add('is-active');
+        toggleAdvBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>Fechar Detalhes Avançados</span>`;
+      } else {
+        advDrawer.style.display = 'none';
+        advDrawer.classList.remove('is-open');
+        toggleAdvBtn.classList.remove('is-active');
+        toggleAdvBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg><span>Personalizar Descrição &amp; Efeitos (Opcional)</span>`;
+      }
     });
   }
 
