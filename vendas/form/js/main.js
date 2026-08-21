@@ -380,15 +380,15 @@ function renderServiceRow(container, data) {
       </div>
     </div>
 
-    <!-- Botão de Expandir Detalhes Avançados (Opcional) -->
+    <!-- Botão de Expandir Detalhes Avançados (Colapsado) -->
     <div class="service-advanced-toggle-wrap">
       <button type="button" class="btn-toggle-advanced">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-        <span>Editar Descrição, Efeito e Recomendação (Opcional)</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+        <span>Personalizar Descrição &amp; Efeitos (Opcional)</span>
       </button>
     </div>
 
-    <!-- Gaveta de Campos Avançados -->
+    <!-- Gaveta de Campos Avançados (Colapsada de início) -->
     <div class="service-advanced-drawer">
       <div class="service-mini-field">
         <label class="sm-label">Descrição Persuasiva do Procedimento</label>
@@ -448,9 +448,10 @@ function renderServiceRow(container, data) {
     toggleAdvBtn.addEventListener('click', () => {
       advDrawer.classList.toggle('is-open');
       const isOpen = advDrawer.classList.contains('is-open');
+      toggleAdvBtn.classList.toggle('is-active', isOpen);
       toggleAdvBtn.innerHTML = isOpen
-        ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>Ocultar Detalhes Avançados</span>`
-        : `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>Editar Descrição, Efeito e Recomendação (Opcional)</span>`;
+        ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>Fechar Detalhes Avançados</span>`
+        : `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg><span>Personalizar Descrição &amp; Efeitos (Opcional)</span>`;
     });
   }
 

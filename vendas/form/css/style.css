@@ -827,13 +827,21 @@ body {
 }
 
 .btn-proc-preview {
+.service-photo-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-proc-preview {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 6px 12px;
   border-radius: var(--radius-pill);
-  border: 1px solid var(--border);
-  background: #ffffff;
+  border: 1.5px solid var(--accent);
+  background: var(--accent-soft);
   font-family: var(--font-main);
   font-size: 0.78rem;
   font-weight: 700;
@@ -898,136 +906,59 @@ body {
   transform: scale(1.06);
 }
 
-/* ── Modal de Prévia do Procedimento (Catálogo) ────────────────────────── */
-.proc-preview-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  transition: opacity 0.25s ease, visibility 0.25s ease;
+/* ── Botão e Gaveta de Detalhes Avançados (Colapsado de Início) ────────── */
+.service-advanced-toggle-wrap {
+  margin-top: 4px;
 }
 
-.proc-preview-modal.is-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.proc-preview-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(13, 11, 10, 0.78);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.proc-preview-sheet {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  background: #14100e;
-  color: #ffffff;
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.12);
-  animation: modalPopIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  z-index: 10;
-}
-
-@keyframes modalPopIn {
-  0% { transform: scale(0.92) translateY(20px); opacity: 0; }
-  100% { transform: scale(1) translateY(0); opacity: 1; }
-}
-
-.proc-preview-close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 20;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease;
-}
-
-.proc-preview-close:hover {
-  background: #ffffff;
-  color: #000000;
-  transform: scale(1.08);
-}
-
-.proc-preview-photo-wrap {
-  position: relative;
-  width: 100%;
-  height: 260px;
-  background: #000000;
-}
-
-.proc-preview-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.proc-preview-scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(20,16,14,0.95) 100%);
-}
-
-.proc-preview-badge {
-  position: absolute;
-  bottom: 12px;
-  left: 16px;
-  background: var(--accent);
-  color: #ffffff;
-  font-size: 0.68rem;
-  font-weight: 800;
-  text-transform: uppercase;
-/* Gaveta de Detalhes Avançados do Procedimento (Opcional) */
 .btn-toggle-advanced {
-  background: transparent;
-  border: none;
+  width: 100%;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  border: 1.5px dashed #d1c5b8;
+  background: #fdfbf9;
   font-family: var(--font-main);
-  font-size: 0.78rem;
+  font-size: 0.80rem;
   font-weight: 700;
   color: var(--accent);
   cursor: pointer;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 2px 0;
-  width: fit-content;
+  justify-content: center;
+  gap: 8px;
   transition: all 0.2s ease;
+  outline: none;
 }
 
 .btn-toggle-advanced:hover {
-  text-decoration: underline;
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  border-style: solid;
+  transform: translateY(-1px);
+}
+
+.btn-toggle-advanced.is-active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  border-style: solid;
+}
+
+.btn-toggle-advanced.is-active svg {
+  transform: rotate(180deg);
 }
 
 .service-advanced-drawer {
   display: none;
   flex-direction: column;
-  gap: 10px;
-  background: var(--bg-card-alt);
-  border: 1px solid var(--border);
+  gap: 12px;
+  background: #fdfbf9;
+  border: 1px solid #ebd9c8;
   border-radius: var(--radius-md);
-  padding: 12px 14px;
-  margin-top: 4px;
-  animation: fadeInDrawer 0.2s ease forwards;
+  padding: 14px;
+  margin-top: 6px;
+  animation: fadeInDrawer 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
 }
 
 .service-advanced-drawer.is-open {
@@ -1035,7 +966,7 @@ body {
 }
 
 @keyframes fadeInDrawer {
-  from { opacity: 0; transform: translateY(-4px); }
+  from { opacity: 0; transform: translateY(-6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -1043,6 +974,12 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .service-advanced-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── Modal de Prévia do Procedimento (Catálogo) ────────────────────────── */
