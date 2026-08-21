@@ -702,21 +702,22 @@ body {
 }
 
 .service-row-card {
-  background: #ffffff;
-  border: 1.5px solid #d4c2b5;
+  background: #fff7f9;
+  border: 1.5px solid #ecd3dc;
   border-radius: var(--radius-lg);
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 16px rgba(192, 75, 107, 0.05);
   position: relative;
 }
 
 .service-row-card:hover {
-  border-color: rgba(192, 75, 107, 0.45);
-  box-shadow: 0 6px 20px rgba(192, 75, 107, 0.08);
+  border-color: rgba(192, 75, 107, 0.55);
+  box-shadow: 0 8px 24px rgba(192, 75, 107, 0.10);
+  background: #fff4f7;
 }
 
 .service-card-header {
@@ -727,6 +728,21 @@ body {
 
 .service-name-field {
   flex: 1;
+}
+
+.service-name-field .sm-label {
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #1f1418;
+  margin-bottom: 2px;
+}
+
+.service-name-field .sm-input {
+  padding: 11px 14px;
+  font-size: 0.98rem;
+  font-weight: 700;
 }
 
 .service-values-grid {
@@ -746,7 +762,7 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .06em;
-  color: #2c211c;
+  color: #382c25;
 }
 
 .sm-input {

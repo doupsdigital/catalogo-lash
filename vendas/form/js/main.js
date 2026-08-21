@@ -851,7 +851,6 @@ function initFormSubmission() {
     e.preventDefault();
 
     const designerName = document.getElementById('input-designer-name')?.value || 'Lash Designer';
-    const studioName = document.getElementById('input-studio-name')?.value || '';
     const whatsapp = document.getElementById('input-whatsapp')?.value || '';
     const instagram = document.getElementById('input-instagram')?.value || '';
     const location = document.getElementById('input-location')?.value || '';
@@ -877,13 +876,11 @@ function initFormSubmission() {
       }
     });
 
-    const extraNotes = document.getElementById('input-extra-notes')?.value || '';
     const heroPhrase = document.getElementById('input-hero-phrase')?.value || '';
 
     // Monta texto formatado para envio direto ao WhatsApp de suporte
     const message = `✨ *NOVO FORMULÁRIO DE PERSONALIZAÇÃO LASHMENU*\n\n` +
       `👤 *Lash Designer:* ${designerName}\n` +
-      `🏢 *Studio:* ${studioName || 'Não informado'}\n` +
       `📱 *WhatsApp:* ${whatsapp}\n` +
       `📸 *Instagram:* @${instagram}\n` +
       `📍 *Localização:* ${location || 'Não informado'}\n` +
@@ -892,8 +889,7 @@ function initFormSubmission() {
       `🎨 *Paleta Escolhida:* ${selectedColor.toUpperCase()}\n` +
       `💬 *Frase da Capa:* ${heroPhrase}\n\n` +
       `📋 *Procedimentos (${serviceRows.length}):* \n${servicesList.join('\n')}\n\n` +
-      `📸 *Fotos Próprias Trocadas nos Cards:* ${customPhotosCount} de ${serviceRows.length}\n\n` +
-      `📝 *Observações / Pedidos Especiais:* \n${extraNotes || 'Nenhuma observação informada'}`;
+      `📸 *Fotos Próprias Trocadas nos Cards:* ${customPhotosCount} de ${serviceRows.length}`;
 
     const adminWhatsAppNumber = '5511999999999'; // Número do seu suporte para recebimento
     const encodedMsg = encodeURIComponent(message);
