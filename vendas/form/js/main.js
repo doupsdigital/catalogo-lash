@@ -1050,6 +1050,11 @@ function initFormSubmission() {
       successLinkDisplay.textContent = `${slug}.lashmenu.com`;
     }
 
+    const liveCatalogBtn = document.getElementById('btn-view-live-catalog');
+    if (liveCatalogBtn) {
+      liveCatalogBtn.href = `../../catalogo/?slug=${slug}`;
+    }
+
     // Restaura botão
     if (submitBtn) {
       submitBtn.disabled = false;
