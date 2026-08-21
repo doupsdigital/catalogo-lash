@@ -1189,29 +1189,58 @@ body {
   color: #14100e;
 }
 
-/* Paleta Rose */
+/* Paleta Rose (Clara, Delicada e Acetinada - Padrão Catálogo Rosé) */
 .proc-preview-sheet[data-theme-color="rose"] {
-  background: #180f13;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(240, 154, 176, 0.2);
+  background: #f2cad5;
+  color: #24141a;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(192, 75, 107, 0.3);
 }
 .proc-preview-sheet[data-theme-color="rose"] .proc-preview-scrim {
-  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(24,15,19,0.98) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(242,202,213,0.98) 100%);
 }
 .proc-preview-sheet[data-theme-color="rose"] .proc-preview-kicker {
-  color: #f09ab0;
+  color: #c04b6b;
+  font-weight: 800;
+}
+.proc-preview-sheet[data-theme-color="rose"] .proc-preview-title {
+  color: #24141a;
+}
+.proc-preview-sheet[data-theme-color="rose"] .proc-preview-desc {
+  color: #543340;
 }
 .proc-preview-sheet[data-theme-color="rose"] .proc-preview-badge {
   background: #c04b6b;
+  color: #ffffff;
 }
 .proc-preview-sheet[data-theme-color="rose"] .proc-preview-specs-table {
-  border-color: rgba(240, 154, 176, 0.18);
+  border-color: rgba(192, 75, 107, 0.25);
 }
 .proc-preview-sheet[data-theme-color="rose"] .proc-spec-k {
-  color: rgba(240, 154, 176, 0.55);
+  color: #8c586b;
+  font-weight: 700;
+}
+.proc-preview-sheet[data-theme-color="rose"] .proc-spec-v {
+  color: #24141a;
+  font-weight: 800;
 }
 .proc-preview-sheet[data-theme-color="rose"] .btn-demo-cta {
-  background: #fceef2;
-  color: #1f0d14;
+  background: #24141a;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(36, 20, 26, 0.25);
+}
+.proc-preview-sheet[data-theme-color="rose"] .btn-modal-change {
+  border-color: rgba(192, 75, 107, 0.4);
+  color: #24141a;
+  background: rgba(255, 255, 255, 0.6);
+}
+.proc-preview-sheet[data-theme-color="rose"] .btn-modal-change:hover {
+  background: #c04b6b;
+  color: #ffffff;
+}
+.proc-preview-sheet[data-theme-color="rose"] .proc-preview-close {
+  background: rgba(255, 255, 255, 0.85);
+  color: #24141a;
+  border-color: rgba(192, 75, 107, 0.3);
 }
 
 /* Paleta Champagne */

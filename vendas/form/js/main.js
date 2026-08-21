@@ -148,12 +148,10 @@ function initModelCardsSelection() {
           testLink.href = url;
         }
 
-        // Se o card já estiver selecionado, atualiza a cor ativa
-        if (card.classList.contains('is-selected')) {
-          selectedColorId = color;
-          if (hiddenColor) hiddenColor.value = color;
-          updateSummaryTags();
-        }
+        // Seleciona automaticamente o card e salva a cor escolhida
+        selectedColorId = color;
+        if (hiddenColor) hiddenColor.value = color;
+        selectCard(card);
       });
     });
 
