@@ -201,16 +201,116 @@ function initModelCardsSelection() {
 
 /* ── 3. Builder Dinâmico de Procedimentos & Fotos ────────────────────────── */
 const defaultServices = [
-  { name: 'Volume Brasileiro', price: '150,00', duration: '1h30', maintenance: '90,00', photo: '../../glamour-midnight/assets/img/volume-brasileiro.png' },
-  { name: 'Clássico Fio a Fio', price: '120,00', duration: '1h30', maintenance: '80,00', photo: '../../glamour-midnight/assets/img/classico-fio-a-fio.png' },
-  { name: 'Volume Egípcio', price: '160,00', duration: '1h30', maintenance: '95,00', photo: '../../glamour-midnight/assets/img/volume-egipcio.png' },
-  { name: 'Volume Híbrido', price: '160,00', duration: '1h45', maintenance: '95,00', photo: '../../glamour-midnight/assets/img/volume-hibrido.png' },
-  { name: 'Volume Russo', price: '190,00', duration: '2h00', maintenance: '110,00', photo: '../../glamour-midnight/assets/img/volume-russo.png' },
-  { name: 'Mega Volume', price: '240,00', duration: '2h30', maintenance: '130,00', photo: '../../glamour-midnight/assets/img/mega-volume.png' },
-  { name: 'Fox Eyes', price: '170,00', duration: '1h45', maintenance: '100,00', photo: '../../glamour-midnight/assets/img/fox-eyes.png' },
-  { name: 'Lash Lifting', price: '130,00', duration: '1h00', maintenance: 'Incluso', photo: '../../glamour-midnight/assets/img/lash-lifting.png' },
-  { name: 'Mapping Boneca / Gatinho', price: 'Incluso', duration: 'Design', maintenance: '-', photo: '../../glamour-midnight/assets/img/mapping-boneca.png' },
-  { name: 'Remoção dos Fios', price: '50,00', duration: '40min', maintenance: '-', photo: '../../glamour-midnight/assets/img/remocao.png' }
+  {
+    name: 'Volume Brasileiro',
+    price: '150,00',
+    duration: '1h30',
+    maintenance: '90,00 (até 20 dias)',
+    cat: 'Extensão em Y',
+    desc: 'Fios tecnológicos com formato Y que preenchem as falhas naturais com leveza incomparável, alta durabilidade e acabamento marcante.',
+    effect: 'Preenchimento, Textura & Leveza',
+    recommendation: 'Mínimo de 40% dos fios para manutenção',
+    photo: '../../glamour-midnight/assets/img/volume-brasileiro.png'
+  },
+  {
+    name: 'Clássico Fio a Fio',
+    price: '120,00',
+    duration: '1h30',
+    maintenance: '70,00 (até 18 dias)',
+    cat: 'Fio a Fio Clássico',
+    desc: 'Um fio sintético ultrafino acoplado a cada cílio natural saudável. O resultado mais elegante e discreto: olhar iluminado com efeito de rímel perfeito.',
+    effect: 'Natural, Discreto & Elegante',
+    recommendation: 'Mínimo de 40% dos fios para manutenção',
+    photo: '../../glamour-midnight/assets/img/classico-fio-a-fio.png'
+  },
+  {
+    name: 'Volume Egípcio',
+    price: '160,00',
+    duration: '1h30',
+    maintenance: '95,00 (até 20 dias)',
+    cat: 'Extensão em W',
+    desc: 'Fios especiais em formato W (3D tecnológico) que proporcionam densidade homogênea, efeito aveludado e volume equilibrado sem pesar nos olhos.',
+    effect: 'Densidade Aveludada & Uniforme',
+    recommendation: 'Mínimo de 40% dos fios para manutenção',
+    photo: '../../glamour-midnight/assets/img/volume-egipcio.png'
+  },
+  {
+    name: 'Volume Híbrido',
+    price: '160,00',
+    duration: '1h45',
+    maintenance: '95,00 (até 20 dias)',
+    cat: 'Clássico + Volume',
+    desc: 'A combinação artesanal entre a delicadeza do fio a fio clássico e leques de volume, criando textura multidimensional, profundidade e brilho no olhar.',
+    effect: 'Textura Desconstruída & Volume Sob Medida',
+    recommendation: 'Mínimo de 40% dos fios para manutenção',
+    photo: '../../glamour-midnight/assets/img/volume-hibrido.png'
+  },
+  {
+    name: 'Volume Russo',
+    price: '190,00',
+    duration: '2h00',
+    maintenance: '110,00 (até 20 dias)',
+    cat: 'Fans Artesanais 3D–6D',
+    desc: 'Técnica de alta precisão com fans ultrafinos (3 a 6 fios de seda) montados à mão na hora. Cria um volume expressivo, extremamente macio, denso e sofisticado.',
+    effect: 'Glamour, Densidade & Toque de Pluma',
+    recommendation: 'Mínimo de 40% dos fios para manutenção',
+    photo: '../../glamour-midnight/assets/img/volume-russo.png'
+  },
+  {
+    name: 'Mega Volume',
+    price: '240,00',
+    duration: '2h30',
+    maintenance: '140,00 (até 18 dias)',
+    cat: 'Densidade Máxima 8D–12D',
+    desc: 'O ápice da densidade e do impacto visual: leques artesanais com fios ultrafinos de 0.03mm. Proporciona um olhar super pretinho, aveludado e hipnotizante.',
+    effect: 'Impacto Máximo, Densidade Total & Preto Profundo',
+    recommendation: 'Mínimo de 40% dos fios para manutenção',
+    photo: '../../glamour-midnight/assets/img/mega-volume.png'
+  },
+  {
+    name: 'Fox Eyes',
+    price: '170,00',
+    duration: '1h45',
+    maintenance: '100,00 (até 20 dias)',
+    cat: 'Mapping Estilizado',
+    desc: 'Alongamento estratégico com curvaturas graduais no canto externo. Cria um efeito delineado sofisticado que eleva o olhar sem necessidade de maquiagem.',
+    effect: 'Olhar Delineado, Marcante & Elevação',
+    recommendation: 'Mínimo de 40% dos fios para manutenção',
+    photo: '../../glamour-midnight/assets/img/fox-eyes.png'
+  },
+  {
+    name: 'Lash Lifting',
+    price: '130,00',
+    duration: '1h00',
+    maintenance: 'Incluso',
+    cat: 'Tratamento Natural',
+    desc: 'Curvatura e hidratação profunda dos próprios cílios naturais com tintura e queratina botox. Sem fios artificiais, durabilidade de até 6 a 8 semanas.',
+    effect: 'Cílios Curvados, Pretos e Nutridos',
+    recommendation: 'Repetição recomendada a cada 45–60 dias',
+    photo: '../../glamour-midnight/assets/img/lash-lifting.png'
+  },
+  {
+    name: 'Mapping Boneca / Gatinho',
+    price: 'Incluso',
+    duration: 'Design',
+    maintenance: '-',
+    cat: 'Personalização de Olhar',
+    desc: 'Consultoria de visagismo personalizada para definir o desenho ideal dos fios de acordo com o formato e proporção única dos olhos da cliente.',
+    effect: 'Harmonização do Olhar',
+    recommendation: 'Definido na avaliação inicial',
+    photo: '../../glamour-midnight/assets/img/mapping-boneca.png'
+  },
+  {
+    name: 'Remoção dos Fios',
+    price: '50,00',
+    duration: '40min',
+    maintenance: '-',
+    cat: 'Remoção Segura',
+    desc: 'Remoção com produto profissional dermatologicamente testado em creme/gel, preservando 100% da integridade e saúde dos cílios naturais.',
+    effect: 'Desacoplamento Suave Sem Danos',
+    recommendation: 'Nunca tente remover puxando em casa',
+    photo: '../../glamour-midnight/assets/img/remocao.png'
+  }
 ];
 
 function updateServicesCount() {
@@ -237,6 +337,10 @@ function initServicesBuilder() {
       price: '',
       duration: '',
       maintenance: '',
+      cat: 'Procedimento Personalizado',
+      desc: '',
+      effect: '',
+      recommendation: '',
       photo: '../../glamour-midnight/assets/img/volume-brasileiro.png'
     });
   });
@@ -276,6 +380,36 @@ function renderServiceRow(container, data) {
       </div>
     </div>
 
+    <!-- Botão de Expandir Detalhes Avançados (Opcional) -->
+    <div class="service-advanced-toggle-wrap">
+      <button type="button" class="btn-toggle-advanced">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        <span>Editar Descrição, Efeito e Recomendação (Opcional)</span>
+      </button>
+    </div>
+
+    <!-- Gaveta de Campos Avançados -->
+    <div class="service-advanced-drawer">
+      <div class="service-mini-field">
+        <label class="sm-label">Descrição Persuasiva do Procedimento</label>
+        <textarea class="sm-input service-desc" rows="2" placeholder="Descreva os benefícios e o visual da técnica...">${data.desc || ''}</textarea>
+      </div>
+      <div class="service-advanced-grid">
+        <div class="service-mini-field">
+          <label class="sm-label">Efeito Visual</label>
+          <input type="text" class="sm-input service-effect" placeholder="Ex: Preenchimento, Textura & Leveza" value="${data.effect || ''}">
+        </div>
+        <div class="service-mini-field">
+          <label class="sm-label">Recomendação</label>
+          <input type="text" class="sm-input service-recommendation" placeholder="Ex: Mínimo de 40% dos fios" value="${data.recommendation || ''}">
+        </div>
+      </div>
+      <div class="service-mini-field">
+        <label class="sm-label">Categoria / Técnica</label>
+        <input type="text" class="sm-input service-cat" placeholder="Ex: Extensão em Y" value="${data.cat || 'Extensão de Cílios'}">
+      </div>
+    </div>
+
     <!-- Base: Barra de Foto com Prévia e Troca -->
     <div class="service-photo-bar">
       <div class="service-photo-thumb-wrap" title="Ver prévia deste procedimento">
@@ -306,6 +440,19 @@ function renderServiceRow(container, data) {
   const photoThumb = row.querySelector('.service-photo-thumb');
   const photoStatus = row.querySelector('.service-photo-status');
   const photoHint = row.querySelector('.service-photo-hint');
+  const toggleAdvBtn = row.querySelector('.btn-toggle-advanced');
+  const advDrawer = row.querySelector('.service-advanced-drawer');
+
+  // Alterna gaveta de detalhes avançados
+  if (toggleAdvBtn && advDrawer) {
+    toggleAdvBtn.addEventListener('click', () => {
+      advDrawer.classList.toggle('is-open');
+      const isOpen = advDrawer.classList.contains('is-open');
+      toggleAdvBtn.innerHTML = isOpen
+        ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>Ocultar Detalhes Avançados</span>`
+        : `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>Editar Descrição, Efeito e Recomendação (Opcional)</span>`;
+    });
+  }
 
   // Abre Prévia
   const openPreview = (e) => {
@@ -410,19 +557,31 @@ function openProcedureModal(row) {
   const priceVal = row.querySelector('.service-price')?.value;
   const durationVal = row.querySelector('.service-duration')?.value;
   const maintenanceVal = row.querySelector('.service-maintenance')?.value;
+  const catVal = row.querySelector('.service-cat')?.value || 'Extensão de Cílios';
+  const descVal = row.querySelector('.service-desc')?.value || 'Procedimento profissional de embelezamento e realce do olhar.';
+  const effectVal = row.querySelector('.service-effect')?.value || 'Realce e Sofisticação do Olhar';
+  const recVal = row.querySelector('.service-recommendation')?.value || 'Manutenção recomendada a cada 15 a 20 dias';
   const photoSrc = row.querySelector('.service-photo-thumb')?.src || '';
 
   const modalImg = document.getElementById('proc-modal-img');
+  const modalCat = document.getElementById('proc-modal-cat');
   const modalTitle = document.getElementById('proc-modal-title');
+  const modalDesc = document.getElementById('proc-modal-desc');
   const modalPrice = document.getElementById('proc-modal-price');
-  const modalDuration = document.getElementById('proc-modal-duration');
   const modalMaintenance = document.getElementById('proc-modal-maintenance');
+  const modalDuration = document.getElementById('proc-modal-duration');
+  const modalEffect = document.getElementById('proc-modal-effect');
+  const modalRec = document.getElementById('proc-modal-recommendation');
 
   if (modalImg) modalImg.src = photoSrc;
+  if (modalCat) modalCat.textContent = catVal.toUpperCase();
   if (modalTitle) modalTitle.textContent = nameVal.trim() || 'Procedimento';
-  if (modalPrice) modalPrice.textContent = priceVal ? `R$ ${priceVal}` : 'R$ 150,00';
+  if (modalDesc) modalDesc.textContent = descVal;
+  if (modalPrice) modalPrice.textContent = priceVal ? (priceVal.startsWith('R$') ? priceVal : `R$ ${priceVal}`) : 'R$ 150,00';
+  if (modalMaintenance) modalMaintenance.textContent = maintenanceVal ? (maintenanceVal.startsWith('R$') || maintenanceVal === '-' || maintenanceVal === 'Incluso' ? maintenanceVal : `R$ ${maintenanceVal}`) : '-';
   if (modalDuration) modalDuration.textContent = durationVal || '1h30';
-  if (modalMaintenance) modalMaintenance.textContent = maintenanceVal ? `R$ ${maintenanceVal}` : '-';
+  if (modalEffect) modalEffect.textContent = effectVal;
+  if (modalRec) modalRec.textContent = recVal;
 
   modal.classList.remove('is-hidden');
   modal.setAttribute('aria-hidden', 'false');

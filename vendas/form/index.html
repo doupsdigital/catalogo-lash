@@ -451,31 +451,41 @@
             <div class="proc-preview-photo-wrap">
               <img id="proc-modal-img" src="" alt="Foto do procedimento" class="proc-preview-img">
               <div class="proc-preview-scrim"></div>
-              <span class="proc-preview-badge">Prévia no Catálogo</span>
+              <span class="proc-preview-badge">Prévia Oficial</span>
             </div>
             <div class="proc-preview-body">
-              <span class="proc-preview-kicker">✨ Procedimento</span>
+              <span class="proc-preview-kicker" id="proc-modal-cat">EXTENSÃO EM Y</span>
               <h3 class="proc-preview-title" id="proc-modal-title">Volume Brasileiro</h3>
+              <p class="proc-preview-desc" id="proc-modal-desc">Fios tecnológicos com formato Y que preenchem as falhas naturais com leveza incomparável, alta durabilidade e acabamento marcante.</p>
               
-              <div class="proc-preview-specs">
-                <div class="proc-spec-item">
-                  <span class="proc-spec-k">Aplicação</span>
-                  <strong class="proc-spec-v" id="proc-modal-price">R$ 150,00</strong>
+              <div class="proc-preview-specs-table">
+                <div class="proc-spec-row">
+                  <span class="proc-spec-k">VALOR</span>
+                  <span class="proc-spec-v" id="proc-modal-price">R$ 150</span>
                 </div>
-                <div class="proc-spec-item">
-                  <span class="proc-spec-k">Duração</span>
-                  <strong class="proc-spec-v" id="proc-modal-duration">1h30</strong>
+                <div class="proc-spec-row">
+                  <span class="proc-spec-k">MANUTENÇÃO</span>
+                  <span class="proc-spec-v" id="proc-modal-maintenance">R$ 90 (até 20 dias)</span>
                 </div>
-                <div class="proc-spec-item">
-                  <span class="proc-spec-k">Manutenção</span>
-                  <strong class="proc-spec-v" id="proc-modal-maintenance">R$ 90,00</strong>
+                <div class="proc-spec-row">
+                  <span class="proc-spec-k">DURAÇÃO</span>
+                  <span class="proc-spec-v" id="proc-modal-duration">1h30</span>
+                </div>
+                <div class="proc-spec-row">
+                  <span class="proc-spec-k">EFEITO</span>
+                  <span class="proc-spec-v" id="proc-modal-effect">Preenchimento, Textura &amp; Leveza</span>
+                </div>
+                <div class="proc-spec-row">
+                  <span class="proc-spec-k">RECOMENDAÇÃO</span>
+                  <span class="proc-spec-v" id="proc-modal-recommendation">Mínimo de 40% dos fios para manutenção</span>
                 </div>
               </div>
 
-              <div class="proc-preview-footer">
-                <button type="button" class="btn btn--outline btn--sm" id="proc-modal-change-photo-btn">
+              <div class="proc-preview-actions">
+                <button type="button" class="btn-demo-cta">QUERO ESSE →</button>
+                <button type="button" class="btn btn--outline btn--sm btn-modal-change" id="proc-modal-change-photo-btn">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                  <span>Trocar Foto deste Procedimento</span>
+                  <span>Trocar Foto</span>
                 </button>
               </div>
             </div>
