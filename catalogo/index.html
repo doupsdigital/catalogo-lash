@@ -3,231 +3,165 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Catálogo Digital Oficial — LashMenu</title>
-  <meta name="description" content="Catálogo digital exclusivo e personalizado para agendamento de procedimentos.">
+  <title>Carregando Catálogo Oficial — LashMenu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  
-  <!-- Fontes Google para todos os modelos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Jost:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Estilo dinâmico que será trocado conforme o modelo do pedido -->
-  <link id="theme-stylesheet" rel="stylesheet" href="../glamour-midnight/css/style.css?v=2026">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* ── Garante Scroll Fluido e Livre em Qualquer Dispositivo ── */
-    html {
-      scroll-behavior: smooth;
-      height: 100%;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
       background: #0d0b0a;
       color: #f5ede6;
-      overflow-x: hidden !important;
-      overflow-y: auto !important;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    #catalog-app {
-      width: 100%;
-      min-height: 100%;
-      display: block;
-    }
-
-    .vitrine {
-      width: 100% !important;
-      height: auto !important;
-      min-height: 100vh !important;
-      overflow: visible !important;
-      scroll-snap-type: none !important;
-    }
-
-    .vitrine > section,
-    .hero,
-    .procedimentos,
-    .agendamento,
-    .contato {
-      min-height: 100vh !important;
-      height: auto !important;
-      position: relative !important;
-      overflow: visible !important;
-      scroll-snap-align: none !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      padding: 60px 20px !important;
-      box-sizing: border-box !important;
-    }
-
-    .hero {
-      padding: 0 !important;
-      height: 100vh !important;
-    }
-
-    .hero__foto-wrap,
-    .procedimentos__foto-wrap,
-    .agendamento__foto-wrap,
-    .contato__foto-wrap {
-      position: absolute !important;
-      inset: 0 !important;
-      z-index: 1 !important;
-      overflow: hidden !important;
-    }
-
-    .hero__scrim,
-    .procedimentos__scrim,
-    .agendamento__scrim,
-    .contato__scrim {
-      position: absolute !important;
-      inset: 0 !important;
-      z-index: 2 !important;
-    }
-
-    .hero__conteudo,
-    .procedimentos__conteudo,
-    .agendamento__conteudo,
-    .contato__conteudo {
-      position: relative !important;
-      z-index: 3 !important;
-      width: 100% !important;
-      max-width: 500px !important;
-      margin: 0 auto !important;
-    }
-
-    .procedimentos__lista {
-      display: grid !important;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
-      gap: 12px !important;
-      max-height: none !important;
-      overflow: visible !important;
-      margin-top: 16px !important;
-    }
-
-    .card-procedimento {
-      cursor: pointer !important;
-      transition: transform 0.2s ease !important;
-    }
-    .card-procedimento:hover {
-      transform: translateY(-4px) !important;
-    }
-
-    /* ── Loader de Alta Classe Durante a Busca no Supabase ── */
-    #catalog-loader {
-      position: fixed;
-      inset: 0;
-      background: #0d0b0a;
-      z-index: 99999;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-    #catalog-loader.is-hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    .loader-brand {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 2.2rem;
-      color: #fff;
-      letter-spacing: 0.15em;
-      margin-bottom: 24px;
-      text-transform: uppercase;
-    }
-    .loader-brand em {
-      font-style: italic;
-      color: #e5a9b8;
-    }
-    .loader-spinner {
-      width: 32px;
-      height: 32px;
-      border: 2px solid rgba(229, 169, 184, 0.2);
-      border-top-color: #e5a9b8;
-      border-radius: 50%;
-      animation: loaderSpin 0.8s linear infinite;
-    }
-    @keyframes loaderSpin {
-      to { transform: rotate(360deg); }
-    }
-    .loader-text {
-      color: #9c8e85;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.82rem;
-      margin-top: 16px;
-      letter-spacing: 0.05em;
-    }
-
-    /* ── Tela de Erro ── */
-    #catalog-error {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #0d0b0a;
-      z-index: 99998;
       align-items: center;
       justify-content: center;
       text-align: center;
       padding: 24px;
-      color: #fff;
-      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    #catalog-error.is-active {
-      display: flex;
-      flex-direction: column;
-    }
-    #catalog-error h2 {
-      font-family: 'Cormorant Garamond', serif;
+    .brand {
+      font-family: 'Cormorant Garamond', Georgia, serif;
       font-size: 2.4rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    .brand em {
+      font-style: italic;
+      color: #e5a9b8;
+    }
+    .spinner {
+      width: 34px;
+      height: 34px;
+      border: 2px solid rgba(229, 169, 184, 0.2);
+      border-top-color: #e5a9b8;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 16px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .status-text {
+      color: #a3958c;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+    .error-box {
+      display: none;
+      max-width: 400px;
+    }
+    .error-box.is-active {
+      display: block;
+    }
+    .error-box h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
       color: #e5a9b8;
       margin-bottom: 12px;
     }
-    #catalog-error p {
-      color: #a8988e;
-      max-width: 420px;
-      margin-bottom: 24px;
-      font-size: 0.95rem;
+    .error-box p {
+      color: #a3958c;
+      font-size: 0.9rem;
       line-height: 1.5;
+      margin-bottom: 20px;
     }
-    #catalog-error a {
+    .error-box a {
       display: inline-block;
-      padding: 12px 28px;
+      padding: 12px 24px;
       background: #e5a9b8;
       color: #0d0b0a;
       border-radius: 100px;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 0.88rem;
+      font-weight: 700;
+      font-size: 0.85rem;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- LOADER INICIAL -->
-  <div id="catalog-loader">
-    <div class="loader-brand">Lash<em>Menu</em></div>
-    <div class="loader-spinner"></div>
-    <p class="loader-text">Carregando catálogo exclusivo...</p>
+  <div id="loader-content">
+    <div class="brand">Lash<em>Menu</em></div>
+    <div class="spinner"></div>
+    <p class="status-text">Carregando catálogo exclusivo...</p>
   </div>
 
-  <!-- TELA DE ERRO -->
-  <div id="catalog-error">
+  <div class="error-box" id="error-box">
     <h2>Catálogo Não Encontrado</h2>
-    <p>O link acessado não possui um catálogo cadastrado ou está em processo de finalização.</p>
-    <a href="../vendas/form/">Criar Meu Catálogo</a>
+    <p>O subdomínio informado não foi localizado ou ainda está sendo configurado.</p>
+    <a href="../vendas/form/">Criar Catálogo</a>
   </div>
 
-  <!-- CONTAINER DINÂMICO QUE RECEBERÁ O TEMPLATE RENDERIZADO -->
-  <main id="catalog-app"></main>
+  <script>
+    (async function routeToModel() {
+      const loader = document.getElementById('loader-content');
+      const errorBox = document.getElementById('error-box');
 
-  <!-- SCRIPTS -->
-  <script src="js/app.js?v=3.0"></script>
+      function getSlug() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const querySlug = urlParams.get('slug') || urlParams.get('c') || urlParams.get('p');
+        if (querySlug) return querySlug.toLowerCase().trim();
+
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
+        if (pathParts.length >= 2 && (pathParts[0] === 'catalogo' || pathParts[0] === 'c')) {
+          return pathParts[1].toLowerCase().trim();
+        }
+
+        const hostname = window.location.hostname;
+        const hostParts = hostname.split('.');
+        if (hostParts.length >= 3 && hostParts[0] !== 'www' && hostParts[0] !== 'lashmenu-vendas') {
+          return hostParts[0].toLowerCase().trim();
+        }
+        return null;
+      }
+
+      const slug = getSlug();
+
+      if (!slug) {
+        if (loader) loader.style.display = 'none';
+        if (errorBox) errorBox.classList.add('is-active');
+        return;
+      }
+
+      try {
+        const SUPABASE_URL = 'https://wffhptpsafllsmcsoiih.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmZmhwdHBzYWZsbHNtY3NvaWloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyODkyMTYsImV4cCI6MjEwMjg2NTIxNn0.nwpvIwl8V6_KGIp5e5oeraAcGyt3oo8Kdam2hp6ajSQ';
+
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/orders?slug=eq.${encodeURIComponent(slug)}&select=model_id,color_id`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+
+        if (!res.ok) throw new Error('Erro na busca');
+        const orders = await res.json();
+
+        if (!orders || orders.length === 0) {
+          if (loader) loader.style.display = 'none';
+          if (errorBox) errorBox.classList.add('is-active');
+          return;
+        }
+
+        const order = orders[0];
+        const model = order.model_id || 'glamour';
+        const color = order.color_id || 'midnight';
+        const targetFolder = `${model}-${color}`;
+
+        // Redireciona para o modelo oficial intacto passando o slug
+        window.location.replace(`../${targetFolder}/?slug=${encodeURIComponent(slug)}`);
+
+      } catch (e) {
+        if (loader) loader.style.display = 'none';
+        if (errorBox) errorBox.classList.add('is-active');
+      }
+    })();
+  </script>
 </body>
 
 </html>
