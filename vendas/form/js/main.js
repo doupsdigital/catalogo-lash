@@ -173,12 +173,18 @@ function initModelCardsSelection() {
     }
   });
 
+  const modelButtonLabels = {
+    glamour: 'Escolher Glamour',
+    harmonia: 'Escolher Harmonia',
+    classico: 'Escolher Clássico'
+  };
+
   function selectCard(selectedCard) {
     cards.forEach((c) => {
       c.classList.remove('is-selected');
       const btn = c.querySelector('.btn-select-model-card .btn-select-text');
-      const modelName = c.querySelector('.opt2-model-title')?.textContent || 'Modelo';
-      if (btn) btn.textContent = `Escolher ${modelName}`;
+      const mId = c.getAttribute('data-model');
+      if (btn) btn.textContent = modelButtonLabels[mId] || 'Escolher Modelo';
     });
 
     selectedCard.classList.add('is-selected');
