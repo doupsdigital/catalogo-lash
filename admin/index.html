@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <title>LashMenu — Painel de Controle e Revisão VIP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0d0b0a;
+      --bg-card: #161210;
+      --bg-card-hover: #1e1916;
+      --border: #2e2621;
+      --border-focus: #e5a9b8;
+      --text: #f5ede6;
+      --text-muted: #a3958c;
+      --primary: #e5a9b8;
+      --primary-dark: #b86e80;
+      --accent-green: #25d366;
+      --accent-gold: #d4af37;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Autenticação Simples com PIN ── */
+    #auth-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    #auth-screen.is-hidden {
+      display: none;
+    }
+    .auth-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    }
+    .auth-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+    }
+    .auth-logo em {
+      font-style: italic;
+      color: var(--primary);
+    }
+    .auth-sub {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+    }
+    .auth-input {
+      width: 100%;
+      background: #0d0b0a;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      color: #fff;
+      font-size: 1rem;
+      text-align: center;
+      letter-spacing: 0.2em;
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .auth-input:focus {
+      border-color: var(--primary);
+    }
+    .auth-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #0d0b0a;
+      font-weight: 700;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    /* ── Header do Painel ── */
+    .admin-header {
+      background: #120e0c;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.1em;
+    }
+    .admin-brand em {
+      font-style: italic;
+      color: var(--primary);
+    }
+    .admin-stats {
+      display: flex;
+      gap: 16px;
+    }
+    .stat-badge {
+      background: rgba(229, 169, 184, 0.1);
+      border: 1px solid rgba(229, 169, 184, 0.25);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* ── Container Principal ── */
+    .admin-container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px 24px;
+      flex: 1;
+    }
+    .admin-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .admin-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    .admin-actions {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-refresh {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    .btn-refresh:hover {
+      background: var(--bg-card-hover);
+    }
+
+    /* ── Lista de Pedidos ── */
+    .orders-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px;
+    }
+    .order-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .order-card:hover {
+      border-color: rgba(229, 169, 184, 0.4);
+      transform: translateY(-2px);
+    }
+    .order-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .order-designer-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .order-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .status-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+    }
+    .status-pill.pendente {
+      background: rgba(212, 175, 55, 0.15);
+      color: #ffd966;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    .status-pill.aprovado {
+      background: rgba(37, 211, 102, 0.15);
+      color: #25d366;
+      border: 1px solid rgba(37, 211, 102, 0.3);
+    }
+
+    .order-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      color: #c9bdb5;
+    }
+    .order-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .order-slug-badge {
+      background: #0d0b0a;
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-family: monospace;
+      color: var(--primary);
+      font-size: 0.8rem;
+    }
+
+    /* ── Botões de Ação do Card ── */
+    .order-card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+    .btn-action-preview {
+      background: #241d1a;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-action-preview:hover {
+      background: #302622;
+    }
+    .btn-action-approve {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .btn-action-approve:hover {
+      filter: brightness(1.1);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- AUTENTICAÇÃO SIMPLES COM PIN -->
+  <div id="auth-screen">
+    <div class="auth-box">
+      <div class="auth-logo">Lash<em>Menu</em></div>
+      <p class="auth-sub">Painel Administrativo VIP</p>
+      <input type="password" id="pin-input" class="auth-input" placeholder="DIGITE SEU PIN" maxlength="6" autofocus>
+      <button type="button" id="btn-login" class="auth-btn">Acessar Painel</button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="admin-header">
+    <div class="admin-brand">Lash<em>Menu</em> · Admin</div>
+    <div class="admin-stats">
+      <span class="stat-badge" id="total-orders-badge">Carregando...</span>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="admin-container">
+    <div class="admin-top-bar">
+      <h1 class="admin-title">Catálogos &amp; Pedidos Recebidos</h1>
+      <div class="admin-actions">
+        <button type="button" class="btn-refresh" id="btn-refresh-orders">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+          <span>Atualizar Lista</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- GRID DE PEDIDOS -->
+    <div class="orders-grid" id="orders-grid">
+      <!-- Injetado via JS -->
+    </div>
+  </main>
+
+  <script>
+    const ADMIN_PIN = '1234'; // PIN padrão de acesso
+
+    const authScreen = document.getElementById('auth-screen');
+    const pinInput = document.getElementById('pin-input');
+    const btnLogin = document.getElementById('btn-login');
+    const ordersGrid = document.getElementById('orders-grid');
+    const totalBadge = document.getElementById('total-orders-badge');
+    const btnRefresh = document.getElementById('btn-refresh-orders');
+
+    // Verifica se já está logado na sessão
+    if (sessionStorage.getItem('lash_admin_auth') === 'true') {
+      authScreen.classList.add('is-hidden');
+      loadOrders();
+    }
+
+    btnLogin.addEventListener('click', handleAuth);
+    pinInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleAuth();
+    });
+
+    function handleAuth() {
+      if (pinInput.value === ADMIN_PIN) {
+        sessionStorage.setItem('lash_admin_auth', 'true');
+        authScreen.classList.add('is-hidden');
+        loadOrders();
+      } else {
+        alert('PIN Incorreto. Tente novamente.');
+        pinInput.value = '';
+        pinInput.focus();
+      }
+    }
+
+    async function loadOrders() {
+      ordersGrid.innerHTML = '<p style="color: #a3958c;">Buscando pedidos no Supabase...</p>';
+      
+      try {
+        const SUPABASE_URL = 'https://wffhptpsafllsmcsoiih.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmZmhwdHBzYWZsbHNtY3NvaWloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyODkyMTYsImV4cCI6MjEwMjg2NTIxNn0.nwpvIwl8V6_KGIp5e5oeraAcGyt3oo8Kdam2hp6ajSQ';
+
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/orders?select=*&order=created_at.desc`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+
+        if (!res.ok) throw new Error('Erro ao carregar');
+        const orders = await res.json();
+
+        totalBadge.textContent = `${orders.length} Catálogos Cadastrados`;
+
+        if (orders.length === 0) {
+          ordersGrid.innerHTML = '<p style="color: #a3958c;">Nenhum catálogo recebido ainda.</p>';
+          return;
+        }
+
+        ordersGrid.innerHTML = orders.map(order => {
+          const dateStr = new Date(order.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+          const isPending = order.status !== 'aprovado';
+          const cleanPhone = (order.whatsapp || '').replace(/\D/g, '');
+          const catalogUrl = `../catalogo/?slug=${order.slug}`;
+          const firstName = (order.client_name || '').split(' ')[0];
+
+          // Mensagem VIP de Entrega Oficial para a cliente
+          const deliveryMessage = `Olá, ${firstName}! ✨👑\n\nSeu catálogo digital oficial LashMenu está pronto, calibrado e no ar! 🚀\n\n🔗 *Seu Link Exclusivo:*\n👉 https://${order.slug}.lashmenu.com\n\n📌 *O que fazer agora:*\n1. Abra o link no seu celular e confira seu catálogo completo.\n2. Coloque este link na bio do seu Instagram e no seu perfil do WhatsApp Business.\n3. Comece a enviar para suas clientes no momento do agendamento!\n\nQualquer dúvida ou ajuste que precisar, nossa equipe está à sua inteira disposição. Parabéns pelo seu novo posicionamento de luxo! 💖✨`;
+          
+          const whatsappDeliveryUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(deliveryMessage)}`;
+
+          return `
+            <div class="order-card">
+              <div>
+                <div class="order-card-header">
+                  <div>
+                    <h3 class="order-designer-name">${order.client_name}</h3>
+                    <div class="order-date">${dateStr}</div>
+                  </div>
+                  <span class="status-pill ${isPending ? 'pendente' : 'aprovado'}">
+                    ${isPending ? 'Pendente' : 'Aprovado'}
+                  </span>
+                </div>
+
+                <div class="order-meta">
+                  <div class="order-meta-item">
+                    <span>🌐 Link:</span>
+                    <span class="order-slug-badge">${order.slug}.lashmenu.com</span>
+                  </div>
+                  <div class="order-meta-item">
+                    <span>📱 WhatsApp:</span>
+                    <span>${order.whatsapp || 'Não informado'}</span>
+                  </div>
+                  <div class="order-meta-item">
+                    <span>🎨 Modelo:</span>
+                    <span>${(order.model_id || 'glamour').toUpperCase()} · ${(order.color_id || 'midnight').toUpperCase()}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-card-actions">
+                <a href="${catalogUrl}" target="_blank" class="btn-action-preview">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="13" r="3"/></svg>
+                  <span>Ver Catálogo</span>
+                </a>
+                <a href="${whatsappDeliveryUrl}" target="_blank" onclick="markAsApproved('${order.id}')" class="btn-action-approve">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.771.815 2.791.815 3.179 0 5.767-2.587 5.768-5.766.001-3.18-2.586-5.767-5.768-5.767zm9.969 5.766c-.002 5.519-4.49 9.998-10 9.998-1.758 0-3.414-.467-4.869-1.282l-5.131 1.346 1.374-5.011c-.91-1.503-1.374-3.238-1.374-5.051 0-5.52 4.488-10 10-10 5.514 0 10 4.48 10 10z"/></svg>
+                  <span>Aprovar &amp; Entregar</span>
+                </a>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        ordersGrid.innerHTML = '<p style="color: #ff6b6b;">Erro ao carregar pedidos. Tente atualizar.</p>';
+      }
+    }
+
+    async function markAsApproved(orderId) {
+      try {
+        const SUPABASE_URL = 'https://wffhptpsafllsmcsoiih.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmZmhwdHBzYWZsbHNtY3NvaWloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyODkyMTYsImV4cCI6MjEwMjg2NTIxNn0.nwpvIwl8V6_KGIp5e5oeraAcGyt3oo8Kdam2hp6ajSQ';
+
+        await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${orderId}`, {
+          method: 'PATCH',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ status: 'aprovado' })
+        });
+        setTimeout(loadOrders, 1000);
+      } catch (e) {}
+    }
+
+    if (btnRefresh) btnRefresh.addEventListener('click', loadOrders);
+  </script>
+</body>
+
+</html>

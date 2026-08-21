@@ -1,5 +1,7 @@
 {
   "rewrites": [
+    { "source": "/admin", "destination": "/admin/index.html" },
+    { "source": "/admin/:path*", "destination": "/admin/:path*" },
     { "source": "/c/:slug", "destination": "/catalogo/index.html?slug=:slug" },
     { "source": "/catalogo/:slug", "destination": "/catalogo/index.html?slug=:slug" },
     { "source": "/catalogo", "destination": "/catalogo/index.html" },
