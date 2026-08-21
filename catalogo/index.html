@@ -13,31 +13,106 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Jost:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Estilo dinâmico que será trocado conforme o modelo do pedido -->
-  <link id="theme-stylesheet" rel="stylesheet" href="../glamour-midnight/css/style.css">
+  <link id="theme-stylesheet" rel="stylesheet" href="../glamour-midnight/css/style.css?v=2026">
 
   <style>
-    html, body {
+    /* ── Garante Scroll Fluido e Livre em Qualquer Dispositivo ── */
+    html {
+      scroll-behavior: smooth;
+      height: 100%;
+    }
+    body {
       margin: 0;
       padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
+      min-height: 100%;
       background: #0d0b0a;
+      color: #f5ede6;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
       -webkit-font-smoothing: antialiased;
-      scrollbar-width: none !important;
-    }
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    ::-webkit-scrollbar {
-      display: none !important;
     }
 
     #catalog-app {
-      height: 100%;
       width: 100%;
+      min-height: 100%;
       display: block;
-      overflow: hidden;
+    }
+
+    .vitrine {
+      width: 100% !important;
+      height: auto !important;
+      min-height: 100vh !important;
+      overflow: visible !important;
+      scroll-snap-type: none !important;
+    }
+
+    .vitrine > section,
+    .hero,
+    .procedimentos,
+    .agendamento,
+    .contato {
+      min-height: 100vh !important;
+      height: auto !important;
+      position: relative !important;
+      overflow: visible !important;
+      scroll-snap-align: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      padding: 60px 20px !important;
+      box-sizing: border-box !important;
+    }
+
+    .hero {
+      padding: 0 !important;
+      height: 100vh !important;
+    }
+
+    .hero__foto-wrap,
+    .procedimentos__foto-wrap,
+    .agendamento__foto-wrap,
+    .contato__foto-wrap {
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: 1 !important;
+      overflow: hidden !important;
+    }
+
+    .hero__scrim,
+    .procedimentos__scrim,
+    .agendamento__scrim,
+    .contato__scrim {
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: 2 !important;
+    }
+
+    .hero__conteudo,
+    .procedimentos__conteudo,
+    .agendamento__conteudo,
+    .contato__conteudo {
+      position: relative !important;
+      z-index: 3 !important;
+      width: 100% !important;
+      max-width: 500px !important;
+      margin: 0 auto !important;
+    }
+
+    .procedimentos__lista {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+      gap: 12px !important;
+      max-height: none !important;
+      overflow: visible !important;
+      margin-top: 16px !important;
+    }
+
+    .card-procedimento {
+      cursor: pointer !important;
+      transition: transform 0.2s ease !important;
+    }
+    .card-procedimento:hover {
+      transform: translateY(-4px) !important;
     }
 
     /* ── Loader de Alta Classe Durante a Busca no Supabase ── */
@@ -50,7 +125,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.4s ease, visibility 0.4s ease;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
     #catalog-loader.is-hidden {
       opacity: 0;
@@ -88,7 +163,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* ── Tela de Erro (Caso não encontre) ── */
+    /* ── Tela de Erro ── */
     #catalog-error {
       display: none;
       position: fixed;
@@ -141,7 +216,7 @@
     <p class="loader-text">Carregando catálogo exclusivo...</p>
   </div>
 
-  <!-- TELA DE ERRO (CASO NÃO EXISTA O SUBDOMÍNIO) -->
+  <!-- TELA DE ERRO -->
   <div id="catalog-error">
     <h2>Catálogo Não Encontrado</h2>
     <p>O link acessado não possui um catálogo cadastrado ou está em processo de finalização.</p>
@@ -152,7 +227,7 @@
   <main id="catalog-app"></main>
 
   <!-- SCRIPTS -->
-  <script src="js/app.js?v=2.0"></script>
+  <script src="js/app.js?v=3.0"></script>
 </body>
 
 </html>
