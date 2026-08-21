@@ -248,50 +248,56 @@ function renderServiceRow(container, data) {
   const defaultPhoto = data.photo || '../../glamour-midnight/assets/img/volume-brasileiro.png';
 
   row.innerHTML = `
-    <!-- Miniatura da Foto -->
-    <div class="service-photo-box" title="Toque para trocar ou adicionar foto">
-      <img src="${defaultPhoto}" alt="Foto ${data.name || 'Procedimento'}" class="service-photo-thumb">
-      <div class="service-photo-overlay">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        <span>Trocar</span>
+    <!-- Topo: Nome do Procedimento + Botão Excluir -->
+    <div class="service-card-header">
+      <div class="service-mini-field service-name-field">
+        <label class="sm-label">Nome do Procedimento</label>
+        <input type="text" class="sm-input service-name" placeholder="Ex: Volume Brasileiro" value="${data.name || ''}" required>
       </div>
+      <button type="button" class="btn-remove-service" title="Remover este procedimento">✕</button>
+    </div>
+
+    <!-- Valores: Valor, Duração e Manutenção -->
+    <div class="service-values-grid">
+      <div class="service-mini-field">
+        <label class="sm-label">Valor (R$)</label>
+        <input type="text" class="sm-input service-price" placeholder="150,00" value="${data.price || ''}">
+      </div>
+      <div class="service-mini-field">
+        <label class="sm-label">Duração</label>
+        <input type="text" class="sm-input service-duration" placeholder="1h30" value="${data.duration || ''}">
+      </div>
+      <div class="service-mini-field">
+        <label class="sm-label">Manutenção</label>
+        <input type="text" class="sm-input service-maintenance" placeholder="90,00" value="${data.maintenance || ''}">
+      </div>
+    </div>
+
+    <!-- Base: Barra de Foto do Procedimento -->
+    <div class="service-photo-bar" title="Toque para trocar ou adicionar sua foto">
+      <div class="service-photo-thumb-wrap">
+        <img src="${defaultPhoto}" alt="Foto ${data.name || 'Procedimento'}" class="service-photo-thumb">
+      </div>
+      <div class="service-photo-info">
+        <span class="service-photo-status">Foto do Procedimento</span>
+        <span class="service-photo-hint">Toque para trocar pela foto real do seu trabalho</span>
+      </div>
+      <button type="button" class="btn-change-photo-mini">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <span>Trocar Foto</span>
+      </button>
       <input type="file" accept="image/*" class="service-file-input">
     </div>
-
-    <!-- Coluna com os Campos -->
-    <div class="service-fields-col">
-      <div class="service-fields-top">
-        <div class="service-mini-field" style="width: 100%;">
-          <label class="sm-label">Nome do Procedimento</label>
-          <input type="text" class="sm-input service-name" placeholder="Ex: Volume Egípcio" value="${data.name || ''}" required>
-        </div>
-      </div>
-
-      <div class="service-fields-bottom">
-        <div class="service-mini-field">
-          <label class="sm-label">Valor (R$)</label>
-          <input type="text" class="sm-input service-price" placeholder="150,00" value="${data.price || ''}">
-        </div>
-        <div class="service-mini-field">
-          <label class="sm-label">Duração</label>
-          <input type="text" class="sm-input service-duration" placeholder="1h30" value="${data.duration || ''}">
-        </div>
-        <div class="service-mini-field">
-          <label class="sm-label">Manutenção</label>
-          <input type="text" class="sm-input service-maintenance" placeholder="90,00" value="${data.maintenance || ''}">
-        </div>
-      </div>
-    </div>
-
-    <button type="button" class="btn-remove-service" title="Remover este procedimento">✕</button>
   `;
 
   // Interação de Troca de Foto
-  const photoBox = row.querySelector('.service-photo-box');
+  const photoBar = row.querySelector('.service-photo-bar');
   const fileInput = row.querySelector('.service-file-input');
   const photoThumb = row.querySelector('.service-photo-thumb');
+  const photoStatus = row.querySelector('.service-photo-status');
+  const photoHint = row.querySelector('.service-photo-hint');
 
-  photoBox.addEventListener('click', () => {
+  photoBar.addEventListener('click', () => {
     fileInput.click();
   });
 
@@ -303,12 +309,12 @@ function renderServiceRow(container, data) {
         photoThumb.src = evt.target.result;
         row.setAttribute('data-has-custom-photo', 'true');
 
-        let badge = photoBox.querySelector('.service-custom-badge');
-        if (!badge) {
-          badge = document.createElement('span');
-          badge.className = 'service-custom-badge';
-          badge.textContent = '✓ Própria';
-          photoBox.appendChild(badge);
+        if (photoStatus) {
+          photoStatus.innerHTML = '✓ Foto Própria Aplicada';
+          photoStatus.classList.add('is-custom');
+        }
+        if (photoHint) {
+          photoHint.textContent = 'Foto personalizada carregada com sucesso';
         }
       };
       reader.readAsDataURL(file);

@@ -690,13 +690,13 @@ body {
   background: #ffffff;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 16px;
-  display: grid;
-  grid-template-columns: 80px 1fr auto;
-  gap: 16px;
-  align-items: center;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   transition: all 0.2s ease;
   box-shadow: var(--shadow-sm);
+  position: relative;
 }
 
 .service-row-card:hover {
@@ -704,92 +704,20 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-/* Miniatura da Foto do Procedimento */
-.service-photo-box {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 1.5px solid var(--border);
-  background: var(--bg-card-alt);
-  cursor: pointer;
-  flex-shrink: 0;
+.service-card-header {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+  align-items: flex-end;
+  gap: 12px;
 }
 
-.service-photo-box:hover {
-  border-color: var(--accent);
-  transform: scale(1.02);
+.service-name-field {
+  flex: 1;
 }
 
-.service-photo-thumb {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.service-photo-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  color: #ffffff;
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 4px;
-}
-
-.service-photo-box:hover .service-photo-overlay {
-  opacity: 1;
-}
-
-.service-custom-badge {
-  position: absolute;
-  bottom: 4px;
-  left: 4px;
-  right: 4px;
-  background: #16a34a;
-  color: #ffffff;
-  font-size: 0.56rem;
-  font-weight: 800;
-  text-align: center;
-  border-radius: 4px;
-  padding: 2px 0;
-  line-height: 1;
-}
-
-.service-file-input {
-  display: none;
-}
-
-/* Coluna de Campos */
-.service-fields-col {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.service-fields-top {
-  display: flex;
-}
-
-.service-fields-bottom {
+.service-values-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
 }
 
 .service-mini-field {
@@ -799,33 +727,128 @@ body {
 }
 
 .sm-label {
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .06em;
+  letter-spacing: .05em;
   color: var(--text-muted);
 }
 
 .sm-input {
   width: 100%;
-  padding: 8px 10px;
+  padding: 9px 12px;
   border-radius: var(--radius-sm);
   border: 1.5px solid var(--border);
   background: #ffffff;
   font-family: var(--font-main);
-  font-size: 0.88rem;
+  font-size: 0.90rem;
   color: var(--text);
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .sm-input:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* Barra de Foto do Procedimento (Inferior) */
+.service-photo-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card-alt);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 2px;
+}
+
+.service-photo-bar:hover {
+  border-color: var(--accent);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.service-photo-thumb-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  border: 1.5px solid var(--border);
+  background: #ffffff;
+}
+
+.service-photo-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.service-photo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.service-photo-status {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.service-photo-status.is-custom {
+  color: #16a34a;
+}
+
+.service-photo-hint {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-change-photo-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: #ffffff;
+  font-family: var(--font-main);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.service-photo-bar:hover .btn-change-photo-mini {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.service-file-input {
+  display: none;
 }
 
 .btn-remove-service {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: #ffffff;
@@ -835,6 +858,7 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .btn-remove-service:hover {
@@ -1147,31 +1171,27 @@ body {
   }
 
   .service-row-card {
-    grid-template-columns: 74px 1fr;
+    padding: 14px;
     gap: 12px;
-    padding: 12px;
-    align-items: start;
   }
 
-  .service-photo-box {
-    width: 74px;
-    height: 74px;
-  }
-
-  .service-fields-bottom {
+  .service-values-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 8px;
   }
 
-  .btn-remove-service {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 28px;
-    height: 28px;
+  .service-values-grid .service-mini-field:last-child {
+    grid-column: 1 / -1;
   }
 
-  .service-row-card {
-    position: relative;
+  .service-photo-bar {
+    gap: 10px;
+    padding: 8px 10px;
+  }
+
+  .btn-change-photo-mini {
+    padding: 5px 10px;
+    font-size: 0.72rem;
   }
 
   .node-label {
