@@ -577,6 +577,8 @@ body {
   color: var(--text-muted);
   line-height: 1.45;
   margin-bottom: 14px;
+  text-wrap: balance;
+  max-width: 320px;
 }
 
 /* Link para Testar Modelo em Tela Cheia */
