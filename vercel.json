@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/form", "destination": "/vendas/form/index.html" },
+    { "source": "/form/:path*", "destination": "/vendas/form/:path*" },
+    { "source": "/vendas/form", "destination": "/vendas/form/index.html" },
+    { "source": "/", "destination": "/vendas/lpb/index.html" }
+  ]
+}
