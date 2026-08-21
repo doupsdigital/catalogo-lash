@@ -808,13 +808,44 @@ function initSlugFormatter() {
   });
 }
 
-function formatSlug(text) {
+function initSlugFormatter() {
+  const nameInput = document.getElementById('input-designer-name');
+  const slugInput = document.getElementById('input-slug');
+  if (!slugInput) return;
+
+  let userHasEditedSlugManually = false;
+
+  slugInput.addEventListener('input', () => {
+    userHasEditedSlugManually = true;
+    slugInput.value = formatSlugNoHyphen(slugInput.value);
+  });
+
+  if (nameInput) {
+    nameInput.addEventListener('input', () => {
+      if (userHasEditedSlugManually) return;
+      const raw = nameInput.value.trim();
+      if (!raw) {
+        slugInput.value = '';
+        return;
+      }
+      const parts = raw.split(/\s+/).filter(Boolean);
+      let combined = '';
+      if (parts.length >= 2) {
+        combined = parts[0] + parts[1]; // Nome + primeiro sobrenome junto
+      } else {
+        combined = parts[0];
+      }
+      slugInput.value = formatSlugNoHyphen(combined);
+    });
+  }
+}
+
+function formatSlugNoHyphen(text) {
   return text
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9-]/g, '')
-    .replace(/-+/g, '-');
+    .replace(/[^a-z0-9]/g, '');
 }
 
 /* ── 7. Atualização das Tags de Resumo na Etapa 4 ───────────────────────── */
