@@ -1,5 +1,8 @@
 {
   "rewrites": [
+    { "source": "/c/:slug", "destination": "/catalogo/index.html?slug=:slug" },
+    { "source": "/catalogo/:slug", "destination": "/catalogo/index.html?slug=:slug" },
+    { "source": "/catalogo", "destination": "/catalogo/index.html" },
     { "source": "/form", "destination": "/vendas/form/index.html" },
     { "source": "/form/:path*", "destination": "/vendas/form/:path*" },
     { "source": "/vendas/form", "destination": "/vendas/form/index.html" },
