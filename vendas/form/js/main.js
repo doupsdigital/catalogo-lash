@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initServicesBuilder();
   initProcedureModal();
   initPhotoDropzone();
+  initCoverPreviewModal();
   initPhoneMask();
   initSlugFormatter();
   initFormSubmission();
@@ -678,6 +679,94 @@ function initPhotoDropzone() {
   }
 }
 
+/* ── 4.1 Modal de Prévia da Capa Oficial (Hero 9:16) ────────────────────── */
+function initCoverPreviewModal() {
+  const openBtn = document.getElementById('btn-open-cover-preview');
+  const modal = document.getElementById('cover-preview-modal');
+  const backdrop = document.getElementById('cover-preview-backdrop');
+  const closeBtn = document.getElementById('cover-preview-close');
+  const phone = document.getElementById('cover-preview-phone');
+
+  if (!modal) return;
+
+  const closeModal = () => {
+    modal.classList.add('is-hidden');
+    modal.setAttribute('aria-hidden', 'true');
+    const video = document.getElementById('cover-modal-video');
+    if (video) video.pause();
+  };
+
+  if (backdrop) backdrop.addEventListener('click', closeModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('is-hidden')) {
+      closeModal();
+    }
+  });
+
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      // 1. Dados dinâmicos do formulário
+      const designerName = document.getElementById('input-designer-name')?.value?.trim() || 'Mariana Alves';
+      const heroPhrase = document.getElementById('input-hero-phrase')?.value?.trim() || 'Especialista em extensão de cílios e visagismo do olhar.';
+      const currentModel = document.getElementById('input-selected-model')?.value || selectedModelId || 'glamour';
+      const currentColor = document.getElementById('input-selected-color')?.value || selectedColorId || 'midnight';
+
+      // 2. Elementos da interface do modal
+      const modalName = document.getElementById('cover-modal-name');
+      const modalPhrase = document.getElementById('cover-modal-phrase');
+      const modalImg = document.getElementById('cover-modal-img');
+      const modalVideo = document.getElementById('cover-modal-video');
+
+      if (modalName) modalName.textContent = designerName;
+      if (modalPhrase) modalPhrase.textContent = heroPhrase;
+
+      if (phone) {
+        phone.setAttribute('data-theme-model', currentModel);
+        phone.setAttribute('data-theme-color', currentColor);
+      }
+
+      // 3. Mídia: Foto ou Vídeo enviado pelo usuário ou Padrão do Modelo
+      const uploadedImg = document.getElementById('avatar-preview-img');
+      const uploadedVideo = document.getElementById('avatar-preview-video');
+
+      if (uploadedVideo && !uploadedVideo.classList.contains('is-hidden') && uploadedVideo.src) {
+        if (modalImg) modalImg.classList.add('is-hidden');
+        if (modalVideo) {
+          modalVideo.src = uploadedVideo.src;
+          modalVideo.classList.remove('is-hidden');
+          modalVideo.play().catch(() => {});
+        }
+      } else if (uploadedImg && !uploadedImg.classList.contains('is-hidden') && uploadedImg.src) {
+        if (modalVideo) {
+          modalVideo.pause();
+          modalVideo.classList.add('is-hidden');
+        }
+        if (modalImg) {
+          modalImg.src = uploadedImg.src;
+          modalImg.classList.remove('is-hidden');
+        }
+      } else {
+        // Mídia de demonstração oficial de alta qualidade
+        if (modalVideo) {
+          modalVideo.pause();
+          modalVideo.classList.add('is-hidden');
+        }
+        if (modalImg) {
+          modalImg.src = currentColor === 'rose'
+            ? '../../harmonia-rose/assets/img/hero-video-poster.jpg'
+            : '../../glamour-midnight/assets/img/hero-video-poster.jpg';
+          modalImg.classList.remove('is-hidden');
+        }
+      }
+
+      modal.classList.remove('is-hidden');
+      modal.setAttribute('aria-hidden', 'false');
+    });
+  }
+}
+
 /* ── 5. Máscara de Telefone (WhatsApp) ──────────────────────────────────── */
 function initPhoneMask() {
   const phoneInput = document.getElementById('input-whatsapp');
@@ -789,6 +878,7 @@ function initFormSubmission() {
     });
 
     const extraNotes = document.getElementById('input-extra-notes')?.value || '';
+    const heroPhrase = document.getElementById('input-hero-phrase')?.value || '';
 
     // Monta texto formatado para envio direto ao WhatsApp de suporte
     const message = `✨ *NOVO FORMULÁRIO DE PERSONALIZAÇÃO LASHMENU*\n\n` +
@@ -799,7 +889,8 @@ function initFormSubmission() {
       `📍 *Localização:* ${location || 'Não informado'}\n` +
       `🌐 *Subdomínio:* ${slug}.lashmenu.com\n\n` +
       `🎨 *Modelo Escolhido:* ${selectedModel.toUpperCase()}\n` +
-      `🎨 *Paleta Escolhida:* ${selectedColor.toUpperCase()}\n\n` +
+      `🎨 *Paleta Escolhida:* ${selectedColor.toUpperCase()}\n` +
+      `💬 *Frase da Capa:* ${heroPhrase}\n\n` +
       `📋 *Procedimentos (${serviceRows.length}):* \n${servicesList.join('\n')}\n\n` +
       `📸 *Fotos Próprias Trocadas nos Cards:* ${customPhotosCount} de ${serviceRows.length}\n\n` +
       `📝 *Observações / Pedidos Especiais:* \n${extraNotes || 'Nenhuma observação informada'}`;
