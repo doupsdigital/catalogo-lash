@@ -560,6 +560,27 @@ function openProcedureModal(row) {
 
   currentModalRow = row;
 
+  // Obtém modelo e paleta selecionados na Etapa 2
+  const currentModel = document.getElementById('input-selected-model')?.value || selectedModelId || 'glamour';
+  const currentColor = document.getElementById('input-selected-color')?.value || selectedColorId || 'midnight';
+
+  const sheet = modal.querySelector('.proc-preview-sheet');
+  if (sheet) {
+    sheet.setAttribute('data-theme-model', currentModel);
+    sheet.setAttribute('data-theme-color', currentColor);
+  }
+
+  const modelLabels = {
+    glamour: '✨ Glamour',
+    harmonia: '🌸 Harmonia',
+    classico: '👑 Clássico'
+  };
+
+  const badgeEl = modal.querySelector('.proc-preview-badge');
+  if (badgeEl) {
+    badgeEl.textContent = `${modelLabels[currentModel] || '✨ Catálogo'} · Prévia`;
+  }
+
   const nameVal = row.querySelector('.service-name')?.value || 'Procedimento';
   const priceVal = row.querySelector('.service-price')?.value;
   const durationVal = row.querySelector('.service-duration')?.value;
