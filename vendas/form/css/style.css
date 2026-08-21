@@ -4,20 +4,21 @@
    ========================================================================== */
 
 :root {
-  --bg: #faf8f5;
+  --bg: #f8f5f1;
   --bg-card: #ffffff;
-  --bg-card-alt: #f5f0eb;
+  --bg-card-alt: #f5ede6;
   
-  --text: #1f1a18;
-  --text-muted: #6e645e;
-  --text-faint: #9c928a;
+  --text: #16110e;
+  --text-muted: #483c35;
+  --text-faint: #5c4e46;
   
   --accent: #c04b6b;
   --accent-hover: #a33753;
-  --accent-soft: rgba(192, 75, 107, 0.08);
+  --accent-soft: rgba(192, 75, 107, 0.09);
   --accent-glow: rgba(192, 75, 107, 0.25);
   
-  --border: #e8dfd8;
+  --border: #d4c4b7;
+  --border-input: #c4b2a3;
   --border-focus: #c04b6b;
   
   --success: #16a34a;
@@ -263,9 +264,10 @@ body {
 }
 
 .step-subtitle {
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.55;
+  font-weight: 500;
 }
 
 /* ── Campos e Inputs ────────────────────────────────────────────────────── */
@@ -278,7 +280,7 @@ body {
 .field-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
 .field-group--full {
@@ -286,42 +288,55 @@ body {
 }
 
 .field-label {
-  font-size: 0.88rem;
+  font-size: 0.90rem;
   font-weight: 700;
   color: var(--text);
+  letter-spacing: -0.01em;
 }
 
 .field-label .req {
   color: var(--accent);
+  margin-left: 2px;
+  font-weight: 800;
 }
 
 .field-input {
   width: 100%;
   padding: 13px 16px;
   border-radius: var(--radius-md);
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--border-input);
   background: #ffffff;
   color: var(--text);
   font-family: var(--font-main);
-  font-size: 0.95rem;
+  font-size: 0.96rem;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
   outline: none;
 }
 
+.field-input::placeholder {
+  color: #9c8e84;
+  font-weight: 400;
+}
+
 .field-input:focus {
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 4px var(--accent-soft);
+  box-shadow: 0 0 0 3.5px rgba(192, 75, 107, 0.16);
+  background: #ffffff;
 }
 
 .field-textarea {
   resize: vertical;
   min-height: 85px;
+  line-height: 1.5;
 }
 
 .field-hint {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--text-faint);
-  line-height: 1.4;
+  line-height: 1.45;
+  font-weight: 500;
 }
 
 /* Prefixo @ */
@@ -334,9 +349,9 @@ body {
 .input-prefix {
   position: absolute;
   left: 14px;
-  color: var(--text-faint);
-  font-weight: 700;
-  font-size: 0.95rem;
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 1rem;
   pointer-events: none;
 }
 
@@ -353,7 +368,7 @@ body {
 
 .field-input--domain {
   padding-right: 140px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--accent);
 }
 
@@ -362,7 +377,10 @@ body {
   right: 14px;
   font-size: 0.88rem;
   font-weight: 700;
-  color: var(--text-muted);
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
   pointer-events: none;
 }
 
@@ -685,20 +703,20 @@ body {
 
 .service-row-card {
   background: #ffffff;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid #d4c2b5;
   border-radius: var(--radius-lg);
-  padding: 18px 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
   position: relative;
 }
 
 .service-row-card:hover {
-  border-color: rgba(192, 75, 107, 0.35);
-  box-shadow: var(--shadow-md);
+  border-color: rgba(192, 75, 107, 0.45);
+  box-shadow: 0 6px 20px rgba(192, 75, 107, 0.08);
 }
 
 .service-card-header {
@@ -720,33 +738,36 @@ body {
 .service-mini-field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .sm-label {
-  font-size: 0.74rem;
-  font-weight: 700;
+  font-size: 0.76rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: .05em;
-  color: var(--text-muted);
+  letter-spacing: .06em;
+  color: #2c211c;
 }
 
 .sm-input {
   width: 100%;
-  padding: 9px 12px;
+  padding: 10px 12px;
   border-radius: var(--radius-sm);
-  border: 1.5px solid var(--border);
+  border: 1.5px solid #c8b7aa;
   background: #ffffff;
   font-family: var(--font-main);
-  font-size: 0.90rem;
-  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #16110e;
   outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .sm-input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
+  box-shadow: 0 0 0 3.5px rgba(192, 75, 107, 0.16);
+  background: #ffffff;
 }
 
 /* Barra de Foto do Procedimento (Inferior) */
@@ -754,8 +775,8 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
-  background: var(--bg-card-alt);
-  border: 1.5px dashed var(--border);
+  background: #f6f0ea;
+  border: 1.5px dashed #c4b2a3;
   border-radius: var(--radius-md);
   padding: 10px 14px;
   cursor: pointer;
@@ -776,7 +797,7 @@ body {
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid #c4b2a3;
   background: #ffffff;
 }
 
@@ -796,9 +817,9 @@ body {
 }
 
 .service-photo-status {
-  font-size: 0.84rem;
-  font-weight: 700;
-  color: var(--text);
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: #16110e;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -809,8 +830,9 @@ body {
 }
 
 .service-photo-hint {
-  font-size: 0.76rem;
-  color: var(--text-muted);
+  font-size: 0.78rem;
+  color: #5c4e46;
+  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1347,16 +1369,16 @@ body {
 
 .cover-req-label {
   font-size: 0.74rem;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .08em;
   color: var(--text-muted);
 }
 
 .upload-dropzone {
-  border: 2px dashed #d6c6b8;
+  border: 2px dashed #c4b2a3;
   border-radius: var(--radius-md);
-  background: #fdfbf9;
+  background: #faf6f1;
   padding: 34px 20px;
   text-align: center;
   cursor: pointer;
@@ -1366,8 +1388,9 @@ body {
 
 .upload-dropzone:hover {
   border-color: var(--accent);
-  background: var(--accent-soft);
+  background: #ffffff;
   transform: scale(1.005);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
 
 .file-input-hidden {
@@ -1384,7 +1407,7 @@ body {
   height: 56px;
   border-radius: 50%;
   background: #ffffff;
-  border: 1.5px solid rgba(192, 75, 107, 0.25);
+  border: 1.5px solid rgba(192, 75, 107, 0.35);
   color: var(--accent);
   display: flex;
   align-items: center;
@@ -1395,18 +1418,21 @@ body {
 
 .dropzone-text {
   font-size: 0.98rem;
+  font-weight: 600;
   color: var(--text);
   margin-bottom: 6px;
 }
 
 .dropzone-text strong {
   color: var(--accent);
+  font-weight: 800;
 }
 
 .dropzone-sub {
-  font-size: 0.80rem;
-  color: var(--text-muted);
-  line-height: 1.4;
+  font-size: 0.82rem;
+  color: var(--text-faint);
+  font-weight: 500;
+  line-height: 1.45;
   display: block;
 }
 
