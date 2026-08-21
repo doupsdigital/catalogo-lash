@@ -908,27 +908,16 @@ function initFormSubmission() {
     let coverMediaUrl = null;
     let coverMediaType = 'image';
 
-    if (uploadedCoverFile && window.supabaseClient) {
+    if (uploadedCoverFile && window.lashSupabase) {
       try {
         const isVideo = uploadedCoverFile.type.startsWith('video/');
         coverMediaType = isVideo ? 'video' : 'image';
         const fileExt = uploadedCoverFile.name.split('.').pop() || (isVideo ? 'mp4' : 'jpg');
         const coverPath = `covers/${slug}-cover-${Date.now()}.${fileExt}`;
 
-        const { error: coverUploadErr } = await window.supabaseClient.storage
-          .from('catalog-assets')
-          .upload(coverPath, uploadedCoverFile, { upsert: true });
-
-        if (!coverUploadErr) {
-          const { data: publicUrlData } = window.supabaseClient.storage
-            .from('catalog-assets')
-            .getPublicUrl(coverPath);
-          coverMediaUrl = publicUrlData.publicUrl;
-        } else {
-          console.warn('Aviso no upload da capa:', coverUploadErr);
-        }
+        coverMediaUrl = await window.lashSupabase.uploadFile('catalog-assets', coverPath, uploadedCoverFile);
       } catch (errCover) {
-        console.warn('Erro ao processar mídia de capa:', errCover);
+        console.warn('Aviso no upload da capa:', errCover);
       }
     }
 
@@ -953,21 +942,12 @@ function initFormSubmission() {
       let finalPhotoUrl = row.querySelector('.service-photo-thumb')?.src || '';
 
       // Se enviou foto personalizada neste card, faz upload
-      if (row._customPhotoFile && window.supabaseClient) {
+      if (row._customPhotoFile && window.lashSupabase) {
         try {
           const fileExt = row._customPhotoFile.name.split('.').pop() || 'jpg';
           const svcPath = `services/${slug}-proc-${i + 1}-${Date.now()}.${fileExt}`;
 
-          const { error: svcUploadErr } = await window.supabaseClient.storage
-            .from('catalog-assets')
-            .upload(svcPath, row._customPhotoFile, { upsert: true });
-
-          if (!svcUploadErr) {
-            const { data: svcUrlData } = window.supabaseClient.storage
-              .from('catalog-assets')
-              .getPublicUrl(svcPath);
-            finalPhotoUrl = svcUrlData.publicUrl;
-          }
+          finalPhotoUrl = await window.lashSupabase.uploadFile('catalog-assets', svcPath, row._customPhotoFile);
         } catch (errSvc) {
           console.warn('Erro ao enviar foto do procedimento:', errSvc);
         }
@@ -995,11 +975,11 @@ function initFormSubmission() {
 
     // 3. Gravação no Banco de Dados Supabase
     let orderId = null;
-    if (window.supabaseClient) {
+    if (window.lashSupabase) {
       try {
         const orderRecord = {
-          platform_order_id: platformOrderId,
-          client_email: clientEmail,
+          platform_order_id: platformOrderId || null,
+          client_email: clientEmail || null,
           client_name: designerName,
           whatsapp: whatsapp,
           instagram: instagram,
@@ -1014,15 +994,9 @@ function initFormSubmission() {
           published_url: `https://${slug}.lashmenu.com`
         };
 
-        const { data: insertedOrder, error: orderErr } = await window.supabaseClient
-          .from('orders')
-          .insert([orderRecord])
-          .select()
-          .single();
+        const insertedOrder = await window.lashSupabase.insert('orders', orderRecord);
 
-        if (orderErr) {
-          console.error('Erro ao gravar pedido:', orderErr);
-        } else if (insertedOrder && insertedOrder.id) {
+        if (insertedOrder && insertedOrder.id) {
           orderId = insertedOrder.id;
 
           const servicesRecords = servicesPayload.map((svc, idx) => ({
@@ -1040,16 +1014,10 @@ function initFormSubmission() {
             order_index: idx + 1
           }));
 
-          const { error: servicesErr } = await window.supabaseClient
-            .from('order_services')
-            .insert(servicesRecords);
-
-          if (servicesErr) {
-            console.error('Erro ao gravar procedimentos:', servicesErr);
-          }
+          await window.lashSupabase.insert('order_services', servicesRecords);
         }
       } catch (dbErr) {
-        console.error('Erro inesperado no banco de dados:', dbErr);
+        console.error('Erro ao gravar no banco Supabase:', dbErr);
       }
     }
 
