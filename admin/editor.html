@@ -160,6 +160,129 @@
       min-height: 80px;
     }
 
+    /* ── Componente de Upload de Mídia / Imagem / Vídeo ── */
+    .media-upload-picker {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    @media (max-width: 600px) {
+      .media-upload-picker {
+        flex-direction: column;
+      }
+    }
+    .media-preview-box {
+      width: 110px;
+      height: 110px;
+      border-radius: 12px;
+      background: #191615;
+      border: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .media-preview-el {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .media-preview-placeholder {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 8px;
+    }
+    .media-upload-controls {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+    .btn-file-select {
+      background: #241d1a;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      width: fit-content;
+    }
+    .btn-file-select:hover {
+      background: var(--primary);
+      color: #000;
+    }
+    .input-url-fallback {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Variant small for procedure list */
+    .media-upload-picker-sm {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .media-preview-box-sm {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+      background: #191615;
+      border: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .media-preview-el-sm {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .media-upload-controls-sm {
+      flex: 1;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    @media (max-width: 600px) {
+      .media-upload-controls-sm {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+    .btn-file-select-sm {
+      background: #241d1a;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .btn-file-select-sm:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
     /* ── Procedimentos / Serviços Lista ── */
     .services-list {
       display: flex;
@@ -368,10 +491,6 @@
           <input type="text" id="client-location" placeholder="Ex: Setor Oeste, Goiânia">
         </div>
         <div class="form-group">
-          <label for="client-cover-url">Foto/Vídeo de Capa (URL)</label>
-          <input type="url" id="client-cover-url" placeholder="URL da foto armazenada">
-        </div>
-        <div class="form-group">
           <label for="client-model">Modelo do Layout</label>
           <select id="client-model">
             <option value="glamour">Glamour</option>
@@ -386,6 +505,27 @@
             <option value="midnight">Midnight</option>
           </select>
         </div>
+        
+        <!-- FOTO OU VÍDEO DE CAPA -->
+        <div class="form-group full-width">
+          <label>Foto ou Vídeo de Capa</label>
+          <div class="media-upload-picker">
+            <div class="media-preview-box" id="cover-preview-container">
+              <img id="cover-preview-img" src="" alt="Prévia da capa" class="media-preview-el" style="display:none;">
+              <video id="cover-preview-video" src="" autoplay muted loop playsinline class="media-preview-el" style="display:none;"></video>
+              <span id="cover-preview-placeholder" class="media-preview-placeholder">Nenhuma mídia selecionada</span>
+            </div>
+            <div class="media-upload-controls">
+              <label class="btn-file-select" for="cover-file-input">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Escolher do Celular / PC</span>
+              </label>
+              <input type="file" id="cover-file-input" accept="image/*,video/*" style="display: none;">
+              <input type="url" id="client-cover-url" placeholder="Ou cole a URL direta da foto/vídeo..." class="input-url-fallback">
+            </div>
+          </div>
+        </div>
+
         <div class="form-group full-width">
           <label for="client-phrase">Frase da Capa (Hero Phrase)</label>
           <textarea id="client-phrase" placeholder="Ex: Olhar sofisticado com a técnica perfeita para realçar sua beleza natural."></textarea>
@@ -433,6 +573,10 @@
     </button>
   </div>
 
+  <!-- Supabase Config & SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../vendas/form/js/supabase-config.js?v=4.0"></script>
+
   <script>
     const SUPABASE_URL = 'https://wffhptpsafllsmcsoiih.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmZmhwdHBzYWZsbHNtY3NvaWloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyODkyMTYsImV4cCI6MjEwMjg2NTIxNn0.nwpvIwl8V6_KGIp5e5oeraAcGyt3oo8Kdam2hp6ajSQ';
@@ -453,6 +597,11 @@
     const inputInstagram = document.getElementById('client-instagram');
     const inputLocation = document.getElementById('client-location');
     const inputCoverUrl = document.getElementById('client-cover-url');
+    const coverFileInput = document.getElementById('cover-file-input');
+    const coverPreviewImg = document.getElementById('cover-preview-img');
+    const coverPreviewVideo = document.getElementById('cover-preview-video');
+    const coverPreviewPlaceholder = document.getElementById('cover-preview-placeholder');
+
     const selectModel = document.getElementById('client-model');
     const selectColor = document.getElementById('client-color');
     const textareaPhrase = document.getElementById('client-phrase');
@@ -468,6 +617,64 @@
     if (sessionStorage.getItem('lash_admin_auth') !== 'true') {
       window.location.replace('./');
     }
+
+    // Auxiliar de Prévia da Mídia de Capa
+    function updateCoverPreview(url, isVideo) {
+      if (!url) {
+        coverPreviewImg.style.display = 'none';
+        coverPreviewVideo.style.display = 'none';
+        coverPreviewPlaceholder.style.display = 'block';
+        return;
+      }
+
+      coverPreviewPlaceholder.style.display = 'none';
+      if (isVideo) {
+        coverPreviewImg.style.display = 'none';
+        coverPreviewVideo.src = url;
+        coverPreviewVideo.style.display = 'block';
+      } else {
+        coverPreviewVideo.style.display = 'none';
+        coverPreviewImg.src = url;
+        coverPreviewImg.style.display = 'block';
+      }
+    }
+
+    inputCoverUrl.addEventListener('input', () => {
+      const url = inputCoverUrl.value.trim();
+      const isVideo = url.toLowerCase().endsWith('.mp4') || url.toLowerCase().includes('video');
+      updateCoverPreview(url, isVideo);
+    });
+
+    // Evento de Seleção de Arquivo para a Capa (Celular / Computador)
+    coverFileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const isVideo = file.type.startsWith('video/');
+      const tempUrl = URL.createObjectURL(file);
+      updateCoverPreview(tempUrl, isVideo);
+
+      showStatus('Enviando foto/vídeo de capa para o Supabase Storage...', 'success');
+      try {
+        const ext = file.name.split('.').pop() || (isVideo ? 'mp4' : 'jpg');
+        const path = `covers/cover_${orderId}_${Date.now()}.${ext}`;
+
+        let publicUrl = null;
+        if (window.lashSupabase && window.lashSupabase.uploadFile) {
+          publicUrl = await window.lashSupabase.uploadFile('catalog-assets', path, file);
+        } else {
+          throw new Error('Supabase client não inicializado');
+        }
+
+        if (publicUrl) {
+          inputCoverUrl.value = publicUrl;
+          updateCoverPreview(publicUrl, isVideo);
+          showStatus('Mídia de capa enviada com sucesso! ✨', 'success');
+        }
+      } catch (err) {
+        showStatus('Erro ao enviar foto/vídeo de capa: ' + err.message, 'error');
+      }
+    });
 
     // Carrega dados iniciais do Supabase
     async function initEditor() {
@@ -498,6 +705,7 @@
         textareaPhrase.value = order.hero_phrase || '';
 
         designerTitle.textContent = `Editar: ${order.client_name}`;
+        updateCoverPreview(order.cover_media_url, order.cover_media_type === 'video');
 
         // 2. Busca Procedimentos
         const servicesRes = await fetch(`${SUPABASE_URL}/rest/v1/order_services?order_id=eq.${orderId}&order=order_index.asc`, {
@@ -521,6 +729,8 @@
       currentServices.forEach((svc, index) => {
         const row = document.createElement('div');
         row.className = 'service-item-card';
+        const photoUrl = svc.photo_url || '';
+
         row.innerHTML = `
           <div class="service-card-header">
             <span class="service-index-label">PROCEDIMENTO #${index + 1}</span>
@@ -553,10 +763,26 @@
               <label>Efeito Visual</label>
               <input type="text" class="svc-effect" value="${svc.effect || ''}" placeholder="Ex: Volume marcante e alongado">
             </div>
+
+            <!-- FOTO DO PROCEDIMENTO -->
             <div class="form-group full-width">
-              <label>Foto do Procedimento (URL)</label>
-              <input type="url" class="svc-photo" value="${svc.photo_url || ''}" placeholder="URL da foto">
+              <label>Foto do Procedimento</label>
+              <div class="media-upload-picker-sm">
+                <div class="media-preview-box-sm">
+                  <img class="svc-preview-img media-preview-el-sm" src="${photoUrl}" alt="Prévia" ${!photoUrl ? 'style="display:none;"' : ''}>
+                  <span class="svc-preview-placeholder media-preview-placeholder" ${photoUrl ? 'style="display:none;"' : ''}>Sem Foto</span>
+                </div>
+                <div class="media-upload-controls-sm">
+                  <label class="btn-file-select-sm">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <span>Escolher Foto</span>
+                    <input type="file" class="svc-file-input" accept="image/*" style="display: none;" onchange="handleServicePhotoSelect(this, ${index})">
+                  </label>
+                  <input type="url" class="svc-photo input-url-fallback" value="${photoUrl}" placeholder="Ou cole a URL da foto..." oninput="updateServicePhotoPreview(this)">
+                </div>
+              </div>
             </div>
+
             <div class="form-group full-width">
               <label>Recomendação pós-aplicação</label>
               <input type="text" class="svc-recommendation" value="${svc.recommendation || ''}" placeholder="Ex: Evitar demaquilantes à base de óleo">
@@ -570,6 +796,59 @@
         servicesListContainer.appendChild(row);
       });
     }
+
+    // Handlers para foto do procedimento
+    window.updateServicePhotoPreview = function(inputEl) {
+      const card = inputEl.closest('.service-item-card');
+      const imgEl = card.querySelector('.svc-preview-img');
+      const placeholderEl = card.querySelector('.svc-preview-placeholder');
+      const val = inputEl.value.trim();
+
+      if (val) {
+        imgEl.src = val;
+        imgEl.style.display = 'block';
+        if (placeholderEl) placeholderEl.style.display = 'none';
+      } else {
+        imgEl.style.display = 'none';
+        if (placeholderEl) placeholderEl.style.display = 'block';
+      }
+    };
+
+    window.handleServicePhotoSelect = async function(fileInput, index) {
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      const card = fileInput.closest('.service-item-card');
+      const imgEl = card.querySelector('.svc-preview-img');
+      const placeholderEl = card.querySelector('.svc-preview-placeholder');
+      const urlInput = card.querySelector('.svc-photo');
+
+      const tempUrl = URL.createObjectURL(file);
+      imgEl.src = tempUrl;
+      imgEl.style.display = 'block';
+      if (placeholderEl) placeholderEl.style.display = 'none';
+
+      showStatus(`Enviando foto do procedimento #${index + 1} para o Supabase...`, 'success');
+      try {
+        const ext = file.name.split('.').pop() || 'jpg';
+        const path = `services/svc_${orderId}_${index}_${Date.now()}.${ext}`;
+
+        let publicUrl = null;
+        if (window.lashSupabase && window.lashSupabase.uploadFile) {
+          publicUrl = await window.lashSupabase.uploadFile('catalog-assets', path, file);
+        } else {
+          throw new Error('Supabase client não inicializado');
+        }
+
+        if (publicUrl) {
+          urlInput.value = publicUrl;
+          currentServices[index].photo_url = publicUrl;
+          showStatus(`Foto do procedimento #${index + 1} enviada com sucesso! ✨`, 'success');
+        }
+      } catch (err) {
+        showStatus(`Erro ao enviar foto #${index + 1}: ` + err.message, 'error');
+      }
+    };
 
     // Adiciona uma linha em branco localmente
     btnAddService.addEventListener('click', () => {
