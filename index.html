@@ -8,6 +8,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      const hostname = window.location.hostname;
+      if (hostname.endsWith('.vercel.app') || hostname === 'localhost' || hostname === '127.0.0.1') return;
+      const hostParts = hostname.split('.');
+      if (hostParts.length >= 3 && hostParts[0] !== 'www' && hostParts[0] !== 'lashmenu-vendas') {
+        window.location.replace('/catalogo/');
+      }
+    })();
+  </script>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body {

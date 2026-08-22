@@ -120,6 +120,19 @@
         return null;
       }
 
+      async function checkManualClientAndRedirect(slug) {
+        try {
+          const res = await fetch(`../clientes/${encodeURIComponent(slug)}/index.html`);
+          if (res.status === 200) {
+            window.location.replace(`../clientes/${encodeURIComponent(slug)}/index.html`);
+            return true;
+          }
+        } catch (err) {
+          console.warn("Erro ao verificar catálogo manual:", err);
+        }
+        return false;
+      }
+
       const slug = getSlug();
 
       if (!slug) {
@@ -143,6 +156,9 @@
         const orders = await res.json();
 
         if (!orders || orders.length === 0) {
+          const foundManual = await checkManualClientAndRedirect(slug);
+          if (foundManual) return;
+
           if (loader) loader.style.display = 'none';
           if (errorBox) errorBox.classList.add('is-active');
           return;
@@ -157,6 +173,9 @@
         window.location.replace(`../${targetFolder}/?slug=${encodeURIComponent(slug)}`);
 
       } catch (e) {
+        const foundManual = await checkManualClientAndRedirect(slug);
+        if (foundManual) return;
+
         if (loader) loader.style.display = 'none';
         if (errorBox) errorBox.classList.add('is-active');
       }
