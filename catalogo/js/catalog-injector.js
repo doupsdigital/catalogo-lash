@@ -40,6 +40,12 @@
 
   } catch (err) {
     console.warn('Injeção de dados:', err);
+  } finally {
+    // Garante que o documento fique visível após a injeção (com transição suave)
+    setTimeout(() => {
+      document.documentElement.style.transition = 'opacity 0.25s ease';
+      document.documentElement.style.opacity = '1';
+    }, 50);
   }
 
   function applyCustomData(order, services) {
@@ -176,6 +182,46 @@
           el.textContent = location;
         }
       });
+    }
+
+    // 8. Substituição Recursiva e Completa de Nomes de Placeholders em Textos
+    const walkAndReplaceNames = (node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        let val = node.nodeValue;
+        if (val.includes('Amanda Carvalho') || val.includes('Bruna Carvalho') || val.includes('Mariana Alves')) {
+          node.nodeValue = val
+            .replace(/Amanda Carvalho/g, designerName)
+            .replace(/Bruna Carvalho/g, designerName)
+            .replace(/Mariana Alves/g, designerName);
+        }
+      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+        node.childNodes.forEach(walkAndReplaceNames);
+      }
+    };
+    document.body.childNodes.forEach(walkAndReplaceNames);
+
+    // 9. Atualização de Alt Tags e Meta Tags de SEO
+    document.querySelectorAll('img').forEach(img => {
+      const alt = img.getAttribute('alt');
+      if (alt && (alt.includes('Amanda Carvalho') || alt.includes('Bruna Carvalho') || alt.includes('Mariana Alves'))) {
+        img.setAttribute('alt', alt
+          .replace(/Amanda Carvalho/g, designerName)
+          .replace(/Bruna Carvalho/g, designerName)
+          .replace(/Mariana Alves/g, designerName)
+        );
+      }
+    });
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      const content = metaDesc.getAttribute('content');
+      if (content && (content.includes('Amanda Carvalho') || content.includes('Bruna Carvalho') || content.includes('Mariana Alves'))) {
+        metaDesc.setAttribute('content', content
+          .replace(/Amanda Carvalho/g, designerName)
+          .replace(/Bruna Carvalho/g, designerName)
+          .replace(/Mariana Alves/g, designerName)
+        );
+      }
     }
   }
 })();
