@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <title>Editar Catálogo — LashMenu Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0d0b0a;
+      --card-bg: #151312;
+      --border: #24201e;
+      --text: #f5ede6;
+      --text-muted: #a3958c;
+      --primary: #e5a9b8;
+      --primary-hover: #f0c2cd;
+      --accent: #8a7ef7;
+      --danger: #ff6b6b;
+      --success: #25d366;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    /* ── Header ── */
+    .admin-header {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #110e0d;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .admin-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .admin-brand em {
+      font-style: italic;
+      color: var(--primary);
+    }
+    .btn-back {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-back:hover {
+      color: #fff;
+      border-color: var(--text-muted);
+      background: rgba(255,255,255,0.02);
+    }
+
+    /* ── Container ── */
+    .editor-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+
+    .editor-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+    .editor-subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+
+    /* ── Cards / Seções ── */
+    .editor-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      color: var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* ── Form Inputs ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+    label {
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    input, select, textarea {
+      background: #1c1817;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      width: 100%;
+      outline: none;
+      transition: all 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 8px rgba(229, 169, 184, 0.15);
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* ── Procedimentos / Serviços Lista ── */
+    .services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .service-item-card {
+      background: #1c1817;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+    }
+    .service-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .service-index-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .btn-delete-service {
+      background: transparent;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    .btn-delete-service:hover {
+      background: rgba(255, 107, 107, 0.08);
+    }
+    .btn-add-service {
+      background: transparent;
+      border: 1.5px dashed var(--border);
+      color: var(--primary);
+      padding: 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin-top: 16px;
+      transition: all 0.2s;
+    }
+    .btn-add-service:hover {
+      border-color: var(--primary);
+      background: rgba(229, 169, 184, 0.02);
+    }
+
+    /* ── Ejection Info ── */
+    .eject-info-card {
+      background: #121526;
+      border: 1px solid rgba(138, 126, 247, 0.25);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .eject-title {
+      color: #b3a9ff;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .eject-desc {
+      font-size: 0.88rem;
+      color: #9398b8;
+      line-height: 1.6;
+    }
+    .eject-steps {
+      margin-top: 14px;
+      padding-left: 20px;
+      font-size: 0.85rem;
+      color: #9398b8;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .eject-steps code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #b3a9ff;
+    }
+
+    /* ── Barra de Ações Flutuante / Bottom Bar ── */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #110e0d;
+      border-top: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.4);
+      z-index: 10;
+    }
+    .btn-save {
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.92rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-save:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+    .btn-save:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Status e Mensagens */
+    .status-msg {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      display: none;
+      font-size: 0.9rem;
+    }
+    .status-msg.error {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      display: block;
+    }
+    .status-msg.success {
+      background: rgba(37, 211, 102, 0.1);
+      border: 1px solid var(--success);
+      color: var(--success);
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="admin-header">
+    <div class="admin-brand">Lash<em>Menu</em> · Editor</div>
+    <a href="./" class="btn-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      <span>Voltar ao Painel</span>
+    </a>
+  </header>
+
+  <div class="editor-container">
+    <h1 class="editor-title" id="designer-title">Editar Catálogo</h1>
+    <p class="editor-subtitle">Gerencie as informações gerais e a lista de procedimentos de cílios da cliente.</p>
+
+    <!-- MENSAGENS DE STATUS -->
+    <div id="status-box" class="status-msg"></div>
+
+    <!-- INFORMAÇÕES GERAIS -->
+    <section class="editor-section">
+      <h2 class="section-title">Informações Gerais</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="client-name">Nome da Lash Designer</label>
+          <input type="text" id="client-name" required placeholder="Ex: Mariana Alves">
+        </div>
+        <div class="form-group">
+          <label for="client-slug">Slug do Link (subdomínio)</label>
+          <input type="text" id="client-slug" required placeholder="Ex: marianaalves">
+        </div>
+        <div class="form-group">
+          <label for="client-whatsapp">WhatsApp (com DDD)</label>
+          <input type="text" id="client-whatsapp" required placeholder="Ex: 62982244466">
+        </div>
+        <div class="form-group">
+          <label for="client-instagram">Instagram (usuário)</label>
+          <input type="text" id="client-instagram" placeholder="Ex: @marianaalves.lash">
+        </div>
+        <div class="form-group">
+          <label for="client-location">Localização / Endereço</label>
+          <input type="text" id="client-location" placeholder="Ex: Setor Oeste, Goiânia">
+        </div>
+        <div class="form-group">
+          <label for="client-cover-url">Foto/Vídeo de Capa (URL)</label>
+          <input type="url" id="client-cover-url" placeholder="URL da foto armazenada">
+        </div>
+        <div class="form-group">
+          <label for="client-model">Modelo do Layout</label>
+          <select id="client-model">
+            <option value="glamour">Glamour</option>
+            <option value="harmonia">Harmonia</option>
+            <option value="classico">Clássico</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="client-color">Tema de Cor</label>
+          <select id="client-color">
+            <option value="rose">Rosé</option>
+            <option value="midnight">Midnight</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label for="client-phrase">Frase da Capa (Hero Phrase)</label>
+          <textarea id="client-phrase" placeholder="Ex: Olhar sofisticado com a técnica perfeita para realçar sua beleza natural."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCEDIMENTOS / SERVIÇOS -->
+    <section class="editor-section">
+      <div class="section-title">
+        <span>Lista de Procedimentos</span>
+      </div>
+      <div class="services-list" id="services-list-container">
+        <!-- Procedimentos dinâmicos injetados aqui -->
+      </div>
+      <button type="button" class="btn-add-service" id="btn-add-service-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>Adicionar Procedimento</span>
+      </button>
+    </section>
+
+    <!-- INFORMAÇÕES DE EJEÇÃO -->
+    <section class="eject-info-card">
+      <h3 class="eject-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <span>Ejetar para Edição de Código Customizado</span>
+      </h3>
+      <p class="eject-desc">
+        Se esta cliente solicitar uma personalização extrema que requeira alteração no código HTML/CSS da página (ex: uma nova seção dedicada de depoimentos ou integração de chat especial), você pode ejetá-la para código físico individual de forma simples:
+      </p>
+      <div class="eject-steps">
+        <span>1. Copie o template correspondente (ex: <code>harmonia-rose</code>) na raiz do projeto local.</span>
+        <span>2. Renomeie a pasta de cópia com o slug da cliente e cole dentro do diretório <code>/clientes/{slug}/</code>.</span>
+        <span>3. Customizar e programar livremente o HTML/CSS/JS da cliente dentro dessa pasta exclusiva.</span>
+        <span>4. Exclua (ou mude o slug no Supabase) o registro desta cliente para que a URL do subdomínio passe a puxar automaticamente o código customizado da pasta física local.</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- BARRA DE SALVAR FLUTUANTE -->
+  <div class="bottom-bar">
+    <button type="button" class="btn-save" id="btn-save-catalog">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      <span>Salvar Alterações</span>
+    </button>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://wffhptpsafllsmcsoiih.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmZmhwdHBzYWZsbHNtY3NvaWloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyODkyMTYsImV4cCI6MjEwMjg2NTIxNn0.nwpvIwl8V6_KGIp5e5oeraAcGyt3oo8Kdam2hp6ajSQ';
+
+    // Recupera ID do pedido da Query URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('id');
+
+    if (!orderId) {
+      alert('Nenhum catálogo informado para edição.');
+      window.location.replace('./');
+    }
+
+    // Elementos DOM
+    const inputName = document.getElementById('client-name');
+    const inputSlug = document.getElementById('client-slug');
+    const inputWhatsapp = document.getElementById('client-whatsapp');
+    const inputInstagram = document.getElementById('client-instagram');
+    const inputLocation = document.getElementById('client-location');
+    const inputCoverUrl = document.getElementById('client-cover-url');
+    const selectModel = document.getElementById('client-model');
+    const selectColor = document.getElementById('client-color');
+    const textareaPhrase = document.getElementById('client-phrase');
+    const servicesListContainer = document.getElementById('services-list-container');
+    const btnAddService = document.getElementById('btn-add-service-row');
+    const btnSave = document.getElementById('btn-save-catalog');
+    const statusBox = document.getElementById('status-box');
+    const designerTitle = document.getElementById('designer-title');
+
+    let currentServices = [];
+
+    // Redireciona se não estiver logado
+    if (sessionStorage.getItem('lash_admin_auth') !== 'true') {
+      window.location.replace('./');
+    }
+
+    // Carrega dados iniciais do Supabase
+    async function initEditor() {
+      showStatus('Buscando dados no Supabase...', 'success');
+      try {
+        // 1. Busca Pedido
+        const orderRes = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${orderId}&select=*`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+        if (!orderRes.ok) throw new Error('Erro ao buscar pedido');
+        const orders = await orderRes.json();
+        if (orders.length === 0) throw new Error('Pedido não localizado');
+        
+        const order = orders[0];
+        
+        // Preenche campos
+        inputName.value = order.client_name || '';
+        inputSlug.value = order.slug || '';
+        inputWhatsapp.value = order.whatsapp || '';
+        inputInstagram.value = order.instagram || '';
+        inputLocation.value = order.location || '';
+        inputCoverUrl.value = order.cover_media_url || '';
+        selectModel.value = order.model_id || 'glamour';
+        selectColor.value = order.color_id || 'midnight';
+        textareaPhrase.value = order.hero_phrase || '';
+
+        designerTitle.textContent = `Editar: ${order.client_name}`;
+
+        // 2. Busca Procedimentos
+        const servicesRes = await fetch(`${SUPABASE_URL}/rest/v1/order_services?order_id=eq.${orderId}&order=order_index.asc`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+        
+        currentServices = servicesRes.ok ? await servicesRes.json() : [];
+        renderServicesList();
+        clearStatus();
+      } catch (err) {
+        showStatus('Erro ao carregar catálogo: ' + err.message, 'error');
+      }
+    }
+
+    // Renderiza a lista de serviços do formulário
+    function renderServicesList() {
+      servicesListContainer.innerHTML = '';
+      currentServices.forEach((svc, index) => {
+        const row = document.createElement('div');
+        row.className = 'service-item-card';
+        row.innerHTML = `
+          <div class="service-card-header">
+            <span class="service-index-label">PROCEDIMENTO #${index + 1}</span>
+            <button type="button" class="btn-delete-service" onclick="removeServiceRow(${index})">
+              ✕ Excluir
+            </button>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nome do Procedimento</label>
+              <input type="text" class="svc-name" value="${svc.name || ''}" placeholder="Ex: Volume Russo" required>
+            </div>
+            <div class="form-group">
+              <label>Categoria (Subtítulo)</label>
+              <input type="text" class="svc-category" value="${svc.category || ''}" placeholder="Ex: Fio a Fio" required>
+            </div>
+            <div class="form-group">
+              <label>Investimento (Preço)</label>
+              <input type="text" class="svc-price" value="${svc.price || ''}" placeholder="Ex: 190,00" required>
+            </div>
+            <div class="form-group">
+              <label>Duração em Cabine</label>
+              <input type="text" class="svc-duration" value="${svc.duration || ''}" placeholder="Ex: 1h45" required>
+            </div>
+            <div class="form-group">
+              <label>Manutenção (Preço)</label>
+              <input type="text" class="svc-maintenance" value="${svc.maintenance || ''}" placeholder="Ex: 110,00 (até 20 dias)">
+            </div>
+            <div class="form-group">
+              <label>Efeito Visual</label>
+              <input type="text" class="svc-effect" value="${svc.effect || ''}" placeholder="Ex: Volume marcante e alongado">
+            </div>
+            <div class="form-group full-width">
+              <label>Foto do Procedimento (URL)</label>
+              <input type="url" class="svc-photo" value="${svc.photo_url || ''}" placeholder="URL da foto">
+            </div>
+            <div class="form-group full-width">
+              <label>Recomendação pós-aplicação</label>
+              <input type="text" class="svc-recommendation" value="${svc.recommendation || ''}" placeholder="Ex: Evitar demaquilantes à base de óleo">
+            </div>
+            <div class="form-group full-width">
+              <label>Descrição do Procedimento</label>
+              <textarea class="svc-description" placeholder="Ex: Aplicação minuciosa com fios de alta tecnologia para um acabamento sofiscitado.">${svc.description || ''}</textarea>
+            </div>
+          </div>
+        `;
+        servicesListContainer.appendChild(row);
+      });
+    }
+
+    // Adiciona uma linha em branco localmente
+    btnAddService.addEventListener('click', () => {
+      currentServices.push({
+        name: '',
+        category: '',
+        price: '',
+        duration: '',
+        maintenance: '',
+        effect: '',
+        photo_url: '',
+        recommendation: '',
+        description: ''
+      });
+      renderServicesList();
+    });
+
+    // Remove um serviço localmente da lista
+    window.removeServiceRow = function(index) {
+      if (confirm('Tem certeza que deseja remover este procedimento?')) {
+        currentServices.splice(index, 1);
+        renderServicesList();
+      }
+    };
+
+    // Lê os dados inseridos nas caixas de serviço atuais e atualiza o array
+    function serializeServices() {
+      const cards = document.querySelectorAll('.service-item-card');
+      const updatedList = [];
+      cards.forEach((card, idx) => {
+        updatedList.push({
+          order_id: orderId,
+          name: card.querySelector('.svc-name').value,
+          category: card.querySelector('.svc-category').value,
+          price: card.querySelector('.svc-price').value,
+          duration: card.querySelector('.svc-duration').value,
+          maintenance: card.querySelector('.svc-maintenance').value,
+          effect: card.querySelector('.svc-effect').value,
+          photo_url: card.querySelector('.svc-photo').value,
+          recommendation: card.querySelector('.svc-recommendation').value,
+          description: card.querySelector('.svc-description').value,
+          order_index: idx
+        });
+      });
+      return updatedList;
+    }
+
+    // Salva tudo no Supabase
+    btnSave.addEventListener('click', async () => {
+      btnSave.disabled = true;
+      btnSave.textContent = 'Gravando...';
+      showStatus('Salvando alterações no banco de dados...', 'success');
+
+      try {
+        // 1. Atualiza Dados Gerais na tabela "orders"
+        const coverMediaUrl = inputCoverUrl.value.trim();
+        const coverMediaType = coverMediaUrl.toLowerCase().endsWith('.mp4') ? 'video' : 'image';
+
+        const orderUpdatePayload = {
+          client_name: inputName.value.trim(),
+          slug: inputSlug.value.trim().toLowerCase(),
+          whatsapp: inputWhatsapp.value.trim(),
+          instagram: inputInstagram.value.trim(),
+          location: inputLocation.value.trim(),
+          cover_media_url: coverMediaUrl,
+          cover_media_type: coverMediaType,
+          model_id: selectModel.value,
+          color_id: selectColor.value,
+          hero_phrase: textareaPhrase.value.trim()
+        };
+
+        const orderRes = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${orderId}`, {
+          method: 'PATCH',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(orderUpdatePayload)
+        });
+
+        if (!orderRes.ok) throw new Error('Erro ao salvar informações gerais');
+
+        // 2. Coleta Procedimentos
+        const servicesPayload = serializeServices();
+
+        // 3. Deleta procedimentos antigos
+        const deleteRes = await fetch(`${SUPABASE_URL}/rest/v1/order_services?order_id=eq.${orderId}`, {
+          method: 'DELETE',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+
+        if (!deleteRes.ok) throw new Error('Erro ao limpar procedimentos antigos');
+
+        // 4. Insere novos procedimentos (se existirem)
+        if (servicesPayload.length > 0) {
+          const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/order_services`, {
+            method: 'POST',
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=representation'
+            },
+            body: JSON.stringify(servicesPayload)
+          });
+          if (!insertRes.ok) throw new Error('Erro ao cadastrar novos procedimentos');
+        }
+
+        showStatus('Catálogo salvo com sucesso! O site já foi atualizado.', 'success');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(initEditor, 1000);
+      } catch (err) {
+        showStatus('Erro ao salvar dados: ' + err.message, 'error');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } finally {
+        btnSave.disabled = false;
+        btnSave.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          <span>Salvar Alterações</span>
+        `;
+      }
+    });
+
+    // Auxiliares de Status
+    function showStatus(msg, type) {
+      statusBox.textContent = msg;
+      statusBox.className = 'status-msg ' + type;
+    }
+    function clearStatus() {
+      statusBox.style.display = 'none';
+    }
+
+    // Inicializa a página
+    initEditor();
+  </script>
+</body>
+
+</html>
