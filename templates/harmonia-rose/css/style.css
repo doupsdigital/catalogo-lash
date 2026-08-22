@@ -1023,3 +1023,55 @@ button {
   border-color: #a93259;
   background: rgba(169, 50, 89, 0.08);
 }
+
+/* ==========================================================================
+   RESPONSIVIDADE DO MODAL DE DETALHES (EVITAR ROLAGEM NO MOBILE)
+   ========================================================================== */
+@media (max-width: 480px) {
+  /* Ajuste no container do modal */
+  .modal-detalhe__sheet,
+  .detalhe-procedimento__sheet {
+    max-height: 94vh !important;
+    overflow-y: auto !important;
+  }
+
+  /* Altura compacta da foto de capa */
+  .modal__foto-wrap,
+  .detalhe-procedimento__foto-wrap {
+    height: 190px !important;
+  }
+
+  /* Padding interno do corpo */
+  .modal__corpo,
+  .detalhe-procedimento__corpo {
+    padding: 0 24px 20px !important;
+    margin-top: -12px !important;
+  }
+
+  /* Tamanho de fonte do título */
+  .modal__titulo,
+  .detalhe-procedimento__titulo {
+    font-size: 28px !important;
+    margin: 4px 0 8px !important;
+  }
+
+  /* Margem inferior da descrição */
+  .modal__desc,
+  .detalhe-procedimento__desc {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Espaçamento mais compacto nas especificações */
+  .modal__spec,
+  .detalhe-procedimento__spec {
+    padding: 6px 0 !important;
+  }
+
+  /* Espaçamento das ações */
+  .modal__specs,
+  .detalhe-procedimento__specs {
+    margin-bottom: 16px !important;
+  }
+}
