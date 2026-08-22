@@ -91,8 +91,6 @@
 
     // 4. Injeta Procedimentos nos Cards Oficiais e Atualiza Array de Modais
     if (services.length > 0) {
-      const cards = document.querySelectorAll('.card-procedimento, .mosaico__card, .card-servico');
-      
       // Se houver variável global PROCEDIMENTOS no template, atualiza os dados
       if (typeof PROCEDIMENTOS !== 'undefined' && Array.isArray(PROCEDIMENTOS)) {
         PROCEDIMENTOS.length = 0; // Limpa o array padrão
@@ -119,40 +117,75 @@
         });
       }
 
-      cards.forEach((card, idx) => {
-        const svc = services[idx];
-        if (!svc) {
-          card.style.display = 'none';
-          return;
-        }
+      // Se existir a função renderGrid (harmonia templates), re-renderiza o grid com os novos dados
+      if (typeof renderGrid === 'function') {
+        renderGrid();
+      }
+      // Se existir a função renderLista (clássico templates), re-renderiza a lista com os novos dados
+      else if (typeof renderLista === 'function') {
+        renderLista();
+      }
+      // Caso contrário (glamour templates), atualiza os cards estáticos no HTML
+      else {
+        const cards = document.querySelectorAll('.card-procedimento, .mosaico__card, .card-servico');
+        cards.forEach((card, idx) => {
+          const svc = services[idx];
+          if (!svc) {
+            card.style.display = 'none';
+            return;
+          }
 
-        card.style.display = '';
-        card.setAttribute('data-proc', `proc_${idx}`);
-        
-        // Foto do Card
-        const cardImg = card.querySelector('.card-procedimento__foto, .mosaico__foto, img');
-        if (cardImg && svc.photo_url) {
-          cardImg.src = svc.photo_url;
-        }
+          card.style.display = '';
 
-        // Nome
-        const cardTitle = card.querySelector('.card-procedimento__nome, .mosaico__nome, h3, h4');
-        if (cardTitle) {
-          cardTitle.textContent = svc.name;
-        }
+          // Clona o card para remover listeners de clique anteriores (que abriam com os IDs antigos)
+          const newCard = card.cloneNode(true);
+          card.parentNode.replaceChild(newCard, card);
 
-        // Preço
-        const cardPrice = card.querySelector('.card-procedimento__preco, .mosaico__preco, .preco');
-        if (cardPrice && svc.price) {
-          cardPrice.textContent = `R$ ${svc.price}`;
-        }
+          newCard.setAttribute('data-proc', `proc_${idx}`);
 
-        // Meta (Duração / Categoria)
-        const cardMeta = card.querySelector('.card-procedimento__meta, .mosaico__meta, .duracao');
-        if (cardMeta) {
-          cardMeta.textContent = `${svc.duration || '1h30'} · ${svc.category || 'fios selecionados'}`;
-        }
-      });
+          // Foto do Card
+          const cardImg = newCard.querySelector('.card-procedimento__foto, .mosaico__foto, img');
+          if (cardImg && svc.photo_url) {
+            cardImg.src = svc.photo_url;
+          }
+
+          // Nome
+          const cardTitle = newCard.querySelector('.card-procedimento__nome, .mosaico__nome, h3, h4');
+          if (cardTitle) {
+            cardTitle.textContent = svc.name;
+          }
+
+          // Preço
+          const cardPrice = newCard.querySelector('.card-procedimento__preco, .mosaico__preco, .preco');
+          if (cardPrice && svc.price) {
+            cardPrice.textContent = `R$ ${svc.price}`;
+          }
+
+          // Meta (Duração / Categoria)
+          const cardMeta = newCard.querySelector('.card-procedimento__meta, .mosaico__meta, .duracao');
+          if (cardMeta) {
+            cardMeta.textContent = `${svc.duration || '1h30'} · ${svc.category || 'fios selecionados'}`;
+          }
+
+          // Atribui novo evento de clique para abrir o modal com o ID correto (proc_idx)
+          newCard.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof abrirModal === 'function') {
+              abrirModal(`proc_${idx}`);
+            }
+          });
+
+          // Suporte a navegação por teclado
+          newCard.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              if (typeof abrirModal === 'function') {
+                abrirModal(`proc_${idx}`);
+              }
+            }
+          });
+        });
+      }
     }
 
     // 5. Links de WhatsApp nos Botões de Agendamento

@@ -306,6 +306,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) close(); });
+
+  // Expose to window for catalog-injector compatibility
+  window.PROCEDIMENTOS = PROCEDIMENTOS;
+  window.abrirModal = open;
 });
 
 /* ---------- Modo Preview / Auto-Tour no Mockup Controlado por Visibilidade ---------- */
